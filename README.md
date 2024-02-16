@@ -17,7 +17,7 @@ Le principal objectif de ce projet est de concevoir une plateforme en ligne intu
 - Permet aux utilisateurs de rechercher des cocktails par nom, ingrédients, ou type.
 - Chaque cocktail dispose d'une fiche descriptive comprenant les ingrédients, les instructions de préparation et des images attrayantes.
 - Les utilisateurs peuvent ajouter de nouveaux cocktails à la base de données, contribuant ainsi à l'enrichissement de la collection.
-
+- Les utilisateurs peuvent laisser leur avis à propos des cocktails à l'aide de commentaires et de mentions j'aimes.
 ### 2. Création de Compte Utilisateur
 
 - Les utilisateurs ont la possibilité de créer un compte personnel.
