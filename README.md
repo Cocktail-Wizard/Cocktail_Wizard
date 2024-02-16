@@ -42,6 +42,7 @@ Ce projet est développé en utilisant les technologies suivantes :
 - Frontend : HTML, CSS, JavaScript (React)
 - Backend : php
 - Base de Données : Microsoft Azure
+- Application: Java(Android Studio)
 
 ---
 
