@@ -1,6 +1,6 @@
 # Projet intégrateur du CUT informatique de l'ETS - Cocktails Wizard
 
-Bienvenue dans le README de notre projet Integratteur dédié à la création d'un site permettant de découvrir, créer et partager des cocktails passionnants! Ce document vous guidera à travers les fonctionnalités clés, les objectifs et les directives pour contribuer au succès de ce projet.
+Bienvenue dans le README de notre projet intégrateur dédié à la création d'un site permettant de découvrir, créer et partager des cocktails passionnants! Ce document vous guidera à travers les fonctionnalités clés, les objectifs et les directives pour contribuer au succès de ce projet.
 
 ---
 
