@@ -12,7 +12,7 @@ Le principal objectif de ce projet est de concevoir une plateforme en ligne intu
 
 ## Fonctionnalités Principales
 
-### 1. Base de Données de Cocktails
+### 1. Gallerie des cocktails
 
 - Permet aux utilisateurs de rechercher des cocktails par nom, ingrédients, ou type.
 - Chaque cocktail dispose d'une fiche descriptive comprenant les ingrédients, les instructions de préparation et des images attrayantes.
