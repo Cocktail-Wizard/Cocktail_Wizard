@@ -46,6 +46,7 @@ Ce projet est développé en utilisant les technologies suivantes :
 
 Ce projet a été initié et est maintenu par l'équipe de développement constitué de Yani Amellal, Maxim Dmitriev, Pablo Hamel Corôa, Léonard Marcoux et Vianney Veremme. 
 
----
+## Conception du projet
 
-! 🍹 Cheers 🍸 ! 
+![Cocktail_Wizard drawio](https://github.com/Vianpyro/Cocktail_Wizard/assets/10519369/269627b4-c4f9-4f62-89ec-c50ddba85073)
+
