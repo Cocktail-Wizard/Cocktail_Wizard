@@ -24,7 +24,7 @@ Le principal objectif de ce projet est de concevoir une plateforme en ligne intu
 - Une fois connectés, ils peuvent accéder à leur propre "bar", où ils peuvent gérer leur collection d'ingrédients et voir les cocktails disponibles en fonction de ces ingrédients.
 
 
-### 4. Personnalisation et Engagement
+### 3. Personnalisation et Engagement
 
 - Les utilisateurs peuvent créer des cocktails personnalisés et les partager avec la communauté.
 - Les cocktails les plus populaires, mesurés par le nombre de likes, sont mis en évidence dans les résultats de recherche, encourageant ainsi l'engagement et la découverte.
