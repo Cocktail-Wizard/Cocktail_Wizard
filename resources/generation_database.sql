@@ -1,3 +1,12 @@
+-- Suppression des tables si elles existent déjà
+DROP TABLE IF EXISTS Publications;
+DROP TABLE IF EXISTS Commentaires;
+DROP TABLE IF EXISTS Utilisateurs;
+DROP TABLE IF EXISTS Cocktails;
+DROP TABLE IF EXISTS Pays;
+DROP TABLE IF EXISTS Alcools;
+
+-- Création des tables
 CREATE TABLE Publications (
     Titre VARCHAR(50) PRIMARY KEY,
     Auteur VARCHAR(50),
