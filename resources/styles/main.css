@@ -1,0 +1,12 @@
+:root {
+    --default-gap: 3em;
+    --main-background-color: #232946;
+}
+
+* {
+    margin: 0;
+    font-family: sans-serif;
+    color: white;
+    user-select: none;
+    transition-duration: 1s;
+}
