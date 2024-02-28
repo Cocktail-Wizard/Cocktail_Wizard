@@ -89,12 +89,21 @@ figcaption {
     bottom: 0;
     left: 0;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.25);
     width: 100%;
     line-height: 2em;
     font-weight: bold;
 }
 
+
+#gallery article>img {
+    filter: grayscale(50%);
+}
+
 #gallery article:hover {
     transform: scale(1.05);
+}
+
+#gallery article:hover img {
+    filter: none;
 }
