@@ -5,11 +5,23 @@ body {
     gap: var(--default-gap);
 }
 
+footer {
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 2em;
+}
+
 header,
 footer {
     align-items: center;
     display: flex;
     justify-content: center;
+}
+
+header h1 {
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 20px;
+    border-radius: 50px;
+    padding: 1em;
 }
 
 nav {
@@ -38,11 +50,15 @@ nav input {
     border: 0;
     border-radius: 15px;
     color: black;
-    padding: 1em;
+    padding: 10px 0 10px 50px;
     box-shadow: #666 0 0 10px;
     outline: none;
     opacity: 80%;
-    width: clamp(275px, 25%, 25%);
+    width: clamp(225px, 25%, 25%);
+    background-image: url("../images/icon-search.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-size: x-large;
 }
 
 nav input:focus {
