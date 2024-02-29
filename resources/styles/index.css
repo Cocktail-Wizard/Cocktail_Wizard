@@ -1,5 +1,11 @@
+:root {
+    /* clamp(min, prefered, max) */
+    --publication-max-width: clamp(250px, 25%, 325px);
+    --publication-max-height: clamp(300px, 500px, 400px);
+}
+
 body {
-    background-color: var(--main-background-color);
+    background: linear-gradient(to right, black, var(--main-background-color), black);
     display: flex;
     flex-direction: column;
     gap: var(--default-gap);
@@ -76,8 +82,8 @@ nav input:focus {
 }
 
 #gallery article {
-    width: clamp(150px, 100%, 300px);
-    height: clamp(300px, 500px, 500px);
+    width: var(--publication-max-width);
+    height: var(--publication-max-height);
     position: relative;
     border-radius: 15px;
     overflow: hidden;
@@ -102,6 +108,7 @@ figcaption {
 
 #gallery article:hover {
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 #gallery article:hover img {
