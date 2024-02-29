@@ -13,17 +13,19 @@ const cocktails = [
 
 document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < 25; i++) {
+        cocktailName = cocktails[Math.floor(Math.random() * cocktails.length)]
+
         // Creation des different elements
         let newCocktail = document.createElement('article');
         let newCocktailImage = document.createElement('img');
         let newCocktailName = document.createElement('figcaption');
 
         // Gestion de l'illustration du cocktail
-        newCocktailImage.src = "https://picsum.photos/300/500"
+        newCocktailImage.src = `https://picsum.photos/seed/${cocktailName.replace(/[^a-zA-Z0-9]/g, '')}/200/300`
         newCocktailImage.loading = "lazy"
 
         // Ajout de la legende de l'image
-        newCocktailName.textContent = cocktails[Math.floor(Math.random() * cocktails.length)];
+        newCocktailName.textContent = cocktailName;
 
         // Regroupement des different elements
         newCocktail.appendChild(newCocktailImage);
