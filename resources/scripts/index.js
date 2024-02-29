@@ -12,8 +12,8 @@ const cocktails = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-    for (let i = 0; i < 25; i++) {
-        cocktailName = cocktails[Math.floor(Math.random() * cocktails.length)]
+    for (let i = 0; i < 5 * 4; i++) {
+        let cocktailName = cocktails[Math.floor(Math.random() * cocktails.length)]
 
         // Creation des different elements
         let newCocktail = document.createElement('article');
