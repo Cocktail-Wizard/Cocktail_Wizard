@@ -1,7 +1,6 @@
 :root {
-    /* clamp(min, prefered, max) */
-    --publication-max-width: clamp(250px, 25%, 325px);
-    --publication-max-height: clamp(300px, 500px, 400px);
+    --publication-width: 300px;
+    --publication-height: 400px;
 }
 
 body {
@@ -27,6 +26,7 @@ header h1 {
     background-color: rgba(0, 0, 0, 0.1);
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 20px;
     border-radius: 50px;
+    text-align: center;
     padding: 1em;
 }
 
@@ -40,16 +40,10 @@ nav {
 }
 
 header {
-    background: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)), url("../images/sparkles.png") no-repeat center 25% / cover;
+    background: radial-gradient(transparent, black), url("../images/sparkles.png") no-repeat center 25% / cover;
     font-size: 4vw;
     height: 50vh;
     text-shadow: 0 0 15px white;
-}
-
-img {
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
 }
 
 nav input {
@@ -59,8 +53,8 @@ nav input {
     padding: 10px 0 10px 50px;
     box-shadow: #666 0 0 10px;
     outline: none;
-    opacity: 80%;
-    width: clamp(225px, 25%, 25%);
+    opacity: 0.8;
+    width: var(--publication-width);
     background-image: url("../images/icon-search.svg");
     background-repeat: no-repeat;
     background-size: contain;
@@ -82,15 +76,15 @@ nav input:focus {
 }
 
 #gallery article {
-    width: var(--publication-max-width);
-    height: var(--publication-max-height);
+    width: var(--publication-width);
+    height: var(--publication-height);
     position: relative;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: #666 0 0 5px;
 }
 
-figcaption {
+#gallery article figcaption {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -101,6 +95,11 @@ figcaption {
     font-weight: bold;
 }
 
+#gallery article img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
 
 #gallery article>img {
     filter: grayscale(50%);
