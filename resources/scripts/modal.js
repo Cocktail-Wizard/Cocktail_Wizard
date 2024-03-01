@@ -1,24 +1,27 @@
 // Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var modal = document.getElementById("modal-wrapper");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementById("close");
 
-// When the user clicks on the button, open the modal
-btn.onclick = function () {
-    modal.style.display = "block";
-}
+document.addEventListener("DOMContentLoaded", () => {
+    var gallery = document.getElementsByClassName('cocktail');
+
+    // When the user clicks on a cocktail, open the modal
+    Array.from(gallery).forEach((cocktail) => {
+        cocktail.addEventListener('click', () => {
+            modal.style.display = "block";
+        })
+    })
+});
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function () {
+span.onclick = () => {
     modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
+window.onclick = (event) => {
     if (event.target == modal) {
         modal.style.display = "none";
     }

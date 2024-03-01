@@ -27,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Ajout de la legende de l'image
         newCocktailName.textContent = cocktailName;
 
+        // Ajout de la classe cocktail
+        newCocktail.classList.add('cocktail')
+
         // Regroupement des different elements
         newCocktail.appendChild(newCocktailImage);
         newCocktail.appendChild(newCocktailName);

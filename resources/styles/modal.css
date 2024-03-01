@@ -4,7 +4,7 @@
 }
 
 #modal-wrapper {
-    /* display: none; */
+    display: none;
     position: fixed;
     z-index: 2;
     width: 100%;
