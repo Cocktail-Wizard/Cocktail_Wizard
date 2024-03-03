@@ -14,3 +14,13 @@
     user-select: none;
     transition-duration: 1s;
 }
+
+h1 {
+    color: var(--palette-headline-color);
+}
+
+p,
+span,
+figcaption {
+    color: var(--palette-paragraph-color);
+}
