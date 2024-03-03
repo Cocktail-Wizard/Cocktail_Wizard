@@ -4,7 +4,7 @@
 }
 
 body {
-    background: linear-gradient(to right, black, var(--main-background-color), black);
+    background: linear-gradient(to right, black, var(--palette-background-color), black);
     display: flex;
     flex-direction: column;
     gap: var(--default-gap);

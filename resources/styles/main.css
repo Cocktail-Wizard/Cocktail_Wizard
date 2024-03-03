@@ -1,6 +1,10 @@
 :root {
     --default-gap: 3em;
-    --main-background-color: #232946;
+    --palette-background-color: #232946;
+    --palette-headline-color: #fffffe;
+    --palette-paragraph-color: #b8c1ec;
+    --palette-button-color: #eebbc3;
+    --palette-button-text-color: #232946;
 }
 
 * {
