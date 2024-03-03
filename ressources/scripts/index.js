@@ -1,40 +1,52 @@
-const gallery = document.getElementById('gallery');
+const MODELE_CARTE_COCKTAIL = "ressources/modeles/cocktail_carte.html";
+const galerie = document.getElementById('galerie');
+const nombreCocktailsAffiches = 20;
 
-const cocktails = [
-    "Margarita", "Martini", "Mojito", "Cosmopolitan", "Daiquiri", "Manhattan", "Old Fashioned",
-    "Bloody Mary", "Piña Colada", "Negroni", "Long Island Iced Tea", "Mai Tai", "Caipirinha",
-    "Sazerac", "Whiskey Sour", "Moscow Mule", "Pisco Sour", "Tom Collins", "White Russian",
-    "Gimlet", "Mint Julep", "Singapore Sling", "Sidecar", "Blue Lagoon", "Tequila Sunrise",
-    "Sex on the Beach", "Bellini", "Irish Coffee", "Mimosa", "Planter's Punch", "Hurricane",
-    "White Lady", "Gin Fizz", "French 75", "Mai Tai", "Zombie", "Sea Breeze", "Lemon Drop Martini",
-    "Black Russian", "Vodka Martini", "Long Beach Iced Tea", "Godfather", "Gin and Tonic",
-    "Dark 'n' Stormy", "Tommy's Margarita", "Margarita Frozen", "Mai Tai", "Mai Tai", "Mai Tai"
-];
+// Fonction pour charger le modèle HTML
+async function chargerModeleHTML() {
+    try {
+        const reponse = await fetch(MODELE_CARTE_COCKTAIL);
+        if (!reponse.ok) {
+            throw new Error("Impossible de charger le modèle HTML.");
+        }
 
-document.addEventListener("DOMContentLoaded", () => {
-    for (let i = 0; i < 5 * 4; i++) {
-        let cocktailName = cocktails[Math.floor(Math.random() * cocktails.length)]
+        return await reponse.text();
+    } catch (error) {
+        console.error("Erreur lors du chargement du modèle HTML :", error);
+        return null;
+    }
+}
 
-        // Creation des different elements
-        let newCocktail = document.createElement('article');
-        let newCocktailImage = document.createElement('img');
-        let newCocktailName = document.createElement('figcaption');
+// Générer la liste complète des cocktails
+let nomsCocktails = [];
 
-        // Gestion de l'illustration du cocktail
-        newCocktailImage.src = `https://picsum.photos/seed/${cocktailName.replace(/[^a-zA-Z0-9]/g, '')}/200/300`
-        newCocktailImage.loading = "lazy"
+for (let i = 0; i < nombreCocktailsAffiches; i++) {
+    const nomAleatoire = genererMotAleatoire(getRandomInt(6, 12));
+    nomsCocktails.push(nomAleatoire);
+}
 
-        // Ajout de la legende de l'image
-        newCocktailName.textContent = cocktailName;
+const cocktails = genererListeCocktails(nomsCocktails);
 
-        // Ajout de la classe cocktail
-        newCocktail.classList.add('cocktail')
+document.addEventListener("DOMContentLoaded", async () => {
+    const modeleHTML = await chargerModeleHTML();
 
-        // Regroupement des different elements
-        newCocktail.appendChild(newCocktailImage);
-        newCocktail.appendChild(newCocktailName);
+    if (modeleHTML) {
+        cocktails.forEach((cocktail) => {
+            // Créer une copie du modèle HTML pour chaque cocktail
+            const nouveauCocktail = document.createElement('article');
+            nouveauCocktail.classList.add('cocktail')
+            nouveauCocktail.innerHTML = modeleHTML;
 
-        // Ajout du nouveau cocktail sur la page
-        gallery.appendChild(newCocktail);
+            // Remplacer les éléments du modèle HTML avec les données du cocktail
+            const nomCocktailElement = nouveauCocktail.querySelector('#nom-cocktail');
+            nomCocktailElement.textContent = cocktail.nom;
+
+            const imageCocktailElement = nouveauCocktail.querySelector('#illustration-cocktail');
+            imageCocktailElement.src = `https://picsum.photos/seed/${cocktail.nom.replace(/[^a-zA-Z0-9]/g, '')}/200/300`;
+            imageCocktailElement.loading = "lazy";
+
+            // Ajouter le cocktail à la galerie
+            galerie.appendChild(nouveauCocktail);
+        });
     }
 });

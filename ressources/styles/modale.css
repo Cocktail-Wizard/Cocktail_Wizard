@@ -3,7 +3,7 @@
     --modal-height: clamp(50%, 600px, 75%);
 }
 
-#modal-wrapper {
+#contenant-modale {
     display: none;
     position: fixed;
     z-index: 2;
@@ -12,7 +12,7 @@
     background-color: rgba(0, 0, 0, 0.75);
 }
 
-#modal {
+#modale {
     width: var(--modal-width);
     height: var(--modal-height);
     overflow: auto;
@@ -25,15 +25,15 @@
     border-radius: 15px;
 }
 
-#close {
+#fermer {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-#close:hover,
-#close:focus {
+#fermer:hover,
+#fermer:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
