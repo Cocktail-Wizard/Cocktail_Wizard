@@ -1,3 +1,60 @@
+<?php
+    session_start();
+    // Accumulateur d'erreurs
+    $erreurs = array();
+
+    if($_SERVER["REQUEST_METHOD"]=="POST")
+    {
+
+        // Valider le nom d'utilisateur
+        if(empty($_POST['identifiant'])) {
+            $erreurs[] = "Le nom d'utilisateur entré est invalide!<br>";
+        }
+
+        // Valider le mot de passe
+        if(empty($_POST['mdp'])) {
+            $erreurs[] = "Le mot de passe entré est invalide!<br>";
+        }
+
+        // Si aucune erreur, etablir la connexion
+        if (count($erreurs) == 0) {
+            //  Ajuster la route de connexion une fois la base de données créé
+            $conn = connexion("localhost","identifiant","mot_de_passe","nom_bd");
+
+            $identifiant = mysqli_real_escape_string($conn, trim($_POST['identifiant']));
+            $mot_de_passe = mysqli_real_escape_string($conn, trim($_POST['mdp']));
+            if($conn == null)
+            die("Erreur");
+
+            //  Rechercher le mot de passe dans la base de donnée
+            $requete_preparee = $conn->prepare("SELECT mot_de_passe FROM utilisateurs WHERE identifiant = ?");
+            //  Lié le mot de passe (String) à l'identifiant
+            $requete_preparee->bind_param("s", $identifiant);
+            $requete_preparee->execute();
+            $resultat = $requete_preparee->get_result();
+            $util = $resultat->fetch_assoc();
+            if($resultat->$nb_ranger>0 ){
+            $mdp_encrypter = $util['mot_de_passe'];
+            }
+            $requete_preparee->close();
+
+            if ($resultat->nb_ranger>0 && password_verify($mot_de_passe,$mdp_encrypter)) {
+                $_SESSION['identifiant'] = $identifiant;
+                //  Rediriger l'utilisateur vers la page de galerie
+                header("Location: galerie.html");
+            } else {
+                echo "Identifiant ou mot de passe incorrect.";
+            }
+        }
+        if(count($erreurs)>0){
+            foreach ($erreurs as $erreur) {
+                echo "<p style='color:red'>" . $erreur . "</p><br>";
+            }
+        }
+
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -77,3 +134,18 @@
 </div>
 </body>
 </html>
+
+<?php
+    function connexion($hostname, $identifiant, $mot_de_passe, $database) {
+
+        // Établir la connexion avec MySQLi
+        $conn = new mysqli($hostname, $identifiant, $mot_de_passe, $database);
+
+        // Retourner une valeur vide en cas d'échec de connexion
+        if ($conn->connect_error) {
+            return null;
+        }
+
+        return $conn;
+    }
+?>
