@@ -50,7 +50,7 @@ nav {
     border-radius: 15px;
     box-shadow: #666 0 0 5px;
     height: var(--publication-height);
-    /* overflow: hidden; */
+    overflow: hidden;
     position: relative;
     width: var(--publication-width);
 }
