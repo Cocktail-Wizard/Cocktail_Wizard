@@ -23,23 +23,12 @@ function genererListeCocktails(names) {
         // Ajoutez d'autres préparations ici...
     ];
 
-    const verresService = [
-        "Verre à margarita",
-        "Verre à martini",
-        "Verre highball",
-        "Verre old-fashioned",
-        "Verre à Collins",
-        "Verre à cocktail",
-        "Verre à whisky",
-        // Ajoutez d'autres types de verres ici...
-    ];
-
     const saveursUmami = [
-        "Salé",
-        "Acide",
         "Sucré",
+        "Aigre",
         "Amer",
-        // Ajoutez d'autres saveurs ici...
+        "Épicé",
+        "Salé",
     ];
 
     for (let i = 0; i < names.length; i++) {
@@ -50,7 +39,7 @@ function genererListeCocktails(names) {
             "preparation": preparations[i % preparations.length],
             "nb_likes": Math.floor(Math.random() * 1000),
             "date_publication": getRandomDate(new Date(2015, 0, 1), new Date()),
-            "verre_service": verresService[i % verresService.length],
+            "verre_service": "Verre is good",
             "classique": true,
             "umami": saveursUmami[i % saveursUmami.length]
         });

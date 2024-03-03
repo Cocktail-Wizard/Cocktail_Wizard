@@ -37,13 +37,35 @@ document.addEventListener("DOMContentLoaded", async () => {
             nouveauCocktail.classList.add('cocktail')
             nouveauCocktail.innerHTML = modeleHTML;
 
-            // Remplacer les éléments du modèle HTML avec les données du cocktail
-            const nomCocktailElement = nouveauCocktail.querySelector('#nom-cocktail');
-            nomCocktailElement.textContent = cocktail.nom;
+            // Définir le nom
+            const nomCocktail = nouveauCocktail.querySelector('#nom-cocktail');
+            nomCocktail.textContent = cocktail.nom;
 
-            const imageCocktailElement = nouveauCocktail.querySelector('#illustration-cocktail');
-            imageCocktailElement.src = `https://picsum.photos/seed/${cocktail.nom.replace(/[^a-zA-Z0-9]/g, '')}/200/300`;
-            imageCocktailElement.loading = "lazy";
+            // Afficher l'icone du profil gustatif
+            const umamiCocktail = nouveauCocktail.querySelector('#icone-saveur');
+            switch (cocktail.umami) {
+                case 'Sucré':
+                    umamiCocktail.src = 'ressources/images/icone-sucre-sucre.svg'
+                    break;
+                case 'Aigre':
+                    umamiCocktail.src = 'ressources/images/icone-citron-aigre.svg'
+                    break;
+                case 'Amer':
+                    umamiCocktail.src = 'ressources/images/icone-cafe-amer.svg'
+                    break;
+                case 'Épicé':
+                    umamiCocktail.src = 'ressources/images/icone-piment-epice.svg'
+                    break;
+                case 'Salé':
+                    umamiCocktail.src = 'ressources/images/icone-sel-sale.svg'
+                    break;
+                default:
+                    umamiCocktail.src = 'ressources/images/point-interrogation.svg'
+            }
+
+            const imageCocktail = nouveauCocktail.querySelector('#illustration-cocktail');
+            imageCocktail.src = `https://picsum.photos/seed/${cocktail.nom.replace(/[^a-zA-Z0-9]/g, '')}/200/300`;
+            imageCocktail.loading = "lazy";
 
             // Ajouter le cocktail à la galerie
             galerie.appendChild(nouveauCocktail);
