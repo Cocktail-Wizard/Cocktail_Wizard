@@ -2,6 +2,7 @@
     session_start();
     // Accumulateur d'erreurs
     $erreurs = array();
+    $messageErreur = "";
 
     if($_SERVER["REQUEST_METHOD"]=="POST")
     {
@@ -18,8 +19,8 @@
 
         // Si aucune erreur, etablir la connexion
         if (count($erreurs) == 0) {
-            //  Ajuster la route de connexion une fois la base de données créé
-            $conn = connexion("localhost","identifiant","mot_de_passe","nom_bd");
+            //  Etablir la connexion avec la base de donnée
+            $conn = connexion("cocktailwizbd.mysql.database.azure.com","cocktail","Cw-yplmv");
 
             $identifiant = mysqli_real_escape_string($conn, trim($_POST['identifiant']));
             $mot_de_passe = mysqli_real_escape_string($conn, trim($_POST['mdp']));
@@ -43,7 +44,7 @@
                 //  Rediriger l'utilisateur vers la page de galerie
                 header("Location: galerie.html");
             } else {
-                echo "Identifiant ou mot de passe incorrect.";
+                $messageErreur = "Identifiant ou mot de passe incorrect.";
             }
         }
         if(count($erreurs)>0){
@@ -51,7 +52,6 @@
                 echo "<p style='color:red'>" . $erreur . "</p><br>";
             }
         }
-
     }
 
 ?>
@@ -130,16 +130,19 @@
 
         <p>Vous n'êtes pas encore membre?</p>
         <a href="inscription.php">Créer un compte</a>
+        <?php if (!empty($messageErreur)) { ?>
+        <p style="color:red"><?php echo $messageErreur; ?></p>
+        <?php } ?>
     </form>
 </div>
 </body>
 </html>
 
 <?php
-    function connexion($hostname, $identifiant, $mot_de_passe, $database) {
+    function connexion($hostname, $identifiant, $mot_de_passe) {
 
         // Établir la connexion avec MySQLi
-        $conn = new mysqli($hostname, $identifiant, $mot_de_passe, $database);
+        $conn = new mysqli($hostname, $identifiant, $mot_de_passe);
 
         // Retourner une valeur vide en cas d'échec de connexion
         if ($conn->connect_error) {
