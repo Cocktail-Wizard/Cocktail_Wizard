@@ -1,6 +1,14 @@
 const MODELE_CARTE_COCKTAIL = "ressources/modeles/cocktail_carte.html";
 const galerie = document.getElementById('galerie');
 const nombreCocktailsAffiches = 20;
+const iconesUmami = {
+    'Sucré': 'icone-sucre-sucre',
+    'Aigre': 'icone-citron-aigre',
+    'Amer': 'icone-cafe-amer',
+    'Épicé': 'icone-piment-epice',
+    'Salé': 'icone-sel-sale',
+    'default': 'point-interrogation'
+};
 
 // Fonction pour charger le modèle HTML
 async function chargerModeleHTML() {
@@ -43,25 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             // Afficher l'icone du profil gustatif
             const umamiCocktail = nouveauCocktail.querySelector('#icone-saveur');
-            switch (cocktail.umami) {
-                case 'Sucré':
-                    umamiCocktail.src = 'ressources/images/icone-sucre-sucre.svg'
-                    break;
-                case 'Aigre':
-                    umamiCocktail.src = 'ressources/images/icone-citron-aigre.svg'
-                    break;
-                case 'Amer':
-                    umamiCocktail.src = 'ressources/images/icone-cafe-amer.svg'
-                    break;
-                case 'Épicé':
-                    umamiCocktail.src = 'ressources/images/icone-piment-epice.svg'
-                    break;
-                case 'Salé':
-                    umamiCocktail.src = 'ressources/images/icone-sel-sale.svg'
-                    break;
-                default:
-                    umamiCocktail.src = 'ressources/images/point-interrogation.svg'
-            }
+            umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.umami]}.svg` || iconesUmami['default'];
 
             const imageCocktail = nouveauCocktail.querySelector('#illustration-cocktail');
             imageCocktail.src = `https://picsum.photos/seed/${cocktail.nom.replace(/[^a-zA-Z0-9]/g, '')}/200/300`;
