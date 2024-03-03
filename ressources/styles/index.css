@@ -60,10 +60,6 @@ nav {
     transform: scale(1.05);
 }
 
-.cocktail:hover img {
-    filter: none;
-}
-
 .icone-cocktail {
     position: absolute;
     height: 1em;
@@ -108,6 +104,10 @@ nav {
     height: 100%;
     object-fit: cover;
     width: 100%;
+}
+
+#illustration-cocktail:hover {
+    filter: none;
 }
 
 #mentions-jaime {
