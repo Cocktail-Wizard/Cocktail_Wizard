@@ -1,4 +1,4 @@
-const MODAL_TEMPLATE = "resources/templates/cocktail_modal.html";
+const MODAL_TEMPLATE = "resources/modeles/cocktail_modal.html";
 
 // Récuperation de la section de la boite modale dans le DOM
 let sectionModale = document.getElementById("modal-wrapper");
