@@ -46,6 +46,15 @@ nav {
     z-index: 1;
 }
 
+.cocktail {
+    border-radius: 15px;
+    box-shadow: #666 0 0 5px;
+    height: var(--publication-height);
+    overflow: hidden;
+    position: relative;
+    width: var(--publication-width);
+}
+
 .cocktail:hover {
     cursor: pointer;
     transform: scale(1.05);
@@ -82,15 +91,6 @@ nav {
     justify-content: center;
     margin: auto;
     width: 80%;
-}
-
-#galerie article {
-    border-radius: 15px;
-    box-shadow: #666 0 0 5px;
-    height: var(--publication-height);
-    overflow: hidden;
-    position: relative;
-    width: var(--publication-width);
 }
 
 #illustration-cocktail {
