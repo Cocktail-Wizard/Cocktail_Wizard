@@ -37,8 +37,8 @@ function genererListeCocktails(names) {
             "nom": names[i],
             "description": descriptions[i % descriptions.length],
             "preparation": preparations[i % preparations.length],
-            "nb_likes": Math.floor(Math.random() * 1000),
-            "date_publication": genererDateAleatoire(new Date(2015, 0, 1), new Date()),
+            "nb_likes": genererNombreAleatoire(0, 1_000),
+            "date_publication": genererDateAleatoire(new Date(2024, 2, 29), new Date()),
             "verre_service": "Verre is good",
             "classique": true,
             "umami": saveursUmami[i % saveursUmami.length]
@@ -56,10 +56,10 @@ function genererDateAleatoire(start, end) {
 function genererMotAleatoire(n) {
     const characters = 'abcdefghijklmnopqrstuvwxyz';
     let result = '';
-    const charactersLength = characters.length;
 
     for (let i = 0; i < n; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt(genererNombreAleatoire(0, characters.length));
     }
+
     return result;
 }

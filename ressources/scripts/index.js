@@ -29,7 +29,7 @@ async function chargerModeleHTML() {
 let nomsCocktails = [];
 
 for (let i = 0; i < nombreCocktailsAffiches; i++) {
-    const nomAleatoire = genererMotAleatoire(getRandomInt(6, 12));
+    const nomAleatoire = genererMotAleatoire(genererNombreAleatoire(6, 12));
     nomsCocktails.push(nomAleatoire);
 }
 
@@ -53,12 +53,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             const umamiCocktail = nouveauCocktail.querySelector('#icone-saveur');
             umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.umami]}.svg` || iconesUmami['default'];
 
+            // Ajouter l'image du cocktail
             const imageCocktail = nouveauCocktail.querySelector('#illustration-cocktail');
             imageCocktail.src = `https://picsum.photos/seed/${cocktail.nom.replace(/[^a-zA-Z0-9]/g, '')}/200/300`;
             imageCocktail.loading = "lazy";
 
+            // Choisir la couleur de la pastille pour l'alcool principal
             const pastilleAlcool = nouveauCocktail.querySelector('#pastille-alcool');
             pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+
+            // Afficher le nombre de mentions "j'aime"
+            const compteurJaime = nouveauCocktail.querySelector('#compteur-jaime');
+            compteurJaime.textContent = cocktail.nb_likes;
+
+            console.log(cocktail.nb_likes);
 
             // Ajouter le cocktail à la galerie
             galerie.appendChild(nouveauCocktail);
