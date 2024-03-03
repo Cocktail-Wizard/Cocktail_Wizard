@@ -57,6 +57,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             imageCocktail.src = `https://picsum.photos/seed/${cocktail.nom.replace(/[^a-zA-Z0-9]/g, '')}/200/300`;
             imageCocktail.loading = "lazy";
 
+            const pastilleAlcool = nouveauCocktail.querySelector('#pastille-alcool');
+            pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+
             // Ajouter le cocktail à la galerie
             galerie.appendChild(nouveauCocktail);
         });

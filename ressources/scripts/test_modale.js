@@ -38,7 +38,7 @@ function genererListeCocktails(names) {
             "description": descriptions[i % descriptions.length],
             "preparation": preparations[i % preparations.length],
             "nb_likes": Math.floor(Math.random() * 1000),
-            "date_publication": getRandomDate(new Date(2015, 0, 1), new Date()),
+            "date_publication": genererDateAleatoire(new Date(2015, 0, 1), new Date()),
             "verre_service": "Verre is good",
             "classique": true,
             "umami": saveursUmami[i % saveursUmami.length]
@@ -49,7 +49,7 @@ function genererListeCocktails(names) {
 }
 
 // Fonction pour générer une date aléatoire entre deux dates
-function getRandomDate(start, end) {
+function genererDateAleatoire(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
