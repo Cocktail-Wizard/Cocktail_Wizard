@@ -23,29 +23,29 @@
             //  Etablir la connexion avec la base de donnée
             $conn = connexion("cocktailwizbd.mysql.database.azure.com","cocktail","Cw-yplmv");
 
-            $identifiant = mysqli_real_escape_string($conn, trim($_POST['nom']));
-            $mot_de_passe = mysqli_real_escape_string($conn, trim($_POST['mdp']));
+            $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
+            $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
             if($conn == null)
             die("Erreur");
 
             //  Rechercher le mot de passe dans la base de donnée
-            $requete_preparee = $conn->prepare("SELECT mot_de_passe FROM utilisateurs WHERE nom = ?");
+            $requete_preparee = $conn->prepare("SELECT mdp FROM utilisateur WHERE nom = ?");
             //  Lié le mot de passe (String) à l'identifiant
-            $requete_preparee->bind_param("s", $identifiant);
+            $requete_preparee->bind_param("s", $nom);
             $requete_preparee->execute();
             $resultat = $requete_preparee->get_result();
             $util = $resultat->fetch_assoc();
             if($resultat->$nb_ranger>0 ){
-            $mdp_encrypter = $util['mot_de_passe'];
+            $mdp_encrypter = $util['mdp'];
             }
             $requete_preparee->close();
 
-            if ($resultat->nb_ranger>0 && password_verify($mot_de_passe,$mdp_encrypter)) {
-                $_SESSION['identifiant'] = $identifiant;
+            if ($resultat->nb_ranger>0 && password_verify($mdp,$mdp_encrypter)) {
+                $_SESSION['nom'] = $nom;
                 //  Rediriger l'utilisateur vers la page de galerie
-                header("Location: galerie.html");
+                header("Location: galerie.php");
             } else {
-                $messageErreur = "Identifiant ou mot de passe incorrect.";
+                $messageErreur = "Nom d'utilisateur ou mot de passe incorrect.";
             }
         }
         if(count($erreurs)>0){

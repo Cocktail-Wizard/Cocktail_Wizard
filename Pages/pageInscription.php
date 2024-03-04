@@ -21,29 +21,36 @@
             $erreurs[] = "Les mots de passe ne sont pas identiques!<br>";
         }
 
+        // Valider la date de naissance
+        if(empty($_POST['naissance'])) {
+            $erreurs[] = "La date de naissance est invalide!<br>";
+        }
+
         // Afficher le message si le formulaire est valide
         if (count($erreurs) == 0) {
             $conn = connexion("cocktailwizbd.mysql.database.azure.com","cocktail","Cw-yplmv");
 
-            $identifiant = mysqli_real_escape_string($conn, trim($_POST['nom']));
-            $mot_de_passe = mysqli_real_escape_string($conn, trim($_POST['mdp']));
-            $mdp_encrypter = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+            $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
+            $courriel = mysqli_real_escape_string($conn, trim($_POST['courriel']));
+            $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
+            $mdp_encrypter = password_hash($mdp, PASSWORD_DEFAULT);
+            $date_nais = mysqli_real_escape_string($conn, trim($_POST['naissance']));
             if($conn == null)
             {
                 die("Erreur");
             }
-            $requete_preparee = $conn->prepare("SELECT * FROM utilisateurs WHERE nom = ?");
+            $requete_preparee = $conn->prepare("SELECT * FROM utilisateur WHERE nom = ?");
             $requete_preparee->bind_param("s", $identifiant);
             $requete_preparee->execute();
             $resultat = $requete_preparee->get_result();
             $requete_preparee->close();
             if ($resultat->$nb_ranger > 0) {
-                $erreurs[] = "L'identifiant est déjà utilisé!";
+                $erreurs[] = "Le nom d'utilisateur est déjà utilisé!";
                 $conn->close();
             }
 
             else{
-                $requete_preparee = $conn->prepare("INSERT INTO utilisateurs (identifiant,mot_de_passe) VALUES (?,?)");
+                $requete_preparee = $conn->prepare("INSERT INTO utilisateur (nom,courriel,mdp,date_nais) VALUES (?,?,?,?)");
                 $requete_preparee->bind_param("ss",$identifiant,$mdp_encrypter);
                 if($requete_preparee->execute())
                 {   //  Test ajout d'utilisateur
