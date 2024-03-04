@@ -1,0 +1,243 @@
+/* Style général */
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #0a285c;
+}
+
+/* Style pour le header */
+#top {
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: relative;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.username {
+    margin-left: 10px;
+    color: white;
+    font-size: 18px;
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: gold;
+    font-size: 24px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.button {
+    background-color: #735dbd;
+    background-image: linear-gradient(#735dbd, #a48df0);
+    border: 1px solid #6248b9;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 17px;
+    margin: 0;
+    outline: 0;
+    padding: 11px 15px 12px;
+    text-align: center;
+    transition: box-shadow .05s ease-in-out, opacity .05s ease-in-out;
+    touch-action: manipulation;
+    display: inline-block;
+}
+
+.button:hover {
+    box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
+    text-decoration: none;
+    transition-duration: .15s, .15s;
+    color: #19337a;
+}
+
+.button:active {
+    box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
+}
+
+.button:disabled {
+    cursor: not-allowed;
+    opacity: .6;
+}
+
+.button:disabled:active {
+    pointer-events: none;
+}
+
+.button:disabled:hover {
+    box-shadow: none;
+}
+
+/* Ingredients section styles */
+.ingredients {
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    border: #6248b9, 1px, solid;
+}
+
+#searchBoxContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+#ingredientList {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 2;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.ingredient-item {
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.ingredient-item:last-child {
+    border-bottom: none;
+    /* enleve la derniere ligne */
+}
+
+/* Stle dans le body */
+.body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10%;
+}
+
+.section {
+    width: 100%;
+    padding: 20px 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.section-name {
+    padding: 10px 20px 10px 20px;;
+    border: 1px solid #735dbd;
+    border-radius: 15px;
+    color: #735dbd;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.line {
+    border: none;
+    border-top: 1px solid #735dbd;
+    flex-grow: 1;
+}
+
+/* Style du footer */
+.footer {
+    position: sticky;
+    bottom: 20px;
+    margin: 0px 20px 0px 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.footer button {
+    border: none;
+    background-color: #a48df0;
+    border-radius: 50%;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+    /* Add transition effect */
+    width: 50px;
+    height: 50px;
+}
+
+.footer button:hover {
+    opacity: 1;
+}
+
+.footer button img {
+    display: block;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+}
+
+.footer button:focus {
+    outline: none;
+}
+
+/* Style particulier */
+hr {
+    border: 1px solid white;
+    margin: 10px 0;
+}
+
+.clear-button {
+    background-color: #735dbd;
+    background-image: linear-gradient(#735dbd, #a48df0);
+    border: 1px solid #6248b9;
+    border-radius: 4px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.clear-button:hover {
+    box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
+    text-decoration: none;
+    transition-duration: .15s, .15s;
+    color: #19337a;
+}
+
