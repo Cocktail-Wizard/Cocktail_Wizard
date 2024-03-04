@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             // Ajouter la fonctionnalité d'ouvrir la boite modale à la publication
             nouveauCocktail.addEventListener('click', () => {
-                console.debug(cocktail.id_cocktail);
+                console.debug("id cocktail: ", cocktail.id_cocktail);
                 chargerInformationsModale(cocktail.id_cocktail);
                 sectionModale.style.display = "block";
             })

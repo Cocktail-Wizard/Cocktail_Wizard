@@ -24,3 +24,10 @@ span,
 figcaption {
     color: var(--palette-paragraph-color);
 }
+
+.error {
+    background-color: var(--palette-background-color);
+    color: red;
+    display: flex;
+    justify-content: center;
+}
