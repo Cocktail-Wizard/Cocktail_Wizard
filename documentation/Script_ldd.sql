@@ -38,6 +38,7 @@ CREATE TABLE Alcool (
     lien_saq VARCHAR(255)
 );
 
+-- Création de la table Banque_Image
 CREATE TABLE Banque_Image (
     id_image INT PRIMARY KEY AUTO_INCREMENT,
     img LONGBLOB NOT NULL,
