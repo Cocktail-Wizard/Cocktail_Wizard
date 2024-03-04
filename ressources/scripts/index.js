@@ -1,4 +1,3 @@
-const MODELE_CARTE_COCKTAIL = "ressources/modeles/cocktail_carte.html";
 const galerie = document.getElementById('galerie');
 const nombreCocktailsAffiches = 20;
 const iconesUmami = {
@@ -9,21 +8,6 @@ const iconesUmami = {
     'Salé': 'icone-sel-sale',
     'default': 'point-interrogation'
 };
-
-// Fonction pour charger le modèle HTML
-async function chargerModeleHTML() {
-    try {
-        const reponse = await fetch(MODELE_CARTE_COCKTAIL);
-        if (!reponse.ok) {
-            throw new Error("Impossible de charger le modèle HTML.");
-        }
-
-        return await reponse.text();
-    } catch (error) {
-        console.error("Erreur lors du chargement du modèle HTML :", error);
-        return null;
-    }
-}
 
 // Générer la liste complète des cocktails
 let nomsCocktails = [];
@@ -36,7 +20,7 @@ for (let i = 0; i < nombreCocktailsAffiches; i++) {
 const cocktails = genererListeCocktails(nomsCocktails);
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const modeleHTML = await chargerModeleHTML();
+    const modeleHTML = await chargerModeleHTML("ressources/modeles/cocktail_carte.html");
 
     if (modeleHTML) {
         cocktails.forEach((cocktail) => {
@@ -66,10 +50,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             const compteurJaime = nouveauCocktail.querySelector('#compteur-jaime');
             compteurJaime.textContent = cocktail.nb_likes;
 
-            console.log(cocktail.nb_likes);
+            // Ajouter la fonctionnalité d'ouvrir la boite modale à la publication
+            nouveauCocktail.addEventListener('click', () => {
+                console.debug(cocktail.id_cocktail);
+                chargerInformationsModale(cocktail.id_cocktail);
+                sectionModale.style.display = "block";
+            })
 
             // Ajouter le cocktail à la galerie
             galerie.appendChild(nouveauCocktail);
         });
     }
 });
+
+function chargerInformationsModale(idCocktail) {
+    // Envoyer une requête à l'API pour ce cocktail, exemple: "https://cocktailwizard.com/cocktail/{id}"
+}
