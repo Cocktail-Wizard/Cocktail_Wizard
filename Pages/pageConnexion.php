@@ -44,6 +44,7 @@
                 $_SESSION['nom'] = $nom;
                 //  Rediriger l'utilisateur vers la page de galerie
                 header("Location: galerie.php");
+                exit();
             } else {
                 $messageErreur = "Nom d'utilisateur ou mot de passe incorrect.";
             }
@@ -119,7 +120,7 @@
 <div id="connexion">
 <!-- Mettre le chemin appropriee une fois que l'organisation des fichiers soient etabli -->
     <img src="../images/LogoCW.png" id="logoCW" alt="Logo Cocktail Wizard">
-    <form id="form-connexion" action="post">
+    <form id="form-connexion" method="post">
         <h1>COCKTAIL WIZARD</h1>
         <label for="nom">Nom d'utilisateur</label>
         <input type="text" name="nom" placeholder="Entrer votre nom d'utilisateur" required>

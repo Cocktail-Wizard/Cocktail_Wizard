@@ -11,9 +11,36 @@
             $erreurs[] = "Le nom d'utilisateur est invalide!<br>";
         }
 
+        // Valider le courriel
+        if(empty($_POST['courriel']) || !str_contains($_POST["courriel"],"@") || !str_contains($_POST["courriel"],".")) {
+            $erreurs[] = "Le courriel est invalide!<br>";
+        }
+
         // Valider le mot de passe
         if(empty($_POST['mdp'])) {
             $erreurs[] = "Le mot de passe est invalide!<br>";
+        }
+        else{
+            // Valider la date de naissance
+            if(empty($_POST['naissance'])) {
+                $erreurs[] = "La date de naissance est invalide!<br>";
+            }
+            // regex nombre charactere
+            if (strlen($mdp) < 8) {
+                $erreurs[] = "Le mot de passe doit contenir au moins 8 caractères!<br>";
+            }
+            // regex pour lettre min/max
+            if(!preg_match("/[a-z]/i", $mdp)) {
+                $erreurs[] = "Le mot de passe doit contenir au moins une minuscule!<br>";
+            }
+            // regex pour num
+            if(!preg_match("/[0-9]/", $mdp)) {
+                $erreurs[] = "Le mot de passe doit contenir au moins un chiffre!<br>";
+            }
+            // \W regex pour les caracteres speciaux
+            if(!preg_match("/\W/", $mdp)) {
+                $erreurs[] = "Le mot de passe doit contenir au moins un symbole!<br>";
+            }
         }
 
         //Verifier si le mot de passe est egale a la validation du mot de passe
@@ -146,7 +173,7 @@
 <body id="conteneur-inscription">
     <div id="inscription">
         <h1>DEVENIR MEMBRE</h1>
-        <form id="form-inscription" action="post">
+        <form id="form-inscription" method="post">
             <label for="nom">Nom d'utilisateur</label>
             <input type="text" name="nom" placeholder="Entrer votre nom d'utilisateur" required>
             <label for="courriel">Courriel</label>
