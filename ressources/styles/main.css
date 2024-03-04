@@ -20,6 +20,10 @@ h1 {
     color: var(--palette-headline-color);
 }
 
+img {
+    pointer-events: none;
+}
+
 .error {
     background-color: var(--palette-background-color);
     color: red;
