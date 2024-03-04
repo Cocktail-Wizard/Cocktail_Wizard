@@ -47,7 +47,7 @@ nav {
 }
 
 .cocktail {
-    border-radius: 15px;
+    border-radius: var(--default-border-radius);
     box-shadow: #666 0 0 5px;
     height: var(--publication-height);
     overflow: hidden;
@@ -71,7 +71,7 @@ nav {
     background-repeat: no-repeat;
     background-size: contain;
     border: 0;
-    border-radius: 15px;
+    border-radius: var(--default-border-radius);
     box-shadow: #666 0 0 10px;
     color: var(--palette-button-text-color);
     font-size: x-large;

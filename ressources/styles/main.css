@@ -1,5 +1,6 @@
 :root {
     --default-gap: 3em;
+    --default-border-radius: 15px;
     --palette-background-color: #232946;
     --palette-headline-color: #fffffe;
     --palette-paragraph-color: #b8c1ec;
@@ -10,19 +11,13 @@
 * {
     margin: 0;
     font-family: sans-serif;
-    color: white;
     user-select: none;
     transition-duration: 1s;
+    color: var(--palette-paragraph-color);
 }
 
 h1 {
     color: var(--palette-headline-color);
-}
-
-p,
-span,
-figcaption {
-    color: var(--palette-paragraph-color);
 }
 
 .error {
