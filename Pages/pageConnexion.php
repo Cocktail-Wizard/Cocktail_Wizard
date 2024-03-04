@@ -8,7 +8,7 @@
     {
 
         // Valider le nom d'utilisateur
-        if(empty($_POST['identifiant'])) {
+        if(empty($_POST['nom'])) {
             $erreurs[] = "Le nom d'utilisateur entré est invalide!<br>";
         }
 
@@ -22,13 +22,13 @@
             //  Etablir la connexion avec la base de donnée
             $conn = connexion("cocktailwizbd.mysql.database.azure.com","cocktail","Cw-yplmv");
 
-            $identifiant = mysqli_real_escape_string($conn, trim($_POST['identifiant']));
+            $identifiant = mysqli_real_escape_string($conn, trim($_POST['nom']));
             $mot_de_passe = mysqli_real_escape_string($conn, trim($_POST['mdp']));
             if($conn == null)
             die("Erreur");
 
             //  Rechercher le mot de passe dans la base de donnée
-            $requete_preparee = $conn->prepare("SELECT mot_de_passe FROM utilisateurs WHERE identifiant = ?");
+            $requete_preparee = $conn->prepare("SELECT mot_de_passe FROM utilisateurs WHERE nom = ?");
             //  Lié le mot de passe (String) à l'identifiant
             $requete_preparee->bind_param("s", $identifiant);
             $requete_preparee->execute();
@@ -117,19 +117,17 @@
 
 <div id="connexion">
 <!-- Mettre le chemin appropriee une fois que l'organisation des fichiers soient etabli -->
-    <img src="../images/logoCW.png" id="logoCW" alt="Logo Cocktail Wizard">
+    <img src="../images/LogoCW.png" id="logoCW" alt="Logo Cocktail Wizard">
     <form id="form-connexion" action="post">
         <h1>COCKTAIL WIZARD</h1>
         <label for="nom">Nom d'utilisateur</label>
         <input type="text" name="nom" placeholder="Entrer votre nom d'utilisateur" required>
         <label for="mdp">Mot de Passe</label>
         <input type="password" name="mdp" placeholder="Entrer votre mot de passe" required>
-        <label for="naissance">Date de naissance</label>
-        <input type="date" name="naissance" required>
         <button type="submit">Connexion</button>
 
         <p>Vous n'êtes pas encore membre?</p>
-        <a href="inscription.php">Créer un compte</a>
+        <a href="./pageInscription.php">Créer un compte</a>
         <?php if (!empty($messageErreur)) { ?>
         <p style="color:red"><?php echo $messageErreur; ?></p>
         <?php } ?>
