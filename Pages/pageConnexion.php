@@ -35,12 +35,12 @@
             $requete_preparee->execute();
             $resultat = $requete_preparee->get_result();
             $util = $resultat->fetch_assoc();
-            if($resultat->$nb_ranger>0 ){
+            if($resultat->num_rows > 0 ){
             $mdp_encrypter = $util['mdp'];
             }
             $requete_preparee->close();
 
-            if ($resultat->nb_ranger>0 && password_verify($mdp,$mdp_encrypter)) {
+            if ($resultat->num_rows > 0 && password_verify($mdp,$mdp_encrypter)) {
                 $_SESSION['nom'] = $nom;
                 //  Rediriger l'utilisateur vers la page de galerie
                 header("Location: galerie.php");
