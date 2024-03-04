@@ -1,4 +1,5 @@
 <?php
+    require("../ressources/api/connexion.php");
     // Accumulateur d'erreurs
     $erreurs = array();
 
