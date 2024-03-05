@@ -3,7 +3,6 @@
     session_start();
     // Accumulateur d'erreurs
     $erreurs = array();
-    $messageErreur = "";
 
     if($_SERVER["REQUEST_METHOD"]=="POST")
     {
@@ -22,7 +21,6 @@
         if (count($erreurs) == 0) {
             //  Etablir la connexion avec la base de donnée
             $conn = connexion("cocktailwizbd.mysql.database.azure.com","cocktail","Cw-yplmv");
-
             $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
             $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
             if($conn == null)
@@ -45,13 +43,6 @@
                 //  Rediriger l'utilisateur vers la page de galerie
                 header("Location: galerie.php");
                 exit();
-            } else {
-                $messageErreur = "Nom d'utilisateur ou mot de passe incorrect.";
-            }
-        }
-        if(count($erreurs)>0){
-            foreach ($erreurs as $erreur) {
-                echo "<p style='color:red'>" . $erreur . "</p><br>";
             }
         }
     }
@@ -112,28 +103,33 @@
             border: none;
             border-radius: 1.875rem;
             width: 13.75rem;
-            }
+        }
+        .erreur{
+            color: red;
+        }
     </style>
 </head>
 <body>
-
-<div id="connexion">
-<!-- Mettre le chemin appropriee une fois que l'organisation des fichiers soient etabli -->
-    <img src="../images/LogoCW.png" id="logoCW" alt="Logo Cocktail Wizard">
-    <form id="form-connexion" method="post">
-        <h1>COCKTAIL WIZARD</h1>
-        <label for="nom">Nom d'utilisateur</label>
-        <input type="text" name="nom" placeholder="Entrer votre nom d'utilisateur" required>
-        <label for="mdp">Mot de Passe</label>
-        <input type="password" name="mdp" placeholder="Entrer votre mot de passe" required>
-        <button type="submit">Connexion</button>
-
-        <p>Vous n'êtes pas encore membre?</p>
-        <a href="./pageInscription.php">Créer un compte</a>
-        <?php if (!empty($messageErreur)) { ?>
-        <p style="color:red"><?php echo $messageErreur; ?></p>
-        <?php } ?>
-    </form>
-</div>
+    <div id="connexion">
+    <!-- Mettre le chemin appropriee une fois que l'organisation des fichiers soient etabli -->
+        <img src="../images/LogoCW.png" id="logoCW" alt="Logo Cocktail Wizard">
+        <form id="form-connexion" method="post">
+            <h1>COCKTAIL WIZARD</h1>
+            <label for="nom">Nom d'utilisateur</label>
+            <input type="text" name="nom" placeholder="Entrer votre nom d'utilisateur" required>
+            <label for="mdp">Mot de Passe</label>
+            <input type="password" name="mdp" placeholder="Entrer votre mot de passe" required>
+            <button type="submit">Connexion</button>
+            <p>Vous n'êtes pas encore membre?</p>
+            <a href="./pageInscription.php">Créer un compte</a>
+            <?php if(count($erreurs) > 0){ ?>
+                <?php foreach ($erreurs as $erreur) { ?>
+                    <p class="erreur"><?php echo $erreur; ?></p><br>
+                <?php } ?>
+            <?php
+            }
+            ?>
+        </form>
+    </div>
 </body>
 </html>

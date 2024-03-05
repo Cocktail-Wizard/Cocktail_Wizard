@@ -16,11 +16,29 @@
             $erreurs[] = "Le courriel est invalide!<br>";
         }
 
+        // Verifier si le courriel est deja utilise
+        $conn = connexion("cocktailwizbd.mysql.database.azure.com","cocktail","Cw-yplmv");
+        $courriel = mysqli_real_escape_string($conn, trim($_POST['courriel']));
+        if($conn == null)
+        {
+            die("Erreur");
+        }
+        $requete_preparee = $conn->prepare("SELECT * FROM utilisateur WHERE courriel = ?");
+        $requete_preparee->bind_param("s", $courriel);
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+        $requete_preparee->close();
+        if ($resultat->num_rows > 0) {
+            $erreurs[] = "Le courriel est déjà utilisé!";
+            $conn->close();
+        }
+
         // Valider le mot de passe
         if(empty($_POST['mdp'])) {
             $erreurs[] = "Le mot de passe est invalide!<br>";
         }
         else{
+            $mdp = $_POST['mdp'];
             // Valider la date de naissance
             if(empty($_POST['naissance'])) {
                 $erreurs[] = "La date de naissance est invalide!<br>";
@@ -56,7 +74,6 @@
         // Afficher le message si le formulaire est valide
         if (count($erreurs) == 0) {
             $conn = connexion("cocktailwizbd.mysql.database.azure.com","cocktail","Cw-yplmv");
-
             $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
             $courriel = mysqli_real_escape_string($conn, trim($_POST['courriel']));
             $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
@@ -76,22 +93,22 @@
                 $conn->close();
             }
 
+            // Inserer les donnees dans la base de donnee
             else{
                 $requete_preparee = $conn->prepare("INSERT INTO utilisateur (nom,courriel,mdp,date_nais) VALUES (?,?,?,?)");
                 $requete_preparee->bind_param("ssss",$nom,$courriel,$mdp_encrypter,$date_nais);
                 if($requete_preparee->execute())
-                {   //  Test ajout d'utilisateur
-                    echo "Nouvel utilisateur ajouté";
+                {
+                    $requete_preparee->close();
+                    $conn->close();
+                    header("Location: pageConnexion.php");
+                    exit();
                 }
-
-                $requete_preparee->close();
             }
         }
     }
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -99,7 +116,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-
+    <!-- Mettre dans les fichiers CSS appropriee -->
     <style>
             html{
                 background-color : #232946;
@@ -113,8 +130,8 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 grid-template-rows: 0.2fr 1.4fr 1.4fr;
-                width: 1100px;
-                height: 650px;
+                width: 68.75rem;
+                height: 40.625rem;
                 background-color: #B8C1EC;
                 border-radius: 50px;
             }
@@ -166,6 +183,9 @@
             justify-content: center;
             }
 
+            .erreur{
+                color: red;
+            }
     </style>
 
 
@@ -192,7 +212,7 @@
         <div id="messErreur">
             <?php if(count($erreurs)>0) { ?>
                 <?php foreach ($erreurs as $erreur) { ?>
-                    <p style="color:red"><?php echo $erreur; ?></p><br>
+                    <p class="erreur"><?php echo $erreur; ?></p><br>
                 <?php } ?>
             <?php } ?>
         </div>
