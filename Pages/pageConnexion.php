@@ -54,65 +54,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-
-    <!-- Mettre dans les fichiers CSS appropriee -->
-    <style>
-        html{
-            background-color: #232946;
-        }
-        #connexion{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
-        #logoCW{
-            border-radius: 50px 0px 0px 50px;
-            width: 36.25rem;
-            height: 36.25rem;
-            margin-top: 5%;
-        }
-        #form-connexion{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 5%;
-            background-color: #B8C1EC;
-            border-radius: 0px 50px 50px 0px;
-            width: 31.25rem;
-            height: 36.25rem;
-        }
-        #form-connexion > h1{
-        font-family: 'merriweather', 'serif';
-        }
-        #form-connexion > input{
-            margin-top: 0.625rem;
-            margin-bottom: 0.625rem;
-            padding: 0.625rem;
-            border: none;
-            border-radius: 1.875rem;
-            width: 18.75rem;
-        }
-        #form-connexion > button{
-            margin-top: 0.625rem;
-            padding: 0.9375rem;
-            font-size: 1.25rem;
-            background-color: #EEBBC3;
-            color: black;
-            border: none;
-            border-radius: 1.875rem;
-            width: 13.75rem;
-        }
-        .erreur{
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" href="../ressources/styles/pageConnexion.css">
 </head>
 <body>
     <div id="connexion">
     <!-- Mettre le chemin appropriee une fois que l'organisation des fichiers soient etabli -->
-        <img src="../images/LogoCW.png" id="logoCW" alt="Logo Cocktail Wizard">
+        <img src="../ressources/images/LogoCW.png" id="logoCW" alt="Logo Cocktail Wizard">
         <form id="form-connexion" method="post">
             <h1>COCKTAIL WIZARD</h1>
             <label for="nom">Nom d'utilisateur</label>

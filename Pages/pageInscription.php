@@ -116,79 +116,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <!-- Mettre dans les fichiers CSS appropriee -->
-    <style>
-            html{
-                background-color : #232946;
-            }
-            #conteneur-inscription{
-                display: flex;
-                justify-content: center;
-                align-items: center
-            }
-            #inscription{
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 0.2fr 1.4fr 1.4fr;
-                width: 68.75rem;
-                height: 40.625rem;
-                background-color: #B8C1EC;
-                border-radius: 50px;
-            }
-            #inscription > h1{
-                grid-area: 1 / 1 / 2/ 3;
-                font-family: 'merriweather', 'serif';
-                text-align: center;
-            }
-            #form-inscription{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            grid-area: 2 / 1 / 4 / 2;
-            }
-            #form-inscription > input{
-            margin-top: 0.625rem;
-            margin-bottom: 0.625rem;
-            padding: 0.625rem;
-            border: none;
-            border-radius: 1.875rem;
-            width: 18.75rem;
-            }
-            #form-inscription > button{
-                margin-top: 0.625rem;
-                padding: 0.9375rem;
-                font-size: 1.25rem;
-                background-color: #EEBBC3;
-                color: black;
-                border: none;
-                border-radius: 1.875rem;
-                width: 13.75rem;
-            }
-            #image-inscription{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            #image-inscription > img{
-            border-radius: 50px;
-            width: 36.25rem;
-            height: 36.25rem;
-            margin-top: 5%;
-            }
-            #messErreur{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            }
-
-            .erreur{
-                color: red;
-            }
-    </style>
-
-
+    <link rel="stylesheet" href="../ressources/styles/pageInscription.css">
 </head>
 <body id="conteneur-inscription">
     <div id="inscription">
@@ -207,7 +135,7 @@
             <button type="submit">S'inscrire</button>
         </form>
         <div id="img-inscription">
-            <img src="../images/LogoCW.png"  alt="Logo Cocktail Wizard">
+            <img src="../ressources/images/LogoCW.png" id="LogoCW-inscription" alt="Logo Cocktail Wizard">
         </div>
         <div id="messErreur">
             <?php if(count($erreurs)>0) { ?>
