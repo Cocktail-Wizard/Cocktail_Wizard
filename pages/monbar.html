@@ -23,63 +23,61 @@
 
     <hr>
 
-    <div class="separator">
-        <span class="section-name">Mes ingredients</span>
-        <hr class="line right" />
+    <section id="main">
 
-        <section class="ingredients">
-            <div id="searchBoxContainer">
-                <input type="text" id="searchBox" oninput="filterIngredients()" placeholder="Chercher un ingredient...">
-                <button class="clear-button" onclick="clearSelectedIngredients()">Effacer votre liste d'ingredients</button>
+        <div class="separator">
+            <span class="section-name">Mes ingredients</span>
+            <hr class="line right" />
+
+            <section class="ingredients">
+                <div id="searchBoxContainer" class="dropdown">
+                    <input type="text" id="searchBox" oninput="filterIngredients()"
+                        placeholder="Chercher un ingredient...">
+                    <div id="ingredientList" class="dropdown-content"></div>
+                </div>
+            </section>
+        </div>
+        <div class="selectIngredient-box" id="selectedIngredients"></div>
+        <div class="body">
+            <div class="separator">
+                <span class="section-name">Les classiques</span>
+                <hr class="line right" />
             </div>
 
-            <!-- Move ingredientList inside searchBoxContainer -->
-            <div class="ingredient-box" id="ingredientList"></div>
+            <div>
+                PLACE COCKTAILS HERE
+            </div>
 
-        </section>
+            <div class="separator">
+                <span class="section-name">Mes favorits</span>
+                <hr class="line right" />
+            </div>
+
+            <div>
+                PLACE COCKTAILS HERE
+            </div>
+
+
+            <div class="separator">
+                <span class="section-name">Communautaires</span>
+                <hr class="line right" />
+            </div>
+
+            <div>
+                PLACE COCKTAILS HERE
+            </div>
+
+        </div>
+    </section>
+
+    <div class="footer">
+        <button>
+            <img src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
+        </button>
+        <button>
+            <img src="../ressources/images/feather.svg" alt="Feather" width="24" height="24">
+        </button>
     </div>
-
-    <div class="ingredient-box" id="selectedIngredients"></div>
-
-    <div class="body">
-        <div class="separator">
-            <span class="section-name">Les classiques</span>
-            <hr class="line right" />
-        </div>
-
-        <div>
-            PLACE COCKTAILS HERE
-        </div>
-
-        <div class="separator">
-            <span class="section-name">Mes favorits</span>
-            <hr class="line right" />
-        </div>
-
-        <div>
-            PLACE COCKTAILS HERE
-        </div>
-
-
-        <div class="separator">
-            <span class="section-name">Communautaires</span>
-            <hr class="line right" />
-        </div>
-
-        <div>
-            PLACE COCKTAILS HERE
-        </div>
-
-    </div>
-
-<div class="footer">
-    <button>
-        <img src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
-    </button>
-    <button>
-        <img src="../ressources/images/feather.svg" alt="Feather" width="24" height="24">
-    </button>
-</div>
 
     <script src="../ressources/scripts/monbar.js"></script>
 </body>
