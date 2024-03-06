@@ -68,7 +68,7 @@
             <input type="password" name="mdp" placeholder="Entrer votre mot de passe" required>
             <button type="submit">Connexion</button>
             <p>Vous n'êtes pas encore membre?</p>
-            <a href="./pageInscription.php">Créer un compte</a>
+            <a href="./inscription.php">Créer un compte</a>
             <?php if(count($erreurs) > 0){ ?>
                 <?php foreach ($erreurs as $erreur) { ?>
                     <p class="erreur"><?php echo $erreur; ?></p><br>
