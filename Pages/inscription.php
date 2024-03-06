@@ -116,7 +116,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link rel="stylesheet" href="../ressources/styles/pageInscription.css">
+    <link rel="stylesheet" href="../ressources/styles/inscription.css">
 </head>
 <body id="conteneur-inscription">
     <div id="inscription">
