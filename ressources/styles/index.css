@@ -66,6 +66,49 @@ nav {
     font-size: 2em;
 }
 
+.compteur-jaime {
+    text-shadow: 0 0 2px var(--palette-background-color);
+}
+
+.illustration-cocktail {
+    /* filter: grayscale(50%); */
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.illustration-cocktail:hover {
+    filter: none;
+}
+
+.mentions-jaime {
+    top: 0;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.pastille-alcool {
+    bottom: 0;
+    left: 0;
+}
+
+.icone-saveur {
+    bottom: 0;
+    right: 0;
+}
+
+.nom-cocktail {
+    background-color: rgba(0, 0, 0, 0.25);
+    bottom: 0;
+    font-weight: 700;
+    left: 0;
+    line-height: 2em;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
 #barre-recherche {
     background-image: url(../images/icone-loupe.svg);
     background-repeat: no-repeat;
@@ -86,10 +129,6 @@ nav {
     opacity: 1;
 }
 
-#compteur-jaime {
-    text-shadow: 0 0 2px var(--palette-background-color);
-}
-
 #galerie {
     display: flex;
     flex-wrap: wrap;
@@ -97,43 +136,4 @@ nav {
     justify-content: center;
     margin: auto;
     width: 80%;
-}
-
-#illustration-cocktail {
-    filter: grayscale(50%);
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
-}
-
-#illustration-cocktail:hover {
-    filter: none;
-}
-
-#mentions-jaime {
-    top: 0;
-    right: 5px;
-    display: flex;
-    gap: 5px;
-}
-
-#pastille-alcool {
-    bottom: 0;
-    left: 0;
-}
-
-#icone-saveur {
-    bottom: 0;
-    right: 0;
-}
-
-#nom-cocktail {
-    background-color: rgba(0, 0, 0, 0.25);
-    bottom: 0;
-    font-weight: 700;
-    left: 0;
-    line-height: 2em;
-    position: absolute;
-    text-align: center;
-    width: 100%;
 }

@@ -30,24 +30,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             nouveauCocktail.innerHTML = modeleHTML;
 
             // Définir le nom
-            const nomCocktail = nouveauCocktail.querySelector('#nom-cocktail');
+            const nomCocktail = nouveauCocktail.querySelector('.nom-cocktail');
             nomCocktail.textContent = cocktail.nom;
 
             // Afficher l'icone du profil gustatif
-            const umamiCocktail = nouveauCocktail.querySelector('#icone-saveur');
+            const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
             umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.umami]}.svg` || iconesUmami['default'];
 
             // Ajouter l'image du cocktail
-            const imageCocktail = nouveauCocktail.querySelector('#illustration-cocktail');
+            const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
             imageCocktail.src = `https://picsum.photos/seed/${cocktail.nom.replace(/[^a-zA-Z0-9]/g, '')}/200/300`;
             imageCocktail.loading = "lazy";
 
             // Choisir la couleur de la pastille pour l'alcool principal
-            const pastilleAlcool = nouveauCocktail.querySelector('#pastille-alcool');
+            const pastilleAlcool = nouveauCocktail.querySelector('.pastille-alcool');
             pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
 
             // Afficher le nombre de mentions "j'aime"
-            const compteurJaime = nouveauCocktail.querySelector('#compteur-jaime');
+            const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
             compteurJaime.textContent = cocktail.nb_likes;
 
             // Ajouter la fonctionnalité d'ouvrir la boite modale à la publication
