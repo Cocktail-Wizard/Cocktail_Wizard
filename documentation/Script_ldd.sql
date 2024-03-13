@@ -13,7 +13,7 @@
 
 -- Drop les tables avant la création si elle sont déja crée.
 DROP TABLE IF EXISTS Commentaire CASCADE;
-DROP TABLE IF EXISTS Ingredient_Utilisateur CASCADE;
+DROP TABLE IF EXISTS Ingredient_Cocktail CASCADE;
 DROP TABLE IF EXISTS Cocktail CASCADE;
 DROP TABLE IF EXISTS Alcool_utilisateur CASCADE;
 DROP TABLE IF EXISTS Ingredient_Utilisateur CASCADE;
@@ -34,7 +34,7 @@ CREATE TABLE Ingredient (
 CREATE TABLE Alcool (
     id_alcool INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255) NOT NULL,
-    information VARCHAR(255),
+    information VARCHAR(400),
     lien_saq VARCHAR(255)
 );
 
@@ -42,6 +42,8 @@ CREATE TABLE Alcool (
 CREATE TABLE Banque_Image (
     id_image INT PRIMARY KEY AUTO_INCREMENT,
     img LONGBLOB NOT NULL,
+    -- Permet de savoir si l'image est utilisée pour un
+    -- cocktail ou pour une image de profil.
     img_cocktail BIT NOT NULL
 );
 
@@ -113,8 +115,8 @@ CREATE TABLE Commentaire (
     contenu VARCHAR(2000) NOT NULL,
     date_commentaire Date NOT NULL,
     nb_like INT NOT NULL,
-    id_utilisateur INT,
-    id_cocktail INT,
+    id_utilisateur INT NOT NULL,
+    id_cocktail INT NOT NULL,
     FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
     FOREIGN KEY (id_cocktail) REFERENCES Cocktail(id_cocktail)
 );
