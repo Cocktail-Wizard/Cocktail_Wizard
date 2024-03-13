@@ -35,29 +35,38 @@ CREATE TABLE Alcool (
     id_alcool INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255) NOT NULL,
     information VARCHAR(400),
-    lien_saq VARCHAR(255)
+    lien_saq VARCHAR(255),
+    CONSTRAINT lien_saq_format CHECK (lien_saq LIKE 'http://%'
+    OR lien_saq LIKE 'https://%' OR lien_saq IS NULL)
 );
 
 -- Création de la table Banque_Image
+--TODO: Stocker les images dans un dossier et stocker le chemin dans la base de donnée.
 CREATE TABLE Banque_Image (
     id_image INT PRIMARY KEY AUTO_INCREMENT,
-    img LONGBLOB NOT NULL,
+    img BLOB NOT NULL,
     -- Permet de savoir si l'image est utilisée pour un
     -- cocktail ou pour une image de profil.
-    img_cocktail BIT NOT NULL
+    img_cocktail BOOLEAN NOT NULL,
+    CONSTRAINT img_cocktail_boolean CHECK (img_cocktail IN (0, 1))
 );
 
 -- Création de la table Utilisateur
 CREATE TABLE Utilisateur (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL,
-    courriel VARCHAR(255) NOT NULL,
+    courriel VARCHAR(255) NOT NULL UNIQUE,
     mdp VARCHAR(255) NOT NULL,
-    privilege BIT NOT NULL,
+    privilege BOOLEAN NOT NULL,
     data_naiss Date NOT NULL,
     desc_public VARCHAR(2000),
     id_image INT,
-    FOREIGN KEY (id_image) REFERENCES Banque_Image(id_image)
+    FOREIGN KEY (id_image) REFERENCES Banque_Image(id_image),
+    CONSTRAINT privilege_boolean CHECK (privilege IN (0, 1)),
+    CONSTRAINT courriel_format CHECK (courriel LIKE '%@%.%'),
+    CONSTRAINT mdp_longueur CHECK (LENGTH(mdp) >= 8),
+    CONSTRAINT date_naiss CHECK (data_naiss <= CURDATE())
+
 );
 
 -- Création de la table Ingredient_Utilisateur
@@ -65,7 +74,8 @@ CREATE TABLE Ingredient_Utilisateur (
     id_utilisateur INT,
     id_ingredient INT,
     PRIMARY KEY (id_utilisateur, id_ingredient),
-    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur)
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
+    FOREIGN KEY (id_ingredient) REFERENCES Ingredient(id_ingredient)
 );
 
 
@@ -87,12 +97,13 @@ CREATE TABLE Cocktail (
     nb_like INT NOT NULL,
     date_publication Date NOT NULL,
     type_verre VARCHAR(255) NOT NULL,
-    classique BIT NOT NULL,
+    classique BOOLEAN NOT NULL,
     profil_saveur VARCHAR(255) NOT NULL,
     id_image INT,
     id_alcool INT,
     FOREIGN KEY (id_image) REFERENCES Banque_Image(id_image),
-    FOREIGN KEY (id_alcool) REFERENCES Alcool(id_alcool)
+    FOREIGN KEY (id_alcool) REFERENCES Alcool(id_alcool),
+    CONSTRAINT classique_boolean CHECK (classique IN (0, 1))
 );
 
 -- Création de la table Ingredient_Cocktail
