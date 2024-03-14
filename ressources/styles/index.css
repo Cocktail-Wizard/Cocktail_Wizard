@@ -10,16 +10,14 @@ body {
     gap: var(--default-gap);
 }
 
-footer {
-    background-color: rgba(0, 0, 0, 0.1);
-    height: 2em;
-}
-
 header {
     background: radial-gradient(transparent, black), url(../images/sparkles.png) no-repeat center 25% / cover;
     font-size: 4vw;
     height: 50vh;
     text-shadow: 0 0 15px var(--palette-headline-color);
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 header h1 {
@@ -28,13 +26,6 @@ header h1 {
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 20px;
     padding: 1em;
     text-align: center;
-}
-
-header,
-footer {
-    align-items: center;
-    display: flex;
-    justify-content: center;
 }
 
 nav {
