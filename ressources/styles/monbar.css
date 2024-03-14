@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+
 :root {
     --publication-width: 250px;
     --publication-height: calc(var(--publication-width * 4 / 3));
@@ -10,10 +12,12 @@ body {
     height: 100vh;
     padding: 0;
     background-color: #16161a;
+    font-family: "Prata", serif;
 }
 
 header {
     font-size: 2vw;
+    font-family: "Prata", serif;
 }
 
 header #w-icon {
@@ -78,6 +82,7 @@ header #w-icon {
     color: #fffffe;
     padding: 1vh 2vh;
     border-radius: 5px;
+    font-family: "Prata", serif;
 }
 
 header h1 {
@@ -85,6 +90,7 @@ header h1 {
     padding: 1em;
     text-align: center;
     color: #fffffe;
+    font-family: "Prata", serif;
 }
 
 .button-container {
@@ -110,6 +116,7 @@ header h1 {
     transition: box-shadow .05s ease-in-out, opacity .05s ease-in-out;
     touch-action: manipulation;
     display: inline-block;
+    font-family: "Prata", serif;
 }
 
 .button:hover {
@@ -161,6 +168,7 @@ header h1 {
     padding-left: 5px;
     background-color: #94a1b2;
     color: #010101;
+    font-family: "Prata", serif;
 }
 
 #ingredientList {
@@ -180,12 +188,14 @@ header h1 {
     max-height: 200px;
     overflow-y: auto;
     width: 310px;
+    font-family: "Prata", serif;
 }
 
 .ingredient-item {
     padding: 5px 0;
     border-bottom: 1px solid #010101;
     color: #010101;
+    font-family: "Prata", serif;
 }
 
 .ingredient-item:last-child {
@@ -218,6 +228,7 @@ header h1 {
     white-space: nowrap;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     background-image: radial-gradient(circle, 3, #7f5af0);
+    font-family: "Prata", serif;
 }
 
 /* Body Styles */
@@ -250,7 +261,7 @@ header h1 {
     color: #fffffe;
     background-color: #7f5af0;
     font-size: 25px;
-    font-weight: bold;
+    font-family: "Prata", serif;
 }
 
 .line {
