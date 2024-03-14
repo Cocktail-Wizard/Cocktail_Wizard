@@ -24,8 +24,6 @@ DROP TABLE IF EXISTS Banque_Image CASCADE;
 DROP TABLE IF EXISTS Ingredient CASCADE;
 DROP TABLE IF EXISTS Alcool CASCADE;
 
-
-
 -- Création de la table Ingredient
 CREATE TABLE Ingredient (
     id_ingredient INT PRIMARY KEY AUTO_INCREMENT,
@@ -46,7 +44,7 @@ CREATE TABLE Alcool (
 -- Essayer de stocker l'image avec des liens dans la base de donnée
 CREATE TABLE Banque_Image (
     id_image INT PRIMARY KEY AUTO_INCREMENT,
-    img BLOB NOT NULL,
+    img VARCHAR(255) NOT NULL,
     -- Permet de savoir si l'image est utilisée pour un
     -- cocktail ou pour une image de profil.
     img_cocktail BOOLEAN NOT NULL,

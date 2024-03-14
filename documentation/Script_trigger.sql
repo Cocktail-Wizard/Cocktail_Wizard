@@ -84,7 +84,7 @@ END//
 -- DESCRIPTION:
 --  Empêche la modification de la date de publication
 -- d'un cocktail
--- TODO: Vérifier si nécessaire
+-- *Vérifier si nécessaire
 --
 DROP TRIGGER IF EXISTS TRG_date_publication_non_update;
 CREATE TRIGGER TRG_date_publication_non_update
@@ -116,14 +116,14 @@ BEGIN
 END//
 
 --
--- DECLENCHEUR: TRG_nb_like_cocktail
+-- DECLENCHEUR: TRG_nb_like_cocktail_+
 -- TABLE: Cocktail_Liked
 -- TYPE: Après requête d'insertion
 -- DESCRIPTION:
 --  Incrémente le nombre de like d'un cocktail
 --
-DROP TRIGGER IF EXISTS TRG_nb_like_cocktail;
-CREATE TRIGGER TRG_nb_like_cocktail
+DROP TRIGGER IF EXISTS TRG_nb_like_cocktail_plus;
+CREATE TRIGGER TRG_nb_like_cocktail_plus
 AFTER INSERT ON Cocktail_Liked
 FOR EACH ROW
 BEGIN
@@ -133,14 +133,14 @@ BEGIN
 END//
 
 --
--- DECLENCHEUR: TRG_nb_like_commentaire
+-- DECLENCHEUR: TRG_nb_like_commentaire_+
 -- TABLE: Commentaire_Liked
 -- TYPE: Après requête d'insertion
 -- DESCRIPTION:
 --  Incrémente le nombre de like d'un commentaire
 --
-DROP TRIGGER IF EXISTS TRG_nb_like_commentaire;
-CREATE TRIGGER TRG_nb_like_commentaire
+DROP TRIGGER IF EXISTS TRG_nb_like_commentaire_plus;
+CREATE TRIGGER TRG_nb_like_commentaire_plus
 AFTER INSERT ON Commentaire_Liked
 FOR EACH ROW
 BEGIN
@@ -148,6 +148,41 @@ BEGIN
     SET nb_like = nb_like + 1
     WHERE id_commentaire = NEW.id_commentaire;
 END//
+
+--
+-- DECLENCHEUR: TRG_nb_like_cocktail_-
+-- TABLE: Cocktail_Liked
+-- TYPE: Après requête de suppression
+-- DESCRIPTION:
+--  Décrémente le nombre de like d'un cocktail
+--
+DROP TRIGGER IF EXISTS TRG_nb_like_cocktail_moins;
+CREATE TRIGGER TRG_nb_like_cocktail_moins
+AFTER DELETE ON Cocktail_Liked
+FOR EACH ROW
+BEGIN
+    UPDATE Cocktail
+    SET nb_like = nb_like - 1
+    WHERE id_cocktail = OLD.id_cocktail;
+END//
+
+--
+-- DECLENCHEUR: TRG_nb_like_commentaire_-
+-- TABLE: Commentaire_Liked
+-- TYPE: Après requête de suppression
+-- DESCRIPTION:
+--  Décrémente le nombre de like d'un commentaire
+--
+DROP TRIGGER IF EXISTS TRG_nb_like_commentaire_moins;
+CREATE TRIGGER TRG_nb_like_commentaire_moins
+AFTER DELETE ON Commentaire_Liked
+FOR EACH ROW
+BEGIN
+    UPDATE Commentaire
+    SET nb_like = nb_like - 1
+    WHERE id_commentaire = OLD.id_commentaire;
+END//
+
 
 
 
