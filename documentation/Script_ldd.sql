@@ -7,11 +7,13 @@
 --  au site web cocktail wizard
 --  Tables: Ingredient, Alcool, Ingredient_Utilisateur,
 --  Utilisateur, Alcool_utilisateur, Commentaire, Banque_Image,
---  Ingredient_Cocktail, Cocktail.
+--  Ingredient_Cocktail, Cocktail, Commentaire_Liked, Cocktail_Liked.
 --
 -- ============================================================
 
 -- Drop les tables avant la création si elle sont déja crée.
+DROP TABLE IF EXISTS Cocktail_Liked CASCADE;
+DROP TABLE IF EXISTS Commentaire_Liked CASCADE;
 DROP TABLE IF EXISTS Commentaire CASCADE;
 DROP TABLE IF EXISTS Ingredient_Cocktail CASCADE;
 DROP TABLE IF EXISTS Cocktail CASCADE;
@@ -27,13 +29,13 @@ DROP TABLE IF EXISTS Alcool CASCADE;
 -- Création de la table Ingredient
 CREATE TABLE Ingredient (
     id_ingredient INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(255) NOT NULL
+    nom VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- Création de la table Alcool
 CREATE TABLE Alcool (
     id_alcool INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(255) NOT NULL,
+    nom VARCHAR(255) NOT NULL UNIQUE,
     information VARCHAR(400),
     lien_saq VARCHAR(255),
     CONSTRAINT lien_saq_format CHECK (lien_saq LIKE 'http://%'
@@ -41,7 +43,7 @@ CREATE TABLE Alcool (
 );
 
 -- Création de la table Banque_Image
---TODO: Stocker les images dans un dossier et stocker le chemin dans la base de donnée.
+-- Essayer de stocker l'image avec des liens dans la base de donnée
 CREATE TABLE Banque_Image (
     id_image INT PRIMARY KEY AUTO_INCREMENT,
     img BLOB NOT NULL,
@@ -56,17 +58,14 @@ CREATE TABLE Utilisateur (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL,
     courriel VARCHAR(255) NOT NULL UNIQUE,
-    mdp VARCHAR(255) NOT NULL,
+    mdp_hashed VARCHAR(255) NOT NULL,
     privilege BOOLEAN NOT NULL,
     data_naiss Date NOT NULL,
     desc_public VARCHAR(2000),
     id_image INT,
     FOREIGN KEY (id_image) REFERENCES Banque_Image(id_image),
     CONSTRAINT privilege_boolean CHECK (privilege IN (0, 1)),
-    CONSTRAINT courriel_format CHECK (courriel LIKE '%@%.%'),
-    CONSTRAINT mdp_longueur CHECK (LENGTH(mdp) >= 8),
-    CONSTRAINT date_naiss CHECK (data_naiss <= CURDATE())
-
+    CONSTRAINT courriel_format CHECK (courriel LIKE '%@%.%')
 );
 
 -- Création de la table Ingredient_Utilisateur
@@ -78,14 +77,13 @@ CREATE TABLE Ingredient_Utilisateur (
     FOREIGN KEY (id_ingredient) REFERENCES Ingredient(id_ingredient)
 );
 
-
-
 -- Création de la table Alcool_utilisateur
 CREATE TABLE Alcool_utilisateur (
     id_utilisateur INT,
     id_alcool INT,
     PRIMARY KEY (id_utilisateur, id_alcool),
-    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur)
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
+    FOREIGN KEY (id_alcool) REFERENCES Alcool(id_alcool)
 );
 
 -- Création de la table Cocktail
@@ -117,7 +115,12 @@ CREATE TABLE Ingredient_Cocktail (
     id_cocktail INT NOT NULL,
     FOREIGN KEY (id_ingredient) REFERENCES Ingredient(id_ingredient),
     FOREIGN KEY (id_alcool) REFERENCES Alcool(id_alcool),
-    FOREIGN KEY (id_cocktail) REFERENCES Cocktail(id_cocktail)
+    FOREIGN KEY (id_cocktail) REFERENCES Cocktail(id_cocktail),
+    -- Permet d'avoir un seul type d'ingrédient par ligne
+    CONSTRAINT ingredient_unique CHECK(
+        (id_ingredient IS NOT NULL AND id_alcool IS NULL AND ingredient_autre IS NULL) OR
+        (id_ingredient IS NULL AND id_alcool IS NOT NULL AND ingredient_autre IS NULL) OR
+        (id_ingredient IS NULL AND id_alcool IS NULL AND ingredient_autre IS NOT NULL))
 );
 
 -- Création de la table Commentaire
@@ -130,4 +133,22 @@ CREATE TABLE Commentaire (
     id_cocktail INT NOT NULL,
     FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
     FOREIGN KEY (id_cocktail) REFERENCES Cocktail(id_cocktail)
+);
+
+-- Création de la table Commentaire_Liked
+CREATE TABLE Commentaire_Liked (
+    id_commentaire INT,
+    id_utilisateur INT,
+    PRIMARY KEY (id_commentaire, id_utilisateur),
+    FOREIGN KEY (id_commentaire) REFERENCES Commentaire(id_commentaire),
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur)
+);
+
+-- Création de la table Cocktail_Liked
+CREATE TABLE Cocktail_Liked (
+    id_cocktail INT,
+    id_utilisateur INT,
+    PRIMARY KEY (id_cocktail, id_utilisateur),
+    FOREIGN KEY (id_cocktail) REFERENCES Cocktail(id_cocktail),
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur)
 );

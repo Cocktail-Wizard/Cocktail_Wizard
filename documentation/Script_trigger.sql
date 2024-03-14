@@ -44,3 +44,112 @@ BEGIN
 END//
 DELIMITER ;
 */
+
+--
+-- DECLENCHEUR: TRG_date_cocktail
+-- TABLE: Cocktail
+-- TYPE: Avant requête d'insertion
+-- DESCRIPTION:
+--  Met la date de publication à la date courante
+--
+DELIMITER // -- Permet de changer le délimiteur pour le trigger
+DROP TRIGGER IF EXISTS TRG_date_cocktail;
+CREATE TRIGGER TRG_date_cocktail
+BEFORE INSERT ON Cocktail
+FOR EACH ROW
+BEGIN
+    SET NEW.date_publication = CURRENT_DATE();
+END//
+
+
+--
+-- DECLENCHEUR: TRG_date_commentaire
+-- TABLE: Commentaire
+-- TYPE: Avant requête d'insertion
+-- DESCRIPTION:
+--  Met la date de publication à la date courante
+--
+DROP TRIGGER IF EXISTS TRG_date_commentaire;
+CREATE TRIGGER TRG_date_commentaire
+BEFORE INSERT ON Commentaire
+FOR EACH ROW
+BEGIN
+    SET NEW.date_commentaire = CURRENT_DATE();
+END//
+
+--
+-- DECLENCHEUR: TRG_date_publication_non_update
+-- TABLE: Cocktail
+-- TYPE: Avant requête de mise à jour
+-- DESCRIPTION:
+--  Empêche la modification de la date de publication
+-- d'un cocktail
+-- TODO: Vérifier si nécessaire
+--
+DROP TRIGGER IF EXISTS TRG_date_publication_non_update;
+CREATE TRIGGER TRG_date_publication_non_update
+BEFORE UPDATE ON Cocktail
+FOR EACH ROW
+BEGIN
+    IF NEW.date_publication != OLD.date_publication THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La date de publication ne peut pas être modifiée';
+    END IF;
+END//
+
+--
+-- DECLENCHEUR: TRG_date_commentaire_non_update
+-- TABLE: Commentaire
+-- TYPE: Avant requête de mise à jour
+-- DESCRIPTION:
+--  Empêche la modification de la date de publication
+--  d'un commentaire
+-- TODO: Vérifier si nécessaire
+--
+DROP TRIGGER IF EXISTS TRG_date_commentaire_non_update;
+CREATE TRIGGER TRG_date_commentaire_non_update
+BEFORE UPDATE ON Commentaire
+FOR EACH ROW
+BEGIN
+    IF NEW.date_commentaire != OLD.date_commentaire THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La date de publication ne peut pas être modifiée';
+    END IF;
+END//
+
+--
+-- DECLENCHEUR: TRG_nb_like_cocktail
+-- TABLE: Cocktail_Liked
+-- TYPE: Après requête d'insertion
+-- DESCRIPTION:
+--  Incrémente le nombre de like d'un cocktail
+--
+DROP TRIGGER IF EXISTS TRG_nb_like_cocktail;
+CREATE TRIGGER TRG_nb_like_cocktail
+AFTER INSERT ON Cocktail_Liked
+FOR EACH ROW
+BEGIN
+    UPDATE Cocktail
+    SET nb_like = nb_like + 1
+    WHERE id_cocktail = NEW.id_cocktail;
+END//
+
+--
+-- DECLENCHEUR: TRG_nb_like_commentaire
+-- TABLE: Commentaire_Liked
+-- TYPE: Après requête d'insertion
+-- DESCRIPTION:
+--  Incrémente le nombre de like d'un commentaire
+--
+DROP TRIGGER IF EXISTS TRG_nb_like_commentaire;
+CREATE TRIGGER TRG_nb_like_commentaire
+AFTER INSERT ON Commentaire_Liked
+FOR EACH ROW
+BEGIN
+    UPDATE Commentaire
+    SET nb_like = nb_like + 1
+    WHERE id_commentaire = NEW.id_commentaire;
+END//
+
+
+
+
+DELIMITER ;
