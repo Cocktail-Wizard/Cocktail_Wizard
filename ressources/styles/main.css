@@ -30,3 +30,11 @@ img {
     display: flex;
     justify-content: center;
 }
+
+footer {
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 2em;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
