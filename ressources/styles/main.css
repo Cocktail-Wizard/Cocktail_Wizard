@@ -1,19 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+
 :root {
     --default-gap: 3em;
-    --default-border-radius: 15px;
-    --palette-background-color: #232946;
+    --default-border-radius: 8px;
+    --palette-background-color: #16161a;
     --palette-headline-color: #fffffe;
-    --palette-paragraph-color: #b8c1ec;
-    --palette-button-color: #eebbc3;
+    --palette-paragraph-color: #fffffe;
+    --palette-button-color: #7f5af0;
     --palette-button-text-color: #232946;
+    --palette-button-color-hover: #2cb67d;
+    --palette-border-color: #010101;
+    --palette-secondary-color: #94a1b2;
+    --palette-secondary-text-color: #010101;
 }
 
 * {
     margin: 0;
-    font-family: sans-serif;
+    font-family: "Prata", serif;
     user-select: none;
     transition-duration: 1s;
     color: var(--palette-paragraph-color);
+}
+
+button {
+    background-color: var(--palette-button-color);
+    color: var(--palette-button-text-color);
 }
 
 h1 {
@@ -27,6 +38,14 @@ img {
 .error {
     background-color: var(--palette-background-color);
     color: red;
+    display: flex;
+    justify-content: center;
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 2em;
+    align-items: center;
     display: flex;
     justify-content: center;
 }
