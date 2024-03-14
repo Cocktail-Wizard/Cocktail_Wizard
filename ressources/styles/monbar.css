@@ -208,14 +208,15 @@ header h1 {
 
 .selected-ingredient {
     display: inline-block;
-    /* Use inline-block for side-by-side display */
     padding: 10px;
     border: 1px solid #735dbd;
-    border-radius: 5px;
+    border-radius: 20px;
     background-color: #9cffb2;
     color: #fff;
     margin: 5px;
     white-space: nowrap;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background-image: radial-gradient(circle, #a1e4ff, #9cffb2);
 }
 
 /* Body Styles */
