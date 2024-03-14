@@ -22,7 +22,7 @@ html {
     align-items: center;
     justify-content: center;
     margin-top: 5%;
-    background-color: #B8C1EC;
+    background-color: var(--palette-secondary-background-color);
     border-radius: 0px 50px 50px 0px;
     width: 31.25rem;
     height: 36.25rem;

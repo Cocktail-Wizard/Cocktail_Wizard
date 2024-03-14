@@ -10,8 +10,8 @@
     --palette-button-text-color: #232946;
     --palette-button-color-hover: #2cb67d;
     --palette-border-color: #010101;
-    --palette-secondary-color: #94a1b2;
-    --palette-secondary-text-color: #010101;
+    --palette-secondary-background-color: #94a1b2;
+    --palette-secondary-background-text-color: #010101;
 }
 
 * {

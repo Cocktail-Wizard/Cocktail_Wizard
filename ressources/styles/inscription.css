@@ -14,7 +14,7 @@ html {
     grid-template-rows: 0.2fr 1.4fr 1.4fr;
     width: 68.75rem;
     height: 40.625rem;
-    background-color: #B8C1EC;
+    background-color: var(--palette-secondary-background-color);
     border-radius: 50px;
 }
 
