@@ -26,14 +26,15 @@ body {
     display: flex;
     align-items: center;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 1vh;
+    left: 1vh;
 }
 
 .profile-pic {
     width: 80px;
     height: 80px;
     border-radius: 50%;
+
 }
 
 .username {
