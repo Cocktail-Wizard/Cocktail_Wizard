@@ -6,9 +6,7 @@ $request = $_SERVER['REQUEST_URI'];
 
 if (isset($_SERVER['REQUEST_METHOD'])) {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
-
-
-        echo "GET METHOD!";
+        require "get.php";
     }
 
     if ($_SERVER['REQUEST_METHOD'] == "PUT") {

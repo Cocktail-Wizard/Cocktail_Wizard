@@ -16,6 +16,6 @@ if ($con->connect_error) {
     echo "Erreur de connexion a la BD";
 }
 
-echo "Informations serveur: " . $con->get_server_info();
+echo "Informations serveur: " . $con->get_server_info() . "</br>";
 
 ?>
