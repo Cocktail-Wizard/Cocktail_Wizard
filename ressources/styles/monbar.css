@@ -1,11 +1,24 @@
+:root {
+    --publication-width: 250px;
+    --publication-height: calc(var(--publication-width * 4 / 3));
+}
+
 /* General Styles */
 body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    margin: 0;
     padding: 0;
     background-color: #0a285c;
+}
+
+header {
+    font-size: 2vw;
+}
+
+header #w-icon {
+    height: 4vw;
+    vertical-align: -35%;
 }
 
 #main {
@@ -43,13 +56,11 @@ body {
     font-size: 18px;
 }
 
-.logo {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+header h1 {
+    width: 100%;
+    padding: 1em;
+    text-align: center;
     color: gold;
-    font-size: 24px;
 }
 
 .button-container {
@@ -69,7 +80,6 @@ body {
     color: #FFFFFF;
     cursor: pointer;
     font-size: 17px;
-    margin: 0;
     outline: 0;
     padding: 11px 15px 12px;
     text-align: center;
@@ -194,7 +204,7 @@ body {
 
 /* Body Styles */
 .body {
-    flex-grow: 1;
+    gap: var(--default-gap);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -270,7 +280,7 @@ body {
 /* Specific Styles */
 hr {
     border: 1px solid white;
-    margin: 10px 0;
+    /* margin: 10px 0; */
 }
 
 .clear-button {
@@ -288,4 +298,20 @@ hr {
     text-decoration: none;
     transition-duration: .15s, .15s;
     color: #19337a;
+}
+
+.galerie {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    overflow-y: hidden;
+    gap: var(--default-gap);
+    justify-content: flex-start;
+    margin: auto;
+    border: 1px solid white;
+    border-radius: var(--default-border-radius);
+}
+
+.galerie::-webkit-scrollbar {
+    display: none;
 }

@@ -33,6 +33,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             const nomCocktail = nouveauCocktail.querySelector('.nom-cocktail');
             nomCocktail.textContent = cocktail.nom;
 
+            // Afficher l'icone "j'aime"
+            const iconeJAime = nouveauCocktail.querySelector('.icone-jaime');
+            iconeJAime.src = "ressources/images/icone-coeur-vide.svg"
+
+            // Afficher l'icone de l'alcool principal
+            const iconeAlcool = nouveauCocktail.querySelector('.pastille-alcool');
+            iconeAlcool.src = "ressources/images/pastille-alcool.svg";
+
             // Afficher l'icone du profil gustatif
             const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
             umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.umami]}.svg` || iconesUmami['default'];
