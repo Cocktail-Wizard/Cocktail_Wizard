@@ -155,25 +155,13 @@ body {
     border-bottom: none;
 }
 
-#selectedIngredients,
-.ingredient-box {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 10px;
-    padding: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-    border: #6248b9, solid, 1px;
-}
-
 .selectIngredient-box {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     justify-content: flex-start;
     align-items: flex-start;
     height: 200px;
+    max-height: 200px;
     overflow-y: auto;
     padding: 10px;
     border: 1px solid #735dbd;
@@ -182,14 +170,15 @@ body {
 }
 
 .selected-ingredient {
-    flex-shrink: 0;
+    display: inline-block;
+    /* Use inline-block for side-by-side display */
     padding: 10px;
     border: 1px solid #735dbd;
     border-radius: 5px;
-    background-color: #735dbd;
+    background-color: #9cffb2;
     color: #fff;
+    margin: 5px;
     white-space: nowrap;
-    /* Prevent ingredient from breaking into multiple lines */
 }
 
 /* Body Styles */

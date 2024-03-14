@@ -57,7 +57,7 @@ function updateSelectedIngredients() {
         ingredientBox.addEventListener("click", () => unselectIngredient(ingredient));
         selectedIngredientsDiv.appendChild(ingredientBox);
     });
-    selectedIngredientsDiv.style.display = "block"; // s'ssurer que la boîte des ingrédients sélectionnés est visible meme si vide
+    selectedIngredientsDiv.style.display = "flex"; // s'ssurer que la boîte des ingrédients sélectionnés est visible meme si vide
 }
 
 // Ferme la liste des ingrédients lorsque l'utilisateur clique à l'extérieur
