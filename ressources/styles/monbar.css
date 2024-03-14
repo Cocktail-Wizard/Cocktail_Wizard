@@ -14,7 +14,7 @@ body {
 
 /* Header Styles */
 #top {
-    height: 20%;
+    height: 20vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -55,8 +55,8 @@ body {
     display: flex;
     justify-content: space-between;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 1vh;
+    right: 1vh;
 }
 
 .button {
@@ -117,8 +117,14 @@ body {
     z-index: 1;
 }
 
-#searchbox {
-    margin-right: 10px;
+#searchBox {
+    font-size: 15px;
+    ;
+    height: 50px;
+    width: 300px;
+    border-radius: 15px;
+    padding-left: 5px;
+    ;
 }
 
 #ingredientList {
@@ -136,6 +142,7 @@ body {
     z-index: 2;
     max-height: 200px;
     overflow-y: auto;
+    width: 310px;
 }
 
 .ingredient-item {
@@ -223,17 +230,18 @@ body {
 }
 
 /* Footer Styles */
-.footer {
-    position: sticky;
+.twoBtn {
+    position: fixed;
     bottom: 20px;
-    margin: 0 20px;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0;
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
-.footer button {
+.twoBtn button {
     border: none;
     background-color: #a48df0;
     border-radius: 50%;
@@ -243,18 +251,18 @@ body {
     height: 50px;
 }
 
-.footer button:hover {
+.twoBtn button:hover {
     opacity: 1;
 }
 
-.footer button img {
+.twoBtn button img {
     display: block;
     margin: auto;
     width: 30px;
     height: 30px;
 }
 
-.footer button:focus {
+.twoBtn button:focus {
     outline: none;
 }
 
