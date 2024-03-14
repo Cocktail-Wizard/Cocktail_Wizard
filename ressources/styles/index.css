@@ -1,6 +1,8 @@
 :root {
     --publication-width: 300px;
     --publication-height: calc(var(--publication-width * 4 / 3));
+    --publication-width-small: calc(var(--publication-width) / 2.28);
+    --publication-height-small: calc(var(--publication-height) / 2.28);
 }
 
 body {
@@ -69,4 +71,11 @@ nav {
     justify-content: center;
     margin: auto;
     width: 80%;
+}
+
+@media screen and (max-width: 850px) {
+    .cocktail {
+        height: var(--publication-height-small);
+        width: var(--publication-width-small);
+    }
 }
