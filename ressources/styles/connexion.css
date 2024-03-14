@@ -1,19 +1,22 @@
-html{
-    background-color: #232946;
+html {
+    background-color: var(--palette-background-color);
 }
-#connexion{
+
+#connexion {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
-#logoCW{
+
+#logoCW {
     border-radius: 50px 0px 0px 50px;
     width: 36.25rem;
     height: 36.25rem;
     margin-top: 5%;
 }
-#form-connexion{
+
+#form-connexion {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,10 +27,12 @@ html{
     width: 31.25rem;
     height: 36.25rem;
 }
-#form-connexion > h1{
-font-family: 'merriweather', 'serif';
+
+#form-connexion>h1 {
+    font-family: 'merriweather', 'serif';
 }
-#form-connexion > input{
+
+#form-connexion>input {
     margin-top: 0.625rem;
     margin-bottom: 0.625rem;
     padding: 0.625rem;
@@ -35,7 +40,8 @@ font-family: 'merriweather', 'serif';
     border-radius: 1.875rem;
     width: 18.75rem;
 }
-#form-connexion > button{
+
+#form-connexion>button {
     margin-top: 0.625rem;
     padding: 0.9375rem;
     font-size: 1.25rem;
@@ -45,6 +51,7 @@ font-family: 'merriweather', 'serif';
     border-radius: 1.875rem;
     width: 13.75rem;
 }
-.erreur{
+
+.erreur {
     color: red;
 }
