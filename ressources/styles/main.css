@@ -1,0 +1,32 @@
+:root {
+    --default-gap: 3em;
+    --default-border-radius: 15px;
+    --palette-background-color: #232946;
+    --palette-headline-color: #fffffe;
+    --palette-paragraph-color: #b8c1ec;
+    --palette-button-color: #eebbc3;
+    --palette-button-text-color: #232946;
+}
+
+* {
+    margin: 0;
+    font-family: sans-serif;
+    user-select: none;
+    transition-duration: 1s;
+    color: var(--palette-paragraph-color);
+}
+
+h1 {
+    color: var(--palette-headline-color);
+}
+
+img {
+    pointer-events: none;
+}
+
+.error {
+    background-color: var(--palette-background-color);
+    color: red;
+    display: flex;
+    justify-content: center;
+}

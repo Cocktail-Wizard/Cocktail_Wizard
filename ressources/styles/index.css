@@ -1,0 +1,139 @@
+:root {
+    --publication-width: 300px;
+    --publication-height: 400px;
+}
+
+body {
+    background: linear-gradient(to right, black, var(--palette-background-color), black);
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-gap);
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 2em;
+}
+
+header {
+    background: radial-gradient(transparent, black), url(../images/sparkles.png) no-repeat center 25% / cover;
+    font-size: 4vw;
+    height: 50vh;
+    text-shadow: 0 0 15px var(--palette-headline-color);
+}
+
+header h1 {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 20px;
+    padding: 1em;
+    text-align: center;
+}
+
+header,
+footer {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.cocktail {
+    border-radius: var(--default-border-radius);
+    box-shadow: #666 0 0 5px;
+    height: var(--publication-height);
+    overflow: hidden;
+    position: relative;
+    width: var(--publication-width);
+}
+
+.cocktail:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.icone-cocktail {
+    position: absolute;
+    height: 1em;
+    font-size: 2em;
+}
+
+.compteur-jaime {
+    text-shadow: 0 0 2px var(--palette-background-color);
+}
+
+.illustration-cocktail {
+    /* filter: grayscale(50%); */
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.illustration-cocktail:hover {
+    filter: none;
+}
+
+.mentions-jaime {
+    top: 0;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.pastille-alcool {
+    bottom: 0;
+    left: 0;
+}
+
+.icone-saveur {
+    bottom: 0;
+    right: 0;
+}
+
+.nom-cocktail {
+    background-color: rgba(0, 0, 0, 0.25);
+    bottom: 0;
+    font-weight: 700;
+    left: 0;
+    line-height: 2em;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+#barre-recherche {
+    background-image: url(../images/icone-loupe.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 0;
+    border-radius: var(--default-border-radius);
+    box-shadow: #666 0 0 10px;
+    color: var(--palette-button-text-color);
+    font-size: x-large;
+    opacity: 0.8;
+    outline: none;
+    padding: 10px 0 10px 50px;
+    width: var(--publication-width);
+}
+
+#barre-recherche:focus {
+    box-shadow: #000 0 0 10px;
+    opacity: 1;
+}
+
+#galerie {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--default-gap);
+    justify-content: center;
+    margin: auto;
+    width: 80%;
+}
