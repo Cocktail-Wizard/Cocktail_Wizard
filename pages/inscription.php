@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($requete_preparee->execute()) {
                 $requete_preparee->close();
                 $conn->close();
-                header("Location: pageConnexion.php");
+                header("Location: connexion.php");
                 exit();
             }
         }

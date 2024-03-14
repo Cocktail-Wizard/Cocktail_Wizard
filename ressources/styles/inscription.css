@@ -37,7 +37,7 @@ html {
     margin-bottom: 0.625rem;
     padding: 0.625rem;
     border: none;
-    border-radius: 1.875rem;
+    border-radius: var(--default-border-radius);
     width: 18.75rem;
 }
 
@@ -45,10 +45,10 @@ html {
     margin-top: 0.625rem;
     padding: 0.9375rem;
     font-size: 1.25rem;
-    background-color: #EEBBC3;
-    color: black;
+    background-color: var(--palette-button-color);
+    color: var(--palette-button-text-color);
     border: none;
-    border-radius: 1.875rem;
+    border-radius: var(--default-border-radius);
     width: 13.75rem;
 }
 
@@ -70,8 +70,4 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.erreur {
-    color: red;
 }

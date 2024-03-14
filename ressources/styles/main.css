@@ -11,7 +11,7 @@
     --palette-button-color-hover: #2cb67d;
     --palette-border-color: #010101;
     --palette-secondary-background-color: #94a1b2;
-    --palette-secondary-background-text-color: #010101;
+    --palette-secondary-text-color: #010101;
 }
 
 * {
@@ -35,7 +35,11 @@ img {
     pointer-events: none;
 }
 
-.error {
+input {
+    color: var(--palette-secondary-text-color);
+}
+
+.erreur {
     background-color: var(--palette-background-color);
     color: red;
     display: flex;
