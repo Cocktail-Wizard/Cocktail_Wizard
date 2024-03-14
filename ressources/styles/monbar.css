@@ -9,7 +9,7 @@ body {
     flex-direction: column;
     height: 100vh;
     padding: 0;
-    background-color: #0a285c;
+    background-color: #16161a;
 }
 
 header {
@@ -47,12 +47,12 @@ header #w-icon {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #735dbd;
-    background-image: linear-gradient(#735dbd, #a48df0);
-    border: 1px solid #6248b9;
+    background-color: #7f5af0;
+    background-image: linear-gradient(#7f5af0, #a48df0);
+    border: 3px solid #010101;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
-    color: #FFFFFF;
+    color: #fffffe;
     cursor: pointer;
     z-index: -1;
     transform-origin: bottom left;
@@ -63,7 +63,7 @@ header #w-icon {
     width: 5vh;
     height: 5vh;
     border-radius: 50%;
-    border: 2px solid #ffff;
+    border: 2px solid #010101;
     overflow: hidden;
     margin-left: 1vh;
 }
@@ -71,13 +71,11 @@ header #w-icon {
 .profile-pic {
     width: 100%;
     height: 100%;
-    /* Make sure the image fills the container */
     object-fit: cover;
-    /* Ensure the image covers the container */
 }
 
 .username {
-    color: #000000;
+    color: #fffffe;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding: 1vh 2vh;
     border-radius: 5px;
@@ -87,7 +85,7 @@ header h1 {
     width: 100%;
     padding: 1em;
     text-align: center;
-    color: gold;
+    color: #fffffe;
 }
 
 .button-container {
@@ -99,12 +97,12 @@ header h1 {
 }
 
 .button {
-    background-color: #735dbd;
-    background-image: linear-gradient(#735dbd, #a48df0);
+    background-color: #7f5af0;
+    background-image: linear-gradient(#7f5af0, #a48df0);
     border: 1px solid #6248b9;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
-    color: #FFFFFF;
+    color: #fffffe;
     cursor: pointer;
     font-size: 17px;
     outline: 0;
@@ -144,7 +142,7 @@ header h1 {
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
-    border: #6248b9, solid, 1px;
+    border: #010101, solid, 1px;
 }
 
 #searchBoxContainer {
@@ -162,15 +160,17 @@ header h1 {
     width: 300px;
     border-radius: 15px;
     padding-left: 5px;
-    ;
+    background-color: #94a1b2;
+    color: #010101;
 }
 
 #ingredientList {
     display: flex;
     flex-direction: column;
     position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
+    background-color: #94a1b2;
+    color: #010101;
+    border: 1px solid #7f5af0;
     border-top: none;
     border-radius: 0 0 5px 5px;
     padding: 10px;
@@ -185,7 +185,8 @@ header h1 {
 
 .ingredient-item {
     padding: 5px 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #010101;
+    color: #010101;
 }
 
 .ingredient-item:last-child {
@@ -201,22 +202,23 @@ header h1 {
     max-height: 200px;
     overflow-y: auto;
     padding: 10px;
-    border: 1px solid #735dbd;
-    border-radius: 5px;
+    border: 5px solid #010101;
+    background-color: #94a1b2;
+    border-radius: 8px;
     margin-bottom: 10px;
 }
 
 .selected-ingredient {
     display: inline-block;
     padding: 10px;
-    border: 1px solid #735dbd;
+    border: 2px solid #010101;
     border-radius: 20px;
-    background-color: #9cffb2;
-    color: #fff;
+    background-color: #7f5af0;
+    color: #fffffe;
     margin: 5px;
     white-space: nowrap;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    background-image: radial-gradient(circle, #a1e4ff, #9cffb2);
+    background-image: radial-gradient(circle, 3, #7f5af0);
 }
 
 /* Body Styles */
@@ -244,16 +246,17 @@ header h1 {
 
 .section-name {
     padding: 10px 20px;
-    border: 1px solid #735dbd;
-    border-radius: 15px;
-    color: #735dbd;
+    border: 5px solid #010101;
+    border-radius: 8px;
+    color: #fffffe;
+    background-color: #7f5af0;
     font-size: 25px;
     font-weight: bold;
 }
 
 .line {
     border: none;
-    border-top: 1px solid #735dbd;
+    border-top: 5px solid #010101;
     flex-grow: 1;
 }
 
@@ -271,7 +274,7 @@ header h1 {
 
 .twoBtn button {
     border: none;
-    background-color: #a48df0;
+    background-color: #7f5af0;
     border-radius: 50%;
     opacity: 0.4;
     transition: opacity 0.3s ease;
@@ -301,9 +304,9 @@ hr {
 }
 
 .clear-button {
-    background-color: #735dbd;
-    background-image: linear-gradient(#735dbd, #a48df0);
-    border: 1px solid #6248b9;
+    background-color: #7f5af0;
+    background-image: linear-gradient(#7f5af0, #a48df0);
+    border: 1px solid #010101;
     border-radius: 4px;
     padding: 5px 10px;
     cursor: pointer;
@@ -325,7 +328,8 @@ hr {
     gap: var(--default-gap);
     justify-content: flex-start;
     margin: auto;
-    border: 1px solid white;
+    border: 5px solid #010101;
+    background-color: #94a1b2;
     border-radius: var(--default-border-radius);
 }
 
