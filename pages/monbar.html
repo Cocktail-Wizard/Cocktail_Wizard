@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon bar</title>
+    <link rel="stylesheet" href="../ressources/styles/main.css">
     <link rel="stylesheet" href="../ressources/styles/monbar.css">
+    <link rel="stylesheet" href="../ressources/styles/carte_cocktail.css">
 </head>
 
 <body>
@@ -17,9 +19,9 @@
             </div>
             <span class="username">@UsernameSuperWizard</span>
         </div>
-        <div class="logo">Cocktail <img src="logo">izard</div>
+        <h1>Cocktail <img src="../favicon.ico" id="w-icon">izard</h1>
         <div class="button-container">
-            <button class="button">Galerie</button>
+            <a class="button" href="../index.html">Galerie</a>
             <button class="button">Déconnexion</button>
         </div>
     </header>
@@ -27,7 +29,6 @@
     <hr>
 
     <section id="main">
-
         <div class="separator">
             <span class="section-name">Mes ingredients</span>
             <hr class="line right" />
@@ -47,28 +48,21 @@
                 <hr class="line right" />
             </div>
 
-            <div>
-                PLACE COCKTAILS HERE
-            </div>
+            <section id="cocktails-classiques" class="galerie"></section>
 
             <div class="separator">
                 <span class="section-name">Mes favoris</span>
                 <hr class="line right" />
             </div>
 
-            <div>
-                PLACE COCKTAILS HERE
-            </div>
-
+            <section id="cocktails-personnels" class="galerie"></section>
 
             <div class="separator">
                 <span class="section-name">Communautaires</span>
                 <hr class="line right" />
             </div>
 
-            <div>
-                PLACE COCKTAILS HERE
-            </div>
+            <section id="cocktails-communautaires" class="galerie"></section>
 
         </div>
     </section>
@@ -82,6 +76,8 @@
         </button>
     </div>
 
+    <script src="../ressources/scripts/outils.js"></script>
+    <script src="../ressources/scripts/test_modale.js"></script>
     <script src="../ressources/scripts/monbar.js"></script>
 </body>
 

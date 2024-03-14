@@ -8,7 +8,7 @@ async function chargerModeleHTML(url) {
 
         return await reponse.text();
     } catch (error) {
-        console.error("Erreur lors du chargement du modèle HTML :", error);
+        console.error(`Erreur lors du chargement du modèle HTML <${url}> :`, error);
         return null;
     }
 }
