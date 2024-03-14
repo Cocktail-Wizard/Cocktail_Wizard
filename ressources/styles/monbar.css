@@ -187,6 +187,10 @@ header h1 {
     color: var(--palette-secondary-text-color);
 }
 
+.ingredient-item:hover {
+    background-color: var(--palette-button-color-hover);
+}
+
 .ingredient-item:last-child {
     border-bottom: none;
 }
