@@ -11,13 +11,11 @@ body {
     flex-direction: column;
     height: 100vh;
     padding: 0;
-    background-color: #16161a;
-    font-family: "Prata", serif;
+    background-color: var(--palette-background-color);
 }
 
 header {
     font-size: 2vw;
-    font-family: "Prata", serif;
 }
 
 header #w-icon {
@@ -51,12 +49,11 @@ header #w-icon {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #7f5af0;
+    background-color: var(--pallette-button-color);
     background-image: linear-gradient(#7f5af0, #a48df0);
     border: 3px solid #010101;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
-    color: #fffffe;
     cursor: pointer;
     z-index: -1;
     transform-origin: bottom left;
@@ -67,7 +64,7 @@ header #w-icon {
     width: 5vh;
     height: 5vh;
     border-radius: 50%;
-    border: 2px solid #010101;
+    border: 2px solid var(--palette-border-color);
     overflow: hidden;
     margin-left: 1vh;
 }
@@ -79,18 +76,15 @@ header #w-icon {
 }
 
 .username {
-    color: #fffffe;
+
     padding: 1vh 2vh;
     border-radius: 5px;
-    font-family: "Prata", serif;
 }
 
 header h1 {
     width: 100%;
     padding: 1em;
     text-align: center;
-    color: #fffffe;
-    font-family: "Prata", serif;
 }
 
 .button-container {
@@ -102,12 +96,10 @@ header h1 {
 }
 
 .button {
-    background-color: #7f5af0;
-    background-image: linear-gradient(#7f5af0, #a48df0);
-    border: 1px solid #6248b9;
+    background-image: linear-gradient(var(--pallette-button-color), #a48df0);
+    border: 2px solid --palette-border-color;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, 0.12) 0 1px 1px;
-    color: #fffffe;
     cursor: pointer;
     font-size: 17px;
     outline: 0;
@@ -123,7 +115,8 @@ header h1 {
     box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
     text-decoration: none;
     transition-duration: .15s, .15s;
-    color: #19337a;
+    color: var(--palette-button-text-color);
+    background-color: var(--palette-button-color-color);
 }
 
 .button:active {
@@ -148,7 +141,7 @@ header h1 {
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
-    border: #010101, solid, 1px;
+    border: solid, 1px, var(--palette-border-color);
 }
 
 #searchBoxContainer {
@@ -161,23 +154,21 @@ header h1 {
 
 #searchBox {
     font-size: 15px;
-    ;
     height: 50px;
     width: 300px;
     border-radius: 15px;
     padding-left: 5px;
-    background-color: #94a1b2;
-    color: #010101;
-    font-family: "Prata", serif;
+    background-color: var(--palette-secondary-color);
+    color: var(--palette-secondary-text-color);
 }
 
 #ingredientList {
     display: flex;
     flex-direction: column;
     position: absolute;
-    background-color: #94a1b2;
-    color: #010101;
-    border: 1px solid #7f5af0;
+    background-color: var(--palette-secondary-color);
+    color: var(--palette-secondary-text-color);
+    border: 2px solid var(--palette-border-color);
     border-top: none;
     border-radius: 0 0 5px 5px;
     padding: 10px;
@@ -188,14 +179,12 @@ header h1 {
     max-height: 200px;
     overflow-y: auto;
     width: 310px;
-    font-family: "Prata", serif;
 }
 
 .ingredient-item {
     padding: 5px 0;
-    border-bottom: 1px solid #010101;
-    color: #010101;
-    font-family: "Prata", serif;
+    border-bottom: 1px solid var(--palette-border-color);
+    color: var(--palette-secondary-text-color);
 }
 
 .ingredient-item:last-child {
@@ -211,8 +200,8 @@ header h1 {
     max-height: 200px;
     overflow-y: auto;
     padding: 10px;
-    border: 5px solid #010101;
-    background-color: #94a1b2;
+    border: 5px solid var(--palette-border-color);
+    background-color: var(--palette-secondary-color);
     border-radius: 8px;
     margin-bottom: 10px;
 }
@@ -220,14 +209,12 @@ header h1 {
 .selected-ingredient {
     display: inline-block;
     padding: 10px;
-    border: 2px solid #010101;
+    border: 2px solid var(--palette-border-color);
     border-radius: 20px;
-    background-color: #7f5af0;
-    color: #fffffe;
+    background-color: var(--palette-button-color);
     margin: 5px;
     white-space: nowrap;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    background-image: radial-gradient(circle, 3, #7f5af0);
     font-family: "Prata", serif;
 }
 
@@ -256,17 +243,16 @@ header h1 {
 
 .section-name {
     padding: 10px 20px;
-    border: 5px solid #010101;
+    border: 5px solid var(--palette-border-color);
     border-radius: 8px;
-    color: #fffffe;
-    background-color: #7f5af0;
+    background-color: var(--palette-button-color);
     font-size: 25px;
     font-family: "Prata", serif;
 }
 
 .line {
     border: none;
-    border-top: 5px solid #010101;
+    border-top: 5px solid var(--palette-border-color);
     flex-grow: 1;
 }
 
@@ -284,7 +270,7 @@ header h1 {
 
 .twoBtn button {
     border: none;
-    background-color: #7f5af0;
+    background-color: var(--palette-button-color);
     border-radius: 50%;
     opacity: 0.4;
     transition: opacity 0.3s ease;
@@ -313,23 +299,6 @@ hr {
     /* margin: 10px 0; */
 }
 
-.clear-button {
-    background-color: #7f5af0;
-    background-image: linear-gradient(#7f5af0, #a48df0);
-    border: 1px solid #010101;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.clear-button:hover {
-    box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
-    text-decoration: none;
-    transition-duration: .15s, .15s;
-    color: #19337a;
-}
-
 .galerie {
     width: 100%;
     height: fit-content;
@@ -338,8 +307,8 @@ hr {
     gap: var(--default-gap);
     justify-content: flex-start;
     margin: auto;
-    border: 5px solid #010101;
-    background-color: #94a1b2;
+    border: 5px solid var(--palette-border-color);
+    background-color: var(--palette-background-color);
     border-radius: var(--default-border-radius);
 }
 
@@ -351,4 +320,9 @@ hr {
 #btnDeconnect {
     font-size: 1.5vw;
     padding: 0.5vh 1vw;
+}
+
+#btnHome:hover,
+#btnDeconnect:hover {
+    background-color: var(--palette-button-color-hover);
 }
