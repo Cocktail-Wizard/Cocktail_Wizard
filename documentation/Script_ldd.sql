@@ -97,10 +97,12 @@ CREATE TABLE Cocktail (
     type_verre VARCHAR(255) NOT NULL,
     classique BOOLEAN NOT NULL,
     profil_saveur VARCHAR(255) NOT NULL,
+    id_utilisateur INT NOT NULL,
     id_image INT,
     id_alcool INT,
     FOREIGN KEY (id_image) REFERENCES Banque_Image(id_image),
     FOREIGN KEY (id_alcool) REFERENCES Alcool(id_alcool),
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur),
     CONSTRAINT classique_boolean CHECK (classique IN (0, 1))
 );
 
