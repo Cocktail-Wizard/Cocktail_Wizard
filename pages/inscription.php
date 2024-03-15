@@ -116,33 +116,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../ressources/styles/inscription.css">
 </head>
 
-<body id="conteneur-inscription">
-    <div id="inscription">
-        <h1>DEVENIR MEMBRE</h1>
+<body>
+    <section id="messErreur">
+        <?php if (count($erreurs) > 0) { ?>
+            <?php foreach ($erreurs as $erreur) { ?>
+                <p class="erreur"><?php echo $erreur; ?></p><br>
+            <?php } ?>
+        <?php } ?>
+    </section>
+
+    <main>
+        <img src="../ressources/images/sparkles.png" id="logoCW" alt="Logo Cocktail Wizard">
         <form id="form-inscription" method="post">
+            <h1>Devenir membre</h1>
+
             <label for="nom">Nom d'utilisateur</label>
             <input type="text" name="nom" placeholder="Entrer votre nom d'utilisateur" required>
+
             <label for="courriel">Courriel</label>
             <input type="email" name="courriel" placeholder="exemple@cocktailwizard.com" required>
+
             <label for="mdp">Mot de Passe</label>
             <input type="password" name="mdp" placeholder="Entrer votre mot de passe" required>
+
             <label for="confmdp">Confirmation Mot de Passe</label>
             <input type="password" name="confmdp" placeholder="Confirmer votre mot de passe" required>
+
             <label for="naissance">Date de naissance</label>
             <input type="date" name="naissance" required>
+
             <button type="submit">S'inscrire</button>
         </form>
-        <div id="img-inscription">
-            <img src="../ressources/images/LogoCW.png" id="LogoCW-inscription" alt="Logo Cocktail Wizard">
-        </div>
-        <div id="messErreur">
-            <?php if (count($erreurs) > 0) { ?>
-                <?php foreach ($erreurs as $erreur) { ?>
-                    <p class="erreur"><?php echo $erreur; ?></p><br>
-                <?php } ?>
-            <?php } ?>
-        </div>
-    </div>
+
+    </main>
+
+    <footer>Cocktail Wizard &copy - 2024</footer>
 </body>
 
 </html>

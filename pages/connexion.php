@@ -45,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -59,27 +59,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <div id="connexion">
+    <section id="messErreur">
+        <?php if (count($erreurs) > 0) { ?>
+            <?php foreach ($erreurs as $erreur) { ?>
+                <p class="erreur"><?php echo $erreur; ?></p><br>
+            <?php } ?>
+        <?php } ?>
+    </section>
+
+    <main>
         <!-- Mettre le chemin appropriee une fois que l'organisation des fichiers soient etabli -->
-        <img src="../ressources/images/LogoCW.png" id="logoCW" alt="Logo Cocktail Wizard">
+        <img src="../ressources/images/sparkles.png" id="logoCW" alt="Logo Cocktail Wizard">
         <form id="form-connexion" method="post">
-            <h1>COCKTAIL WIZARD</h1>
+            <h1>Cocktail Wizard</h1>
+
             <label for="nom">Nom d'utilisateur</label>
             <input type="text" name="nom" placeholder="Entrer votre nom d'utilisateur" required>
+
             <label for="mdp">Mot de Passe</label>
             <input type="password" name="mdp" placeholder="Entrer votre mot de passe" required>
+
             <button type="submit">Connexion</button>
+
             <p>Vous n'êtes pas encore membre?</p>
-            <a href="./inscription.php">Créer un compte</a>
-            <?php if (count($erreurs) > 0) { ?>
-                <?php foreach ($erreurs as $erreur) { ?>
-                    <p class="erreur"><?php echo $erreur; ?></p><br>
-                <?php } ?>
-            <?php
-            }
-            ?>
+            <a href="../pages/inscription.php">Créer un compte</a>
+            <?php if (!empty($erreurs)) : ?>
+                <?php foreach ($erreurs as $erreur) : ?>
+                    <p class="erreur"><?= $erreur ?></p><br>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </form>
-    </div>
+    </main>
+
+    <footer>Cocktail Wizard &copy - 2024</footer>
 </body>
 
 </html>

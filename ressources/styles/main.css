@@ -3,6 +3,8 @@
 :root {
     --default-gap: 3em;
     --default-border-radius: 8px;
+    --authentification-area-width: 60%;
+    --authentification-area-height: 60%;
     --palette-background-color: #16161a;
     --palette-headline-color: #fffffe;
     --palette-paragraph-color: #fffffe;
@@ -12,6 +14,7 @@
     --palette-border-color: #010101;
     --palette-secondary-background-color: #94a1b2;
     --palette-secondary-text-color: #010101;
+    --media-screen-max-width: 850px;
 }
 
 * {
@@ -25,6 +28,10 @@
 button {
     background-color: var(--palette-button-color);
     color: var(--palette-button-text-color);
+}
+
+html {
+    background-color: var(--palette-background-color);
 }
 
 h1 {

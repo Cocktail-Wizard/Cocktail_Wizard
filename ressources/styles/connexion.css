@@ -1,40 +1,45 @@
-html {
-    background-color: var(--palette-background-color);
+:root {
+    --multiplicateur-styles: 3;
 }
 
-#connexion {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-#logoCW {
-    border-radius: 50px 0px 0px 50px;
-    width: 36.25rem;
-    height: 36.25rem;
-    margin-top: 5%;
-}
-
-#form-connexion {
+body {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 5%;
-    background-color: var(--palette-secondary-background-color);
-    border-radius: 0px 50px 50px 0px;
-    width: 31.25rem;
-    height: 36.25rem;
 }
 
-#form-connexion>h1 {
-    font-family: 'merriweather', 'serif';
+main {
+    height: var(--authentification-area-height);
+    width: var(--authentification-area-width);
+    display: flex;
+    border-radius: calc(var(--default-border-radius) * var(--multiplicateur-styles));
+    overflow: hidden;
+}
+
+main h1 {
+    text-align: center;
+    font-size: clamp(2em, 3vw, 3vw);
+}
+
+#logoCW {
+    object-fit: cover;
+    width: 50%;
+}
+
+#form-connexion {
+    gap: calc(var(--default-gap) / var(--multiplicateur-styles));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--palette-secondary-background-color);
+    width: 100%;
+    height: 100%;
 }
 
 #form-connexion>input {
-    margin-top: 0.625rem;
-    margin-bottom: 0.625rem;
     padding: 0.625rem;
     border: none;
     border-radius: var(--default-border-radius);
@@ -42,7 +47,6 @@ html {
 }
 
 #form-connexion>button {
-    margin-top: 0.625rem;
     padding: 0.9375rem;
     font-size: 1.25rem;
     background-color: var(--palette-button-color);
@@ -50,4 +54,26 @@ html {
     border: none;
     border-radius: var(--default-border-radius);
     width: 13.75rem;
+}
+
+@media screen and (max-width: 850px) {
+    #logoCW {
+        width: 100%;
+        height: 25%;
+    }
+
+    main {
+        border-radius: 0;
+        width: 100%;
+        height: 80%;
+        flex-direction: column;
+    }
+
+    main img {
+        object-position: center 25%;
+    }
+
+    #form-connexion {
+        justify-content: space-evenly;
+    }
 }

@@ -1,40 +1,40 @@
-html {
-    background-color: var(--palette-background-color);
+:root {
+    --multiplicateur-styles: 3;
 }
 
-#conteneur-inscription {
+body {
+    height: 100vh;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: center
 }
 
-#inscription {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 0.2fr 1.4fr 1.4fr;
-    width: 68.75rem;
-    height: 40.625rem;
-    background-color: var(--palette-secondary-background-color);
-    border-radius: 50px;
-}
-
-#inscription>h1 {
-    grid-area: 1 / 1 / 2/ 3;
-    font-family: 'merriweather', 'serif';
-    text-align: center;
+main {
+    height: var(--authentification-area-height);
+    width: var(--authentification-area-width);
+    display: flex;
+    flex-direction: row-reverse;
+    border-radius: calc(var(--default-border-radius) * var(--multiplicateur-styles));
+    overflow: hidden;
 }
 
 #form-inscription {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    grid-area: 2 / 1 / 4 / 2;
+    justify-content: center;
+    background-color: var(--palette-secondary-background-color);
+    width: 100%;
+    height: 100%;
+}
+
+#form-inscription h1 {
+    text-transform: capitalize;
+    text-align: center;
 }
 
 #form-inscription>input {
-    margin-top: 0.625rem;
-    margin-bottom: 0.625rem;
     padding: 0.625rem;
     border: none;
     border-radius: var(--default-border-radius);
@@ -42,7 +42,6 @@ html {
 }
 
 #form-inscription>button {
-    margin-top: 0.625rem;
     padding: 0.9375rem;
     font-size: 1.25rem;
     background-color: var(--palette-button-color);
@@ -52,17 +51,9 @@ html {
     width: 13.75rem;
 }
 
-#image-inscription {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#LogoCW-inscription {
-    border-radius: 50px;
-    width: 20rem;
-    height: 20rem;
-    margin-left: 20%;
+#logoCW {
+    object-fit: cover;
+    width: 50%;
 }
 
 #messErreur {
@@ -70,4 +61,26 @@ html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+@media screen and (max-width: 850px) {
+    #logoCW {
+        width: 100%;
+        height: 25%;
+    }
+
+    main {
+        border-radius: 0;
+        width: 100%;
+        height: 85%;
+        flex-direction: column;
+    }
+
+    main img {
+        object-position: center 25%;
+    }
+
+    #form-inscription {
+        justify-content: space-evenly;
+    }
 }
