@@ -23,7 +23,7 @@ header #w-icon {
     vertical-align: -35%;
 }
 
-#main {
+main {
     margin: 0 10%;
 }
 
@@ -261,7 +261,7 @@ header h1 {
 }
 
 /* Footer Styles */
-.twoBtn {
+#twoBtn {
     position: fixed;
     bottom: 20px;
     left: 0;
@@ -272,7 +272,7 @@ header h1 {
     box-sizing: border-box;
 }
 
-.twoBtn button {
+#twoBtn button {
     border: none;
     background-color: var(--palette-button-color);
     border-radius: 50%;
@@ -282,18 +282,18 @@ header h1 {
     height: 50px;
 }
 
-.twoBtn button:hover {
+#twoBtn button:hover {
     opacity: 1;
 }
 
-.twoBtn button img {
+#twoBtn button img {
     display: block;
     margin: auto;
     width: 30px;
     height: 30px;
 }
 
-.twoBtn button:focus {
+#twoBtn button:focus {
     outline: none;
 }
 
