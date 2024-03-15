@@ -53,3 +53,7 @@ footer {
     display: flex;
     justify-content: center;
 }
+
+*:disabled {
+    cursor: not-allowed;
+}

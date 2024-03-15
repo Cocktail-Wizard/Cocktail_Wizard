@@ -121,19 +121,6 @@ header h1 {
     box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
 }
 
-.button:disabled {
-    cursor: not-allowed;
-    opacity: .6;
-}
-
-.button:disabled:active {
-    pointer-events: none;
-}
-
-.button:disabled:hover {
-    box-shadow: none;
-}
-
 /* Ingredients Section Styles */
 .ingredients {
     padding: 20px;
