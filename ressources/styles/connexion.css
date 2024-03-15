@@ -1,48 +1,56 @@
+:root {
+    --multiplicateur-styles: 3;
+}
+
 html {
     background-color: var(--palette-background-color);
 }
 
-#connexion {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-#logoCW {
-    border-radius: 50px 0px 0px 50px;
-    width: 36.25rem;
-    height: 36.25rem;
-    margin-top: 5%;
-}
-
-#form-connexion {
+body {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 5%;
-    background-color: var(--palette-secondary-background-color);
-    border-radius: 0px 50px 50px 0px;
-    width: 31.25rem;
-    height: 36.25rem;
 }
 
-#form-connexion>h1 {
-    font-family: 'merriweather', 'serif';
+#connexion {
+    height: 60%;
+    width: 60%;
+    display: flex;
+    border-radius: calc(var(--default-border-radius) * var(--multiplicateur-styles));
+    overflow: hidden;
+}
+
+#connexion h1 {
+    text-align: center;
+    font-size: clamp(3em, 3vw, 3vw);
+}
+
+#logoCW {
+    object-fit: cover;
+    width: 50%;
+}
+
+#form-connexion {
+    gap: calc(var(--default-gap) / var(--multiplicateur-styles));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--palette-secondary-background-color);
+    width: 100%;
+    height: 100%;
 }
 
 #form-connexion>input {
-    margin-top: 0.625rem;
-    margin-bottom: 0.625rem;
     padding: 0.625rem;
     border: none;
     border-radius: var(--default-border-radius);
-    width: 18.75rem;
+    width: 50%;
 }
 
 #form-connexion>button {
-    margin-top: 0.625rem;
     padding: 0.9375rem;
     font-size: 1.25rem;
     background-color: var(--palette-button-color);
@@ -50,4 +58,22 @@ html {
     border: none;
     border-radius: var(--default-border-radius);
     width: 13.75rem;
+}
+
+@media screen and (max-width: 850px) {
+    #logoCW {
+        width: 100%;
+        height: 25%;
+    }
+
+    #connexion {
+        border-radius: 0;
+        width: 100%;
+        height: 80%;
+        flex-direction: column;
+    }
+
+    #connexion img {
+        object-position: center 25%;
+    }
 }
