@@ -22,7 +22,7 @@ header #w-icon {
     vertical-align: -35%;
 }
 
-#main {
+main {
     margin: 0 10%;
 }
 
@@ -104,7 +104,6 @@ header h1 {
     outline: 0;
     padding: 11px 15px 12px;
     text-align: center;
-    transition: box-shadow .05s ease-in-out, opacity .05s ease-in-out;
     touch-action: manipulation;
     display: inline-block;
     font-family: "Prata", serif;
@@ -113,26 +112,12 @@ header h1 {
 .button:hover {
     box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
     text-decoration: none;
-    transition-duration: .15s, .15s;
     color: var(--palette-button-text-color);
     background-color: var(--palette-button-color-color);
 }
 
 .button:active {
     box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
-}
-
-.button:disabled {
-    cursor: not-allowed;
-    opacity: .6;
-}
-
-.button:disabled:active {
-    pointer-events: none;
-}
-
-.button:disabled:hover {
-    box-shadow: none;
 }
 
 /* Ingredients Section Styles */
@@ -260,7 +245,7 @@ header h1 {
 }
 
 /* Footer Styles */
-.twoBtn {
+#twoBtn {
     position: fixed;
     bottom: 20px;
     left: 0;
@@ -271,28 +256,27 @@ header h1 {
     box-sizing: border-box;
 }
 
-.twoBtn button {
+#twoBtn button {
     border: none;
     background-color: var(--palette-button-color);
     border-radius: 50%;
     opacity: 0.4;
-    transition: opacity 0.3s ease;
     width: 50px;
     height: 50px;
 }
 
-.twoBtn button:hover {
+#twoBtn button:hover {
     opacity: 1;
 }
 
-.twoBtn button img {
+#twoBtn button img {
     display: block;
     margin: auto;
     width: 30px;
     height: 30px;
 }
 
-.twoBtn button:focus {
+#twoBtn button:focus {
     outline: none;
 }
 

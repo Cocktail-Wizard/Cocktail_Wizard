@@ -17,7 +17,7 @@
         <div class="user">
             <span id="backgroundshape"></span>
             <div class="profile-pic-container">
-                <img class="profile-pic" src="/ressources/images/lionWizard.jpg" alt="Profile Picture">
+                <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Profile Picture">
             </div>
             <span class="username">@UsernameSuperWizard</span>
             <button class="button" id="btnDeconnect" style="display: none;">Déconnexion</button>
@@ -32,15 +32,14 @@
 
     <hr>
 
-    <section id="main">
+    <main>
         <div class="separator">
             <span class="section-name">Mes ingredients</span>
             <hr class="line right" />
 
             <section class="ingredients">
                 <div id="searchBoxContainer" class="dropdown">
-                    <input type="text" id="searchBox" oninput="filterIngredients()"
-                        placeholder="Ajouter un ingredient...">
+                    <input type="text" id="searchBox" placeholder="Ajouter un ingredient...">
                     <div id="ingredientList" class="dropdown-content"></div>
                 </div>
             </section>
@@ -69,16 +68,16 @@
             <section id="cocktails-communautaires" class="galerie"></section>
 
         </div>
-    </section>
+    </main>
 
-    <div class="twoBtn">
+    <aside id="twoBtn">
         <button>
             <img id="btnAbout" src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
         </button>
         <button>
             <img id="btnPublish" src="../ressources/images/feather.svg" alt="Feather" width="24" height="24">
         </button>
-    </div>
+    </aside>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
 
