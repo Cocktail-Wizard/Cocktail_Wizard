@@ -13,6 +13,8 @@
 -- Affiche les procédures
 SHOW PROCEDURE STATUS;
 
+
+
 DELIMITER //
 
 --Création de la procédure GetListeIngredientsCocktail
@@ -37,6 +39,35 @@ BEGIN
     WHERE IC.id_alcool IS NULL AND IC.id_ingredient IS NULL AND IC.id_cocktail = cocktail;
 END //
 
+-- Création de la procédure GetInfoCocktailSimple
+-- Renvoie les informations d'un cocktail pour l'affichage simple
+-- Utiliser pour afficher les cocktails sous format simple(image, nom, profil saveur
+-- alcool principale et nb de like)
+-- *Vérfier si mieux de renoyer tous les infos d'un cocktail d'un coup et storer dans objet php
+DROP PROCEDURE IF EXISTS GetInfoCocktailSimple;
+CREATE PROCEDURE GetInfoCocktailSimple(IN cocktail INT)
+BEGIN
+    SELECT C.nom, C.profil_saveur, C.nb_like, A.nom AS alcool_principale, BI.img
+    FROM Cocktail C
+    JOIN Alcool A ON C.id_alcool = A.id_alcool
+    JOIN Banque_Image BI ON C.id_image = BI.id_image
+    WHERE C.id_cocktail = cocktail;
+END //
+
+-- Création de la procédure GetInfoCocktailComplet
+-- Renvoie les informations d'un cocktail pour l'affichage complet
+-- Utiliser pour afficher les cocktails lorsqu'ils sont sélectionnés
+-- *Vérifier si nécessaire de renvoyer alcool_principale
+-- *Vérifier si nécessaire de renvoyer les infos déja envoyer dans GetInfoCocktailSimple(Objet Cocktail)
+DROP PROCEDURE IF EXISTS GetInfoCocktailComplet;
+CREATE PROCEDURE GetInfoCocktailComplet(IN cocktail INT)
+BEGIN
+    SELECT C.nom, C.desc_cocktail, C.preparation, C.nb_like, C.date_publication, C.type_verre, C.profil_saveur, U.nom AS auteur, BI.img
+    FROM Cocktail C
+    JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
+    JOIN Banque_Image BI ON C.id_image = BI.id_image
+    WHERE C.id_cocktail = cocktail;
+END //
 
 --Création de la procédure GetMesCocktails
 -- Permet de voir les cocktails que chaque utilisateur a créé
@@ -67,6 +98,12 @@ BEGIN
     WHERE AU.id_utilisateur = id_utilisateur;
 END //
 
+--Création de la procédure GetCocktailPossibleFavorie
+-- Permet de voir les cocktails qu'un utilisateur à aimé et
+-- qu'il peut faire avec les ingrédients qu'il possède
+-- Utiliser pour lister les cocktails favoris dans la section mon bar
+--DROP PROCEDURE IF EXISTS GetCocktailPossibleFavorie;
+
 
 --Création de la procédure GetCocktailPossibleClassique
 -- Permet de voir les cocktails classiques que chaque utilisateur peut faire
@@ -77,7 +114,8 @@ CREATE PROCEDURE GetCocktailPossibleClassique(IN id_utilisateur INT)
 BEGIN
     SELECT C.id_cocktail
     FROM Cocktail C
-    JOIN Ingredient_Cocktail IC ON C.id;
+    JOIN Ingredient_Cocktail IC ON C.id
+    ORDER BY C.nb_like DESC;
 END //
 
 

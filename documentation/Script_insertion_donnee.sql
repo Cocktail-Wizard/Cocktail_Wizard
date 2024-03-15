@@ -166,8 +166,8 @@ INSERT INTO Alcool_utilisateur (id_utilisateur, id_alcool) VALUES (2, 3);
 INSERT INTO Alcool_utilisateur (id_utilisateur, id_alcool) VALUES (2, 4);
 
 -- Insertion des données dans la table Cocktail
-INSERT INTO Cocktail (nom, desc_cocktail, preparation, nb_like, date_publication, type_verre, classique, profil_saveur, id_utilisateur, id_image, id_alcool) VALUES ('Mojito', 'Cocktail rafraîchissant', 'Mélanger tous les ingrédients', 0, '2022-01-01', 'Verre long', 1, 'Sucré', 1, 1, 2);
-INSERT INTO Cocktail (nom, desc_cocktail, preparation, nb_like, date_publication, type_verre, classique, profil_saveur, id_utilisateur, id_image, id_alcool) VALUES ('Gin Tonic', 'Cocktail classique', 'Mélanger gin et tonic', 0, '2022-01-02', 'Verre long', 1, 'Amer', 2, 2, 3);
+INSERT INTO Cocktail (nom, desc_cocktail, preparation, nb_like, type_verre, classique, profil_saveur, id_utilisateur, id_image, id_alcool) VALUES ('Mojito', 'Cocktail rafraîchissant', 'Mélanger tous les ingrédients', 0,'Verre long', 1, 'Sucré', 1, 1, 2);
+INSERT INTO Cocktail (nom, desc_cocktail, preparation, nb_like, type_verre, classique, profil_saveur, id_utilisateur, id_image, id_alcool) VALUES ('Gin Tonic', 'Cocktail classique', 'Mélanger gin et tonic', 0,'Verre long', 1, 'Amer', 2, 2, 3);
 
 -- Insertion des données dans la table Ingredient_Cocktail
 INSERT INTO Ingredient_Cocktail (quantite, unite, id_ingredient, id_cocktail) VALUES (1, 'pièce', 2, 1);
@@ -179,8 +179,8 @@ INSERT INTO Ingredient_Cocktail (quantite, unite, id_ingredient, id_cocktail) VA
 INSERT INTO ingredient_cocktail (quantite, unite, ingredient_autre, id_cocktail) VALUES (2, 'pièce', 'coriandre', 2);
 
 -- Insertion des données dans la table Commentaire
-INSERT INTO Commentaire (contenu, date_commentaire, nb_like, id_utilisateur, id_cocktail) VALUES ('Super cocktail !', '2022-01-02', 0, 1, 1);
-INSERT INTO Commentaire (contenu, date_commentaire, nb_like, id_utilisateur, id_cocktail) VALUES ('J\'adore celui-ci !', '2022-01-03', 0, 2, 2);
+INSERT INTO Commentaire (contenu, nb_like, id_utilisateur, id_cocktail) VALUES ('Super cocktail !', 0, 1, 1);
+INSERT INTO Commentaire (contenu,nb_like, id_utilisateur, id_cocktail) VALUES ('J\'adore celui-ci !', 0, 2, 2);
 
 -- Insertion des données dans la table Commentaire_Liked
 INSERT INTO Commentaire_Liked (id_commentaire, id_utilisateur) VALUES (1, 1);
