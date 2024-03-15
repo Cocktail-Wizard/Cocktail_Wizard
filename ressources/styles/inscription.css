@@ -35,8 +35,6 @@ main {
 }
 
 #form-inscription>input {
-    margin-top: 0.625rem;
-    margin-bottom: 0.625rem;
     padding: 0.625rem;
     border: none;
     border-radius: var(--default-border-radius);
@@ -44,7 +42,6 @@ main {
 }
 
 #form-inscription>button {
-    margin-top: 0.625rem;
     padding: 0.9375rem;
     font-size: 1.25rem;
     background-color: var(--palette-button-color);
