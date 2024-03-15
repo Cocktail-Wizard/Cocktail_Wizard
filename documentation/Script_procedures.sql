@@ -1,4 +1,4 @@
--- Active: 1710380541515@@cocktailwizbd.mysql.database.azure.com@3306@cocktailwizardbd
+-- Active: 1709764745031@@cocktailwizbd.mysql.database.azure.com@3306@cocktailwizardbd
 -- ============================================================
 -- Auteurs : Yani Amellal, Léonard Marcoux, Pablo Hamel-Corôa,
 --           Maxime Dmitriev et Vianney Veremme
@@ -22,12 +22,21 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS GetListeIngredientsCocktail;
 CREATE PROCEDURE GetListeIngredientsCocktail(IN cocktail INT)
 BEGIN
-    SELECT IC.quantite, IC.unite, I.nom, A.nom, IC.ingredient_autre
+    SELECT IC.quantite, IC.unite, I.nom
     FROM Ingredient_Cocktail IC
-    LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
-    LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-    WHERE IC.id_cocktail = cocktail;
+    JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+    WHERE IC.id_cocktail = cocktail
+    UNION ALL
+    SELECT IC.quantite, IC.unite, A.nom
+    FROM Ingredient_Cocktail IC
+    JOIN Alcool A ON IC.id_alcool = A.id_alcool
+    WHERE IC.id_cocktail = cocktail
+    UNION ALL
+    SELECT IC.quantite, IC.unite, IC.ingredient_autre as nom
+    FROM Ingredient_Cocktail IC
+    WHERE IC.id_alcool IS NULL AND IC.id_ingredient IS NULL AND IC.id_cocktail = cocktail;
 END //
+
 
 --Création de la procédure GetMesCocktails
 -- Permet de voir les cocktails que chaque utilisateur a créé
@@ -43,7 +52,7 @@ END //
 
 --Création de la procédure GetMesIngredients
 -- Permet de voir les ingrédients que chaque utilisateur possède
--- Utiliser pour lister les ingrédients dans la section mon bad
+-- Utiliser pour lister les ingrédients dans la section mon bar qu'un utilisateur possède
 DROP PROCEDURE IF EXISTS GetMesIngredients;
 CREATE PROCEDURE GetMesIngredients(IN id_utilisateur INT)
 BEGIN
@@ -62,6 +71,7 @@ END //
 --Création de la procédure GetCocktailPossibleClassique
 -- Permet de voir les cocktails classiques que chaque utilisateur peut faire
 -- Utiliser pour lister les cocktails classiques dans la section mon bar
+-- INCOMPLET
 DROP PROCEDURE IF EXISTS GetCocktailPossibleClassique;
 CREATE PROCEDURE GetCocktailPossibleClassique(IN id_utilisateur INT)
 BEGIN
@@ -69,11 +79,23 @@ BEGIN
     FROM Cocktail C
     JOIN Ingredient_Cocktail IC ON C.id;
 END //
-DELIMITER ;
 
-/*
-SELECT C.id_cocktail
-    FROM Cocktail C
-    JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
-    WHERE
-*/
+
+--Création de la procédure GetlisteIngredients
+-- Permet d'avoir tout les ingrédients(Alcool et Ingredient) de la base de donnée
+-- Utiliser pour lister les ingrédients à ajouter dans un cocktail
+-- ou dans mon bar
+DROP PROCEDURE IF EXISTS GetlisteIngredients;
+CREATE PROCEDURE GetlisteIngredients()
+BEGIN
+    SELECT I.nom
+    FROM Ingredient I
+    UNION ALL
+    SELECT A.nom
+    FROM Alcool A;
+END //
+
+
+
+
+DELIMITER ;

@@ -176,6 +176,7 @@ INSERT INTO Ingredient_Cocktail (quantite, unite, id_alcool, id_cocktail) VALUES
 INSERT INTO Ingredient_Cocktail (quantite, unite, id_ingredient, id_cocktail) VALUES (2, 'cuillère', 1, 1);
 INSERT INTO Ingredient_Cocktail (quantite, unite, id_ingredient, id_cocktail) VALUES (1, 'pièce', 3, 2);
 INSERT INTO Ingredient_Cocktail (quantite, unite, id_ingredient, id_cocktail) VALUES (1, 'pièce', 4, 2);
+INSERT INTO ingredient_cocktail (quantite, unite, ingredient_autre, id_cocktail) VALUES (2, 'pièce', 'coriandre', 2);
 
 -- Insertion des données dans la table Commentaire
 INSERT INTO Commentaire (contenu, date_commentaire, nb_like, id_utilisateur, id_cocktail) VALUES ('Super cocktail !', '2022-01-02', 0, 1, 1);
