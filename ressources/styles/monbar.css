@@ -105,7 +105,6 @@ header h1 {
     outline: 0;
     padding: 11px 15px 12px;
     text-align: center;
-    transition: box-shadow .05s ease-in-out, opacity .05s ease-in-out;
     touch-action: manipulation;
     display: inline-block;
     font-family: "Prata", serif;
@@ -114,7 +113,6 @@ header h1 {
 .button:hover {
     box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
     text-decoration: none;
-    transition-duration: .15s, .15s;
     color: var(--palette-button-text-color);
     background-color: var(--palette-button-color-color);
 }
@@ -277,7 +275,6 @@ header h1 {
     background-color: var(--palette-button-color);
     border-radius: 50%;
     opacity: 0.4;
-    transition: opacity 0.3s ease;
     width: 50px;
     height: 50px;
 }
