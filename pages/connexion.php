@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <div id="connexion">
+    <main>
         <!-- Mettre le chemin appropriee une fois que l'organisation des fichiers soient etabli -->
         <img src="../ressources/images/sparkles.png" id="logoCW" alt="Logo Cocktail Wizard">
         <form id="form-connexion" method="post">
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php endforeach; ?>
             <?php endif; ?>
         </form>
-    </div>
+    </main>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
 </body>

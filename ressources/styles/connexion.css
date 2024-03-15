@@ -14,7 +14,7 @@ body {
     justify-content: center;
 }
 
-#connexion {
+main {
     height: 60%;
     width: 60%;
     display: flex;
@@ -22,9 +22,9 @@ body {
     overflow: hidden;
 }
 
-#connexion h1 {
+main h1 {
     text-align: center;
-    font-size: clamp(3em, 3vw, 3vw);
+    font-size: clamp(2em, 3vw, 3vw);
 }
 
 #logoCW {
@@ -66,14 +66,18 @@ body {
         height: 25%;
     }
 
-    #connexion {
+    main {
         border-radius: 0;
         width: 100%;
         height: 80%;
         flex-direction: column;
     }
 
-    #connexion img {
+    main img {
         object-position: center 25%;
+    }
+
+    #form-connexion {
+        justify-content: space-evenly;
     }
 }
