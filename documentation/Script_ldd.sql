@@ -92,7 +92,7 @@ CREATE TABLE Cocktail (
     desc_cocktail VARCHAR(2000) NOT NULL,
     preparation VARCHAR(2000) NOT NULL,
     nb_like INT NOT NULL DEFAULT 0,
-    date_publication Date NOT NULL,
+    date_publication Date NOT NULL DEFAULT (curdate()),
     type_verre VARCHAR(255) NOT NULL,
     classique BOOLEAN NOT NULL,
     profil_saveur VARCHAR(255) NOT NULL,
@@ -128,7 +128,7 @@ CREATE TABLE Ingredient_Cocktail (
 CREATE TABLE Commentaire (
     id_commentaire INT PRIMARY KEY AUTO_INCREMENT,
     contenu VARCHAR(2000) NOT NULL,
-    date_commentaire Date NOT NULL,
+    date_commentaire Date NOT NULL DEFAULT (curdate()),
     nb_like INT NOT NULL DEFAULT 0,
     id_utilisateur INT NOT NULL,
     id_cocktail INT NOT NULL,
@@ -149,6 +149,7 @@ CREATE TABLE Commentaire_Liked (
 CREATE TABLE Cocktail_Liked (
     id_cocktail INT,
     id_utilisateur INT,
+    date_like Date NOT NULL DEFAULT (curdate()),
     PRIMARY KEY (id_cocktail, id_utilisateur),
     FOREIGN KEY (id_cocktail) REFERENCES Cocktail(id_cocktail),
     FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur)

@@ -13,8 +13,6 @@
 -- Affiche les procédures
 SHOW PROCEDURE STATUS;
 
-
-
 DELIMITER //
 
 --Création de la procédure GetListeIngredientsCocktail
@@ -102,7 +100,17 @@ END //
 -- Permet de voir les cocktails qu'un utilisateur à aimé et
 -- qu'il peut faire avec les ingrédients qu'il possède
 -- Utiliser pour lister les cocktails favoris dans la section mon bar
---DROP PROCEDURE IF EXISTS GetCocktailPossibleFavorie;
+DROP PROCEDURE IF EXISTS GetCocktailListePossibleFavorie;
+CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT)
+BEGIN
+    SELECT C.id_cocktail
+    FROM Cocktail C
+    JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
+    WHERE CL.id_utilisateur = id_utilisateur
+    ORDER BY CL.date_like DESC;
+END //
+
+
 
 
 --Création de la procédure GetCocktailPossibleClassique
@@ -113,9 +121,7 @@ DROP PROCEDURE IF EXISTS GetCocktailPossibleClassique;
 CREATE PROCEDURE GetCocktailPossibleClassique(IN id_utilisateur INT)
 BEGIN
     SELECT C.id_cocktail
-    FROM Cocktail C
-    JOIN Ingredient_Cocktail IC ON C.id
-    ORDER BY C.nb_like DESC;
+    FROM cocktail C
 END //
 
 

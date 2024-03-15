@@ -12,70 +12,7 @@
 -- Affiche les triggers
 SHOW TRIGGERS;
 
-/*
---
--- DECLENCHEUR: TRG_lien_saq
--- TABLE: Alcool
--- TYPE: Avant requête d'insertion ou de mise à jour
--- DESCRIPTION:
---  Vérifie si le lien saq est valide
--- TODO : Essayer d'utiliser une expression régulière pour valider le lien (REGEXP)
---
 DELIMITER // -- Permet de changer le délimiteur pour le trigger
-DROP TRIGGER IF EXISTS TRG_lien_saq_update;
-CREATE TRIGGER TRG_lien_saq_update
-BEFORE UPDATE ON Alcool
-FOR EACH ROW
-BEGIN
-    IF NEW.lien_saq IS NOT NULL AND
-       (NEW.lien_saq NOT LIKE 'http://%' AND NEW.lien_saq NOT LIKE 'https://%') THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Le lien SAQ n''est pas valide';
-    END IF;
-END//
-DROP TRIGGER IF EXISTS TRG_lien_saq_insert;
-CREATE TRIGGER TRG_lien_saq_insert
-BEFORE INSERT ON Alcool
-FOR EACH ROW
-BEGIN
-    IF NEW.lien_saq IS NOT NULL AND
-       (NEW.lien_saq NOT LIKE 'http://%' AND NEW.lien_saq NOT LIKE 'https://%') THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Le lien SAQ n''est pas valide';
-    END IF;
-END//
-DELIMITER ;
-*/
-
---
--- DECLENCHEUR: TRG_date_cocktail
--- TABLE: Cocktail
--- TYPE: Avant requête d'insertion
--- DESCRIPTION:
---  Met la date de publication à la date courante
---
-DELIMITER // -- Permet de changer le délimiteur pour le trigger
-DROP TRIGGER IF EXISTS TRG_date_cocktail;
-CREATE TRIGGER TRG_date_cocktail
-BEFORE INSERT ON Cocktail
-FOR EACH ROW
-BEGIN
-    SET NEW.date_publication = CURRENT_DATE();
-END//
-
-
---
--- DECLENCHEUR: TRG_date_commentaire
--- TABLE: Commentaire
--- TYPE: Avant requête d'insertion
--- DESCRIPTION:
---  Met la date de publication à la date courante
---
-DROP TRIGGER IF EXISTS TRG_date_commentaire;
-CREATE TRIGGER TRG_date_commentaire
-BEFORE INSERT ON Commentaire
-FOR EACH ROW
-BEGIN
-    SET NEW.date_commentaire = CURRENT_DATE();
-END//
 
 --
 -- DECLENCHEUR: TRG_date_publication_non_update
@@ -103,7 +40,7 @@ END//
 -- DESCRIPTION:
 --  Empêche la modification de la date de publication
 --  d'un commentaire
--- TODO: Vérifier si nécessaire
+-- *Vérifier si nécessaire
 --
 DROP TRIGGER IF EXISTS TRG_date_commentaire_non_update;
 CREATE TRIGGER TRG_date_commentaire_non_update
@@ -182,8 +119,6 @@ BEGIN
     SET nb_like = nb_like - 1
     WHERE id_commentaire = OLD.id_commentaire;
 END//
-
-
 
 
 
