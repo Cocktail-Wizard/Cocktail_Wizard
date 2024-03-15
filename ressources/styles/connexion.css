@@ -2,10 +2,6 @@
     --multiplicateur-styles: 3;
 }
 
-html {
-    background-color: var(--palette-background-color);
-}
-
 body {
     height: 100vh;
     display: flex;
@@ -15,8 +11,8 @@ body {
 }
 
 main {
-    height: 60%;
-    width: 60%;
+    height: var(--authentification-area-height);
+    width: var(--authentification-area-width);
     display: flex;
     border-radius: calc(var(--default-border-radius) * var(--multiplicateur-styles));
     overflow: hidden;

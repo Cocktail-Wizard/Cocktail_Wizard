@@ -59,6 +59,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <section id="messErreur">
+        <?php if (count($erreurs) > 0) { ?>
+            <?php foreach ($erreurs as $erreur) { ?>
+                <p class="erreur"><?php echo $erreur; ?></p><br>
+            <?php } ?>
+        <?php } ?>
+    </section>
+
     <main>
         <!-- Mettre le chemin appropriee une fois que l'organisation des fichiers soient etabli -->
         <img src="../ressources/images/sparkles.png" id="logoCW" alt="Logo Cocktail Wizard">
