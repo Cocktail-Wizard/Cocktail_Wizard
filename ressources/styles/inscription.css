@@ -1,0 +1,86 @@
+:root {
+    --multiplicateur-styles: 3;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    height: var(--authentification-area-height);
+    width: var(--authentification-area-width);
+    display: flex;
+    flex-direction: row-reverse;
+    border-radius: calc(var(--default-border-radius) * var(--multiplicateur-styles));
+    overflow: hidden;
+}
+
+#form-inscription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--palette-secondary-background-color);
+    width: 100%;
+    height: 100%;
+}
+
+#form-inscription h1 {
+    text-transform: capitalize;
+    text-align: center;
+}
+
+#form-inscription>input {
+    padding: 0.625rem;
+    border: none;
+    border-radius: var(--default-border-radius);
+    width: 18.75rem;
+}
+
+#form-inscription>button {
+    padding: 0.9375rem;
+    font-size: 1.25rem;
+    background-color: var(--palette-button-color);
+    color: var(--palette-button-text-color);
+    border: none;
+    border-radius: var(--default-border-radius);
+    width: 13.75rem;
+}
+
+#logoCW {
+    object-fit: cover;
+    width: 50%;
+}
+
+#messErreur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 850px) {
+    #logoCW {
+        width: 100%;
+        height: 25%;
+    }
+
+    main {
+        border-radius: 0;
+        width: 100%;
+        height: 85%;
+        flex-direction: column;
+    }
+
+    main img {
+        object-position: center 25%;
+    }
+
+    #form-inscription {
+        justify-content: space-evenly;
+    }
+}
