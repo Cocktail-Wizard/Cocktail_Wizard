@@ -106,6 +106,9 @@ filterIngredients();
 updateSelectedIngredients(); // Display initially selected ingredients
 
 document.addEventListener("DOMContentLoaded", async () => {
+    inputRechercheIngredient = document.getElementById('searchBox');
+    inputRechercheIngredient.addEventListener('input', filterIngredients);
+
     const modeleHTML = await chargerModeleHTML("../ressources/modeles/cocktail_carte.html");
 
     if (modeleHTML) {
