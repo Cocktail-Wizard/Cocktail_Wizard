@@ -171,6 +171,8 @@ INSERT INTO Cocktail (nom, desc_cocktail, preparation, nb_like, date_publication
 
 -- Insertion des données dans la table Ingredient_Cocktail
 INSERT INTO Ingredient_Cocktail (quantite, unite, id_ingredient, id_cocktail) VALUES (1, 'pièce', 2, 1);
+INSERT INTO Ingredient_Cocktail (quantite, unite, id_alcool, id_cocktail) VALUES (2, 'Oz', 1, 1);
+INSERT INTO Ingredient_Cocktail (quantite, unite, id_alcool, id_cocktail) VALUES (2, 'Oz', 3, 1);
 INSERT INTO Ingredient_Cocktail (quantite, unite, id_ingredient, id_cocktail) VALUES (2, 'cuillère', 1, 1);
 INSERT INTO Ingredient_Cocktail (quantite, unite, id_ingredient, id_cocktail) VALUES (1, 'pièce', 3, 2);
 INSERT INTO Ingredient_Cocktail (quantite, unite, id_ingredient, id_cocktail) VALUES (1, 'pièce', 4, 2);
