@@ -15,6 +15,7 @@
     --palette-secondary-background-color: #94a1b2;
     --palette-secondary-text-color: #010101;
     --media-screen-max-width: 850px;
+    --space-from-corner: .5em;
 }
 
 * {

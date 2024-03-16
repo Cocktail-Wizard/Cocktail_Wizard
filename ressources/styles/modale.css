@@ -30,8 +30,8 @@
 
 #fermer {
     position: fixed;
-    top: .5em;
-    right: .5em;
+    top: var(--space-from-corner);
+    right: var(--space-from-corner);
     height: 1em;
     width: 1em;
     text-align: center;
@@ -62,7 +62,7 @@
 }
 
 #presentation {
-    width: clamp(var(--modal-content-min-width), 40%, 40%);
+    width: 40%;
     height: 100%;
 }
 
@@ -107,6 +107,10 @@
 
 @media screen and (max-width: 850px) {
     #modale {
-        padding: .5em;
+        padding: var(--space-from-corner);
+    }
+
+    #presentation {
+        width: 100%;
     }
 }
