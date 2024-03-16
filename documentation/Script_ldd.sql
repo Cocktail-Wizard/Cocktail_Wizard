@@ -59,7 +59,7 @@ CREATE TABLE Utilisateur (
     courriel VARCHAR(255) NOT NULL UNIQUE,
     mdp_hashed VARCHAR(255) NOT NULL,
     privilege BOOLEAN NOT NULL,
-    data_naiss Date NOT NULL,
+    date_naiss Date NOT NULL,
     desc_public VARCHAR(2000),
     id_image INT,
     FOREIGN KEY (id_image) REFERENCES Banque_Image(id_image),

@@ -120,17 +120,19 @@ INSERT INTO Alcool (nom) VALUES ('Fernet');
 
 */
 -- Suppression des données
-DELETE FROM cocktail_liked;
-DELETE FROM commentaire_liked;
-DELETE FROM commentaire;
-DELETE FROM ingredient_cocktail;
-DELETE FROM cocktail;
-DELETE FROM alcool_utilisateur;
-DELETE FROM ingredient_utilisateur;
-DELETE FROM utilisateur;
-DELETE FROM banque_image;
-DELETE FROM alcool;
-DELETE FROM ingredient;
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE Ingredient;
+TRUNCATE TABLE Alcool;
+TRUNCATE TABLE Banque_Image;
+TRUNCATE TABLE Utilisateur;
+TRUNCATE TABLE Ingredient_Utilisateur;
+TRUNCATE TABLE Alcool_utilisateur;
+TRUNCATE TABLE Cocktail;
+TRUNCATE TABLE Ingredient_Cocktail;
+TRUNCATE TABLE Commentaire;
+TRUNCATE TABLE Commentaire_Liked;
+TRUNCATE TABLE Cocktail_Liked;
+SET FOREIGN_KEY_CHECKS = 1;
 
 
 -- Insertion des données dans la table Ingredient
@@ -194,3 +196,4 @@ INSERT INTO Commentaire_Liked (id_commentaire, id_utilisateur) VALUES (3, 1);
 -- Insertion des données dans la table Cocktail_Liked
 INSERT INTO Cocktail_Liked (id_cocktail, id_utilisateur) VALUES (1, 1);
 INSERT INTO Cocktail_Liked (id_cocktail, id_utilisateur) VALUES (2, 2);
+INSERT INTO Cocktail_Liked (id_cocktail, id_utilisateur) VALUES (2, 1);
