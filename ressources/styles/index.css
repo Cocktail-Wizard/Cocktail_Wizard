@@ -1,8 +1,8 @@
 :root {
     --publication-width: 300px;
-    --publication-height: calc(var(--publication-width * 4 / 3));
-    --publication-width-small: calc(var(--publication-width) / 2.28);
-    --publication-height-small: calc(var(--publication-height) / 2.28);
+    --publication-height: calc(var(--publication-width) * 4 / 3);
+    --publication-width-small: calc(var(--publication-width) / 2.13);
+    --publication-height-small: calc(var(--publication-height) / 2.13);
 }
 
 body {
@@ -38,6 +38,19 @@ nav {
     z-index: 1;
 }
 
+aside#jesaispas>* {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+aside#jesaispas a img {
+    width: 4em;
+    height: 4em;
+    z-index: 1;
+    filter: drop-shadow(0px 0px 5px black);
+}
+
 .cocktail:hover {
     cursor: pointer;
     transform: scale(1.05);
@@ -55,7 +68,7 @@ nav {
     opacity: 0.8;
     outline: none;
     padding: 10px 0 10px 50px;
-    width: var(--publication-width);
+    width: clamp(200px, calc(var(--publication-width) * 2), 75%);
 }
 
 #barre-recherche:focus {
@@ -72,9 +85,13 @@ nav {
     width: 80%;
 }
 
+#galerie aside#jesaispas {
+    gap: 0;
+}
+
 @media screen and (max-width: 850px) {
-    .cocktail {
-        height: var(--publication-height-small);
-        width: var(--publication-width-small);
+    #galerie {
+        width: 85%;
+        gap: calc(var(--default-gap) / 2);
     }
 }

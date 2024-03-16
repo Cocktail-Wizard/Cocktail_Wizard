@@ -56,3 +56,10 @@
     text-align: center;
     width: 100%;
 }
+
+@media screen and (max-width: 850px) {
+    .cocktail {
+        height: var(--publication-height-small);
+        width: var(--publication-width-small);
+    }
+}
