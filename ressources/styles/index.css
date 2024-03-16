@@ -5,10 +5,11 @@
     --publication-height-small: calc(var(--publication-height) / 2.13);
 }
 
-body {
+main {
     display: flex;
     flex-direction: column;
     gap: var(--default-gap);
+    margin: var(--default-gap) 0;
 }
 
 header {
@@ -38,13 +39,13 @@ nav {
     z-index: 1;
 }
 
-aside#jesaispas>* {
+aside#contenant-boutons-fixes>* {
     position: absolute;
     top: 1em;
     right: 1em;
 }
 
-aside#jesaispas a img {
+aside#contenant-boutons-fixes a img {
     width: 4em;
     height: 4em;
     z-index: 1;
@@ -85,7 +86,7 @@ aside#jesaispas a img {
     width: 80%;
 }
 
-#galerie aside#jesaispas {
+#galerie aside#contenant-boutons-fixes {
     gap: 0;
 }
 
