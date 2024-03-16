@@ -1,3 +1,10 @@
+:root {
+    --publication-width: 300px;
+    --publication-height: calc(var(--publication-width) * 4 / 3);
+    --publication-width-small: calc(var(--publication-width) / 2.13);
+    --publication-height-small: calc(var(--publication-height) / 2.13);
+}
+
 .cocktail {
     border-radius: var(--default-border-radius);
     box-shadow: #666 0 0 5px;
@@ -55,4 +62,11 @@
     position: absolute;
     text-align: center;
     width: 100%;
+}
+
+@media screen and (max-width: 850px) {
+    .cocktail {
+        height: var(--publication-height-small);
+        width: var(--publication-width-small);
+    }
 }
