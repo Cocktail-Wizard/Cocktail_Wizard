@@ -23,7 +23,7 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
                 });
             } else {
                 // Rediriger vers la page de connexion si l'inscription est réussie (à changer)
-                window.location.href = "connexion.php";
+                window.location.href = "connexion.html";
             }
         })
         .catch(error => {
