@@ -1,5 +1,5 @@
 <?php
-require("config.php");
+require ("config.php");
 session_start();
 // Accumulateur d'erreurs
 $erreurs = array();
@@ -11,11 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Valider le courriel
-    if (empty($_POST['courriel']) || !str_contains($_POST["courriel"], "@") || !str_contains($_POST["courriel"], ".")) {
+    if (empty($_POST['courriel']) || !filter_var($_POST['courriel'], FILTER_VALIDATE_EMAIL)) {
         $erreurs[] = "Le courriel est invalide!<br>";
     }
 
-    // Verifier si le courriel est deja utilise
+    // Vérifier si le courriel est déjà utilisé
+    $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     if ($conn->connect_error) {
         die("Erreur de connexion à la base de données: " . $conn->connect_error);
     }
@@ -31,15 +32,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Valider le mot de passe et les autres champs
+    if (empty ($_POST['mdp']) || strlen($_POST['mdp']) < 8) {
+        $erreurs[] = "Le mot de passe doit contenir au moins 8 caractères!<br>";
+    }
+    if ($_POST['mdp'] != $_POST['confmdp']) {
+        $erreurs[] = "Les mots de passe ne correspondent pas!<br>";
+    }
+    if (empty ($_POST['naissance'])) {
+        $erreurs[] = "La date de naissance est invalide!<br>";
+    }
 
     // Si le formulaire est valide, insérer les données dans la base de données
     if (count($erreurs) == 0) {
-        // Insérer les données dans la base de données
-        // ...
+        $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
+        $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
+        $mdp_encrypte = password_hash($mdp, PASSWORD_DEFAULT);
+        $date_nais = date('Y-m-d', strtotime(trim($_POST['naissance'])));
 
-        // Rediriger vers la page de connexion si l'inscription est réussie
-        header("Location: connexion.php");
-        exit();
+        $requete_preparee = $conn->prepare("INSERT INTO utilisateur (nom, courriel, mdp, date_nais) VALUES (?, ?, ?, ?)");
+        $requete_preparee->bind_param("ssss", $nom, $courriel, $mdp_encrypte, $date_nais);
+        if ($requete_preparee->execute()) {
+            // Rediriger vers la page de connexion si l'inscription est réussie
+            header("Location: connexion.php");
+            exit();
+        } else {
+            $erreurs[] = "Erreur lors de l'inscription!<br>";
+        }
     }
 }
 
