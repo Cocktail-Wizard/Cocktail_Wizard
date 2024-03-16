@@ -41,8 +41,8 @@ nav {
 
 aside#contenant-boutons-fixes>* {
     position: absolute;
-    top: 1em;
-    right: 1em;
+    top: var(--space-from-corner);
+    right: var(--space-from-corner);
 }
 
 aside#contenant-boutons-fixes a img {
