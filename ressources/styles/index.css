@@ -48,7 +48,7 @@ nav {
     opacity: 0.8;
     outline: none;
     padding: 10px 0 10px 50px;
-    width: var(--publication-width);
+    width: clamp(200px, calc(var(--publication-width) * 2), 75%);
 }
 
 #barre-recherche:focus {
