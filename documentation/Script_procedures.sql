@@ -22,6 +22,33 @@ SHOW PROCEDURE STATUS;
 
 DELIMITER //
 
+--Création de la procédure InscriptionUtilisateur
+-- Permet d'inscrire un utilisateur
+-- Utiliser pour l'inscription
+-- var_date_naissance: 'YYYY-MM-DD'
+DROP PROCEDURE IF EXISTS InscriptionUtilisateur;
+CREATE PROCEDURE InscriptionUtilisateur(IN var_nom VARCHAR(100), IN var_courriel VARCHAR(255), IN var_mdp_hashed VARCHAR(255), IN var_date_naissance DATE)
+BEGIN
+    INSERT INTO Utilisateur (nom, courriel, mdp_hashed, date_naiss)
+    VALUES (var_nom, var_courriel, var_mdp_hashed, var_date_naissance);
+END //
+
+--Création de la procédure ConnexionUtilisateur
+-- Renvoie le mot_de_passe_hashé afin de vérifier si le mot de passe est correct
+-- Utiliser pour la connexion
+DROP PROCEDURE IF EXISTS ConnexionUtilisateur;
+CREATE PROCEDURE ConnexionUtilisateur(IN var_courriel VARCHAR(255))
+BEGIN
+    SELECT mdp_hashed
+    FROM Utilisateur
+    WHERE courriel = var_courriel;
+END //
+
+
+----------------- Création d'un cocktail -----------------
+
+
+
 --Création de la procédure GetCocktailGalerieNonFiltrer
 -- Permet de voir tous les cocktails de la galerie
 -- Utiliser pour afficher les cocktails dans la galerie non connecté
@@ -69,8 +96,6 @@ BEGIN
             ELSE C.nb_like
         END DESC;
 END //
-
-CALL GetCocktailGalerieFiltrer(2, 'date');
 
 --Création de la procédure GetListeIngredientsCocktail
 -- Permet d'avoir les informations importantes

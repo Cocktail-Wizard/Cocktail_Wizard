@@ -153,8 +153,8 @@ INSERT INTO Banque_Image (img, img_cocktail) VALUES ('BLOB_DATA', 0);
 
 
 -- Insertion des données dans la table Utilisateur
-INSERT INTO Utilisateur (nom, courriel, mdp_hashed, privilege, data_naiss, desc_public, id_image) VALUES ('John Doe', 'john@example.com', 'hashed_password', 0, '2000-01-01', 'J\'adore les cocktails', 1);
-INSERT INTO Utilisateur (nom, courriel, mdp_hashed, privilege, data_naiss, desc_public, id_image) VALUES ('Jane Doe', 'jane@example.com', 'hashed_password', 0, '2000-01-02', 'J\'adore préparer des cocktails', 2);
+INSERT INTO Utilisateur (nom, courriel, mdp_hashed, privilege, date_naiss, desc_public, id_image) VALUES ('John Doe', 'john@example.com', 'hashed_password', 0, '2000-01-01', 'J\'adore les cocktails', 1);
+INSERT INTO Utilisateur (nom, courriel, mdp_hashed, privilege, date_naiss, desc_public, id_image) VALUES ('Jane Doe', 'jane@example.com', 'hashed_password', 0, '2000-01-02', 'J\'adore préparer des cocktails', 2);
 
 -- Insertion des données dans la table Ingredient_Utilisateur
 INSERT INTO Ingredient_Utilisateur (id_utilisateur, id_ingredient) VALUES (1, 1);
