@@ -41,14 +41,17 @@ nav {
 
 aside#contenant-boutons-fixes>* {
     position: absolute;
-    top: var(--space-from-corner);
     right: var(--space-from-corner);
+    top: var(--space-from-corner);
 }
 
 aside#contenant-boutons-fixes a img {
+    filter: drop-shadow(0px 0px 5px black);
+    height: 4em;
     position: absolute;
-    top: 1em;
-    right: 1em;
+    right: var(--space-from-corner);
+    top: var(--space-from-corner);
+    width: 4em;
 }
 
 .cocktail:hover {
@@ -85,13 +88,9 @@ aside#contenant-boutons-fixes a img {
     width: 80%;
 }
 
-#galerie aside#contenant-boutons-fixes {
-    gap: 0;
-}
-
 @media screen and (max-width: 850px) {
     #galerie {
-        width: 85%;
         gap: calc(var(--default-gap) / 2);
+        width: 85%;
     }
 }
