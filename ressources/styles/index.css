@@ -1,3 +1,10 @@
+:root {
+    --publication-width: 300px;
+    --publication-height: calc(var(--publication-width) * 4 / 3);
+    --publication-width-small: calc(var(--publication-width) / 2.13);
+    --publication-height-small: calc(var(--publication-height) / 2.13);
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -29,6 +36,19 @@ nav {
     top: 0;
     width: 100%;
     z-index: 1;
+}
+
+aside#jesaispas>* {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+aside#jesaispas a img {
+    width: 4em;
+    height: 4em;
+    z-index: 1;
+    filter: drop-shadow(0px 0px 5px black);
 }
 
 .cocktail:hover {
@@ -63,6 +83,10 @@ nav {
     justify-content: center;
     margin: auto;
     width: 80%;
+}
+
+#galerie aside#jesaispas {
+    gap: 0;
 }
 
 @media screen and (max-width: 850px) {
