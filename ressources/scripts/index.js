@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     // Ajouter le cocktail à la galerie
                     galerie.appendChild(nouveauCocktail);
                 });
-                console.log('Données stockées dans localStorage : ', data);
+                console.debug('Données stockées dans localStorage : ', data);
             })
             .catch(error => console.error('Erreur : ', error));
     }
