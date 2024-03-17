@@ -9,7 +9,7 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
     // Envoyer les données du formulaire à l'API PHP
     let formData = new FormData(event.target);
 
-    fetch("inscription.php", {
+    fetch("../ressources/api/inscription.php", {
         method: "POST",
         body: formData
     })
