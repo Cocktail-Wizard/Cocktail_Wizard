@@ -68,3 +68,7 @@ function afficherCocktails(data, modeleHTML) {
 function nettoyerNomCocktail(nom) {
     return nom.replace(/[^a-zA-Z0-9]/g, '');
 }
+
+function chargerInformationsModale(idCocktail) {
+    // Envoyer une requête à l'API pour ce cocktail, exemple: "https://cocktailwizard.com/cocktail/{id}"
+}
