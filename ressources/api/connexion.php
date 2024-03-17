@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($mdp, $mdp_hashed)) {
                 // Authentification réussie
                 $_SESSION['nom'] = $nom;
-                header("Location: galerie.php");
+                header("Location: ../../index.html");
                 exit();
             } else {
                 // Mot de passe incorrect
