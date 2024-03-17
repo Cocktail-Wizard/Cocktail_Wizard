@@ -1,5 +1,5 @@
 <?php
-require ("config.php");
+require("config.php");
 session_start();
 // Accumulateur d'erreurs
 $erreurs = array();
@@ -16,11 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Vérifier si le courriel est déjà utilisé
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-    if ($conn->connect_error) {
-        die("Erreur de connexion à la base de données: " . $conn->connect_error);
-    }
-
     $courriel = mysqli_real_escape_string($conn, trim($_POST['courriel']));
     $requete_preparee = $conn->prepare("SELECT * FROM utilisateur WHERE courriel = ?");
     $requete_preparee->bind_param("s", $courriel);
@@ -32,13 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Valider le mot de passe et les autres champs
-    if (empty ($_POST['mdp']) || strlen($_POST['mdp']) < 8) {
+    if (empty($_POST['mdp']) || strlen($_POST['mdp']) < 8) {
         $erreurs[] = "Le mot de passe doit contenir au moins 8 caractères!<br>";
     }
     if ($_POST['mdp'] != $_POST['confmdp']) {
         $erreurs[] = "Les mots de passe ne correspondent pas!<br>";
     }
-    if (empty ($_POST['naissance'])) {
+    if (empty($_POST['naissance'])) {
         $erreurs[] = "La date de naissance est invalide!<br>";
     }
 
