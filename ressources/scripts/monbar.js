@@ -2,7 +2,7 @@ const cocktailsClassiques = document.getElementById("cocktails-classiques");
 const cocktailsPersonnels = document.getElementById("cocktails-personnels");
 const cocktailsCommunautaires = document.getElementById("cocktails-communautaires");
 
-const nombreCocktailsAffiches = 5;
+const nombreCocktailsAffiches = 10;
 const iconesUmami = {
     'Sucré': 'icone-sucre-sucre',
     'Aigre': 'icone-citron-aigre',
