@@ -10,7 +10,11 @@
 --
 -- ============================================================
 
--- À faire ajout d'indexe
+-- Manque logique de gestion des images
+
+-- Le session_id du siteweb doit être le id_utilisateur
+
+-- À faire ajout d'indexe pour les order by qui renvoit bcp de donnees
 
 -- À faire, diminuer la quantité de procédures en envoyant plus d'informations en une seule fois
 -- qui seront stocker dans des objets php
@@ -45,9 +49,29 @@ BEGIN
 END //
 
 
+
 ----------------- Création d'un cocktail -----------------
 
+--Création de la procédure CreerCocktail
+-- Permet de créer un cocktail
+-- Utiliser pour la création de cocktail. Le id_cocktail est retouner afin de
+-- de pouvoir utiliser lors de l'ajout des ingrédients cocktails.
+DROP PROCEDURE IF EXISTS CreerCocktail;
+CREATE PROCEDURE CreerCocktail
+(IN var_nom VARCHAR(255), IN var_desc_cocktail TEXT, IN var_preparation TEXT,
+IN var_type_verre VARCHAR(50), IN var_profil_saveur VARCHAR(50), IN var_id_utilisateur INT, OUT id_cocktail INT)
+BEGIN
+    INSERT INTO Cocktail (nom, desc_cocktail, preparation, type_verre, profil_saveur, id_utilisateur)
+    VALUES (var_nom, var_desc_cocktail, var_preparation, var_type_verre, var_profil_saveur, var_id_utilisateur);
 
+    SET id_cocktail = LAST_INSERT_ID();
+END //
+
+--Création de la procédure AjouterIngredientCocktail
+-- Permet d'ajouter un ingrédient à un cocktail
+-- Utiliser pour la création de cocktail
+-- Query à faire dans le code php afin de pouvoir ajouter plusieurs ingrédients
+-- à la fois
 
 --Création de la procédure GetCocktailGalerieNonFiltrer
 -- Permet de voir tous les cocktails de la galerie
