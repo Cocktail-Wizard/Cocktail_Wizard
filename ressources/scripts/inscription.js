@@ -3,12 +3,13 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
     event.preventDefault();
 
     // Réinitialiser les erreurs
-    var errorsContainer = document.getElementById("messErreur");
+    let errorsContainer = document.getElementById("messErreur");
     errorsContainer.innerHTML = "";
 
     // Envoyer les données du formulaire à l'API PHP
-    var formData = new FormData(this);
-    fetch("inscription_api.php", {
+    let formData = new FormData(event.target);
+
+    fetch("inscription.php", {
         method: "POST",
         body: formData
     })
@@ -17,7 +18,7 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
             // Afficher les erreurs
             if (errors.length > 0) {
                 errors.forEach(error => {
-                    var errorElement = document.createElement("p");
+                    let errorElement = document.createElement("p");
                     errorElement.textContent = error;
                     errorsContainer.appendChild(errorElement);
                 });
