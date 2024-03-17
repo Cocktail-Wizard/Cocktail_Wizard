@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             const data = await response.json();
             afficherCocktails(data, modeleHTML);
-            console.debug('Données stockées dans localStorage : ', data);
+            console.debug("Données récuperées de l'API de la galerie : ", data);
         } catch (error) {
             console.error('Erreur : ', error);
         }
