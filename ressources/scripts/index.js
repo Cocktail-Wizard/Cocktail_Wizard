@@ -1,5 +1,4 @@
 const galerie = document.getElementById('galerie');
-const nombreCocktailsAffiches = 20;
 const iconesUmami = {
     'Sucré': 'icone-sucre-sucre',
     'Aigre': 'icone-citron-aigre',
@@ -8,16 +7,6 @@ const iconesUmami = {
     'Salé': 'icone-sel-sale',
     'default': 'point-interrogation'
 };
-
-// Générer la liste complète des cocktails
-let nomsCocktails = [];
-
-for (let i = 0; i < nombreCocktailsAffiches; i++) {
-    const nomAleatoire = genererMotAleatoire(genererNombreAleatoire(6, 12));
-    nomsCocktails.push(nomAleatoire);
-}
-
-const cocktails = genererListeCocktails(nomsCocktails);
 
 document.addEventListener("DOMContentLoaded", async () => {
     const modeleHTML = await chargerModeleHTML("ressources/modeles/cocktail_carte.html");
