@@ -20,30 +20,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
         $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
 
-
-        //  Rechercher le mot de passe dans la base de données
-        $requete_preparee = $conn->prepare("SELECT * FROM `utilisateur` WHERE nom = ?");
-
-        //  Lier le mot de passe (String) à l'identifiant
-        $requete_preparee->execute([$nom]);
+        // Rechercher le mot de passe dans la base de données
+        $requete_preparee = $conn->prepare("SELECT mdp_hashed FROM utilisateur WHERE nom = ?");
+        $requete_preparee->bind_param("s", $nom);
+        $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
-        $util = $resultat->fetch_assoc();
 
         if ($resultat->num_rows > 0) {
-            $mdp_encrypter = $util['mdp'];
+            $utilisateur = $resultat->fetch_assoc();
+            $mdp_hashed = $utilisateur['mdp_hashed'];
+
+            // Vérifier le mot de passe
+            if (password_verify($mdp, $mdp_hashed)) {
+                // Authentification réussie
+                $_SESSION['nom'] = $nom;
+                header("Location: galerie.php");
+                exit();
+            } else {
+                // Mot de passe incorrect
+                $erreurs[] = "Mot de passe incorrect!<br>";
+            }
+        } else {
+            // Nom d'utilisateur non trouvé
+            $erreurs[] = "Nom d'utilisateur non trouvé!<br>";
         }
 
         $requete_preparee->close();
-
-        if ($resultat->num_rows > 0 && password_verify($mdp, $mdp_encrypter)) {
-            $_SESSION['nom'] = $nom;
-            //  Rediriger l'utilisateur vers la page de galerie
-            echo "Connexion reussie!";
-            header("Location: galerie.php");
-            exit();
-        } else {
-            echo "Echec de connexion.";
-        }
     }
 }
 
