@@ -10,6 +10,9 @@
 --
 -- ============================================================
 
+-- Ajouter procédure qui permet de like et renvoyer le nouveau
+-- nombre de like
+
 -- Manque logique de gestion des images
 
 -- Le session_id du siteweb doit être le id_utilisateur
@@ -48,6 +51,69 @@ BEGIN
     WHERE courriel = var_courriel;
 END //
 
+--Création de la procédure LikeCocktail
+-- Permet de liker un cocktail et renvoyer le nouveau nombre de like
+-- du cocktail
+-- Utiliser pour liker un cocktail
+DROP PROCEDURE IF EXISTS LikeCocktail;
+CREATE PROCEDURE LikeCocktail(IN var_id_cocktail INT, IN var_id_utilisateur INT, OUT out_nb_like INT)
+BEGIN
+    INSERT INTO cocktail_liked (id_cocktail, id_utilisateur)
+    VALUES (var_id_cocktail, var_id_utilisateur);
+
+    SELECT C.nb_like
+    INTO out_nb_like
+    FROM Cocktail C
+    WHERE id_cocktail = var_id_cocktail;
+END //
+
+--Création de la procédure DislikeCocktail
+-- Permet de disliker un cocktail et renvoyer le nouveau nombre de like
+-- du cocktail
+-- Utiliser pour disliker un cocktail
+DROP PROCEDURE IF EXISTS DislikeCocktail;
+CREATE PROCEDURE DislikeCocktail(IN var_id_cocktail INT, IN var_id_utilisateur INT, OUT out_nb_like INT)
+BEGIN
+    DELETE FROM cocktail_liked
+    WHERE id_cocktail = var_id_cocktail AND id_utilisateur = var_id_utilisateur;
+
+    SELECT C.nb_like
+    INTO out_nb_like
+    FROM Cocktail C
+    WHERE id_cocktail = var_id_cocktail;
+END //
+
+--Création de la procédure LikeCommentaire
+-- Permet de liker un commentaire et renvoyer le nouveau nombre de like
+-- du commentaire
+-- Utiliser pour liker un commentaire
+DROP PROCEDURE IF EXISTS LikeCommentaire;
+CREATE PROCEDURE LikeCommentaire(IN var_id_commentaire INT, IN var_id_utilisateur INT, OUT out_nb_like INT)
+BEGIN
+    INSERT INTO commentaire_liked (id_commentaire, id_utilisateur)
+    VALUES (var_id_commentaire, var_id_utilisateur);
+
+    SELECT C.nb_like
+    INTO out_nb_like
+    FROM Commentaire C
+    WHERE id_commentaire = var_id_commentaire;
+END //
+
+--Création de la procédure DislikeCommentaire
+-- Permet de disliker un commentaire et renvoyer le nouveau nombre de like
+-- du commentaire
+-- Utiliser pour disliker un commentaire
+DROP PROCEDURE IF EXISTS DislikeCommentaire;
+CREATE PROCEDURE DislikeCommentaire(IN var_id_commentaire INT, IN var_id_utilisateur INT, OUT out_nb_like INT)
+BEGIN
+    DELETE FROM commentaire_liked
+    WHERE id_commentaire = var_id_commentaire AND id_utilisateur = var_id_utilisateur;
+
+    SELECT C.nb_like
+    INTO out_nb_like
+    FROM Commentaire C
+    WHERE id_commentaire = var_id_commentaire;
+END //
 
 
 ----------------- Création d'un cocktail -----------------
