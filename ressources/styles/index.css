@@ -5,9 +5,13 @@
     --publication-height-small: calc(var(--publication-height) / 2.13);
 }
 
+body,
 main {
     display: flex;
     flex-direction: column;
+}
+
+main {
     gap: var(--default-gap);
     margin: var(--default-gap) 0;
 }
