@@ -56,6 +56,7 @@
         $requete_preparee = $conn->prepare("CALL GetCocktailGalerieNonFiltrer(?)");
         $requete_preparee->bind_param("s", $triage);
         $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
 
         if($resultat->num_rows > 0){
             while($row = $resultat->fetch_assoc()){
@@ -66,50 +67,8 @@
         $requete_preparee->close();
 
         foreach($id_cocktail as $id) {
-            $requete_preparee = $conn->prepare("CALL GetInfoCocktailComplet(?)");
-            $requete_preparee->bind_param("i", $id);
-            $requete_preparee->execute();
-            $resultat = $requete_preparee->get_result();
 
-            if($resultat->num_rows > 0) {
-                $row = $resultat->fetch_assoc();
-
-                $cocktail = new Cocktail($row['nom'], $row['desc_cocktail'], $row['preparation'],
-                $row['imgCocktail'], $row['imgAuteur'], $row['auteur'], $row['date_publication'],
-                $row['nb_like'], $row['alcool_principale'], $row['profil_saveur'], $row['type_verre']);
-            }
-
-            $requete_preparee->close();
-
-            $requete_preparee = $conn->prepare("CALL GetListeIngredientsCocktail(?)");
-            $requete_preparee->bind_param("i", $id);
-            $requete_preparee->execute();
-            $resultat = $requete_preparee->get_result();
-
-            if($resultat->num_rows > 0){
-                while($row = $resultat->fetch_assoc()){
-                    $ingredient = new IngredientCocktail($row['quantite'], $row['unite'], $row['nom']);
-                    $cocktail->ajouterIngredient($ingredient);
-                }
-            }
-
-            $requete_preparee->close();
-
-            $requete_preparee = $conn->prepare("CALL GetCommentairesCocktail(?, like)");
-            $requete_preparee->bind_param("i", $id);
-            $requete_preparee->execute();
-            $resultat = $requete_preparee->get_result();
-
-            if($resultat->num_rows > 0){
-                while($row = $resultat->fetch_assoc()){
-                    $commentaire = new Commentaire($row['img'], $row['nom'], $row['date_publication'], $row['contenu'], $row['nb_like']);
-                    $cocktail->ajouterCommentaire($commentaire);
-                }
-            }
-
-            $requete_preparee->close();
-
-            $cocktails[] = $cocktail;
+            $cocktails[] = remplirCocktail($id, $conn);
 
         }
 
@@ -132,8 +91,9 @@
         $cocktails = [];
 
         $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?)");
-        $requete_preparee->bind_param("i","s", $userId,$triage);
+        $requete_preparee->bind_param("is", $userId,$triage);
         $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
 
         if($resultat->num_rows > 0){
             while($row = $resultat->fetch_assoc()){
@@ -144,50 +104,8 @@
         $requete_preparee->close();
 
         foreach($id_cocktail as $id) {
-            $requete_preparee = $conn->prepare("CALL GetInfoCocktailComplet(?)");
-            $requete_preparee->bind_param("i", $id);
-            $requete_preparee->execute();
-            $resultat = $requete_preparee->get_result();
 
-            if($resultat->num_rows > 0) {
-                $row = $resultat->fetch_assoc();
-
-                $cocktail = new Cocktail($row['nom'], $row['desc_cocktail'], $row['preparation'],
-                $row['imgCocktail'], $row['imgAuteur'], $row['auteur'], $row['date_publication'],
-                $row['nb_like'], $row['alcool_principale'], $row['profil_saveur'], $row['type_verre']);
-            }
-
-            $requete_preparee->close();
-
-            $requete_preparee = $conn->prepare("CALL GetListeIngredientsCocktail(?)");
-            $requete_preparee->bind_param("i", $id);
-            $requete_preparee->execute();
-            $resultat = $requete_preparee->get_result();
-
-            if($resultat->num_rows > 0){
-                while($row = $resultat->fetch_assoc()){
-                    $ingredient = new IngredientCocktail($row['quantite'], $row['unite'], $row['nom']);
-                    $cocktail->ajouterIngredient($ingredient);
-                }
-            }
-
-            $requete_preparee->close();
-
-            $requete_preparee = $conn->prepare("CALL GetCommentairesCocktail(?, like)");
-            $requete_preparee->bind_param("i", $id);
-            $requete_preparee->execute();
-            $resultat = $requete_preparee->get_result();
-
-            if($resultat->num_rows > 0){
-                while($row = $resultat->fetch_assoc()){
-                    $commentaire = new Commentaire($row['img'], $row['nom'], $row['date_publication'], $row['contenu'], $row['nb_like']);
-                    $cocktail->ajouterCommentaire($commentaire);
-                }
-            }
-
-            $requete_preparee->close();
-
-            $cocktails[] = $cocktail;
+            $cocktails[] = remplirCocktail($id, $conn);
 
         }
 
@@ -199,18 +117,196 @@
 
     function getCocktailClassiqueMonBar($userId){
 
+        $conn = connexionBD();
 
+        if($conn == null){
+            http_response_code(500);
+            echo json_encode("Erreur de connexion à la base de données.");
+            exit();
+        }
+
+        $id_cocktail = [];
+        $cocktails = [];
+
+        $requete_preparee = $conn->prepare("CALL GetCocktailPossibleClassique(?)");
+        $requete_preparee->bind_param("i",$userId);
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+
+        if($resultat->num_rows > 0){
+            while($row = $resultat->fetch_assoc()){
+                $id_cocktail[] = $row['id_cocktail'];
+            }
+        }
+
+        $requete_preparee->close();
+
+        foreach($id_cocktail as $id) {
+
+            $cocktails[] = remplirCocktail($id, $conn);
+
+        }
+
+        echo json_encode($cocktails);
+
+        $conn->close();
     }
 
     function getCocktailFavorieMonBar($userId){
+        $conn = connexionBD();
+
+        if($conn == null){
+            http_response_code(500);
+            echo json_encode("Erreur de connexion à la base de données.");
+            exit();
+        }
+
+        $id_cocktail = [];
+        $cocktails = [];
+
+        $requete_preparee = $conn->prepare("CALL GetListeCocktailPossibleFavorie(?)");
+        $requete_preparee->bind_param("i",$userId);
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+
+        if($resultat->num_rows > 0){
+            while($row = $resultat->fetch_assoc()){
+                $id_cocktail[] = $row['id_cocktail'];
+            }
+        }
+
+        $requete_preparee->close();
+
+        foreach($id_cocktail as $id) {
+
+            $cocktails[] = remplirCocktail($id, $conn);
+        }
+
+
+        echo json_encode($cocktails);
+
+        $conn->close();
 
     }
 
     function getCocktailCommunataireMonBar($userId){
 
+        $conn = connexionBD();
+
+        if($conn == null){
+            http_response_code(500);
+            echo json_encode("Erreur de connexion à la base de données.");
+            exit();
+        }
+
+        $id_cocktail = [];
+        $cocktails = [];
+
+        $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleCommunautaire(?)");
+        $requete_preparee->bind_param("i",$userId);
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+
+        if($resultat->num_rows > 0){
+            while($row = $resultat->fetch_assoc()){
+                $id_cocktail[] = $row['id_cocktail'];
+            }
+        }
+
+        $requete_preparee->close();
+
+        foreach($id_cocktail as $id) {
+
+            $cocktails[] = remplirCocktail($id, $conn);
+        }
+
+
+        echo json_encode($cocktails);
+
+        $conn->close();
     }
 
     function getMesCocktailsProfil($userId){
+        $conn = connexionBD();
 
+        if($conn == null){
+            http_response_code(500);
+            echo json_encode("Erreur de connexion à la base de données.");
+            exit();
+        }
+
+        $id_cocktail = [];
+        $cocktails = [];
+
+        $requete_preparee = $conn->prepare("CALL GetMesCocktails(?)");
+        $requete_preparee->bind_param("i",$userId);
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+
+        if($resultat->num_rows > 0){
+            while($row = $resultat->fetch_assoc()){
+                $id_cocktail[] = $row['id_cocktail'];
+            }
+        }
+
+        $requete_preparee->close();
+
+        foreach($id_cocktail as $id) {
+
+            $cocktails[] = remplirCocktail($id);
+        }
+
+
+        echo json_encode($cocktails);
+
+        $conn->close();
+    }
+
+
+    function remplirCocktail($cocktailId, $conn){
+        $requete_preparee = $conn->prepare("CALL GetInfoCocktailComplet(?)");
+        $requete_preparee->bind_param("i", $cocktailId);
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+
+        if($resultat->num_rows > 0) {
+            $row = $resultat->fetch_assoc();
+
+            $cocktail = new Cocktail($row['nom'], $row['desc_cocktail'], $row['preparation'],
+            $row['imgCocktail'], $row['imgAuteur'], $row['auteur'], $row['date_publication'],
+            $row['nb_like'], $row['alcool_principale'], $row['profil_saveur'], $row['type_verre']);
+        }
+
+        $requete_preparee->close();
+
+        $requete_preparee = $conn->prepare("CALL GetListeIngredientsCocktail(?)");
+        $requete_preparee->bind_param("i", $cocktailId);
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+
+        if($resultat->num_rows > 0){
+            while($row = $resultat->fetch_assoc()){
+                $ingredient = new IngredientCocktail($row['quantite'], $row['unite'], $row['nom']);
+                $cocktail->ajouterIngredient($ingredient);
+            }
+        }
+
+        $requete_preparee->close();
+
+        $requete_preparee = $conn->prepare("CALL GetCommentairesCocktail(?, 'like')");
+        $requete_preparee->bind_param("i", $cocktailId);
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+
+        if($resultat->num_rows > 0){
+            while($row = $resultat->fetch_assoc()){
+                $commentaire = new Commentaire($row['img'], $row['nom'], $row['date_publication'], $row['contenu'], $row['nb_like']);
+                $cocktail->ajouterCommentaire($commentaire);
+            }
+        }
+
+        $requete_preparee->close();
+
+        return $cocktail;
     }
 ?>
