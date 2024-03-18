@@ -3,7 +3,7 @@
 * Implémentantion du système de routage
 */
 $request = $_SERVER['REQUEST_URI'];
-
+//Routes dynamiques
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $json = file_get_contents('php://input');
     $donnees = json_decode($json, true);
@@ -23,7 +23,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             require __DIR__ . '/pages/404.php';
             break;
     }
-} else if($_SERVER["REQUEST_METHOD"]== "GET") {
+}
+// Pour les requêtes GET, les informations nécessaires pour effectuer l'action
+// sont passées dans l'URL et non en JSON.
+else if($_SERVER["REQUEST_METHOD"]== "GET") {
     // Passer dans l'URL les informations nécessaires pour effectuer l'action
     $typeGet = $_GET['type'];
     switch ($typeGet) {
@@ -43,7 +46,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else if($_SERVER["REQUEST_METHOD"]== "DELETE") {
     //TODO
-} else {
+}
+// Routes statiques
+else {
     switch ($request) {
         case '/':
         case '/galerie':
