@@ -31,7 +31,6 @@ UNION ALL
 SELECT id_utilisateur, id_alcool AS ingredient, 1 AS type_ing
 FROM Alcool_utilisateur;
 
-SELECT * FROM mes_ingredients;
 /*
 --Création de la vue liste_ingredients_cocktail
 -- Permet de voir les ingrédients de chaque cocktail
