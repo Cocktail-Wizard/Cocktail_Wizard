@@ -7,16 +7,16 @@ $erreurs = array();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Valider le nom d'utilisateur
     if (empty($_POST['nom'])) {
-        $erreurs[] = "Le nom d'utilisateur entré est invalide!<br>";
+        $erreurs[] = "Le nom d'utilisateur est requis!";
     }
 
     // Valider le mot de passe
     if (empty($_POST['mdp'])) {
-        $erreurs[] = "Le mot de passe entré est invalide!<br>";
+        $erreurs[] = "Le mot de passe est requis!";
     }
 
     // Si aucune erreur, établir la connexion
-    if (count($erreurs) == 0) {
+    if (empty($erreurs)) {
         $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
         $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
 
@@ -36,13 +36,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['nom'] = $nom;
                 header("Location: ../../index.html");
                 exit();
-            } else {
-                // Mot de passe incorrect
-                $erreurs[] = "Mot de passe incorrect!<br>";
             }
+
+            // Mot de passe incorrect
+            $erreurs[] = "Mot de passe incorrect!";
         } else {
             // Nom d'utilisateur non trouvé
-            $erreurs[] = "Nom d'utilisateur non trouvé!<br>";
+            $erreurs[] = "Nom d'utilisateur introuvable!";
         }
 
         $requete_preparee->close();
