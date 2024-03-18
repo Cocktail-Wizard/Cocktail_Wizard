@@ -47,6 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $requete_preparee->close();
     }
+} else {
+    $erreurs[] = "How did you get there?";
 }
 
 // Construction de la réponse JSON
