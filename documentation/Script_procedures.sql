@@ -232,10 +232,12 @@ END //
 DROP PROCEDURE IF EXISTS GetInfoCocktailComplet;
 CREATE PROCEDURE GetInfoCocktailComplet(IN cocktail INT)
 BEGIN
-    SELECT C.nom, C.desc_cocktail, C.preparation, C.nb_like, C.date_publication, C.type_verre, C.profil_saveur, U.nom AS auteur, BI.img
+    SELECT C.nom, C.desc_cocktail, C.preparation, BI.img as imgCocktail, BI2.img as imgAuteur,  U.nom AS auteur, C.date_publication, C.nb_like, A.nom AS alcool_principale, C.profil_saveur, C.type_verre
     FROM Cocktail C
     JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
     JOIN Banque_Image BI ON C.id_image = BI.id_image
+    JOIN Alcool A ON C.id_alcool = A.id_alcool
+    JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
     WHERE C.id_cocktail = cocktail;
 END //
 
