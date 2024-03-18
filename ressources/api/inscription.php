@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $requete_preparee->bind_param("ssss", $nom, $courriel, $mdp_encrypte, $date_nais);
         if ($requete_preparee->execute()) {
             // Rediriger vers la page de connexion si l'inscription est réussie
-            header("Location: connexion.php");
+            header("Location: ../../pages/connexion.html");
             exit();
         } else {
             $erreurs[] = "Erreur lors de l'inscription!<br>";
