@@ -148,7 +148,7 @@ END //
 DROP PROCEDURE IF EXISTS GetCocktailGalerieNonFiltrer;
 CREATE PROCEDURE GetCocktailGalerieNonFiltrer(IN param_orderby VARCHAR(50))
 BEGIN
-    SELECT C.id_cocktail, C.nb_like
+    SELECT C.id_cocktail
     FROM Cocktail C
     ORDER BY
         CASE
