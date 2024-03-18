@@ -1,3 +1,4 @@
+<?php
 /*
  * Classe Cocktail
  *
@@ -8,7 +9,6 @@
  * Date : 18 mars 2023
  *
  */
-<?php
 class Cocktail implements JsonSerializable {
 
     private $id_cocktail;
@@ -22,6 +22,9 @@ class Cocktail implements JsonSerializable {
     private $alcool_principale;
     private $profil_saveur;
     private $type_verre;
+    // Permet de savoir si l'utilisateur a liké le cocktail quand connecté
+    // Valeur: null si l'utilisateur n'est pas connecté, true si l'utilisateur a liké, false sinon
+    private $liked;
 
     private $commentaires = [];
     private $ingredients_cocktail = [];
@@ -41,10 +44,12 @@ class Cocktail implements JsonSerializable {
         $this->type_verre = $type_verre;
     }
 
+    // Ajoute un commentaire à la liste des commentaires du cocktail
     public function ajouterCommentaire($commentaire) {
         $this->commentaires[] = $commentaire;
     }
 
+    // Ajoute un ingrédient à la liste des ingrédients du cocktail
     public function ajouterIngredient($ingredient) {
         $this->ingredients_cocktail[] = $ingredient;
     }
