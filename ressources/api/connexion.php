@@ -3,6 +3,7 @@ require("config.php");
 session_start();
 // Accumulateur d'erreurs
 $erreurs = array();
+$success = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Valider le nom d'utilisateur
@@ -34,12 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($mdp, $mdp_hashed)) {
                 // Authentification réussie
                 $_SESSION['nom'] = $nom;
-                header("Location: ../../index.html");
-                exit();
+                $success = true;
+            } else {
+                // Mot de passe incorrect
+                $erreurs[] = "Mot de passe incorrect!";
             }
-
-            // Mot de passe incorrect
-            $erreurs[] = "Mot de passe incorrect!";
         } else {
             // Nom d'utilisateur non trouvé
             $erreurs[] = "Nom d'utilisateur introuvable!";
@@ -49,5 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Répondre avec les erreurs au format JSON
-echo json_encode($erreurs);
+// Construction de la réponse JSON
+$response = array(
+    "success" => $success,
+    "errors" => $erreurs
+);
+
+// Répondre avec la réponse JSON
+echo json_encode($response);

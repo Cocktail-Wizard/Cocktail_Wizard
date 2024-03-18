@@ -14,10 +14,11 @@ document.getElementById("form-connexion").addEventListener("submit", (event) => 
         body: formData
     })
         .then(response => response.json())
-        .then(errors => {
-            // Afficher les erreurs
-            if (errors.length > 0) {
-                errors.forEach(error => {
+        .then(data => {
+            if (data.success) {
+                window.location.href = "../index.html";
+            } else {
+                data.errors.forEach(error => {
                     let errorElement = document.createElement("p");
                     errorElement.innerText = error;
                     errorsContainer.appendChild(errorElement);
