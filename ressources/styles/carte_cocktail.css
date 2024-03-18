@@ -1,0 +1,65 @@
+.cocktail {
+    border-radius: var(--default-border-radius);
+    box-shadow: #666 0 0 5px;
+    height: var(--publication-height);
+    overflow: hidden;
+    position: relative;
+    width: var(--publication-width);
+    flex: 0 0 auto;
+}
+
+.icone-cocktail {
+    position: absolute;
+    height: 1em;
+    font-size: 2em;
+}
+
+.compteur-jaime {
+    text-shadow: 0 0 2px var(--palette-background-color);
+}
+
+.illustration-cocktail {
+    /* filter: grayscale(50%); */
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.illustration-cocktail:hover {
+    filter: none;
+}
+
+.mentions-jaime {
+    top: 0;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+}
+
+.pastille-alcool {
+    bottom: 0;
+    left: 0;
+}
+
+.icone-saveur {
+    bottom: 0;
+    right: 0;
+}
+
+.nom-cocktail {
+    background-color: rgba(0, 0, 0, 0.25);
+    bottom: 0;
+    font-weight: 700;
+    left: 0;
+    line-height: 2em;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+@media screen and (max-width: 850px) {
+    .cocktail {
+        height: var(--publication-height-small);
+        width: var(--publication-width-small);
+    }
+}
