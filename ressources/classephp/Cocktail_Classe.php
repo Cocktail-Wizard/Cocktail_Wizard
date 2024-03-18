@@ -15,8 +15,8 @@ class Cocktail implements JsonSerializable {
     private $nom;
     private $desc;
     private $preparation;
-    private $img;
-    private $auteur;
+    private $img_cocktail;
+    private $img_auteur;
     private $date;
     private $nb_like;
     private $alcool_principale;

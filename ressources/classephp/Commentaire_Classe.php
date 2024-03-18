@@ -12,6 +12,7 @@
 class Commentaire implements JsonSerializable {
 
     private $id_commentaire;
+    private $img_auteur;
     private $auteur;
     private $date;
     private $contenu;
