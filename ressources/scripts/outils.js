@@ -12,8 +12,3 @@ async function chargerModeleHTML(url) {
         return null;
     }
 }
-
-// Fonction pour générer un entier aléatoire entre deux bornes
-const genererNombreAleatoire = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-};
