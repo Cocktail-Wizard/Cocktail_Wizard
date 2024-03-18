@@ -7,7 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $orderby = (isset($_GET["orderby"])) ? $_GET["orderby"] : 'date';
 
         $requete_preparee = $conn->prepare("CALL GetCommentairesCocktail(?, ?)");
-
         $requete_preparee->bind_param("is", $_GET["id"], $orderby);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
