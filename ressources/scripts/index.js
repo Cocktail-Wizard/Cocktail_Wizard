@@ -1,4 +1,6 @@
+const nbCocktailsGalerie = 20;
 const galerie = document.getElementById('galerie');
+
 const iconesUmami = {
     'Sucré': 'icone-sucre-sucre',
     'Aigre': 'icone-citron-aigre',
@@ -7,18 +9,18 @@ const iconesUmami = {
     'Salé': 'icone-sel-sale',
     'default': 'point-interrogation'
 };
-const nbCocktailsGalerie = 20;
 
 document.addEventListener("DOMContentLoaded", async () => {
     const modeleHTML = await chargerModeleHTML("ressources/modeles/cocktail_carte.html");
 
     if (modeleHTML) {
         try {
-            const response = await fetch(`../ressources/api/galerie.php?nombre=${nbCocktailsGalerie}`);
-            if (!response.ok) {
+            const reponse = await fetch(`../ressources/api/galerie.php?nombre=${nbCocktailsGalerie}`);
+            if (!reponse.ok) {
                 throw new Error('La requête a échoué');
             }
-            const data = await response.json();
+
+            const data = await reponse.json();
             afficherCocktails(data, modeleHTML);
             console.debug("Données récuperées de l'API de la galerie : ", data);
         } catch (error) {
@@ -69,6 +71,33 @@ function nettoyerNomCocktail(nom) {
     return nom.replace(/[^a-zA-Z0-9]/g, '');
 }
 
-function chargerInformationsModale(idCocktail) {
-    // Envoyer une requête à l'API pour ce cocktail, exemple: "https://cocktailwizard.com/cocktail/{id}"
+async function chargerInformationsModale(idCocktail) {
+    try {
+        const reponse = await fetch(`../ressources/api/modale_cocktail.php?id=${idCocktail}`);
+        if (!reponse.ok) {
+            throw new Error('La requête a échoué');
+        }
+
+        const data = await reponse.json();
+        console.debug("Données récuperées de l'API du cocktail : ", data);
+
+        if (data === null) {
+            console.debug(`Cocktail invalide! (${idCocktail})`);
+            return;
+        }
+
+        const auteur = document.getElementById('auteur');
+        auteur.innerText = `@${data.auteur}`;
+
+        const jaimes = document.getElementById('compteur-jaime');
+        jaimes.innerText = data.nb_like;
+
+        const titre = document.getElementById('titre-cocktail');
+        titre.innerText = data.nom;
+
+        const preparation = document.getElementById('preparation');
+        preparation.innerText = data.preparation;
+    } catch (error) {
+        console.error('Erreur : ', error);
+    }
 }
