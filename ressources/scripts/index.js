@@ -1,4 +1,5 @@
 const nbCocktailsGalerie = 20;
+const ordreCommentaires = 'date';
 const galerie = document.getElementById('galerie');
 
 const iconesUmami = {
@@ -61,6 +62,7 @@ function afficherCocktails(data, modeleHTML) {
             console.debug("id cocktail: ", cocktail.id_cocktail);
             chargerInformationsModale(cocktail.id_cocktail);
             sectionModale.style.display = "block";
+            chargerCommentairesModale(cocktail.id_cocktail, ordreCommentaires);
         });
 
         galerie.appendChild(nouveauCocktail);
@@ -97,6 +99,25 @@ async function chargerInformationsModale(idCocktail) {
 
         const preparation = document.getElementById('preparation');
         preparation.innerText = data.preparation;
+    } catch (error) {
+        console.error('Erreur : ', error);
+    }
+}
+
+async function chargerCommentairesModale(idCocktail, ordre) {
+    try {
+        const reponse = await fetch(`../ressources/api/modale_commentaires.php?id=${idCocktail}&orderby=${ordre}`);
+        if (!reponse.ok) {
+            throw new Error('La requête a échoué');
+        }
+
+        const data = await reponse.json();
+        console.debug("Données récuperées de l'API des commentaires : ", data)
+
+        if (data === null) {
+            console.debug(`Cocktail invalide! (${idCocktail})`);
+            return;
+        }
     } catch (error) {
         console.error('Erreur : ', error);
     }
