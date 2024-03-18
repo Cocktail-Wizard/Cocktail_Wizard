@@ -11,7 +11,6 @@
  */
 class Commentaire implements JsonSerializable {
 
-    private $id_commentaire;
     private $img_auteur;
     private $auteur;
     private $date;
@@ -21,8 +20,8 @@ class Commentaire implements JsonSerializable {
     // Valeur: null si l'utilisateur n'est pas connecté, true si l'utilisateur a liké, false sinon
     private $liked;
 
-    public function __construct($id_commentaire, $auteur, $date, $contenu, $nb_like) {
-        $this->id_commentaire = $id_commentaire;
+    public function __construct($img_auteur,$auteur, $date, $contenu, $nb_like) {
+        $this->img_auteur = $img_auteur;
         $this->auteur = $auteur;
         $this->date = $date;
         $this->contenu = $contenu;

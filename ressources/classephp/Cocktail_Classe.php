@@ -11,12 +11,12 @@
  */
 class Cocktail implements JsonSerializable {
 
-    private $id_cocktail;
     private $nom;
     private $desc;
     private $preparation;
     private $img_cocktail;
     private $img_auteur;
+    private $auteur;
     private $date;
     private $nb_like;
     private $alcool_principale;
@@ -29,13 +29,13 @@ class Cocktail implements JsonSerializable {
     private $commentaires = [];
     private $ingredients_cocktail = [];
 
-    public function _construct($id_cocktail, $nom, $desc, $preparation, $img, $auteur, $date,
+    public function _construct( $nom, $desc, $preparation, $img_cocktail, $img_auteur, $auteur, $date,
      $nb_like, $alcool_principale, $profil_saveur, $type_verre) {
-        $this->id_cocktail = $id_cocktail;
         $this->nom = $nom;
         $this->desc = $desc;
         $this->preparation = $preparation;
-        $this->img = $img;
+        $this->img_cocktail = $img_cocktail;
+        $this->img_auteur = $img_auteur;
         $this->auteur = $auteur;
         $this->date = $date;
         $this->nb_like = $nb_like;
