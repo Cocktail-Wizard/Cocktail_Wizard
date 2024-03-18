@@ -2,8 +2,6 @@
 require("config.php");
 session_start();
 
-$saveursUmami = ["Sucré", "Aigre", "Amer", "Épicé", "Salé"];
-
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET["nombre"])) {
         $requete_preparee = $conn->prepare("SELECT id_cocktail, nom, nb_like, date_publication, profil_saveur FROM Cocktail LIMIT ?");
@@ -22,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     "nom" => $row["nom"],
                     "nb_likes" => $row["nb_like"],
                     "date_publication" => $row["date_publication"],
-                    "umami" => $saveursUmami[$profil_saveur % count($saveursUmami)]
+                    "umami" => $row["profil_saveur"]
                 );
                 $cocktails[] = $cocktail; // Ajouter le cocktail au tableau des cocktails
             }
