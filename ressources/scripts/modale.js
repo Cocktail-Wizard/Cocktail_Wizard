@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.onclick = (event) => {
             if (event.target == sectionModale) {
                 sectionModale.style.display = "none";
+                sectionModale.innerHTML = modeleHTML;
             }
         }
     }
