@@ -1,25 +1,29 @@
-// Récuperation de la section de la boite modale dans le DOM
 const sectionModale = document.getElementById("contenant-modale");
 
+// Fonction pour réinitialiser la boîte modale
+function reinitialiserModale(modeleHTML) {
+    sectionModale.style.display = "none";
+    sectionModale.innerHTML = modeleHTML;
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
-    // Récuperation et utilisation du modèle de boite modale
     const modeleHTML = await chargerModeleHTML("ressources/modeles/cocktail_modale.html");
 
     if (modeleHTML) {
         sectionModale.innerHTML = modeleHTML;
 
-        let span = document.getElementById("fermer");
+        const span = document.getElementById("fermer");
 
         // Fermer la boite modale quand un utilisateur clique sur la croix
-        span.onclick = () => {
-            sectionModale.style.display = "none";
-        }
+        span.addEventListener("click", () => {
+            reinitialiserModale(modeleHTML);
+        });
 
         // Fermer la boite modale quand un utilisateur clique en dehors
-        window.onclick = (event) => {
-            if (event.target == sectionModale) {
-                sectionModale.style.display = "none";
+        window.addEventListener("click", (event) => {
+            if (event.target === sectionModale) {
+                reinitialiserModale(modeleHTML);
             }
-        }
+        });
     }
 });
