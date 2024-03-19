@@ -3,20 +3,21 @@ require("config.php");
 session_start();
 // Accumulateur d'erreurs
 $erreurs = array();
+$success = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Valider le nom d'utilisateur
     if (empty($_POST['nom'])) {
-        $erreurs[] = "Le nom d'utilisateur entré est invalide!<br>";
+        $erreurs[] = "Le nom d'utilisateur est requis!";
     }
 
     // Valider le mot de passe
     if (empty($_POST['mdp'])) {
-        $erreurs[] = "Le mot de passe entré est invalide!<br>";
+        $erreurs[] = "Le mot de passe est requis!";
     }
 
     // Si aucune erreur, établir la connexion
-    if (count($erreurs) == 0) {
+    if (empty($erreurs)) {
         $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
         $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
 
@@ -34,20 +35,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($mdp, $mdp_hashed)) {
                 // Authentification réussie
                 $_SESSION['nom'] = $nom;
-                header("Location: ../../index.html");
-                exit();
+                $success = true;
             } else {
                 // Mot de passe incorrect
-                $erreurs[] = "Mot de passe incorrect!<br>";
+                $erreurs[] = "Mot de passe incorrect!";
             }
         } else {
             // Nom d'utilisateur non trouvé
-            $erreurs[] = "Nom d'utilisateur non trouvé!<br>";
+            $erreurs[] = "Nom d'utilisateur introuvable!";
         }
 
         $requete_preparee->close();
     }
+} else {
+    $erreurs[] = "How did we get here?";
 }
 
-// Répondre avec les erreurs au format JSON
-echo json_encode($erreurs);
+// Construction de la réponse JSON
+$response = array(
+    "success" => $success,
+    "errors" => $erreurs
+);
+
+// Répondre avec la réponse JSON
+echo json_encode($response);

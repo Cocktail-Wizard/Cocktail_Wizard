@@ -47,8 +47,7 @@ input {
     color: var(--palette-secondary-text-color);
 }
 
-.erreur {
-    background-color: var(--palette-background-color);
+.erreur * {
     color: red;
     display: flex;
     justify-content: center;
