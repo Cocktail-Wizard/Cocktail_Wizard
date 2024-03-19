@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Fermer la boite modale quand un utilisateur clique sur la croix
         span.onclick = () => {
             sectionModale.style.display = "none";
+            sectionModale.innerHTML = modeleHTML;
         }
 
         // Fermer la boite modale quand un utilisateur clique en dehors
