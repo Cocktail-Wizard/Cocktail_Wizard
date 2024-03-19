@@ -274,7 +274,7 @@ END //
 -- Permet de voir les cocktails qu'un utilisateur à aimé et
 -- qu'il peut faire avec les ingrédients qu'il possède
 -- Utiliser pour lister les cocktails favoris dans la section mon bar
-DROP PROCEDURE IF EXISTS GetCocktailListePossibleFavorie;
+DROP PROCEDURE IF EXISTS GetListeCocktailPossibleFavorie;
 CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT)
 BEGIN
     SELECT C.id_cocktail
