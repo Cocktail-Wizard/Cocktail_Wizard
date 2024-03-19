@@ -8,10 +8,12 @@
 
     //Ajouter gestion du nombre de cocktail à renvoyer
 
+    //Ajouter du code pour la gestion des erreurs
+
     //Paramètre $_GET['dest'] représente l'endroit où les cocktails sont afficher
     switch($_GET['dest']){
         case 'GalerieNonFiltrer':
-            $triage = $_GET['triage'];
+            $triage =  ($_GET['triage']);
             getCocktailGalerieNonfiltrer($triage);
             break;
         case 'GalerieFiltrer':
@@ -50,11 +52,13 @@
             exit();
         }
 
+        $triage_s = mysqli_real_escape_string($conn, $triage);
+
         $id_cocktail = [];
         $cocktails = [];
 
         $requete_preparee = $conn->prepare("CALL GetCocktailGalerieNonFiltrer(?)");
-        $requete_preparee->bind_param("s", $triage);
+        $requete_preparee->bind_param("s", $triage_s);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
 
@@ -81,17 +85,21 @@
 
         $conn = connexionBD();
 
+
         if($conn == null){
             http_response_code(500);
             echo json_encode("Erreur de connexion à la base de données.");
             exit();
         }
 
+        $userId_s = mysqli_real_escape_string($conn, $userId);
+        $triage_s = mysqli_real_escape_string($conn, $triage);
+
         $id_cocktail = [];
         $cocktails = [];
 
         $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?)");
-        $requete_preparee->bind_param("is", $userId,$triage);
+        $requete_preparee->bind_param("is", $userId_s,$triage_s);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
 
@@ -125,11 +133,13 @@
             exit();
         }
 
+        $userId_s = mysqli_real_escape_string($conn, $userId);
+
         $id_cocktail = [];
         $cocktails = [];
 
         $requete_preparee = $conn->prepare("CALL GetCocktailPossibleClassique(?)");
-        $requete_preparee->bind_param("i",$userId);
+        $requete_preparee->bind_param("i",$userId_s);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
 
@@ -161,11 +171,13 @@
             exit();
         }
 
+        $userId_s = mysqli_real_escape_string($conn, $userId);
+
         $id_cocktail = [];
         $cocktails = [];
 
         $requete_preparee = $conn->prepare("CALL GetListeCocktailPossibleFavorie(?)");
-        $requete_preparee->bind_param("i",$userId);
+        $requete_preparee->bind_param("i",$userId_s);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
 
@@ -199,11 +211,13 @@
             exit();
         }
 
+        $userId_s = mysqli_real_escape_string($conn, $userId);
+
         $id_cocktail = [];
         $cocktails = [];
 
         $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleCommunautaire(?)");
-        $requete_preparee->bind_param("i",$userId);
+        $requete_preparee->bind_param("i",$userId_s);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
 
@@ -235,11 +249,13 @@
             exit();
         }
 
+        $userId_s = mysqli_real_escape_string($conn, $userId);
+
         $id_cocktail = [];
         $cocktails = [];
 
         $requete_preparee = $conn->prepare("CALL GetMesCocktails(?)");
-        $requete_preparee->bind_param("i",$userId);
+        $requete_preparee->bind_param("i",$userId_s);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
 
@@ -264,6 +280,7 @@
 
 
     function remplirCocktail($cocktailId, $conn){
+
         $requete_preparee = $conn->prepare("CALL GetInfoCocktailComplet(?)");
         $requete_preparee->bind_param("i", $cocktailId);
         $requete_preparee->execute();
