@@ -11,7 +11,7 @@
     //Ajouter du code pour la gestion des erreurs
 
     //Paramètre $_GET['dest'] représente l'endroit où les cocktails sont afficher
-    switch($_GET['dest']){
+    switch($_GET['section']){
         case 'GalerieNonFiltrer':
             $triage =  ($_GET['triage']);
             getCocktailGalerieNonfiltrer($triage);
@@ -317,7 +317,7 @@
 
         if($resultat->num_rows > 0){
             while($row = $resultat->fetch_assoc()){
-                $commentaire = new Commentaire($row['img'], $row['nom'], $row['date_publication'], $row['contenu'], $row['nb_like']);
+                $commentaire = new Commentaire($row['img'], $row['nom'], $row['date_commentaire'], $row['contenu'], $row['nb_like']);
                 $cocktail->ajouterCommentaire($commentaire);
             }
         }
