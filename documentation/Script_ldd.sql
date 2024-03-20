@@ -55,7 +55,7 @@ CREATE TABLE Banque_Image (
 -- Création de la table Utilisateur
 CREATE TABLE Utilisateur (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100) NOT NULL,
+    nom VARCHAR(100) NOT NULL UNIQUE,
     courriel VARCHAR(255) NOT NULL UNIQUE,
     mdp_hashed VARCHAR(255) NOT NULL,
     privilege BOOLEAN NOT NULL DEFAULT 0,

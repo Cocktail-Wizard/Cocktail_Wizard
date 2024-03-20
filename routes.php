@@ -123,8 +123,7 @@ else if($methode == "GET") {
         case 'users':
             $username = $requete_separee[2];
             // /api/users/{username}/recommandations?tri=tri&type=type -> Cocktail qu'un utilisateur peut faire. Pour mon bar et galerie connecté
-            if (isset($_GET['tri']) && isset($_GET['type']) && isset($requete_separee[3]) && $requete_separee[3] == 'recommandations') {
-                $tri = $_GET['tri'];
+            if (isset($_GET['type']) && isset($requete_separee[3]) && $requete_separee[3] == 'recommandations') {
                 $type = $_GET['type'];
                 require __DIR__ . '/api/getUserRecommandations.php';
             }

@@ -51,6 +51,17 @@ BEGIN
     WHERE courriel = var_courriel;
 END //
 
+--Création de la procédure GetIduser
+-- Renvoie le id_utilisateur
+-- Utiliser pour convertir un username en id
+DROP PROCEDURE IF EXISTS GetIdUser;
+CREATE PROCEDURE GetIdUser(IN username VARCHAR(255))
+BEGIN
+    SELECT id_utilisateur
+    FROM Utilisateur
+    WHERE nom = username;
+END //
+
 --Création de la procédure LikeCocktail
 -- Permet de liker un cocktail et renvoyer le nouveau nombre de like
 -- du cocktail
