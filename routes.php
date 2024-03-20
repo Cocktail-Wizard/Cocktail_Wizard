@@ -23,11 +23,11 @@ if($methode == "POST") {
         switch($requete_separee[1]){
 
             case 'users':
-                // /api/users/authentification
+                // /api/users/authentification ->Connexion d'un utilisateur
                 if(isset($requete_separee[2]) && $requete_separee[2] == 'authentification'){
                     require __DIR__ . '/api/connexion.php';
                 }
-                // /api/users
+                // /api/users ->Inscription d'un utilisateur
                 elseif(!isset($requete_separee[2])) {
                     require __DIR__ . '/api/inscription.php';
                 }
@@ -37,25 +37,25 @@ if($methode == "POST") {
                 }
                 break;
             case 'cocktails':
-                // /api/cocktails/like
+                // /api/cocktails/like ->Like d'un cocktail
                 if(isset($requete_separee[2]) && $requete_separee[2] == 'like'){
                     require __DIR__ . '/api/likeCocktail.php';
                 }
-                // /api/cocktails/dislike
+                // /api/cocktails/dislike ->Dislike d'un cocktail
                 elseif(isset($requete_separee[2]) && $requete_separee[2] == 'dislike'){
                     require __DIR__ . '/api/dislikeCocktail.php';
                 }
                 // /api/cocktails/commentaires
                 elseif(isset($requete_separee[2]) && $requete_separee[2] == 'commentaires'){
-                    // /api/cocktails/commentaires/like
+                    // /api/cocktails/commentaires/like ->Like d'un commentaire
                     if(isset($requete_separee[3]) && $requete_separee[3] == 'like'){
                         require __DIR__ . '/api/likeCommentaire.php';
                     }
-                    // /api/cocktails/commentaires/dislike
+                    // /api/cocktails/commentaires/dislike ->Dislike d'un commentaire
                     elseif(isset($requete_separee[3]) && $requete_separee[3] == 'dislike'){
                         require __DIR__ . '/api/dislikeCommentaire.php';
                     }
-                    // /api/cocktails/commentaires
+                    // /api/cocktails/commentaires ->Ajout d'un commentaire
                     elseif(!isset($requete_separee[3])) {
                         require __DIR__ . '/api/ajouterCommentaire.php';
                     }
@@ -64,7 +64,7 @@ if($methode == "POST") {
                         echo json_encode("requête invalide.");
                     }
                 }
-                // /api/cocktails
+                // /api/cocktails ->Ajout d'un cocktail
                 elseif(!isset($requete_separee[2])) {
                     require __DIR__ . '/api/ajouterCocktail.php';
                 }
@@ -73,7 +73,7 @@ if($methode == "POST") {
                     echo json_encode("requête invalide.");
                 }
                 break;
-            // /api/ingredients
+            // /api/ingredients ->Ajout d'un ingrédient dans mon bar
             case 'ingredients':
                 require __DIR__ . '/api/ajouterIngredientMonBar.php';
                 break;
@@ -97,11 +97,11 @@ else if($methode == "GET") {
         case 'cocktails':
             if (isset($_GET['tri'])) {
                 $tri = $_GET['tri'];
-                // /api/cocktails?tri=like
+                // /api/cocktails?tri=like ->Cocktails galerie par like
                 if ($tri == 'like') {
                     require __DIR__ . '/api/getCocktailParLike.php';
                 }
-                // /api/cocktails?tri=date
+                // /api/cocktails?tri=date ->Cocktails galerie par date
                 elseif ($tri == 'date') {
                     require __DIR__ . '/api/getCocktailParDate.php';
                 }
@@ -110,7 +110,7 @@ else if($methode == "GET") {
                     echo json_encode("Paramètre de triage invalide.");
                 }
             }
-            // /api/cocktails?recherche=mots_cles
+            // /api/cocktails?recherche=mots_cles ->Recherche de cocktails sans filtre
             elseif (isset($_GET['recherche'])) {
                 $mots_cles = $_GET['recherche'];
                 require __DIR__ . '/api/rechercheCocktail.php';
@@ -122,26 +122,26 @@ else if($methode == "GET") {
             break;
         case 'users':
             $username = $requete_separee[2];
-            // /api/users/{username}/recommandations?tri=tri&type=type
+            // /api/users/{username}/recommandations?tri=tri&type=type -> Cocktail qu'un utilisateur peut faire. Pour mon bar et galerie connecté
             if (isset($_GET['tri']) && isset($_GET['type']) && isset($requete_separee[3]) && $requete_separee[3] == 'recommandations') {
                 $tri = $_GET['tri'];
                 $type = $_GET['type'];
                 require __DIR__ . '/api/getUserRecommandations.php';
             }
-            // /api/users/{username}/recommandations?recherche=mots_cles
+            // /api/users/{username}/recommandations?recherche=mots_cles ->Recherche de cocktail qu'un utilisateur peut faire
             elseif (isset($_GET['recherche']) && $requete_separee[3] == 'recommandations') {
                 $mots_cles = $_GET['recherche'];
                 require __DIR__ . '/api/rechercheUserRecommandations.php';
             }
-            // /api/users/{username}/ingredients
+            // /api/users/{username}/ingredients ->Ingrédients dans mon bar
             elseif ($requete_separee[3] == 'ingredients') {
                 require __DIR__ . '/api/getUserIngredients.php';
             }
-            // /api/users/{username}/cocktails
+            // /api/users/{username}/cocktails -> Cocktail qu'un utilisateur a créé(Profil)
             elseif ($requete_separee[3] == 'cocktails') {
                 require __DIR__ . '/api/getUserCocktails.php';
             }
-            // /api/users/{username}
+            // /api/users/{username} ->Information d'un utilisateur(Profil)
             elseif(!isset($requete_separee[3])) {
                 require __DIR__ . '/api/getUserInfo.php';
             }
@@ -151,6 +151,7 @@ else if($methode == "GET") {
             }
             break;
         case 'ingredients':
+            // /api/ingredients ->Liste des ingrédients disponibles(Mon bar ou création de cocktail)
             require __DIR__ . '/api/getIngredients.php';
             break;
         default:
