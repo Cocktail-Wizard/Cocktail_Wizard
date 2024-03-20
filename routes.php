@@ -10,21 +10,64 @@ $methode = $_SERVER['REQUEST_METHOD'];
 if($methode == "POST") {
     $json = file_get_contents('php://input');
     $donnees = json_decode($json, true);
+
+    $requete = trim(parse_url($uri, PHP_URL_PATH), '/');
+    $requete_separee = explode('/', $requete);
+
     //Passer dans le JSON le type d'action à effectuer
-    switch ($donnees['action']) {
-        case 'cocktail':
-            require __DIR__ . '/api/postCocktail.php';
-            break;
-        case 'commentaire':
-            require __DIR__ . '/api/postCommentaire.php';
-            break;
-        case 'inscription':
-            require __DIR__ . '/api/Inscription.php';
-            break;
-        default:
-            http_response_code(404);
-            echo json_encode("Requête invalide.");
-            break;
+    if(isset($requete_separee[1])){
+        switch($requete_separee[1]){
+            case 'users':
+                if(isset($requete_separee[2]) && $requete_separee[2] == 'authentification'){
+                    require __DIR__ . '/api/connexion.php';
+                }
+                elseif(!isset($requete_separee[2])) {
+                    require __DIR__ . '/api/inscription.php';
+                }
+                else {
+                    http_response_code(404);
+                    echo json_encode("requête invalide.");
+                }
+                break;
+            case 'cocktails':
+                if(isset($requete_separee[2]) && $requete_separee[2] == 'like'){
+                    require __DIR__ . '/api/likeCocktail.php';
+                }
+                elseif(isset($requete_separee[2]) && $requete_separee[2] == 'dislike'){
+                    require __DIR__ . '/api/dislikeCocktail.php';
+                }
+                elseif(isset($requete_separee[2]) && $requete_separee[2] == 'commentaires'){
+
+                    if(isset($requete_separee[3]) && $requete_separee[3] == 'like'){
+                        require __DIR__ . '/api/likeCommentaire.php';
+                    }
+                    elseif(isset($requete_separee[3]) && $requete_separee[3] == 'dislike'){
+                        require __DIR__ . '/api/dislikeCommentaire.php';
+                    }
+                    elseif(!isset($requete_separee[3])) {
+                        require __DIR__ . '/api/ajouterCommentaire.php';
+                    }
+                    else {
+                        http_response_code(404);
+                        echo json_encode("requête invalide.");
+                    }
+                }
+                elseif(!isset($requete_separee[2])) {
+                    require __DIR__ . '/api/ajouterCocktail.php';
+                }
+                else {
+                    http_response_code(404);
+                    echo json_encode("requête invalide.");
+                }
+                break;
+            case 'ingredients':
+                require __DIR__ . '/api/ajouterIngredientMonBar.php';
+                break;
+            default:
+                http_response_code(404);
+                echo json_encode("requête invalide.");
+                break;
+        }
     }
 }
 // Pour les requêtes GET, les informations nécessaires pour effectuer l'action
@@ -32,47 +75,55 @@ if($methode == "POST") {
 else if($methode == "GET") {
 
     $requete = trim(parse_url($uri, PHP_URL_PATH), '/');
-
     $requete_separee = explode('/', $requete);
 
     switch ($requete_separee[1]) {
         case 'cocktails':
-            require __DIR__ . '/api/getCocktail.php';
-            break;
-        case 'ingredients':
-            require __DIR__ . '/api/getIngredient.php';
+            if (isset($_GET['tri'])) {
+                $tri = $_GET['tri'];
+                if ($tri == 'like') {
+                    require __DIR__ . '/api/getCocktailParLike.php';
+                } elseif ($tri == 'date') {
+                    require __DIR__ . '/api/getCocktailParDate.php';
+                } else {
+                    http_response_code(400);
+                    echo json_encode("Paramètre de triage invalide.");
+                }
+            } elseif (isset($_GET['recherche'])) {
+                $mots_cles = $_GET['recherche'];
+                require __DIR__ . '/api/rechercheCocktail.php';
+            } else {
+                http_response_code(400);
+                echo json_encode("Requête invalide.");
+            }
             break;
         case 'users':
-            if($requete_separee[2] == 'cocktails')
-                require __DIR__ . '/api/getCocktail.php';
-            else
-                require __DIR__ . '/api/getUser.php';
+            $username = $requete_separee[2];
+            if (isset($_GET['tri']) && isset($_GET['type']) && $requete_separee[3] == 'recommandations') {
+                $tri = $_GET['tri'];
+                $type = $_GET['type'];
+                require __DIR__ . '/api/getUserRecommandations.php';
+            } elseif (isset($_GET['recherche']) && $requete_separee[3] == 'recommandations') {
+                $mots_cles = $_GET['recherche'];
+                require __DIR__ . '/api/rechercheUserRecommandations.php';
+            } elseif ($requete_separee[3] == 'ingredients') {
+                require __DIR__ . '/api/getUserIngredients.php';
+            } elseif ($requete_separee[3] == 'cocktails') {
+                require __DIR__ . '/api/getUserCocktails.php';
+            } else {
+                require __DIR__ . '/api/getUserInfo.php';
+            }
+            break;
+        case 'ingredients':
+            require __DIR__ . '/api/getIngredients.php';
             break;
         default:
             http_response_code(404);
-            echo json_encode("Requête invalide.");
+            echo json_encode("Invalid request.");
             break;
     }
 
-    /*
-    // Passer dans l'URL les informations nécessaires pour effectuer l'action
-    $typeGet = $_GET['type'];
-    switch ($typeGet) {
-        // Aller checher le reste des informations du GET dans l'URL directement
-        // dans le fichier .php
-        case 'cocktail':
-            require __DIR__ . '/api/getCocktail.php';
-            break;
-        case 'Ingredient':
-            // Possibilité de passer dans l'URL la fonction à effectuer
-            // et d'appeler une procédure stockée sql différente dans getIngredient.php
-            // Par ex: GetListeIngredients pour obtenir la liste des ingrédients à ajouter
-            // dans mon bar ou pour un cocktail. Sinon, GetMesIngredients pour obtenir
-            // la liste des ingrédients que l'utilisateur a déjà dans son bar.
-            require __DIR__ . '/api/getIngredient.php';
-            break;
-    }
-    */
+
 } else if($_SERVER["REQUEST_METHOD"]== "DELETE") {
     //TODO
 }
