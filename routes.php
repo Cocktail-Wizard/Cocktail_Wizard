@@ -2,9 +2,12 @@
 /*
 * Implémentantion du système de routage
 */
-$request = $_SERVER['REQUEST_URI'];
+$uri = $_SERVER['REQUEST_URI'];
+$param = $_SERVER['QUERY_STRING'];
+$methode = $_SERVER['REQUEST_METHOD'];
+
 //Routes dynamiques
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if($methode == "POST") {
     $json = file_get_contents('php://input');
     $donnees = json_decode($json, true);
     //Passer dans le JSON le type d'action à effectuer
@@ -20,13 +23,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
         default:
             http_response_code(404);
-            require __DIR__ . '/pages/404.php';
+            echo json_encode("Requête invalide.");
             break;
     }
 }
 // Pour les requêtes GET, les informations nécessaires pour effectuer l'action
 // sont passées dans l'URL et non en JSON.
-else if($_SERVER["REQUEST_METHOD"]== "GET") {
+else if($methode == "GET") {
+
+    $requete = trim(parse_url($uri, PHP_URL_PATH), '/');
+
+    $requete_separee = explode('/', $requete);
+
+    switch ($requete_separee[1]) {
+        case 'cocktails':
+            require __DIR__ . '/api/getCocktail.php';
+            break;
+        case 'ingredients':
+            require __DIR__ . '/api/getIngredient.php';
+            break;
+        case 'users':
+            if($requete_separee[2] == 'cocktails')
+                require __DIR__ . '/api/getCocktail.php';
+            else
+                require __DIR__ . '/api/getUser.php';
+            break;
+        default:
+            http_response_code(404);
+            echo json_encode("Requête invalide.");
+            break;
+    }
+
+    /*
     // Passer dans l'URL les informations nécessaires pour effectuer l'action
     $typeGet = $_GET['type'];
     switch ($typeGet) {
@@ -44,12 +72,13 @@ else if($_SERVER["REQUEST_METHOD"]== "GET") {
             require __DIR__ . '/api/getIngredient.php';
             break;
     }
+    */
 } else if($_SERVER["REQUEST_METHOD"]== "DELETE") {
     //TODO
 }
 // Routes statiques
 else {
-    switch ($request) {
+    switch ($uri) {
         case '/':
         case '/galerie':
             if (isset($_SESSION['id_utilisateur'])) {
