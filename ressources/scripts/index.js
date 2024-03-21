@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             const data = await faireRequete(`../ressources/api/galerie.php?nombre=${nbCocktailsGalerie}`);
             if (data) {
                 afficherCocktails(data, modeleHTML);
-                console.debug("Données récuperées de l'API de la galerie : ", data);
             }
         } catch (error) {
             console.error('Erreur : ', error);
@@ -94,7 +93,6 @@ async function chargerInformationsModale(idCocktail) {
     try {
         const data = await faireRequete(`../ressources/api/modale_cocktail.php?id=${idCocktail}`);
         if (data === null) {
-            console.debug(`Cocktail invalide! (${idCocktail})`);
             return;
         }
 
