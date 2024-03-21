@@ -129,10 +129,6 @@
 }
 
 @media screen and (max-width: 850px) {
-    #modale {
-        padding: var(--space-from-corner);
-    }
-
     #presentation {
         width: 100%;
     }
