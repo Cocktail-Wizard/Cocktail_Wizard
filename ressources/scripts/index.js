@@ -113,13 +113,41 @@ async function chargerInformationsModale(idCocktail) {
 }
 
 async function chargerCommentairesModale(idCocktail, ordre) {
-    try {
-        const data = await faireRequete(`../ressources/api/modale_commentaires.php?id=${idCocktail}&orderby=${ordre}`);
-        if (data === null) {
-            console.debug(`Cocktail invalide! (${idCocktail})`);
-            return;
+    const modeleHTML = await chargerModeleHTML("ressources/modeles/modale_commentaire.html");
+
+    if (modeleHTML) {
+        try {
+            const data = await faireRequete(`../ressources/api/modale_commentaires.php?id=${idCocktail}&orderby=${ordre}`);
+            if (data === null) {
+                return;
+            }
+
+            console.debug("Données récuperées de l'API des commentaires : ", data);
+
+            const listeCommentaires = document.getElementById('commentaires');
+            listeCommentaires.innerHTML = '';
+
+            data.forEach((commentaire) => {
+                const nouveauCommentaireTemp = document.createElement('li');
+
+                nouveauCommentaireTemp.innerHTML = modeleHTML;
+
+                const nouveauCommentaire = nouveauCommentaireTemp.firstElementChild.cloneNode(true);
+
+                const auteurCommentaire = nouveauCommentaire.querySelector('.auteur');
+                auteurCommentaire.innerText = `@${commentaire.auteur}`;
+
+                const dateCommentaire = nouveauCommentaire.querySelector('.date');
+                dateCommentaire.innerText = commentaire.date_publication;
+
+                const messageCommentaire = nouveauCommentaire.querySelector('.contenu');
+                messageCommentaire.innerText = commentaire.message;
+
+                listeCommentaires.appendChild(nouveauCommentaire);
+            });
+
+        } catch (error) {
+            console.error('Erreur : ', error);
         }
-    } catch (error) {
-        console.error('Erreur : ', error);
     }
 }
