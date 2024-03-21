@@ -27,7 +27,7 @@ if($methode == "POST") {
                 if(isset($requete_separee[2]) && $requete_separee[2] == 'authentification'){
                     require __DIR__ . '/ressources/api/connexion.php';
                 }
-                // /api/users ->Inscription d'un utilisateur
+                // /api/users -> Inscription d'un utilisateur
                 elseif(!isset($requete_separee[2])) {
                     require __DIR__ . '/ressources/api/inscription.php';
                 }
@@ -161,6 +161,9 @@ else if($methode == "GET") {
 }
 
 else if($methode == "DELETE") {
+    $json = file_get_contents('php://input');
+    $donnees = json_decode($json, true);
+
     //TODO
 }
 // Routes statiques

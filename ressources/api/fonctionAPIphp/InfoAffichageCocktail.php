@@ -6,9 +6,10 @@
  * à partir de son id_cocktail et de la connexion à la base de données.
  *
  */
-require_once ("../classephp/Cocktail_Classe.php");
-require_once("../classephp/IngredientCocktail_Classe.php");
-require_once("../classephp/Commentaire_Classe.php");
+
+require_once(__DIR__."/../../classephp/Cocktail_Classe.php");
+require_once(__DIR__ ."/../../classephp/IngredientCocktail_Classe.php");
+require_once(__DIR__ ."/../../classephp/Commentaire_Classe.php");
 
 function InfoAffichageCocktail($id_cocktail, $conn) {
 
