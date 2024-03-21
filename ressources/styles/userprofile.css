@@ -31,7 +31,7 @@ body {
 /* Modal Content */
 .userprofile-content {
     position: relative;
-    background-color: #fefefe;
+    background-color: var(--palette-secondary-background-color);
     margin: auto;
     padding: 0;
     border: 1px solid #888;
@@ -101,7 +101,101 @@ body {
 .userprofile-footer {
     padding: 2px 16px;
     background-color: var(--palette-secondary-background-color);
-    color: var(--palette-secondary-text-color);
+    color: #94a1b2;
     text-align: center;
     font-size: small;
+}
+
+/* Style pour la partie support*/
+.support-body {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--palette-paragraph-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px #010101;
+}
+
+h2 {
+    color: #7f5af0;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+label {
+    font-weight: bold;
+    color: #7f5af0;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-paragraph-color);
+}
+
+input[type="submit"] {
+    background-color: var(--palette-button-color);
+    color: var(--palette-button-text-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--palette-button-color-hover);
+}
+
+/*style pour la section Mes cocktails*/
+
+.mycocktail-body {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--palette-paragraph-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cocktail-container {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+
+/*Style pour info user*/
+.userinfo-body {
+    text-align: center;
+    padding: 20px;
+}
+
+.userinfo-body img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.userinfo-body h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.userinfo-body p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.userinfo-body span {
+    font-weight: bold;
+    color: var(--palette-button-color);
 }

@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="../ressources/styles/userprofile.css"> <!-- Include your CSS file -->
+    <link rel="stylesheet" href="../ressources/styles/userprofile.css">
+    <link rel="stylesheet" href="../ressources/styles/main.css"><!-- Include your CSS file -->
 </head>
 
 <body>
@@ -24,19 +25,29 @@
                 <button id="supportBtn">Support</button>
                 <span class="close">&times;</span> <!--c'est le symbole x-->
             </div>
-            <div class="userinfo-body" id="infoPage">
-                <p>ICI Y VAS AVOIR LES INFO DU CLIENTS</p>
-            </div>
-            <div class="cocktail-body" id="cocktailPage">
-                <p>ICI Y VAS AVOIR LES COCKTAILS DU CLIENTS</p>
-            </div>
-            <div class="support-body" id="supportPage">
-                <h2>Contact Support</h2>
 
-                <form id="contactForm">
+            <div class="userinfo-body" id="infoPage">
+                <img src="../ressources/images/lionWizard.jpg" alt="Photo de profil de l'utilisateur">
+                <h3>Nom de l'utilisateur: Lionel Wizard</h3>
+                <p>Nombre de likes : <span id="likeCount">0</span></p>
+                <p>Nombre de cocktails : <span id="cocktailCount">0</span></p>
+                <p>Nombre de commentaires : <span id="commentCount">0</span></p>
+            </div>
+
+            <div class="mycocktail-body" id="mycocktailPage">
+                <div class="cocktail-container">
+                    <!-- Les cartes de cocktail seront ajoutées ici -->
+                </div>
+            </div>
+
+            <div class="support-body" id="supportPage">
+
+                <h2>Contactez-nous</h2>
+
+                <form action="../ressources/send_email.php" method="post">
                     <label for="message">Message:</label><br>
-                    <textarea id="message" name="message" rows="4" cols="50"></textarea><br><br>
-                    <button type="submit">Envoyer</button>
+                    <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+                    <input type="submit" value="Envoyer">
                 </form>
 
             </div>

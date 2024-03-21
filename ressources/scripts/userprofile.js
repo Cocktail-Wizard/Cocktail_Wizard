@@ -11,14 +11,14 @@ var span = document.getElementsByClassName("close")[0];
 
 // Get the content pages
 var infoPage = document.getElementById("infoPage");
-var cocktailPage = document.getElementById("cocktailPage");
+var mycocktailPage = document.getElementById("mycocktailPage");
 var supportPage = document.getElementById("supportPage");
 
 // Function to show modal and corresponding page
 function openModal(page) {
     modal.style.display = "block";
     infoPage.style.display = "none";
-    cocktailPage.style.display = "none";
+    mycocktailPage.style.display = "none";
     supportPage.style.display = "none";
     page.style.display = "block";
 }
@@ -34,7 +34,7 @@ infoBtn.onclick = function () {
 }
 
 cocktailBtn.onclick = function () {
-    openModal(cocktailPage);
+    openModal(mycocktailPage);
 }
 
 supportBtn.onclick = function () {
