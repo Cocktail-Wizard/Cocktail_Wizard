@@ -155,7 +155,7 @@ else if($methode == "GET") {
             break;
         default:
             http_response_code(404);
-            echo json_encode("Invalid request.");
+            echo json_encode("$uri");
             break;
     }
 }
