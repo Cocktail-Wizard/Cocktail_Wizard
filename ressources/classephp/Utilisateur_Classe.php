@@ -10,19 +10,23 @@
  * Date : 18 mars 2023
  *
  */
-class Utilisateur {
-    private $id_utilisateur;
+class Utilisateur implements JsonSerializable{
+   //private $id_utilisateur;
     private $nom;
     private $courriel;
     // Privilege de l'utilisateur: true si l'utilisateur est admin, false sinon
-    private $privilege;
+    //private $privilege;
     private $img_profil;
 
-    public function __construct($id_utilisateur, $nom, $courriel, $privilege, $img_profil) {
-        $this->id_utilisateur = $id_utilisateur;
+    public function __construct($nom, $courriel,$img_profil) {
+        //$this->id_utilisateur = $id_utilisateur;
         $this->nom = $nom;
         $this->courriel = $courriel;
-        $this->privilege = $privilege;
+       // $this->privilege = $privilege;
         $this->img_profil = $img_profil;
+    }
+
+    public function jsonSerialize() {
+        return get_object_vars($this);
     }
 }
