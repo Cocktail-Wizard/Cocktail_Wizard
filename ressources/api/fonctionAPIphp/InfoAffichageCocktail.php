@@ -20,7 +20,7 @@ function InfoAffichageCocktail($id_cocktail, $conn) {
     if($resultat->num_rows > 0) {
         $row = $resultat->fetch_assoc();
 
-        $cocktail = new Cocktail($row['nom'], $row['desc_cocktail'], $row['preparation'],
+        $cocktail = new Cocktail($row['id_cocktail'],$row['nom'], $row['desc_cocktail'], $row['preparation'],
         $row['imgCocktail'], $row['imgAuteur'], $row['auteur'], $row['date_publication'],
         $row['nb_like'], $row['alcool_principale'], $row['profil_saveur'], $row['type_verre']);
     }

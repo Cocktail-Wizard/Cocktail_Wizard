@@ -62,6 +62,26 @@ BEGIN
     WHERE nom = username;
 END //
 
+--Création de la procédure AjoutIngredient
+-- Permet d'ajouter un ingrédient à un utilisateur
+-- Utiliser pour ajouter un ingrédient dans mon bar
+DROP PROCEDURE IF EXISTS AjoutIngredient;
+CREATE PROCEDURE AjoutIngredient(IN var_id_utilisateur INT, IN var_nom_ingredient VARCHAR(255), IN var_type_ingredient VARCHAR(50))
+BEGIN
+    IF var_type_ingredient = 'alcool' THEN
+        INSERT INTO Alcool_Utilisateur (id_utilisateur, id_alcool)
+        SELECT var_id_utilisateur, id_alcool
+        FROM Alcool
+        WHERE nom = var_nom_ingredient;
+    ELSE
+        INSERT INTO Ingredient_Utilisateur (id_utilisateur, id_ingredient)
+        SELECT var_id_utilisateur, id_ingredient
+        FROM Ingredient
+        WHERE nom = var_nom_ingredient;
+    END IF;
+    CALL GetMesIngredients(var_id_utilisateur);
+END //
+
 --Création de la procédure LikeCocktail
 -- Permet de liker un cocktail et renvoyer le nouveau nombre de like
 -- du cocktail
@@ -243,7 +263,7 @@ END //
 DROP PROCEDURE IF EXISTS GetInfoCocktailComplet;
 CREATE PROCEDURE GetInfoCocktailComplet(IN cocktail INT)
 BEGIN
-    SELECT C.nom, C.desc_cocktail, C.preparation, BI.img as imgCocktail, BI2.img as imgAuteur,  U.nom AS auteur, C.date_publication, C.nb_like, A.nom AS alcool_principale, C.profil_saveur, C.type_verre
+    SELECT C.id_cocktail,C.nom, C.desc_cocktail, C.preparation, BI.img as imgCocktail, BI2.img as imgAuteur,  U.nom AS auteur, C.date_publication, C.nb_like, A.nom AS alcool_principale, C.profil_saveur, C.type_verre
     FROM Cocktail C
     JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
     JOIN Banque_Image BI ON C.id_image = BI.id_image
