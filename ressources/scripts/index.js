@@ -1,4 +1,5 @@
 const nbCocktailsGalerie = 20;
+const ordreCommentaires = 'date';
 const galerie = document.getElementById('galerie');
 const iconesUmami = {
     'Sucré': 'icone-sucre-sucre',
@@ -30,7 +31,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             const data = await faireRequete(`../ressources/api/galerie.php?nombre=${nbCocktailsGalerie}`);
             if (data) {
                 afficherCocktails(data, modeleHTML);
-                console.debug("Données récuperées de l'API de la galerie : ", data);
             }
         } catch (error) {
             console.error('Erreur : ', error);
@@ -40,11 +40,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function afficherCocktails(data, modeleHTML) {
     const fragment = document.createDocumentFragment();
+    const modeleTemp = document.createElement('div');
+
+    modeleTemp.innerHTML = modeleHTML;
+
+    const modeleClone = modeleTemp.firstElementChild.cloneNode(true);
 
     data.forEach((cocktail) => {
-        const nouveauCocktail = document.createElement('article');
-        nouveauCocktail.classList.add('cocktail');
-        nouveauCocktail.innerHTML = modeleHTML;
+        const nouveauCocktail = modeleClone.cloneNode(true);
 
         const nomCocktail = nouveauCocktail.querySelector('.nom-cocktail');
         nomCocktail.textContent = cocktail.nom;
@@ -70,8 +73,8 @@ function afficherCocktails(data, modeleHTML) {
 
         nouveauCocktail.addEventListener('click', (event) => {
             const idCocktail = event.currentTarget.dataset.idCocktail;
-            chargerInformationsModale(idCocktail);
             sectionModale.style.display = "block";
+            chargerInformationsModale(idCocktail);
             chargerCommentairesModale(idCocktail, ordreCommentaires);
         });
 
@@ -90,7 +93,6 @@ async function chargerInformationsModale(idCocktail) {
     try {
         const data = await faireRequete(`../ressources/api/modale_cocktail.php?id=${idCocktail}`);
         if (data === null) {
-            console.debug(`Cocktail invalide! (${idCocktail})`);
             return;
         }
 
@@ -111,13 +113,41 @@ async function chargerInformationsModale(idCocktail) {
 }
 
 async function chargerCommentairesModale(idCocktail, ordre) {
-    try {
-        const data = await faireRequete(`../ressources/api/modale_commentaires.php?id=${idCocktail}&orderby=${ordre}`);
-        if (data === null) {
-            console.debug(`Cocktail invalide! (${idCocktail})`);
-            return;
+    const modeleHTML = await chargerModeleHTML("ressources/modeles/modale_commentaire.html");
+
+    if (modeleHTML) {
+        try {
+            const data = await faireRequete(`../ressources/api/modale_commentaires.php?id=${idCocktail}&orderby=${ordre}`);
+            if (data === null) {
+                return;
+            }
+
+            console.debug("Données récuperées de l'API des commentaires : ", data);
+
+            const listeCommentaires = document.getElementById('commentaires');
+            listeCommentaires.innerHTML = '';
+
+            data.forEach((commentaire) => {
+                const nouveauCommentaireTemp = document.createElement('li');
+
+                nouveauCommentaireTemp.innerHTML = modeleHTML;
+
+                const nouveauCommentaire = nouveauCommentaireTemp.firstElementChild.cloneNode(true);
+
+                const auteurCommentaire = nouveauCommentaire.querySelector('.auteur');
+                auteurCommentaire.innerText = `@${commentaire.auteur}`;
+
+                const dateCommentaire = nouveauCommentaire.querySelector('.date');
+                dateCommentaire.innerText = commentaire.date_publication;
+
+                const messageCommentaire = nouveauCommentaire.querySelector('.contenu');
+                messageCommentaire.innerText = commentaire.message;
+
+                listeCommentaires.appendChild(nouveauCommentaire);
+            });
+
+        } catch (error) {
+            console.error('Erreur : ', error);
         }
-    } catch (error) {
-        console.error('Erreur : ', error);
     }
 }
