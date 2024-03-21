@@ -110,7 +110,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             const data = await response.json();
             afficherCocktails(data, modeleHTML);
-            console.debug("Données récuperées de l'API de la galerie : ", data);
         } catch (error) {
             console.error('Erreur : ', error);
         }
@@ -153,7 +152,6 @@ function afficherCocktails(data, modeleHTML) {
 
         // Ajouter la fonctionnalité d'ouvrir la boite modale à la publication
         nouveauCocktail.addEventListener('click', () => {
-            console.debug("id cocktail: ", cocktail.id_cocktail);
             chargerInformationsModale(cocktail.id_cocktail);
             sectionModale.style.display = "block";
         });

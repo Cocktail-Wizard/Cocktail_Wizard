@@ -16,7 +16,7 @@ main {
     margin: var(--default-gap) 0;
 }
 
-header {
+body>header {
     background: radial-gradient(transparent, black), url(../images/sparkles.png) no-repeat center 25% / cover;
     font-size: 4vw;
     height: 50vh;

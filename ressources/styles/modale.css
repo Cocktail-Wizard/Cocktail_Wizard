@@ -26,6 +26,7 @@
     border-radius: var(--default-border-radius);
     display: flex;
     flex-direction: column;
+    gap: var(--default-gap);
 }
 
 #fermer {
@@ -105,11 +106,52 @@
     width: 28px;
 }
 
-@media screen and (max-width: 850px) {
-    #modale {
-        padding: var(--space-from-corner);
-    }
+#commenter>form {
+    border-radius: var(--default-border-radius);
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+}
 
+#commenter>form>textarea {
+    resize: none;
+    height: 100px;
+    color: var(--palette-secondary-text-color);
+}
+
+#commenter>form>button {
+    align-self: flex-end;
+    border: none;
+    padding: .5em;
+    font-size: large;
+    border-radius: var(--default-border-radius);
+}
+
+#commentaires {
+    display: flex;
+    gap: calc(var(--default-gap) / 2);
+    flex-direction: column;
+    padding-left: var(--default-gap);
+}
+
+.commentaire {
+    border-radius: var(--default-border-radius);
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 1em;
+}
+
+#commentaires header {
+    display: flex;
+    gap: calc(var(--default-gap) / 2);
+}
+
+#commentaires .date {
+    color: rgba(0, 0, 0, 0.25);
+    font-style: italic;
+}
+
+@media screen and (max-width: 850px) {
     #presentation {
         width: 100%;
     }
