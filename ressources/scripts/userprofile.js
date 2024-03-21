@@ -52,3 +52,14 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+//envoyer un email directement a notre email de support
+document.getElementById("contactForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    var message = document.getElementById("message").value;
+
+    // Send email
+    var mailtoLink = "mailto:cocktailwizard.supp0rt@gmail.com?subject=Support Request&body=" + encodeURIComponent(message);
+    window.location.href = mailtoLink;
+});
