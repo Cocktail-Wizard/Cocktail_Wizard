@@ -14,7 +14,7 @@ $typeIngredient = mysqli_real_escape_string($conn, $_POST['typeIngredient']);
 $username = mysqli_real_escape_string($conn, $_POST['username']);
 $userId = usernameToId($username, $conn);
 
-$requete_preparee = $conn->prepare("CALL AjouterIngredientMonBar(?,?,?)");
+$requete_preparee = $conn->prepare("CALL AjouterIngredient(?,?,?)");
 $requete_preparee->bind_param('iss', $userId, $nomIngredient, $typeIngredient);
 $requete_preparee->execute();
 $resultat = $requete_preparee->get_result();
@@ -28,8 +28,5 @@ if($resultat->num_rows > 0){
     echo json_encode($ingredients);
 }
 
-
 $conn->close();
-
-
 ?>
