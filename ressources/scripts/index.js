@@ -41,11 +41,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function afficherCocktails(data, modeleHTML) {
     const fragment = document.createDocumentFragment();
+    const modeleTemp = document.createElement('div');
+
+    modeleTemp.innerHTML = modeleHTML;
+
+    const modeleClone = modeleTemp.firstElementChild.cloneNode(true);
 
     data.forEach((cocktail) => {
-        const nouveauCocktail = document.createElement('article');
-        nouveauCocktail.classList.add('cocktail');
-        nouveauCocktail.innerHTML = modeleHTML;
+        const nouveauCocktail = modeleClone.cloneNode(true);
 
         const nomCocktail = nouveauCocktail.querySelector('.nom-cocktail');
         nomCocktail.textContent = cocktail.nom;
@@ -71,8 +74,8 @@ function afficherCocktails(data, modeleHTML) {
 
         nouveauCocktail.addEventListener('click', (event) => {
             const idCocktail = event.currentTarget.dataset.idCocktail;
-            chargerInformationsModale(idCocktail);
             sectionModale.style.display = "block";
+            chargerInformationsModale(idCocktail);
             chargerCommentairesModale(idCocktail, ordreCommentaires);
         });
 

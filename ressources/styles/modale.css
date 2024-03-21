@@ -105,6 +105,12 @@
     width: 28px;
 }
 
+#commenter>form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
 @media screen and (max-width: 850px) {
     #modale {
         padding: var(--space-from-corner);
