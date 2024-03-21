@@ -135,6 +135,12 @@
     padding-left: var(--default-gap);
 }
 
+.commentaire {
+    border-radius: var(--default-border-radius);
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 1em;
+}
+
 #commentaires header {
     display: flex;
     gap: calc(var(--default-gap) / 2);
