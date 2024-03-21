@@ -4,20 +4,20 @@ const sectionModale = document.getElementById("contenant-modale");
 function reinitialiserModale(modeleHTML) {
     sectionModale.style.display = "none";
     sectionModale.innerHTML = modeleHTML;
+
+    const span = document.getElementById("fermer");
+
+    // Fermer la boite modale quand un utilisateur clique sur la croix
+    span.addEventListener("click", () => {
+        reinitialiserModale(modeleHTML);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
     const modeleHTML = await chargerModeleHTML("ressources/modeles/cocktail_modale.html");
 
     if (modeleHTML) {
-        sectionModale.innerHTML = modeleHTML;
-
-        const span = document.getElementById("fermer");
-
-        // Fermer la boite modale quand un utilisateur clique sur la croix
-        span.addEventListener("click", () => {
-            reinitialiserModale(modeleHTML);
-        });
+        reinitialiserModale(modeleHTML);
 
         // Fermer la boite modale quand un utilisateur clique en dehors
         window.addEventListener("click", (event) => {
