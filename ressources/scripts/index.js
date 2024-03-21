@@ -1,7 +1,6 @@
 const nbCocktailsGalerie = 20;
 const ordreCommentaires = 'date';
 const galerie = document.getElementById('galerie');
-
 const iconesUmami = {
     'Sucré': 'icone-sucre-sucre',
     'Aigre': 'icone-citron-aigre',
@@ -11,19 +10,29 @@ const iconesUmami = {
     'default': 'point-interrogation'
 };
 
+async function faireRequete(url) {
+    try {
+        const reponse = await fetch(url);
+        if (!reponse.ok) {
+            throw new Error('La requête a échoué');
+        }
+        return await reponse.json();
+    } catch (error) {
+        console.error('Erreur : ', error);
+        return null;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const modeleHTML = await chargerModeleHTML("ressources/modeles/cocktail_carte.html");
 
     if (modeleHTML) {
         try {
-            const reponse = await fetch(`../ressources/api/galerie.php?nombre=${nbCocktailsGalerie}`);
-            if (!reponse.ok) {
-                throw new Error('La requête a échoué');
+            const data = await faireRequete(`../ressources/api/galerie.php?nombre=${nbCocktailsGalerie}`);
+            if (data) {
+                afficherCocktails(data, modeleHTML);
+                console.debug("Données récuperées de l'API de la galerie : ", data);
             }
-
-            const data = await reponse.json();
-            afficherCocktails(data, modeleHTML);
-            console.debug("Données récuperées de l'API de la galerie : ", data);
         } catch (error) {
             console.error('Erreur : ', error);
         }
@@ -31,6 +40,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function afficherCocktails(data, modeleHTML) {
+    const fragment = document.createDocumentFragment();
+
     data.forEach((cocktail) => {
         const nouveauCocktail = document.createElement('article');
         nouveauCocktail.classList.add('cocktail');
@@ -58,15 +69,18 @@ function afficherCocktails(data, modeleHTML) {
         const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
         compteurJaime.textContent = cocktail.nb_likes;
 
-        nouveauCocktail.addEventListener('click', () => {
-            console.debug("id cocktail: ", cocktail.id_cocktail);
-            chargerInformationsModale(cocktail.id_cocktail);
+        nouveauCocktail.addEventListener('click', (event) => {
+            const idCocktail = event.currentTarget.dataset.idCocktail;
+            chargerInformationsModale(idCocktail);
             sectionModale.style.display = "block";
-            chargerCommentairesModale(cocktail.id_cocktail, ordreCommentaires);
+            chargerCommentairesModale(idCocktail, ordreCommentaires);
         });
 
-        galerie.appendChild(nouveauCocktail);
+        nouveauCocktail.dataset.idCocktail = cocktail.id_cocktail;
+        fragment.appendChild(nouveauCocktail);
     });
+
+    galerie.appendChild(fragment);
 }
 
 function nettoyerNomCocktail(nom) {
@@ -75,14 +89,7 @@ function nettoyerNomCocktail(nom) {
 
 async function chargerInformationsModale(idCocktail) {
     try {
-        const reponse = await fetch(`../ressources/api/modale_cocktail.php?id=${idCocktail}`);
-        if (!reponse.ok) {
-            throw new Error('La requête a échoué');
-        }
-
-        const data = await reponse.json();
-        console.debug("Données récuperées de l'API du cocktail : ", data);
-
+        const data = await faireRequete(`../ressources/api/modale_cocktail.php?id=${idCocktail}`);
         if (data === null) {
             console.debug(`Cocktail invalide! (${idCocktail})`);
             return;
@@ -106,14 +113,7 @@ async function chargerInformationsModale(idCocktail) {
 
 async function chargerCommentairesModale(idCocktail, ordre) {
     try {
-        const reponse = await fetch(`../ressources/api/modale_commentaires.php?id=${idCocktail}&orderby=${ordre}`);
-        if (!reponse.ok) {
-            throw new Error('La requête a échoué');
-        }
-
-        const data = await reponse.json();
-        console.debug("Données récuperées de l'API des commentaires : ", data)
-
+        const data = await faireRequete(`../ressources/api/modale_commentaires.php?id=${idCocktail}&orderby=${ordre}`);
         if (data === null) {
             console.debug(`Cocktail invalide! (${idCocktail})`);
             return;
