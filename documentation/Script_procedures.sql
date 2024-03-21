@@ -87,13 +87,12 @@ END //
 -- du cocktail
 -- Utiliser pour liker un cocktail
 DROP PROCEDURE IF EXISTS LikeCocktail;
-CREATE PROCEDURE LikeCocktail(IN var_id_cocktail INT, IN var_id_utilisateur INT, OUT out_nb_like INT)
+CREATE PROCEDURE LikeCocktail(IN var_id_cocktail INT, IN var_id_utilisateur INT)
 BEGIN
     INSERT INTO cocktail_liked (id_cocktail, id_utilisateur)
     VALUES (var_id_cocktail, var_id_utilisateur);
 
     SELECT C.nb_like
-    INTO out_nb_like
     FROM Cocktail C
     WHERE id_cocktail = var_id_cocktail;
 END //
