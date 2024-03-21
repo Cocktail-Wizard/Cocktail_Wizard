@@ -128,6 +128,23 @@
     border-radius: var(--default-border-radius);
 }
 
+#commentaires {
+    display: flex;
+    gap: calc(var(--default-gap) / 2);
+    flex-direction: column;
+    padding-left: var(--default-gap);
+}
+
+#commentaires header {
+    display: flex;
+    gap: calc(var(--default-gap) / 2);
+}
+
+#commentaires .date {
+    color: rgba(0, 0, 0, 0.25);
+    font-style: italic;
+}
+
 @media screen and (max-width: 850px) {
     #presentation {
         width: 100%;
