@@ -27,7 +27,7 @@ $typeIngredient = mysqli_real_escape_string($conn, $data['typeIngredient']);
 $username = mysqli_real_escape_string($conn, $data['username']);
 $userId = usernameToId($username, $conn);
 
-$requete_preparee = $conn->prepare("CALL EnleverIngredientMonBar(?,?,?)");
+$requete_preparee = $conn->prepare("CALL RetraitIngredient(?,?,?)");
 $requete_preparee->bind_param('iss', $userId, $nomIngredient, $typeIngredient);
 $requete_preparee->execute();
 $resultat = $requete_preparee->get_result();
