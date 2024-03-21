@@ -120,13 +120,12 @@ END //
 -- du cocktail
 -- Utiliser pour disliker un cocktail
 DROP PROCEDURE IF EXISTS DislikeCocktail;
-CREATE PROCEDURE DislikeCocktail(IN var_id_cocktail INT, IN var_id_utilisateur INT, OUT out_nb_like INT)
+CREATE PROCEDURE DislikeCocktail(IN var_id_cocktail INT, IN var_id_utilisateur INT)
 BEGIN
     DELETE FROM cocktail_liked
     WHERE id_cocktail = var_id_cocktail AND id_utilisateur = var_id_utilisateur;
 
     SELECT C.nb_like
-    INTO out_nb_like
     FROM Cocktail C
     WHERE id_cocktail = var_id_cocktail;
 END //
@@ -136,13 +135,12 @@ END //
 -- du commentaire
 -- Utiliser pour liker un commentaire
 DROP PROCEDURE IF EXISTS LikeCommentaire;
-CREATE PROCEDURE LikeCommentaire(IN var_id_commentaire INT, IN var_id_utilisateur INT, OUT out_nb_like INT)
+CREATE PROCEDURE LikeCommentaire(IN var_id_commentaire INT, IN var_id_utilisateur INT)
 BEGIN
     INSERT INTO commentaire_liked (id_commentaire, id_utilisateur)
     VALUES (var_id_commentaire, var_id_utilisateur);
 
     SELECT C.nb_like
-    INTO out_nb_like
     FROM Commentaire C
     WHERE id_commentaire = var_id_commentaire;
 END //
@@ -152,13 +150,12 @@ END //
 -- du commentaire
 -- Utiliser pour disliker un commentaire
 DROP PROCEDURE IF EXISTS DislikeCommentaire;
-CREATE PROCEDURE DislikeCommentaire(IN var_id_commentaire INT, IN var_id_utilisateur INT, OUT out_nb_like INT)
+CREATE PROCEDURE DislikeCommentaire(IN var_id_commentaire INT, IN var_id_utilisateur INT)
 BEGIN
     DELETE FROM commentaire_liked
     WHERE id_commentaire = var_id_commentaire AND id_utilisateur = var_id_utilisateur;
 
     SELECT C.nb_like
-    INTO out_nb_like
     FROM Commentaire C
     WHERE id_commentaire = var_id_commentaire;
 END //
