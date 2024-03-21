@@ -11,14 +11,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
 
-        $row = $resultat->fetch_assoc();
+        $commentaires = array();
 
-        echo json_encode(($resultat->num_rows > 0) ? array(
-            'auteur' => $row['nom'],
-            'nb_likes' => $row['nb_like'],
-            'img_profile' => $row['img'],
-            'date_publication' => $row['date_commentaire'],
-            'message' => $row['contenu']
-        ) : null);
+        while ($row = $resultat->fetch_assoc()) {
+            $commentaire = array(
+                'auteur' => $row['nom'],
+                'nb_likes' => $row['nb_like'],
+                'img_profile' => $row['img'],
+                'date_publication' => $row['date_commentaire'],
+                'message' => $row['contenu']
+            );
+            array_push($commentaires, $commentaire);
+        }
+
+        echo json_encode(($resultat->num_rows > 0) ? $commentaires : null);
     }
 }
