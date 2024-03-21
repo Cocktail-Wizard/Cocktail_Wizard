@@ -48,7 +48,7 @@ function InfoAffichageCocktail($id_cocktail, $conn) {
 
     if($resultat->num_rows > 0){
         while($row = $resultat->fetch_assoc()){
-            $commentaire = new Commentaire($row['img'], $row['nom'], $row['date_commentaire'], $row['contenu'], $row['nb_like']);
+            $commentaire = new Commentaire($row['id_commentaire'],$row['img'], $row['nom'], $row['date_commentaire'], $row['contenu'], $row['nb_like']);
             $cocktail->ajouterCommentaire($commentaire);
         }
     }

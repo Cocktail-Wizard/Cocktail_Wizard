@@ -398,7 +398,7 @@ END //
 DROP PROCEDURE IF EXISTS GetCommentairesCocktail;
 CREATE PROCEDURE GetCommentairesCocktail(IN cocktail INT, IN param_orderby VARCHAR(50))
 BEGIN
-    SELECT U.nom, C.nb_like, BI.img, C.date_commentaire, C.contenu
+    SELECT C.id_commentaire,U.nom, C.nb_like, BI.img, C.date_commentaire, C.contenu
     FROM Commentaire C
     JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
     JOIN Banque_Image BI ON U.id_image = BI.id_image
@@ -442,6 +442,17 @@ BEGIN
     */
 END //
 
---Création de la procédure
+--Création de la procédure getInfoUtilisateur
+-- Permet de voir les informations d'un utilisateur
+-- Utiliser pour afficher les informations d'un utilisateur
+-- dans mon profil.
+DROP PROCEDURE IF EXISTS GetInfoUtilisateur;
+CREATE PROCEDURE GetInfoUtilisateur(IN id_utilisateur INT)
+BEGIN
+    SELECT U.nom, U.courriel, BI.img
+    FROM Utilisateur U
+    JOIN Banque_Image BI ON U.id_image = BI.id_image
+    WHERE U.id_utilisateur = id_utilisateur;
+END //
 
 DELIMITER ;
