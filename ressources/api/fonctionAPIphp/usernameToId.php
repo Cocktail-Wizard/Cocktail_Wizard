@@ -20,7 +20,7 @@ function usernameToId($username, $conn){
     }
     else{
         http_response_code(404);
-        echo json_encode("Aucun utilisateur trouve");
+        echo json_encode("Aucun utilisateur trouvé.");
         exit();
     }
     return $id_user;
