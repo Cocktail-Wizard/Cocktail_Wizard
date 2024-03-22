@@ -13,7 +13,7 @@ get('/', 'index.php');
 
 // Static GET
 // /galerie -> Galerie de cocktails
-get('/galerie', 'pages/index..php');
+get('/galerie', 'index..php');
 
 // Static GET
 // /inscription -> Page d'inscription
