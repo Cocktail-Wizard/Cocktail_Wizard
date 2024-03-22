@@ -29,7 +29,7 @@
             <button type="submit">Connexion</button>
 
             <p>Vous n'êtes pas encore membre?</p>
-            <a href="inscription.php">Créer un compte</a>
+            <a href="https://cocktailwizard.azurewebsites.net/inscription">Créer un compte</a>
         </form>
     </main>
 
