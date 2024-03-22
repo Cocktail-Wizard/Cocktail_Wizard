@@ -15,6 +15,8 @@ $commentaires = [];
 
 $id_cocktail_s = mysqli_real_escape_string($conn, $id_cocktail);
 
+$id_cocktails_s = intval($id_cocktail_s);
+
 $requete_preparee = $conn->prepare("CALL GetCommentairesCocktail(?, 'like')");
 $requete_preparee->bind_param("i", $id_cocktail_s);
 $requete_preparee->execute();
