@@ -24,7 +24,7 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
                 });
             } else {
                 // Rediriger vers la page de connexion si l'inscription est réussie (à changer)
-                window.location.href = "connexion.html";
+                window.location.href = "https://cocktailwizard.azurewebsites.net/connexion";
             }
         })
         .catch(error => {
