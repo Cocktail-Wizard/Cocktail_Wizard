@@ -42,19 +42,6 @@ function InfoAffichageCocktail($id_cocktail, $conn) {
 
     $requete_preparee->close();
 
-    $requete_preparee = $conn->prepare("CALL GetCommentairesCocktail(?, 'like')");
-    $requete_preparee->bind_param("i", $id_cocktail);
-    $requete_preparee->execute();
-    $resultat = $requete_preparee->get_result();
-
-    if($resultat->num_rows > 0){
-        while($row = $resultat->fetch_assoc()){
-            $commentaire = new Commentaire($row['id_commentaire'],$row['img'], $row['nom'], $row['date_commentaire'], $row['contenu'], $row['nb_like']);
-            $cocktail->ajouterCommentaire($commentaire);
-        }
-    }
-
-    $requete_preparee->close();
 
     return $cocktail;
 

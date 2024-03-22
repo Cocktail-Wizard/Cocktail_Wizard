@@ -3,6 +3,7 @@
 * Fonction qui retourne la liste des ingrédients d'un utilisateur
 * pour mon bar.
 */
+header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
@@ -17,6 +18,7 @@ if($conn == null){
 
 //Liste des noms d'ingrédients(Alcool et Ingredient)
 $ingredients = [];
+
 
 // Transforme le nom d'utilisateur en id
 $id_user = usernameToId($username, $conn);
