@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publication</title>
+    <link rel="stylesheet" href="../ressources/styles/publication.css">
+    <link rel="stylesheet" href="../ressources/styles/main.css"><!-- Include your CSS file -->
+</head>
+
+<body>
+
+    <!-- Trigger/Open The Modal -->
+    <button id="myBtn">Publication</button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="publication-content">
+            <div class="publication-header">
+                <h1> Publication </h1>
+                <span class="close">&times;</span> <!--c'est le symbole x-->
+            </div>
+
+
+            <div class="publication-body" id="publicationPage">
+
+                <h2>Ajouter un nouveau cocktail à nos archives</h2>
+
+                <form>
+                    <label for="cocktail_name">Nom du cocktail:</label><br>
+                    <textarea id="name_texte" name="cocktail_name" rows="1" cols="50"></textarea><br>
+
+                    <label for="cocktail_ingredient">Ingredients:</label><br>
+                    <textarea id="ingredients_texte" name="cocktail_ingredient" rows="4" cols="50"></textarea><br>
+
+                    <label for="cocktail_description">Descrition:</label><br>
+                    <textarea id="description_texte" name="cocktail_description" rows="4" cols="50"
+                        placeholder="Une description n'est pas nécessaire, mais elle permet à notre communauté de reproduire votre création exactement comme vous l'avez imaginée."></textarea><br>
+
+                    <label for="cocktail_image">Photo de votre cocktail:</label><br>
+                    <input type="file" accept="image/*" onchange="previewImage(event)" />
+                    <img id="preview" src="#" alt="Votre image" />
+
+                    <input type="submit" value="Publier">
+                </form>
+
+            </div>
+            <div class="publication-footer">
+                <h3>Cocktail Wizard &copy - 2024</h3>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="../ressources/scripts/publication.js"></script> <!-- Include your JavaScript file -->
+</body>
+
+</html>
