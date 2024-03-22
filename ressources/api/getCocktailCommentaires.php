@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
-require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/classephp/Commentaire_Classe.php';
+require_once (__DIR__.'/config.php');
+require_once (__DIR__.'/../classephp/Commentaire_Classe.php');
 
 $conn = connexionBD();
 
