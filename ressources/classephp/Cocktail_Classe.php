@@ -26,7 +26,6 @@ class Cocktail implements JsonSerializable {
     // Valeur: null si l'utilisateur n'est pas connecté, true si l'utilisateur a liké, false sinon
     private $liked;
 
-    private $commentaires = [];
     private $ingredients_cocktail = [];
 
     public function __construct($id_cocktail ,$nom, $desc, $preparation, $img_cocktail, $img_auteur, $auteur, $date,
@@ -43,11 +42,6 @@ class Cocktail implements JsonSerializable {
         $this->alcool_principale = $alcool_principale;
         $this->profil_saveur = $profil_saveur;
         $this->type_verre = $type_verre;
-    }
-
-    // Ajoute un commentaire à la liste des commentaires du cocktail
-    public function ajouterCommentaire($commentaire) {
-        $this->commentaires[] = $commentaire;
     }
 
     // Ajoute un ingrédient à la liste des ingrédients du cocktail

@@ -7,7 +7,6 @@ require_once __DIR__.'/router.php';
 // ##################################################
 
 // Static GET
-// In the URL -> http://localhost
 // The output -> Index
 get('/', 'index.php');
 
@@ -37,7 +36,7 @@ get('/profile', 'pages/profile.php');
 post('/api/users/authentification', 'ressources/api/connexion.php');
 
 // /api/users -> Inscription d'un utilisateur
-post('/api/users', 'ressources/api/inscription');
+post('/api/users', 'ressources/api/inscription.php');
 
 // /api/cocktails/like ->Like d'un cocktail
 post('/api/cocktails/like', 'ressources/api/likeCocktail.php');
@@ -77,7 +76,7 @@ get('/api/users/$username/cocktails/tri/$tri/recherche/$mots', '/ressources/api/
 get('/api/users/$username/recommandations/tri/$tri', '/ressources/api/getUserRecommandations.php');
 
 // /api/users/{username}/ingredients ->Liste des ingrédients de mon bar
-get(' ', '/ressources/api/getUserIngredients.php');
+get('/api/users/$username/ingredients', '/ressources/api/getUserIngredients.php');
 
 // /api/users/{username}/cocktails ->Liste des cocktails de mon bar ou galerie qu
 get('/api/users/$username/cocktails/type/$type', '/ressources/api/getUserCocktails.php');
@@ -88,6 +87,8 @@ get('/api/users/$username', '/ressources/api/getUserInfo.php');
 // /api/ingredients ->Liste des ingrédients de la base de données(Mon bar ou Création de cocktail)
 get('/api/ingredients', '/ressources/api/getIngredients.php');
 
+// /api/cocktails/{id_cocktail}/commentaires ->Liste des commentaires d'un cocktail
+get('/api/cocktails/$id_cocktail/commentaires', '/ressources/api/getCocktailCommentaires.php');
 
 
 /*
