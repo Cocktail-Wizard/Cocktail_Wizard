@@ -1,5 +1,4 @@
 <?php
-header("Content-Type: application/json");
 require("config.php");
 session_start();
 // Accumulateur d'erreurs

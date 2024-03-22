@@ -37,7 +37,7 @@ get('/profile', 'pages/profile.php');
 post('/api/users/authentification', 'ressources/api/connexion.php');
 
 // /api/users -> Inscription d'un utilisateur
-post('/api/users', 'ressources/api/inscription.php');
+post('/api/users', 'ressources/api/inscription');
 
 // /api/cocktails/like ->Like d'un cocktail
 post('/api/cocktails/like', 'ressources/api/likeCocktail.php');
@@ -77,7 +77,7 @@ get('/api/users/$username/cocktails/tri/$tri/recherche/$mots', '/ressources/api/
 get('/api/users/$username/recommandations/tri/$tri', '/ressources/api/getUserRecommandations.php');
 
 // /api/users/{username}/ingredients ->Liste des ingrédients de mon bar
-get('/api/users/$username/ingredients', '/ressources/api/getUserIngredients.php');
+get(' ', '/ressources/api/getUserIngredients.php');
 
 // /api/users/{username}/cocktails ->Liste des cocktails de mon bar ou galerie qu
 get('/api/users/$username/cocktails/type/$type', '/ressources/api/getUserCocktails.php');
