@@ -16,11 +16,11 @@ function usernameToId($username, $conn){
 
     if($resultat->num_rows == 1){
         $row = $resultat->fetch_assoc();
-        $id_user = $row['id_user'];
+        $id_user = $row['id_utilisateur'];
     }
     else{
         http_response_code(404);
-        echo json_encode("Aucun utilisateur trouvé.");
+        echo json_encode("Aucun utilisateur trouve");
         exit();
     }
     return $id_user;
