@@ -1,3 +1,4 @@
+-- Active: 1709764745031@@cocktailwizbd.mysql.database.azure.com@3306@cocktailwizardbd
 -- ============================================================
 -- Auteurs : Yani Amellal, Léonard Marcoux, Pablo Hamel-Corôa,
 --           Maxime Dmitriev et Vianney Veremme
@@ -78,30 +79,44 @@ END
 DROP PROCEDURE IF EXISTS AjoutIngredient;
 
 CREATE PROCEDURE AjoutIngredient(IN var_id_utilisateur
-INT, IN var_nom_ingredient VARCHAR(255), IN var_type_ingredient
-VARCHAR(50))
+INT, IN var_nom_ingredient VARCHAR(255))
 BEGIN
-	IF var_type_ingredient = 'alcool' THEN
-	INSERT INTO
-	    Alcool_Utilisateur (id_utilisateur, id_alcool)
-	SELECT var_id_utilisateur, id_alcool
-	FROM Alcool
-	WHERE
-	    nom = var_nom_ingredient;
-	ELSE
-	INSERT INTO
-	    Ingredient_Utilisateur (id_utilisateur, id_ingredient)
-	SELECT
-	    var_id_utilisateur,
-	    id_ingredient
-	FROM Ingredient
-	WHERE
-	    nom = var_nom_ingredient;
-END
-	IF;
+	IF var_nom_ingredient IN (
+	    SELECT nom
+	    FROM Ingredient
+	) THEN
+		INSERT INTO Ingredient_Utilisateur (
+			id_utilisateur, id_ingredient
+		)
+		VALUES (
+			var_id_utilisateur,
+			(
+				SELECT id_ingredient
+				FROM Ingredient
+				WHERE nom = var_nom_ingredient
+			)
+		);
+	ELSEIF var_nom_ingredient IN (
+	    SELECT nom
+	    FROM Alcool
+	) THEN
+		INSERT INTO Alcool_Utilisateur (
+			id_utilisateur, id_alcool
+		)
+		VALUES (
+			var_id_utilisateur,
+			(
+				SELECT id_alcool
+				FROM Alcool
+				WHERE nom = var_nom_ingredient
+			)
+		);
+	END IF;
+
 	CALL GetMesIngredients (var_id_utilisateur);
 END
 //
+
 
 --Création de la procédure RetraitIngredient
 -- Permet d'enlerver un ingrédient à un utilisateur
@@ -109,31 +124,34 @@ END
 DROP PROCEDURE IF EXISTS RetraitIngredient;
 
 CREATE PROCEDURE RetraitIngredient(IN var_id_utilisateur
-INT, IN var_nom_ingredient VARCHAR(255), IN var_type_ingredient
-VARCHAR(50))
+INT, IN var_nom_ingredient VARCHAR(255))
 BEGIN
-	IF var_type_ingredient = 'alcool' THEN
-	DELETE FROM Alcool_Utilisateur
-	WHERE
-	    id_utilisateur = var_id_utilisateur
-	    AND id_alcool IN (
-	        SELECT id_alcool
-	        FROM Alcool
-	        WHERE
-	            nom = var_nom_ingredient
-	    );
-	ELSE
-	DELETE FROM Ingredient_Utilisateur
-	WHERE
-	    id_utilisateur = var_id_utilisateur
-	    AND id_ingredient IN (
-	        SELECT id_ingredient
-	        FROM Ingredient
-	        WHERE
-	            nom = var_nom_ingredient
-	    );
-END
-	IF;
+	IF var_nom_ingredient IN (
+	    SELECT nom
+	    FROM Ingredient
+	) THEN
+		DELETE FROM Ingredient_Utilisateur
+		WHERE
+		    id_utilisateur = var_id_utilisateur
+		    AND id_ingredient = (
+		        SELECT id_ingredient
+		        FROM Ingredient
+		        WHERE nom = var_nom_ingredient
+		    );
+	ELSEIF var_nom_ingredient IN (
+		SELECT nom
+		FROM Alcool
+	) THEN
+		DELETE FROM Alcool_Utilisateur
+		WHERE
+			id_utilisateur = var_id_utilisateur
+			AND id_alcool = (
+				SELECT id_alcool
+				FROM Alcool
+				WHERE nom = var_nom_ingredient
+			);
+	END IF;
+
 	CALL GetMesIngredients (var_id_utilisateur);
 END
 //
@@ -147,17 +165,17 @@ DROP PROCEDURE IF EXISTS LikeCocktail;
 CREATE PROCEDURE LikeCocktail(IN var_id_cocktail INT
 , IN var_id_utilisateur INT)
 BEGIN
-	INSERT INTO
-	    cocktail_liked (id_cocktail, id_utilisateur)
+	INSERT INTO cocktail_liked (id_cocktail, id_utilisateur)
 	VALUES (
 	        var_id_cocktail, var_id_utilisateur
-	    );
+	);
+
 	SELECT C.nb_like
 	FROM Cocktail C
-	WHERE
-	    id_cocktail = var_id_cocktail;
+	WHERE id_cocktail = var_id_cocktail;
 END
 //
+
 
 --Création de la procédure DislikeCocktail
 -- Permet de disliker un cocktail et renvoyer le nouveau nombre de like
