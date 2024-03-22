@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cocktail Wizard</title>
+    <title>Inscription</title>
     <link rel="stylesheet" href="../ressources/styles/main.css">
     <link rel="stylesheet" href="../ressources/styles/inscription.css">
 </head>
