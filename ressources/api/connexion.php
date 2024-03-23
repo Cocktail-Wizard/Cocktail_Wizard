@@ -43,10 +43,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo json_encode("Erreur de connexion à la base de données.");
             exit();
         }
+        $donnees = json_decode(file_get_contents('php://input'), true);
 
-
-        $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
-        $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
+        $nom = mysqli_real_escape_string($conn, trim($donnees['nom']));
+        $mdp = mysqli_real_escape_string($conn, trim($donnees['mdp']));
 
         // Rechercher le mot de passe dans la base de données
         $requete_preparee = $conn->prepare("Call  ConnexionUtilisateur(?)");

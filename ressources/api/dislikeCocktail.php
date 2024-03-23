@@ -30,8 +30,8 @@ if($conn == null){
 
 $donnees = json_decode(file_get_contents('php://input'), true);
 
-$userId = usernameToId($donnees['username'], $conn);
-$id_cocktail = mysqli_real_escape_string($conn, $donnees['id_cocktail']);
+$userId = usernameToId(trim($donnees['username']), $conn);
+$id_cocktail = mysqli_real_escape_string($conn, trim($donnees['id_cocktail']));
 
 // Envoie une requête à la base de données pour enlever un like au cocktail
 $requete_preparee = $conn->prepare("CALL DislikeCocktail(?,?)");
