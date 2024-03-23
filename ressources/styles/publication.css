@@ -141,6 +141,22 @@ textarea {
     color: var(--palette-paragraph-color);
 }
 
+.ingredient-box {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-paragraph-color);
+    min-height: 100px;
+    /* Adjust the height as needed */
+    resize: vertical;
+    /* Allow vertical resizing */
+    overflow-y: auto;
+    /* Enable vertical scrollbar when content exceeds height */
+}
+
 input[type="submit"] {
     background-color: var(--palette-button-color);
     color: var(--palette-button-text-color);
