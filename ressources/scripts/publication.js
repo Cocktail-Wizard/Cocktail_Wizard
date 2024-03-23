@@ -11,6 +11,10 @@ function addIngredientToList(name, amount, unit) {
     const listItem = document.createElement("div");
     listItem.textContent = `${name} ${amount} ${unit}`;
     ingredientList.appendChild(listItem);
+
+    // Clear the text areas
+    document.getElementById("ingredient_name").value = "";
+    document.getElementById("ingredient_amount").value = "";
 }
 
 
@@ -79,9 +83,6 @@ document.getElementById("add_ingredient").addEventListener("click", function (ev
     // Prevent the default behavior of the button (form submission or link navigation)
     event.preventDefault();
 
-    // Clear the text areas
-    document.getElementById("ingredient_name").value = "";
-    document.getElementById("ingredient_amount").value = "";
 });
 
 
