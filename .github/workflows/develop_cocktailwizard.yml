@@ -14,16 +14,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@main
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@main
         with:
           php-version: '8.2'
 
       - name: Check if composer.json exists
         id: check_files
-        uses: andstor/file-existence-action@v1
+        uses: andstor/file-existence-action@main
         with:
           files: 'composer.json'
 
@@ -35,7 +35,7 @@ jobs:
         run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@main
         with:
           name: php-app
           path: release.zip
@@ -57,7 +57,7 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -72,4 +72,3 @@ jobs:
           app-name: 'CocktailWizard'
           slot-name: 'Production'
           package: .
-          
