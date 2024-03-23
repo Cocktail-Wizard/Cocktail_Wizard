@@ -9,7 +9,7 @@ let ingredientUnit = "";
 function addIngredientToList(name, amount, unit) {
     const ingredientList = document.getElementById("ingredient_list");
     const listItem = document.createElement("div");
-    listItem.textContent = `${name} ${amount} ${unit}`;
+    listItem.textContent = `${amount} ${unit} ${name} `;
     ingredientList.appendChild(listItem);
 
     // Clear the text areas
