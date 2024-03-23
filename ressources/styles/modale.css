@@ -155,8 +155,12 @@ ul#ingredients {
     list-style-type: none;
     text-align: left;
     padding: 0;
+}
+
+ul#ingredients li {
     display: flex;
-    gap: 1em;
+    justify-content: space-between;
+    width: 100%;
 }
 
 @media screen and (max-width: 850px) {
