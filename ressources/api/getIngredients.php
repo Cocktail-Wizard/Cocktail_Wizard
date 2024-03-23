@@ -1,4 +1,21 @@
 <?php
+/**
+ * Script getIngredients
+ *
+ * Script de l'API qui permet de récupérer la liste des ingrédients de la base de données.
+ * Celle ci inclut les ingrédients de type Alcool et Ingredient.
+ *
+ * Type de requête : GET
+ *
+ * URL : /api/ingredients
+ *
+ * @return JSON La liste des noms d'ingrédients.
+ *
+ * @version 1.0
+ *
+ * @author Yani Amellal
+ *
+ */
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 

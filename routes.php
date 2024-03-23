@@ -42,17 +42,9 @@ post('/api/users', 'ressources/api/inscription.php');
 // L'API retourne le nouveau nombre de likes
 post('/api/cocktails/like', 'ressources/api/likeCocktail.php');
 
-// /api/cocktails/dislike ->Dislike d'un cocktail
-// L'API retourne le nouveau nombre de like
-post('/api/cocktails/dislike', 'ressources/api/dislikeCocktail.php');
-
 // /api/cocktails/commentaires/like ->Like d'un commentaire
 // L'API retourne le nouveau nombre de likes
 post('/api/cocktails/commentaires/like', 'ressources/api/likeCommentaire.php');
-
-// /api/cocktails/commentaires/dislike ->Dislike d'un commentaire
-// L'API retourne le nouveau nombre de likes
-post('/api/cocktails/commentaires/dislike', 'ressources/api/dislikeCommentaire.php');
 
 // /api/cocktails/commentaires ->Ajout d'un commentaire
 // L'API retourne le nouveau nombre de likes
@@ -62,7 +54,7 @@ post('/api/cocktails/commentaires', 'ressources/api/ajouterCommentaire.php');
 post('/api/cocktails', 'ressources/api/ajouterCocktail.php');
 
 // /api/user/ingredients ->Ajout d'un ingrédient dans mon bar
-post('/api/user/ingredients', 'ressources/api/ajouterIngredient');
+post('/api/user/ingredients', 'ressources/api/ajouterIngredientMonBar.php');
 
 /******GET*********/
 
@@ -78,13 +70,20 @@ get('/api/cocktails/tri/$tri/recherche/$mots', 'ressources/api/rechercheCocktail
 get('/api/users/$username/cocktails/tri/$tri/recherche/$mots', '/ressources/api/getUserRecommandations.php');
 
 // /api/users/{username}/recommandations/tri/{like/date}
+// ->Liste des cocktails que l'utilisateur peut faire avec ses ingrédients. Pour galerie connectée
 get('/api/users/$username/recommandations/tri/$tri', '/ressources/api/getUserRecommandations.php');
+
+// /api/users/{username}/recommandations/type/{classiques/favoris/communaute}
+// ->Liste des cocktails que l'utilisateur peut faire avec ses ingrédients. Pour mon bar
+get('/api/users/$username/recommandations/type/$type', '/ressources/api/getUserRecommandations.php');
 
 // /api/users/{username}/ingredients ->Liste des ingrédients de mon bar
 get('/api/users/$username/ingredients', '/ressources/api/getUserIngredients.php');
 
-// /api/users/{username}/cocktails ->Liste des cocktails de mon bar ou galerie qu
-get('/api/users/$username/cocktails/type/$type', '/ressources/api/getUserCocktails.php');
+// /api/users/{username}/cocktails ->Liste des cocktails de l'utilisateur
+get('/api/users/$username/cocktails', '/ressources/api/getUserCocktails.php');
+
+
 
 // /api/user/{username} ->Profil utilisateur
 get('/api/users/$username', '/ressources/api/getUserInfo.php');
@@ -95,6 +94,18 @@ get('/api/ingredients', '/ressources/api/getIngredients.php');
 // /api/cocktails/{id_cocktail}/commentaires ->Liste des commentaires d'un cocktail
 get('/api/cocktails/$id_cocktail/commentaires', '/ressources/api/getCocktailCommentaires.php');
 
+/**********DELETE ************/
+
+// /api/users/ingredients ->Suppression d'un ingrédient de mon bar
+delete('/api/users/ingredients', '/ressources/api/enleverIngredientMonBar.php');
+
+// /api/cocktails/commentaires/dislike ->Dislike d'un commentaire
+// L'API retourne le nouveau nombre de likes
+delete('/api/cocktails/commentaires/like', 'ressources/api/dislikeCommentaire.php');
+
+// /api/cocktails/dislike ->Dislike d'un cocktail
+// L'API retourne le nouveau nombre de like
+delete('/api/cocktails/like', 'ressources/api/dislikeCocktail.php');
 
 /*
 // Dynamic GET. Example with 1 variable

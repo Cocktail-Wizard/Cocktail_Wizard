@@ -8,15 +8,23 @@ document.getElementById("form-connexion").addEventListener("submit", (event) => 
 
     // Envoyer les données du formulaire à l'API PHP
     let formData = new FormData(event.target);
+    let infoConnexion = {};
+    formData.forEach((value, key) => {
+        infoConnexion[key] = value;
+    });
+    let json = JSON.stringify(infoConnexion);
 
-    fetch("../ressources/api/connexion.php", {
+    fetch("https://cocktailwizard.azurewebsites.net/api/users/authentification", {
         method: "POST",
-        body: formData
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: json
     })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                window.location.href = "../index.html";
+                window.location.href = "https://cocktailwizard.azurewebsites.net/galerie";
             } else {
                 data.errors.forEach(error => {
                     let errorElement = document.createElement("p");

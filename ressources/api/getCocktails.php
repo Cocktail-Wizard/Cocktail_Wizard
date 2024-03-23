@@ -1,4 +1,26 @@
 <?php
+/**
+ * Script getCocktails
+ *
+ * Script de l'API qui permet de récupérer les cocktails de la galerie non filtrée.
+ *
+ * Type de requête : GET
+ *
+ * URL : /api/cocktails/tri/$tri
+ *
+ * @param string $tri Le type de tri des cocktails (date, like)
+ *
+ * @return JSON Un json contenant les informations des cocktails de la galerie non filtrée.
+ *
+ * @version 1.0
+ *
+ * @author Yani Amellal
+ *
+ * @see InfoAffichageCocktail.php
+ *
+ * @todo Ajouter la pagination
+ *
+ */
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';

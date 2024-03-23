@@ -39,7 +39,7 @@ CREATE PROCEDURE InscriptionUtilisateur(
 	IN var_nom VARCHAR(100),
 	IN var_courriel VARCHAR(255),
 	IN var_mdp_hashed VARCHAR(255),
-E	IN var_date_naissance DATE)
+	IN var_date_naissance DATE)
 BEGIN
 	INSERT INTO Utilisateur (nom, courriel, mdp_hashed, date_naiss)
 	VALUES (var_nom, var_courriel, var_mdp_hashed, var_date_naissance);
@@ -50,10 +50,9 @@ END
 -- Renvoie le mot_de_passe_hashé afin de vérifier si le mot de passe est correct
 -- Utiliser pour la connexion
 DROP PROCEDURE IF EXISTS ConnexionUtilisateur;
-CREATE PROCEDURE ConnexionUtilisateur(IN var_courriel
-VARCHAR(255))
+CREATE PROCEDURE ConnexionUtilisateur(IN var_nom VARCHAR(255))
 BEGIN
-	SELECT mdp_hashed FROM Utilisateur WHERE courriel = var_courriel;
+	SELECT mdp_hashed FROM Utilisateur WHERE nom = var_nom;
 END
 //
 
@@ -242,14 +241,17 @@ CREATE PROCEDURE CreerCocktail(
 	IN var_preparation TEXT,
 	IN var_type_verre VARCHAR(50),
 	IN var_profil_saveur VARCHAR(50),
-	IN var_id_utilisateur INT
+	IN var_id_utilisateur INT,
+	IN var_alcool_principal VARCHAR(255)
 )
 BEGIN
 	INSERT INTO Cocktail (
-		nom, desc_cocktail, preparation, type_verre, profil_saveur, id_utilisateur
+		nom, desc_cocktail, preparation, type_verre, profil_saveur, id_utilisateur, id_alcool
 	)
 	VALUES (
-		var_nom, var_desc_cocktail, var_preparation, var_type_verre, var_profil_saveur, var_id_utilisateur
+		var_nom, var_desc_cocktail, var_preparation,
+		var_type_verre, var_profil_saveur, var_id_utilisateur
+		(SELECT id_alcool FROM Alcool WHERE nom = var_alcool_principal)
 	);
 	SELECT LAST_INSERT_ID() AS id_cocktail;
 END
