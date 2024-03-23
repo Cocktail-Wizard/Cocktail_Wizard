@@ -39,18 +39,23 @@ post('/api/users/authentification', 'ressources/api/connexion.php');
 post('/api/users', 'ressources/api/inscription.php');
 
 // /api/cocktails/like ->Like d'un cocktail
+// L'API retourne le nouveau nombre de likes
 post('/api/cocktails/like', 'ressources/api/likeCocktail.php');
 
 // /api/cocktails/dislike ->Dislike d'un cocktail
+// L'API retourne le nouveau nombre de like
 post('/api/cocktails/dislike', 'ressources/api/dislikeCocktail.php');
 
 // /api/cocktails/commentaires/like ->Like d'un commentaire
+// L'API retourne le nouveau nombre de likes
 post('/api/cocktails/commentaires/like', 'ressources/api/likeCommentaire.php');
 
 // /api/cocktails/commentaires/dislike ->Dislike d'un commentaire
+// L'API retourne le nouveau nombre de likes
 post('/api/cocktails/commentaires/dislike', 'ressources/api/dislikeCommentaire.php');
 
 // /api/cocktails/commentaires ->Ajout d'un commentaire
+// L'API retourne le nouveau nombre de likes
 post('/api/cocktails/commentaires', 'ressources/api/ajouterCommentaire.php');
 
 // /api/cocktails ->Ajout d'un cocktail
