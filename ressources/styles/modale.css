@@ -159,7 +159,7 @@ ul#ingredients {
 
 ul#ingredients li {
     display: flex;
-    column-gap: .5em;
+    justify-content: space-between;
     width: 100%;
 }
 
