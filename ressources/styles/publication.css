@@ -243,3 +243,8 @@ select option {
     border-color: red;
     animation: shake 0.5s ease;
 }
+
+#ingredient_list {
+    padding-top: 4px;
+    color: black;
+}

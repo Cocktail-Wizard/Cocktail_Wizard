@@ -1,19 +1,9 @@
 const allIngredients = ["Vodka", "Rhum", "Gin", "Tequila", "Whiskey", "Triple sec", "Sirop simple", "Jus de citron", "Jus de lime", "Jus d'orange", "Jus de canneberge", "Grenadine", "Jus de pomme", "Jujutsu Kaisen"];
 
-// Set "OZ" as the default value for the unit select dropdown
-document.getElementById("unit_select").value = "oz";
 
 let ingredientName = "";
 let ingredientAmount = "";
 let ingredientUnit = "";
-
-// Filtrer les ingrédients en fonction de la recherche de l'utilisateur
-function filterIngredients(searchValue) {
-    return allIngredients.filter(ingredient =>
-        ingredient.toLowerCase().includes(searchValue.toLowerCase())
-    );
-}
-
 
 // Fonction pour ajouter un ingrédient à la liste d'ingrédients
 function addIngredientToList(name, amount, unit) {
@@ -39,6 +29,9 @@ function openModal(page) {
     document.getElementById("ingredient_name").value = ingredientName;
     document.getElementById("ingredient_amount").value = ingredientAmount;
     document.getElementById("unit_select").value = ingredientUnit;
+
+    // Set "oz" as the default unit
+    document.getElementById("unit_select").value = "oz";
 }
 
 // Open the modal with the Info personnelle page when the Profile User button is clicked
@@ -85,6 +78,10 @@ document.getElementById("add_ingredient").addEventListener("click", function (ev
 
     // Prevent the default behavior of the button (form submission or link navigation)
     event.preventDefault();
+
+    // Clear the text areas
+    document.getElementById("ingredient_name").value = "";
+    document.getElementById("ingredient_amount").value = "";
 });
 
 
@@ -109,6 +106,3 @@ function previewImage(event) {
     };
     reader.readAsDataURL(input.files[0]);
 }
-
-filterIngredients();
-updateSelectedIngredients();
