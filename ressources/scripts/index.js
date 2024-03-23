@@ -134,7 +134,7 @@ async function chargerInformationsModale(cocktail) {
     });
 }
 
-async function chargerCommentairesModale(idCocktail, ordre) {
+async function chargerCommentairesModale(idCocktail) {
     const modeleHTML = await chargerModeleHTML("ressources/modeles/modale_commentaire.html");
 
     if (modeleHTML) {
