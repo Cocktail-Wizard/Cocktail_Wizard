@@ -655,8 +655,6 @@ BEGIN
 END
 //
 
-CALL RechercheCocktailFiltrer('Mojito', 1, 'date');
-
 --Création de la procédure getInfoUtilisateur
 -- Permet de voir les informations d'un utilisateur
 -- Utiliser pour afficher les informations d'un utilisateur
