@@ -33,9 +33,22 @@
                     <textarea id="name_texte" name="cocktail_name" rows="1" cols="50"></textarea><br>
 
                     <label for="cocktail_ingredient">Ingredients:</label><br>
-                    <div id="ingredients_liste" class="ingredient-box" rows="4" cols="50">
+                    <div id="ingredient_input">
+                        <div>
+                            <input type="text" id="ingredient_name" placeholder="Nom de l'ingrédient...">
+                            <input type="text" id="ingredient_amount" placeholder="Quantité...">
+                            <select id="unit_select" name="unit">
+                                <option value="oz" selected>oz</option>
+                                <option value="ml">ml</option>
+                                <option value="dash">Dash</option>
+                                <option value="pinch">Pinch</option>
+                                <option value="top">Top</option>
+                            </select>
 
+                            <button class="button" id="add_ingredient">+</button>
+                        </div>
                     </div>
+                    <div id="ingredient_liste"></div>
                     <br>
 
                     <label for="cocktail_description">Descrition:</label><br>

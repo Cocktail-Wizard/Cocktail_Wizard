@@ -177,3 +177,69 @@ input[type="submit"]:hover {
     display: block;
     margin: auto;
 }
+
+#ingredient_input {
+    background-color: var(--palette-secondary-background-color);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+
+#add_ingredient:hover {
+    box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
+    text-decoration: none;
+    color: var(--palette-button-text-color);
+    background-color: var(--palette-button-color-hover);
+}
+
+#add_ingredient {
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid --palette-border-color;
+    background-image: linear-gradient(var(--pallette-button-color), #a48df0);
+}
+
+#unit_select {
+    color: var(--palette-secondary-text-color);
+}
+
+select option {
+    color: black;
+}
+
+/* merci chatgpt pour comment faire une petite animation --> */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    10%,
+    90% {
+        transform: translateX(-10px);
+    }
+
+    20%,
+    80% {
+        transform: translateX(10px);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translateX(-10px);
+    }
+
+    40%,
+    60% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.invalid-input {
+    border-color: red;
+    animation: shake 0.5s ease;
+}
