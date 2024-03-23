@@ -158,7 +158,7 @@ async function chargerCommentairesModale(idCocktail) {
                 auteurCommentaire.innerText = `@${commentaire.auteur}`;
 
                 const dateCommentaire = nouveauCommentaire.querySelector('.date');
-                dateCommentaire.innerText = commentaire.date_publication;
+                dateCommentaire.innerText = commentaire.date;
 
                 const messageCommentaire = nouveauCommentaire.querySelector('.contenu');
                 messageCommentaire.innerText = commentaire.message;
