@@ -46,6 +46,7 @@ function afficherCocktails(data, modeleHTML) {
     const modeleClone = modeleTemp.firstElementChild.cloneNode(true);
 
     data.forEach((cocktail) => {
+        console.log(cocktail);
         const nouveauCocktail = modeleClone.cloneNode(true);
 
         const nomCocktail = nouveauCocktail.querySelector('.nom-cocktail');
