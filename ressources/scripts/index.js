@@ -161,7 +161,7 @@ async function chargerCommentairesModale(idCocktail) {
                 dateCommentaire.innerText = commentaire.date;
 
                 const messageCommentaire = nouveauCommentaire.querySelector('.contenu');
-                messageCommentaire.innerText = commentaire.message;
+                messageCommentaire.innerText = commentaire.contenu;
 
                 listeCommentaires.appendChild(nouveauCommentaire);
             });
