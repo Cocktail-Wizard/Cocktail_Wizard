@@ -151,7 +151,7 @@
     font-style: italic;
 }
 
-#ingredients>ul {
+ul#ingredients {
     list-style-type: none;
     text-align: left;
     padding: 0;
