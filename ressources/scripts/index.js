@@ -46,7 +46,12 @@ function afficherCocktails(data, modeleHTML) {
     const modeleClone = modeleTemp.firstElementChild.cloneNode(true);
 
     data.forEach((cocktail) => {
-        console.log(cocktail);
+        if (!cocktail) {
+            return;
+        }
+
+        console.debug(cocktail);
+
         const nouveauCocktail = modeleClone.cloneNode(true);
 
         const nomCocktail = nouveauCocktail.querySelector('.nom-cocktail');
@@ -138,8 +143,6 @@ async function chargerCommentairesModale(idCocktail, ordre) {
             if (data === null) {
                 return;
             }
-
-            console.debug("Données récuperées de l'API des commentaires : ", data);
 
             const listeCommentaires = document.getElementById('commentaires');
             listeCommentaires.innerHTML = '';
