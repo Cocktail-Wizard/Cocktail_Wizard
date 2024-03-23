@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="ressources/styles/modale.css">
     <link rel="stylesheet" href="ressources/styles/carte_cocktail.css">
     <script src="ressources/scripts/outils.js"></script>
+    <script src="ressources/scripts/main.js"></script>
 </head>
 
 <body>

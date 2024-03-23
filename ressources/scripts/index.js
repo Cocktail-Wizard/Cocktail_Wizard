@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (modeleHTML) {
         try {
-            const data = await faireRequete(`../ressources/api/galerie.php?nombre=${nbCocktailsGalerie}`);
+            const data = await faireRequete(`${API_URL}/cocktails/tri/like`);
             if (data) {
                 afficherCocktails(data, modeleHTML);
             }
@@ -105,8 +105,34 @@ async function chargerInformationsModale(idCocktail) {
         const titre = document.getElementById('titre-cocktail');
         titre.innerText = data.nom;
 
+        const description = document.getElementById('description');
+        description.innerText = data.desc;
+
         const preparation = document.getElementById('preparation');
         preparation.innerText = data.preparation;
+
+        const date = document.getElementById('date-publication');
+        date.innerText = data.date;
+
+        const ingredients = document.getElementById('ingredients');
+        ingredients.innerHTML = '';
+
+        data.ingredients_cocktail.forEach((ingredient) => {
+            const ligneIngredient = document.createElement('li');
+            const quantiteIngredient = document.createElement('span');
+            const uniteIngredient = document.createElement('span');
+            const nomIngredient = document.createElement('span');
+
+            quantiteIngredient.innerText = ingredient.quantite;
+            uniteIngredient.innerText = ingredient.unite;
+            nomIngredient.innerText = ingredient.ingredient;
+
+            ligneIngredient.appendChild(quantiteIngredient);
+            ligneIngredient.appendChild(uniteIngredient);
+            ligneIngredient.appendChild(nomIngredient);
+
+            ingredients.appendChild(ligneIngredient);
+        });
     } catch (error) {
         console.error('Erreur : ', error);
     }
