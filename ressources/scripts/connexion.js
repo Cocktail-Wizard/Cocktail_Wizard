@@ -8,18 +8,10 @@ document.getElementById("form-connexion").addEventListener("submit", (event) => 
 
     // Envoyer les données du formulaire à l'API PHP
     let formData = new FormData(event.target);
-    let infoConnexion = {};
-    formData.forEach((value, key) => {
-        infoConnexion[key] = value;
-    });
-    let json = JSON.stringify(infoConnexion);
 
     fetch("https://cocktailwizard.azurewebsites.net/api/users/authentification", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: json
+        body: formData
     })
         .then(response => response.json())
         .then(data => {
