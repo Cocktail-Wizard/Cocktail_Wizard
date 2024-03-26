@@ -1,13 +1,10 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
+/* Modal */
 #myModal {
     width: 100%;
     height: 100%;
 }
 
-/* The Modal (background) */
+/* Arrière-plan du Modal */
 .modal {
     display: none;
     position: fixed;
@@ -18,32 +15,32 @@ body {
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
+    /*Utilise pas de var, car besoin de transparance*/
 }
 
-/* Modal Content */
+/* Contenu du Modal */
 .publication-content {
     position: relative;
     background-color: var(--palette-secondary-background-color);
     margin: auto;
-    padding: 0;
-    border: 1px solid #888;
+    padding-top: 10px;
+    border: 1px solid var(--palette-border-color);
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /*template de "boxshadow"*/
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s;
-
-    height: 80%;
+    height: auto;
     max-height: 80%;
     overflow-y: auto;
     width: 80%;
     box-sizing: border-box;
 }
 
-/* Add Animation */
+/* Animation qui fait que la page modale apparait sur "top" */
 @-webkit-keyframes animatetop {
     from {
         top: -300px;
@@ -68,21 +65,23 @@ body {
     }
 }
 
-/* The Close Button */
+/* Bouton de fermeture */
 .close {
-    color: white;
-    float: right;
+    color: var(--palette-headline-color);
+    position: absolute;
+    right: 10px;
     font-size: 28px;
     font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
+    color: var(--palette-secondary-text-color);
     text-decoration: none;
     cursor: pointer;
 }
 
+/* En-tête de publication */
 .publication-header {
     padding: 2px 16px;
     background-color: var(--palette-secondary-background-color);
@@ -93,20 +92,7 @@ body {
     gap: 40px;
 }
 
-.publication-body {
-    padding: 2px 16px;
-    background-color: var(--palette-secondary-background-color);
-}
-
-.publication-footer {
-    padding: 2px 16px;
-    background-color: var(--palette-secondary-background-color);
-    color: #94a1b2;
-    text-align: center;
-    font-size: small;
-}
-
-/* Style pour la partie support*/
+/* Corps de publication */
 .publication-body {
     max-width: 600px;
     margin: 20px auto;
@@ -116,11 +102,16 @@ body {
     box-shadow: 0 0 10px #010101;
 }
 
+.publication-footer {
+    text-align: center;
+}
+
 h2 {
-    color: #7f5af0;
+    color: var(--palette-button-color);
     margin-bottom: 20px;
 }
 
+/* Formulaire */
 form {
     margin-top: 20px;
     margin-right: 10px;
@@ -128,14 +119,23 @@ form {
 
 label {
     font-weight: bold;
-    color: #7f5af0;
+    color: var(--palette-button-color);
 }
 
 textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--palette-border-color);
+    border-radius: 4px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-paragraph-color);
+}
+
+#ingredient_input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--palette-border-color);
     border-radius: 4px;
     background-color: var(--palette-secondary-background-color);
     color: var(--palette-paragraph-color);
@@ -145,16 +145,13 @@ textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--palette-border-color);
     border-radius: 4px;
     background-color: var(--palette-secondary-background-color);
     color: var(--palette-paragraph-color);
     min-height: 100px;
-    /* Adjust the height as needed */
     resize: vertical;
-    /* Allow vertical resizing */
     overflow-y: auto;
-    /* Enable vertical scrollbar when content exceeds height */
 }
 
 input[type="submit"] {
@@ -184,7 +181,6 @@ input[type="submit"]:hover {
     border-radius: 4px;
 }
 
-
 #add_ingredient:hover {
     box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
     text-decoration: none;
@@ -207,7 +203,7 @@ select option {
     color: black;
 }
 
-/* merci chatgpt pour comment faire une petite animation --> */
+/* Animation d'erreur */
 @keyframes shake {
     0% {
         transform: translateX(0);
