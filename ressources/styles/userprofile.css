@@ -1,76 +1,67 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
+/* Style pour le modal */
 #myModal {
     width: 100%;
     height: 100%;
 }
 
-/* The Modal (background) */
+/* Le Modal (fond) */
 .modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
-    /* Stay in place */
     z-index: 1;
-    /* Sit on top */
     padding-top: 100px;
-    /* Location of the box */
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
     height: 100%;
-    /* Full height */
     overflow: auto;
-    background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
+    /* pas de var car, fond sombre avec transparence */
 }
 
-/* Modal Content */
+/* Contenu du Modal */
 .userprofile-content {
     position: relative;
     background-color: var(--palette-secondary-background-color);
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
+    border: 1px solid var(--palette-border-color);
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
 }
 
-/* Add Animation */
+/* Ajout de l'animation (apparition par ne haut)*/
 @-webkit-keyframes animatetop {
     from {
         top: -300px;
-        opacity: 0
+        opacity: 0;
     }
 
     to {
         top: 0;
-        opacity: 1
+        opacity: 1;
     }
 }
 
 @keyframes animatetop {
     from {
         top: -300px;
-        opacity: 0
+        opacity: 0;
     }
 
     to {
         top: 0;
-        opacity: 1
+        opacity: 1;
     }
 }
 
-/* The Close Button */
+/* Le bouton de fermeture */
 .close {
-    color: white;
+    color: var(--palette-headline-color);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -78,11 +69,12 @@ body {
 
 .close:hover,
 .close:focus {
-    color: #000;
+    color: var(--palette-border-color);
     text-decoration: none;
     cursor: pointer;
 }
 
+/* En-tête de la section profil utilisateur */
 .userprofile-header {
     padding: 2px 16px;
     background-color: var(--palette-secondary-background-color);
@@ -93,20 +85,48 @@ body {
     gap: 40px;
 }
 
+/* Corps des informations utilisateur */
 .userinfo-body {
-    padding: 2px 16px;
-    background-color: var(--palette-secondary-background-color);
+    text-align: center;
+    padding: 20px;
 }
 
+/* Image de profil */
+.userinfo-body img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+/* nom de l'utilisateur */
+.userinfo-body h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Paragraphe d'informations */
+.userinfo-body p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+/* Texte du l'infromation personelle*/
+.userinfo-body span {
+    font-weight: bold;
+    color: var(--palette-button-color);
+}
+
+/* Pied de page de la page modale */
 .userprofile-footer {
     padding: 2px 16px;
     background-color: var(--palette-secondary-background-color);
-    color: #94a1b2;
+    color: var(--palette-paragraph-color);
     text-align: center;
     font-size: small;
 }
 
-/* Style pour la partie support*/
+/* Style pour la section support */
 .support-body {
     max-width: 600px;
     margin: 20px auto;
@@ -116,21 +136,25 @@ body {
     box-shadow: 0 0 10px #010101;
 }
 
+/* Titre de la section */
 h2 {
     color: #7f5af0;
     margin-bottom: 20px;
 }
 
+/* Formulaire */
 form {
     margin-top: 20px;
     margin-right: 10px;
 }
 
+/* Étiquette du formulaire */
 label {
     font-weight: bold;
     color: #7f5af0;
 }
 
+/* Zone de texte */
 textarea {
     width: 100%;
     padding: 10px;
@@ -141,6 +165,7 @@ textarea {
     color: var(--palette-paragraph-color);
 }
 
+/* Bouton de soumission */
 input[type="submit"] {
     background-color: var(--palette-button-color);
     color: var(--palette-button-text-color);
@@ -151,12 +176,12 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
+/* Effet au survol du bouton de soumission */
 input[type="submit"]:hover {
     background-color: var(--palette-button-color-hover);
 }
 
-/*style pour la section Mes cocktails*/
-
+/* Corps de la section Mes cocktails */
 .mycocktail-body {
     max-width: 800px;
     margin: 20px auto;
@@ -166,36 +191,27 @@ input[type="submit"]:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Conteneur de défilement horizontal pour les cocktails */
 .cocktail-container {
     overflow-x: auto;
     white-space: nowrap;
 }
 
-
-/*Style pour info user*/
-.userinfo-body {
-    text-align: center;
-    padding: 20px;
+/* Style pour les boutons de choix de sections */
+#infoBtn,
+#cocktailBtn,
+#supportBtn {
+    background-color: var(--palette-button-color);
+    color: var(--palette-button-text-color);
+    padding: 10px 20px;
+    border: 2px solid var(--palette-border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.userinfo-body img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-}
-
-.userinfo-body h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.userinfo-body p {
-    font-size: 1rem;
-    margin-bottom: 5px;
-}
-
-.userinfo-body span {
-    font-weight: bold;
-    color: var(--palette-button-color);
+#infoBtn:hover,
+#cocktailBtn:hover,
+#supportBtn:hover {
+    background-color: var(--palette-button-color-hover);
 }
