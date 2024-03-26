@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
 
         // Rechercher le mot de passe dans la base de données
-        $requete_preparee = $conn->prepare("Call  ConnexionUtilisateur(?)");
+        $requete_preparee = $conn->prepare("CALL  ConnexionUtilisateur(?)");
         $requete_preparee->bind_param("s", $nom);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
