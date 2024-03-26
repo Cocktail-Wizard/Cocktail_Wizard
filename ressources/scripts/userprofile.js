@@ -1,20 +1,20 @@
-// Get the modal
+// Récupérer le modal
 var modal = document.getElementById("myModal");
 
-// Get the buttons that open the modal pages
+// Récupérer les boutons qui ouvrent les pages modales
 var infoBtn = document.getElementById("infoBtn");
 var cocktailBtn = document.getElementById("cocktailBtn");
 var supportBtn = document.getElementById("supportBtn");
 
-// Get the <span> element that closes the modal
+// Récupérer l'élément <span> qui ferme le modal
 var span = document.getElementsByClassName("close")[0];
 
-// Get the content pages
+// Récupérer les pages de contenu
 var infoPage = document.getElementById("infoPage");
 var mycocktailPage = document.getElementById("mycocktailPage");
 var supportPage = document.getElementById("supportPage");
 
-// Function to show modal and corresponding page
+// Fonction pour afficher le modal et la page correspondante
 function openModal(page) {
     modal.style.display = "block";
     infoPage.style.display = "none";
@@ -23,12 +23,12 @@ function openModal(page) {
     page.style.display = "block";
 }
 
-// Open the modal with the Info personnelle page when the Profile User button is clicked
+// S'assurer que ca sois la page Info personnelle lorsque le bouton Profile User est cliqué
 document.getElementById("myBtn").onclick = function () {
     openModal(infoPage);
 }
 
-// When the user clicks on the buttons to open corresponding pages
+// Lorsque l'utilisateur clique sur les boutons pour ouvrir les pages correspondantes
 infoBtn.onclick = function () {
     openModal(infoPage);
 }
@@ -41,25 +41,27 @@ supportBtn.onclick = function () {
     openModal(supportPage);
 }
 
-// When the user clicks on <span> (x), close the modal
+// Lorsque l'utilisateur clique sur <span> (x), fermer le modal
 span.onclick = function () {
     modal.style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
+// Lorsque l'utilisateur clique n'importe où en dehors du modal, le fermer
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 }
 
-//envoyer un email directement a notre email de support
+// Envoyer un email directement à notre email de support
 document.getElementById("contactForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
     var message = document.getElementById("message").value;
 
-    // Send email
-    var mailtoLink = "mailto:cocktailwizard.supp0rt@gmail.com?subject=Support Request&body=" + encodeURIComponent(message);
+    // Envoyer l'email
+    var mailtoLink = "mailto:cocktailwizard.supp0rt@gmail.com?subject=Demande de support&body=" + encodeURIComponent(message);
     window.location.href = mailtoLink;
 });
+
+//CETTE PARTI AVEC LE EMAIL EST A COMPLETE
