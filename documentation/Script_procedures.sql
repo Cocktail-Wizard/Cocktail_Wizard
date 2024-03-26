@@ -10,6 +10,11 @@
 --
 -- ============================================================
 
+-- indexe pas sur column qui change
+
+-- Azure blobl storage pour les images
+
+
 -- Ajouter procédure qui permet de like et renvoyer le nouveau
 -- nombre de like
 
