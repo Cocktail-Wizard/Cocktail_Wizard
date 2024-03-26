@@ -7,23 +7,35 @@
  *
  */
 
-require_once(__DIR__."/../../classephp/Cocktail_Classe.php");
-require_once(__DIR__ ."/../../classephp/IngredientCocktail_Classe.php");
-require_once(__DIR__ ."/../../classephp/Commentaire_Classe.php");
+require_once(__DIR__ . "/../../classephp/Cocktail_Classe.php");
+require_once(__DIR__ . "/../../classephp/IngredientCocktail_Classe.php");
+require_once(__DIR__ . "/../../classephp/Commentaire_Classe.php");
 
-function InfoAffichageCocktail($id_cocktail, $conn) {
+function InfoAffichageCocktail($id_cocktail, $conn)
+{
 
     $requete_preparee = $conn->prepare("CALL GetInfoCocktailComplet(?)");
     $requete_preparee->bind_param("i", $id_cocktail);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
 
-    if($resultat->num_rows > 0) {
+    if ($resultat->num_rows > 0) {
         $row = $resultat->fetch_assoc();
 
-        $cocktail = new Cocktail($row['id_cocktail'],$row['nom'], $row['desc_cocktail'], $row['preparation'],
-        $row['imgCocktail'], $row['imgAuteur'], $row['auteur'], $row['date_publication'],
-        $row['nb_like'], $row['alcool_principale'], $row['profil_saveur'], $row['type_verre']);
+        $cocktail = new Cocktail(
+            $row['id_cocktail'],
+            $row['nom'],
+            $row['desc_cocktail'],
+            $row['preparation'],
+            $row['imgCocktail'],
+            $row['imgAuteur'],
+            $row['auteur'],
+            $row['date_publication'],
+            $row['nb_like'],
+            $row['alcool_principale'],
+            $row['profil_saveur'],
+            $row['type_verre']
+        );
     }
 
     $requete_preparee->close();
@@ -33,8 +45,8 @@ function InfoAffichageCocktail($id_cocktail, $conn) {
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
 
-    if($resultat->num_rows > 0){
-        while($row = $resultat->fetch_assoc()){
+    if ($resultat->num_rows > 0) {
+        while ($row = $resultat->fetch_assoc()) {
             $ingredient = new IngredientCocktail($row['quantite'], $row['unite'], $row['nom']);
             $cocktail->ajouterIngredient($ingredient);
         }
@@ -44,9 +56,4 @@ function InfoAffichageCocktail($id_cocktail, $conn) {
 
 
     return $cocktail;
-
 }
-
-
-
-?>

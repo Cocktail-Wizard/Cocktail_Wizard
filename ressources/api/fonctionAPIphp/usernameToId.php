@@ -4,7 +4,8 @@
 *
 */
 
-function usernameToId($username, $conn){
+function usernameToId($username, $conn)
+{
     $username_s = mysqli_real_escape_string($conn, $username);
 
     //Convertion du username en id
@@ -14,15 +15,13 @@ function usernameToId($username, $conn){
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
 
-    if($resultat->num_rows == 1){
+    if ($resultat->num_rows == 1) {
         $row = $resultat->fetch_assoc();
         $id_user = $row['id_utilisateur'];
-    }
-    else{
+    } else {
         http_response_code(404);
         echo json_encode("Aucun utilisateur trouvé.");
         exit();
     }
     return $id_user;
 }
-?>

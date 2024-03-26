@@ -10,12 +10,12 @@ $cocktails = [];
 // Connexion à la base de données
 $conn = connexionBD();
 
-if($conn == null){
+if ($conn == null) {
     http_response_code(500);
     echo json_encode("Erreur de connexion à la base de données.");
     exit();
 }
-if($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != 'communaute'){
+if ($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != 'communaute') {
     http_response_code(400);
     echo json_encode("Paramètre de type invalide.");
     exit();
@@ -23,13 +23,12 @@ if($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != 'c
 
 $id_user = usernameToId($username, $conn);
 
-switch($type){
+switch ($type) {
     case 'tout':
 
-        if(isset($_GET['tri']) && ($_GET['tri'] == 'like' || $_GET['tri'] == 'date')){
+        if (isset($_GET['tri']) && ($_GET['tri'] == 'like' || $_GET['tri'] == 'date')) {
             $triage_s = mysqli_real_escape_string($conn, $_GET['tri']);
-        }
-        else{
+        } else {
             http_response_code(400);
             echo json_encode("Paramètre de triage invalide.");
             exit();
@@ -67,24 +66,21 @@ switch($type){
         exit();
 }
 
-if($resultat->num_rows > 0){
+if ($resultat->num_rows > 0) {
     //Ajoute les id des cocktails à la liste
-    while($row = $resultat->fetch_assoc()){
+    while ($row = $resultat->fetch_assoc()) {
         $id_cocktail[] = $row['id_cocktail'];
     }
-}
-else{
+} else {
     http_response_code(404);
     echo json_encode("Aucun cocktail trouvé.");
     exit();
 }
 
-foreach($id_cocktail as $id) {
+foreach ($id_cocktail as $id) {
     $cocktails[] = InfoAffichageCocktail($id, $conn);
 }
 
 echo json_encode($cocktails);
 
 $conn->close();
-
-?>

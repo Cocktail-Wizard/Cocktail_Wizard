@@ -42,5 +42,3 @@ foreach ($id_cocktail as $id) {
 echo json_encode($cocktails);
 
 $conn->close();
-
-?>
