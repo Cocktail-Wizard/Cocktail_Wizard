@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../../pages/connexion.html");
             exit();
         } else {
-            $erreurs[] = "Erreur lors de l'inscription!<br>";
+            $erreurs[] = "Erreur lors de l'inscription!";
         }
     }
 }

@@ -1,4 +1,22 @@
 <?php
+/**
+* Script dislikeCommentaire
+*
+* Script de l'API qui permet de retirer un like à un commentaire.
+*
+* Type de requête : DELETE
+*
+* URL : /api/cocktails/commentaires/like
+*
+* @param JSON : username, id_commentaire
+*
+* @return JSON Le nouveau nombre de like du cocktail
+*
+* @version 1.0
+*
+* @author Yani Amellal
+*/
+header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ .'/fonctionAPIphp/usernameToId.php';
 
@@ -10,9 +28,10 @@ if($conn == null){
     exit();
 }
 
-$username = mysqli_real_escape_string($conn, $donnees['username']);
-$userId = usernameToId($username, $conn);
-$id_commentaire = mysqli_real_escape_string($conn, $donnees['id_commentaire']);
+$donnees = json_decode(file_get_contents('php://input'), true);
+
+$userId = usernameToId(trim($donnees['username']), $conn);
+$id_commentaire = mysqli_real_escape_string($conn, trim($donnees['id_comemntaire']));
 
 $requete_preparee = $conn->prepare("CALL DislikeCocktail(?,?)");
 $requete_preparee->bind_param('ii', $userId, $id_commentaire);

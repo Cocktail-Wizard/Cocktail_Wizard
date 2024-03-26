@@ -1,4 +1,3 @@
-const nbCocktailsGalerie = 20;
 const ordreCommentaires = 'date';
 const galerie = document.getElementById('galerie');
 const iconesUmami = {
@@ -28,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (modeleHTML) {
         try {
-            const data = await faireRequete(`../ressources/api/galerie.php?nombre=${nbCocktailsGalerie}`);
+            const data = await faireRequete('/api/cocktails/tri/like');
             if (data) {
                 afficherCocktails(data, modeleHTML);
             }
@@ -47,6 +46,12 @@ function afficherCocktails(data, modeleHTML) {
     const modeleClone = modeleTemp.firstElementChild.cloneNode(true);
 
     data.forEach((cocktail) => {
+        if (!cocktail) {
+            return;
+        }
+
+        console.debug(cocktail);
+
         const nouveauCocktail = modeleClone.cloneNode(true);
 
         const nomCocktail = nouveauCocktail.querySelector('.nom-cocktail');
@@ -74,7 +79,7 @@ function afficherCocktails(data, modeleHTML) {
         nouveauCocktail.addEventListener('click', (event) => {
             const idCocktail = event.currentTarget.dataset.idCocktail;
             sectionModale.style.display = "block";
-            chargerInformationsModale(idCocktail);
+            chargerInformationsModale(cocktail);
             chargerCommentairesModale(idCocktail, ordreCommentaires);
         });
 
@@ -89,40 +94,55 @@ function nettoyerNomCocktail(nom) {
     return nom.replace(/[^a-zA-Z0-9]/g, '');
 }
 
-async function chargerInformationsModale(idCocktail) {
-    try {
-        const data = await faireRequete(`../ressources/api/modale_cocktail.php?id=${idCocktail}`);
-        if (data === null) {
-            return;
-        }
+async function chargerInformationsModale(cocktail) {
+    const auteur = document.getElementById('auteur');
+    auteur.innerText = `@${cocktail.auteur}`;
 
-        const auteur = document.getElementById('auteur');
-        auteur.innerText = `@${data.auteur}`;
+    const jaimes = document.getElementById('compteur-jaime');
+    jaimes.innerText = cocktail.nb_like;
 
-        const jaimes = document.getElementById('compteur-jaime');
-        jaimes.innerText = data.nb_like;
+    const titre = document.getElementById('titre-cocktail');
+    titre.innerText = cocktail.nom;
 
-        const titre = document.getElementById('titre-cocktail');
-        titre.innerText = data.nom;
+    const description = document.getElementById('description');
+    description.innerText = cocktail.desc;
 
-        const preparation = document.getElementById('preparation');
-        preparation.innerText = data.preparation;
-    } catch (error) {
-        console.error('Erreur : ', error);
-    }
+    const preparation = document.getElementById('preparation');
+    preparation.innerText = cocktail.preparation;
+
+    const date = document.getElementById('date-publication');
+    date.innerText = cocktail.date;
+
+    const ingredients = document.getElementById('ingredients');
+    ingredients.innerHTML = '';
+
+    cocktail.ingredients_cocktail.forEach((ingredient) => {
+        const ligneIngredient = document.createElement('li');
+        const quantiteIngredient = document.createElement('span');
+        const uniteIngredient = document.createElement('span');
+        const nomIngredient = document.createElement('span');
+
+        quantiteIngredient.innerText = ingredient.quantite;
+        uniteIngredient.innerText = ingredient.unite;
+        nomIngredient.innerText = ingredient.ingredient;
+
+        ligneIngredient.appendChild(quantiteIngredient);
+        ligneIngredient.appendChild(uniteIngredient);
+        ligneIngredient.appendChild(nomIngredient);
+
+        ingredients.appendChild(ligneIngredient);
+    });
 }
 
-async function chargerCommentairesModale(idCocktail, ordre) {
+async function chargerCommentairesModale(idCocktail) {
     const modeleHTML = await chargerModeleHTML("ressources/modeles/modale_commentaire.html");
 
     if (modeleHTML) {
         try {
-            const data = await faireRequete(`../ressources/api/modale_commentaires.php?id=${idCocktail}&orderby=${ordre}`);
+            const data = await faireRequete('/api/cocktails/' + idCocktail + '/commentaires');
             if (data === null) {
                 return;
             }
-
-            console.debug("Données récuperées de l'API des commentaires : ", data);
 
             const listeCommentaires = document.getElementById('commentaires');
             listeCommentaires.innerHTML = '';
@@ -138,10 +158,10 @@ async function chargerCommentairesModale(idCocktail, ordre) {
                 auteurCommentaire.innerText = `@${commentaire.auteur}`;
 
                 const dateCommentaire = nouveauCommentaire.querySelector('.date');
-                dateCommentaire.innerText = commentaire.date_publication;
+                dateCommentaire.innerText = commentaire.date;
 
                 const messageCommentaire = nouveauCommentaire.querySelector('.contenu');
-                messageCommentaire.innerText = commentaire.message;
+                messageCommentaire.innerText = commentaire.contenu;
 
                 listeCommentaires.appendChild(nouveauCommentaire);
             });

@@ -1,13 +1,13 @@
 <?php
-/*
+/**
  * Classe Cocktail
  *
  * Permet de créer un objet Cocktail qui contient les informations utiliser
  * pour l'affichage d'un cocktail.
  *
- * Auteur : Yani Amellal
- * Date : 18 mars 2023
+ * @author Yani Amellal
  *
+ * @version 1.0
  */
 class Cocktail implements JsonSerializable {
     private $id_cocktail;
@@ -43,6 +43,7 @@ class Cocktail implements JsonSerializable {
         $this->profil_saveur = $profil_saveur;
         $this->type_verre = $type_verre;
     }
+
 
     // Ajoute un ingrédient à la liste des ingrédients du cocktail
     public function ajouterIngredient($ingredient) {

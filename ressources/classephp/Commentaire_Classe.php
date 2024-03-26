@@ -1,14 +1,15 @@
 <?php
-/*
- * Classe Commentaire
- *
- * Permet de créer un objet Commentaire qui contient les informations utiliser
- * pour l'affichage d'un commentaire.
- *
- * Auteur : Yani Amellal
- * Date : 18 mars 2023
- *
- */
+/**
+* Classe Commentaire
+*
+* Permet de créer un objet Commentaire qui contient les informations utiliser
+* pour l'affichage d'un commentaire.
+*
+* @version 1.0
+*
+* @author Yani Amellal
+*
+*/
 class Commentaire implements JsonSerializable {
     private $id_commentaire;
     private $img_auteur;
