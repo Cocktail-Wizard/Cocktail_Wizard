@@ -125,7 +125,7 @@ header h1 {
     border: solid, 1px, var(--palette-border-color);
 }
 
-#searchBoxContainer {
+#contenant-boite-recherche {
     position: relative;
     display: flex;
     align-items: center;
@@ -133,7 +133,7 @@ header h1 {
     z-index: 1;
 }
 
-#searchBox {
+#boite-recherche {
     font-size: 15px;
     height: 50px;
     width: 300px;
@@ -143,7 +143,7 @@ header h1 {
     color: var(--palette-secondary-text-color);
 }
 
-#ingredientList {
+#liste-ingredients {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -176,7 +176,7 @@ header h1 {
     border-bottom: none;
 }
 
-.selectIngredient-box {
+.boite-ingredients-selectionnes {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -240,7 +240,7 @@ header h1 {
 }
 
 /* Footer Styles */
-#twoBtn {
+#deux-boutons {
     position: fixed;
     bottom: 20px;
     left: 0;
@@ -251,27 +251,27 @@ header h1 {
     box-sizing: border-box;
 }
 
-#twoBtn button {
+#deux-boutons button {
     border: none;
     background-color: var(--palette-button-color);
     border-radius: 50%;
-    opacity: 40%;
+    opacity: 0.4;
     width: 50px;
     height: 50px;
 }
 
-#twoBtn button:hover {
+#deux-boutons button:hover {
     opacity: 1;
 }
 
-#twoBtn button img {
+#deux-boutons button img {
     display: block;
     margin: auto;
     width: 30px;
     height: 30px;
 }
 
-#twoBtn button:focus {
+#deux-boutons button:focus {
     outline: none;
 }
 
@@ -298,13 +298,13 @@ hr {
     display: none;
 }
 
-#btnHome,
-#btnDeconnect {
+#bouton-galerie,
+#bouton-deconnexion {
     font-size: 1.5vw;
     padding: 0.5vh 1vw;
 }
 
-#btnHome:hover,
-#btnDeconnect:hover {
+#bouton-galerie:hover,
+#bouton-deconnexion:hover {
     background-color: var(--palette-button-color-hover);
 }

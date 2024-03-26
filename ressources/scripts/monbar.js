@@ -17,16 +17,16 @@ let selectedIngredients = [];
 
 //Liste des ingredients (vas eventuellement etre update avec la bd)
 function filterIngredients() {
-    const searchValue = document.getElementById("searchBox").value.toLowerCase();
-    const ingredientList = document.getElementById("ingredientList");
-    ingredientList.innerHTML = '';
+    const searchValue = document.getElementById("boite-recherche").value.toLowerCase();
+    const liste-ingredients = document.getElementById("liste-ingredients");
+    liste - ingredients.innerHTML = '';
 
     //affiche la liste si la searchbar contient quelquechose
     if (searchValue.trim() !== '') {
-        ingredientList.style.display = "block";
+        liste - ingredients.style.display = "block";
     } else {
         //cache le drop down si la barre de recherche est vide
-        ingredientList.style.display = "none";
+        liste - ingredients.style.display = "none";
     }
 
     // filtre les ingredient en fonctions de la rechercher ET des element deja selectionner
@@ -38,7 +38,7 @@ function filterIngredients() {
         ingredientItem.textContent = ingredient;
         ingredientItem.classList.add("ingredient-item");
         ingredientItem.addEventListener("click", () => selectIngredient(ingredient));
-        ingredientList.appendChild(ingredientItem);
+        liste - ingredients.appendChild(ingredientItem);
     });
 }
 
@@ -76,17 +76,17 @@ function updateSelectedIngredients() {
 
 // Ferme la liste des ingrédients lorsque l'utilisateur clique à l'extérieur
 document.addEventListener("click", function (event) {
-    const searchBox = document.getElementById("searchBox");
-    const ingredientList = document.getElementById("ingredientList");
+    const boite-recherche = document.getElementById("boite-recherche");
+    const liste-ingredients = document.getElementById("liste-ingredients");
 
-    if (event.target !== searchBox && event.target !== ingredientList) {
+    if (event.target !== boite - recherche && event.target !== liste - ingredients) {
         // Verifier si le clic n'est pas à l'intérieur de la liste
         if (!selectedIngredients.includes(event.target.textContent)) {
-            ingredientList.style.display = "none"; // Ferme la liste si oui
+            liste - ingredients.style.display = "none"; // Ferme la liste si oui
         }
     } else {
         //s'assure que la liste reste visible tant que l'utilisateur clique pas a l'exterieur
-        if (ingredientList.style.display !== "block") {
+        if (liste - ingredients.style.display !== "block") {
             filterIngredients();
         }
     }
@@ -97,7 +97,7 @@ filterIngredients();
 updateSelectedIngredients(); // Display initially selected ingredients
 
 document.addEventListener("DOMContentLoaded", async () => {
-    inputRechercheIngredient = document.getElementById('searchBox');
+    inputRechercheIngredient = document.getElementById('boite-recherche');
     inputRechercheIngredient.addEventListener('input', filterIngredients);
 
     const modeleHTML = await chargerModeleHTML("../ressources/modeles/cocktail_carte.html");
