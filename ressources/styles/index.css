@@ -78,7 +78,7 @@ aside#contenant-boutons-fixes a img {
     box-shadow: #666 0 0 10px;
     color: var(--palette-button-text-color);
     font-size: x-large;
-    opacity: 0.8;
+    opacity: 80%;
     outline: none;
     padding: 10px 0 10px 50px;
     width: clamp(200px, calc(var(--publication-width) * 2), 75%);
