@@ -59,9 +59,9 @@ if (count($erreurs) == 0) {
         } else {
             $erreurs[] = "Erreur inconnue!";
         }
+    } finally {
+        $requete_preparee->close();
     }
-
-    $requete_preparee->close();
 }
 
 if (count($erreurs) == 0) {
