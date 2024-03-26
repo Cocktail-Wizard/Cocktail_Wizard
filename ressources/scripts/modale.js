@@ -14,7 +14,7 @@ function reinitialiserModale(modeleHTML) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const modeleHTML = await chargerModeleHTML("/ressources/modeles/cocktail_modale.html");
+    const modeleHTML = await chargerModeleHTML("ressources/modeles/cocktail_modale.html");
 
     if (modeleHTML) {
         reinitialiserModale(modeleHTML);

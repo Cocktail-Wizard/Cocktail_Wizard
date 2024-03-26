@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (modeleHTML) {
         try {
-            const data = await faireRequete('/api/cocktails/tri/like');
+            const data = await faireRequete(`${API_URL}/cocktails/tri/like`);
             if (data) {
                 afficherCocktails(data, modeleHTML);
             }
@@ -139,7 +139,7 @@ async function chargerCommentairesModale(idCocktail) {
 
     if (modeleHTML) {
         try {
-            const data = await faireRequete('/api/cocktails/' + idCocktail + '/commentaires');
+            const data = await faireRequete(`${API_URL}/cocktails/${idCocktail}/commentaires`);
             if (data === null) {
                 return;
             }
