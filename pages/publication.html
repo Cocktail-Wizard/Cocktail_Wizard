@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publication</title>
     <link rel="stylesheet" href="../ressources/styles/publication.css">
-    <link rel="stylesheet" href="../ressources/styles/main.css"><!-- Include your CSS file -->
+    <link rel="stylesheet" href="../ressources/styles/main.css">
 </head>
 
 <body>
 
-    <!-- Trigger/Open The Modal -->
+    <!-- Déclencheur/Ouvrir le modal -->
     <button id="myBtn">Publication</button>
 
-    <!-- The Modal -->
+    <!-- Le modal -->
     <div id="myModal" class="modal">
-        <!-- Modal content -->
+        <!-- Contenu du modal -->
         <div class="publication-content">
             <div class="publication-header">
                 <h1> Publication </h1>
-                <span class="close">&times;</span> <!--c'est le symbole x-->
+                <span class="close">&times;</span> <!-- symbole x pour fermer -->
             </div>
 
 
@@ -32,7 +32,7 @@
                     <label for="cocktail_name">Nom du cocktail:</label><br>
                     <textarea id="name_texte" name="cocktail_name" rows="1" cols="50"></textarea><br>
 
-                    <label for="cocktail_ingredient">Ingredients:</label><br>
+                    <label for="cocktail_ingredient">Ingrédients:</label><br>
                     <div id="ingredient_input">
                         <div>
                             <input type="text" id="ingredient_name" placeholder="Nom de l'ingrédient...">
@@ -41,7 +41,7 @@
                                 <option value="oz" selected>oz</option>
                                 <option value="ml">ml</option>
                                 <option value="dash">Dash</option>
-                                <option value="pinch">Pinch</option>
+                                <option value="pinch">Pincée</option>
                                 <option value="top">Top</option>
                             </select>
 
@@ -55,10 +55,10 @@
 
                     <label for="cocktail_preparation">Préparation:</label><br>
                     <textarea id="preparation_texte" name="cocktail_preparation" rows="4" cols="50"
-                        placeholder="Expliquez-nous comment créer votre fabuleuse création, les étapes, la méthode et, si jamais vous avez des petites notes à rajouter, faite nous en part!"></textarea><br>
+                        placeholder="Expliquez-nous comment créer votre fabuleuse création, les étapes, la méthode et, si jamais vous avez des petites notes à rajouter, faites-nous en part!"></textarea><br>
 
 
-                    <label for="cocktail_description">Descrition:</label><br>
+                    <label for="cocktail_description">Description:</label><br>
                     <textarea id="description_texte" name="cocktail_description" rows="4" cols="50"
                         placeholder="Une description n'est pas nécessaire, mais elle permet à notre communauté de voir à travers vos yeux."></textarea><br>
 
@@ -78,7 +78,7 @@
     </div>
 
 
-    <script src="../ressources/scripts/publication.js"></script> <!-- Include your JavaScript file -->
+    <script src="../ressources/scripts/publication.js"></script>
 </body>
 
 </html>
