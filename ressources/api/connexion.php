@@ -23,7 +23,6 @@ require_once("config.php");
 $erreurs = array();
 $success = false;
 
-
 // Valider le nom d'utilisateur
 if (empty($_POST['nom'])) {
     $erreurs[] = "Le nom d'utilisateur est requis!";
@@ -59,18 +58,6 @@ if (empty($erreurs)) {
 
         // Vérifier le mot de passe
         if (password_verify($mdp, $mdp_hashed)) {
-            // Authentification réussie
-            $cookieParams = session_get_cookie_params();
-            session_set_cookie_params([
-                'lifetime' => $cookieParams['lifetime'],
-                'path' => $cookieParams['path'],
-                'domain' => $cookieParams['domain'],
-                'secure' => true, // Set secure to true
-                'httponly' => $cookieParams['httponly'],
-                'samesite' => $cookieParams['samesite'],
-            ]);
-            session_id($nom);
-            session_start();
             $success = true;
         } else {
             // Mot de passe incorrect
