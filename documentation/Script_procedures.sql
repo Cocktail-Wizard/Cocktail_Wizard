@@ -1,4 +1,4 @@
--- Active: 1709764745031@@cocktailwizbd.mysql.database.azure.com@3306@cocktailwizardbd
+-- Active: 1710380541515@@cocktailwizbd.mysql.database.azure.com@3306@cocktailwizardbd
 -- ============================================================
 -- Auteurs : Yani Amellal, Léonard Marcoux, Pablo Hamel-Corôa,
 --           Maxime Dmitriev et Vianney Veremme
@@ -48,6 +48,8 @@ CREATE PROCEDURE InscriptionUtilisateur(
 BEGIN
 	INSERT INTO Utilisateur (nom, courriel, mdp_hashed, date_naiss)
 	VALUES (var_nom, var_courriel, var_mdp_hashed, var_date_naissance);
+
+	SELECT LAST_INSERT_ID() AS id_utilisateur;
 END
 //
 
@@ -266,7 +268,7 @@ END
 -- Permet d'ajouter un ingrédient à un cocktail
 -- Utiliser pour la création de cocktail
 DROP PROCEDURE IF EXISTS AjouterIngredientCocktail;
-CREATE PROCEDURE AjouterIngredientCockail(
+CREATE PROCEDURE AjouterIngredientCocktail(
 	IN var_id_cocktail INT,
 	IN var_nom_ingredient VARCHAR(255),
 	IN var_quantite FLOAT,
@@ -304,6 +306,12 @@ BEGIN
 		),
 		var_quantite,
 		var_unite
+	);
+	ELSE INSERT INTO ingredient_cocktail (
+		id_cocktail, ingredient_autre, quantite, unite
+	)
+	VALUES (
+		var_id_cocktail, var_nom_ingredient, var_quantite, var_unite
 	);
 	END IF;
 END
