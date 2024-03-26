@@ -52,5 +52,5 @@ function InfoAffichageCocktail($id_cocktail, $conn)
 
     $requete_preparee->close();
 
-    return $cocktail;
+    return $cocktail ?? null;
 }

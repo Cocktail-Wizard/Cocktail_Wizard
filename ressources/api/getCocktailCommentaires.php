@@ -17,11 +17,12 @@ if (!isset($_GET['id_cocktail'])) {
     exit();
 }
 
+$id_cocktail = $_GET['id_cocktail'];
+
 // Liste d'objets commentaires du cocktail
 $commentaires = [];
 
 $id_cocktail_s = mysqli_real_escape_string($conn, $id_cocktail);
-
 $id_cocktails_s = intval($id_cocktail_s);
 
 $requete_preparee = $conn->prepare("CALL GetCommentairesCocktail(?, 'like')");
