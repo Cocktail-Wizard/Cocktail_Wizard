@@ -14,9 +14,29 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
         body: formData
     })
         .then(response => response.json())
-        .then(errors => {
+        .then(data => {
+            console.log(data);
             // Afficher les erreurs
-            if (errors.length > 0) {
+            if (Array.isArray(data) && data.length > 0) {
+                data.forEach(error => {
+                    let errorElement = document.createElement("p");
+                    errorElement.textContent = error;
+                    errorsContainer.appendChild(errorElement);
+                });
+            }
+            // Rediriger vers la page de connexion si l'inscription est réussie
+            else {
+                window.location.href = "/connexion";
+            }
+
+        })
+        .catch(error => {
+            console.error("Erreur lors de la soumission du formulaire:", error);
+        });
+});
+
+/*
+if (errors.length > 0) {
                 errors.forEach(error => {
                     let errorElement = document.createElement("p");
                     errorElement.textContent = error;
@@ -26,8 +46,4 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
                 // Rediriger vers la page de connexion si l'inscription est réussie (à changer)
                 window.location.href = "/connexion";
             }
-        })
-        .catch(error => {
-            console.error("Erreur lors de la soumission du formulaire:", error);
-        });
-});
+*/
