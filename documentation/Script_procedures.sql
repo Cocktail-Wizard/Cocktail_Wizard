@@ -347,6 +347,8 @@ BEGIN
 	VALUES (
 		var_contenu, var_id_utilisateur, var_id_cocktail
 	);
+
+	CALL GetCommentairesCocktail(var_id_cocktail, 'date');
 END
 //
 

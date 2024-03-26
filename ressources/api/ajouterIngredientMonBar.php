@@ -8,7 +8,7 @@
 *
 * URL : /api/ingredients
 *
-* @param JSON : nomIngredient, username.
+* @param FormData : nomIngredient, username.
 *
 * @return JSON Un json contenant la liste mise à jour des ingredients du bar de l'utilisateur.
 *

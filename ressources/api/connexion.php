@@ -8,7 +8,7 @@
  *
  * URL : /api/users/authentification
  *
- * @param JSON : nom, mdp
+ * @param FormData : nom, mdp
  *
  * @return JSON Un json contenant le message de succès ou d'erreur
  *
