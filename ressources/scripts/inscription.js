@@ -34,16 +34,3 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
             console.error("Erreur lors de la soumission du formulaire:", error);
         });
 });
-
-/*
-if (errors.length > 0) {
-                errors.forEach(error => {
-                    let errorElement = document.createElement("p");
-                    errorElement.textContent = error;
-                    errorsContainer.appendChild(errorElement);
-                });
-            } else {
-                // Rediriger vers la page de connexion si l'inscription est réussie (à changer)
-                window.location.href = "/connexion";
-            }
-*/

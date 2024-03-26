@@ -19,63 +19,60 @@
  */
 header('Content-Type: application/json');
 require_once("config.php");
-session_start();
 // Accumulateur d'erreurs
 $erreurs = array();
 $success = false;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Valider le nom d'utilisateur
-    if (empty($_POST['nom'])) {
-        $erreurs[] = "Le nom d'utilisateur est requis!";
+
+// Valider le nom d'utilisateur
+if (empty($_POST['nom'])) {
+    $erreurs[] = "Le nom d'utilisateur est requis!";
+}
+
+// Valider le mot de passe
+if (empty($_POST['mdp'])) {
+    $erreurs[] = "Le mot de passe est requis!";
+}
+
+// Si aucune erreur, établir la connexion
+if (empty($erreurs)) {
+    $conn = connexionBD();
+
+    if ($conn == null) {
+        http_response_code(500);
+        echo json_encode("Erreur de connexion à la base de données.");
+        exit();
     }
 
-    // Valider le mot de passe
-    if (empty($_POST['mdp'])) {
-        $erreurs[] = "Le mot de passe est requis!";
-    }
+    $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
+    $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
 
-    // Si aucune erreur, établir la connexion
-    if (empty($erreurs)) {
-        $conn = connexionBD();
+    // Rechercher le mot de passe dans la base de données
+    $requete_preparee = $conn->prepare("CALL  ConnexionUtilisateur(?)");
+    $requete_preparee->bind_param("s", $nom);
+    $requete_preparee->execute();
+    $resultat = $requete_preparee->get_result();
 
-        if ($conn == null) {
-            http_response_code(500);
-            echo json_encode("Erreur de connexion à la base de données.");
-            exit();
-        }
+    if ($resultat->num_rows > 0) {
+        $utilisateur = $resultat->fetch_assoc();
+        $mdp_hashed = $utilisateur['mdp_hashed'];
 
-        $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
-        $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
-
-        // Rechercher le mot de passe dans la base de données
-        $requete_preparee = $conn->prepare("CALL  ConnexionUtilisateur(?)");
-        $requete_preparee->bind_param("s", $nom);
-        $requete_preparee->execute();
-        $resultat = $requete_preparee->get_result();
-
-        if ($resultat->num_rows > 0) {
-            $utilisateur = $resultat->fetch_assoc();
-            $mdp_hashed = $utilisateur['mdp_hashed'];
-
-            // Vérifier le mot de passe
-            if (password_verify($mdp, $mdp_hashed)) {
-                // Authentification réussie
-                $_SESSION['nom'] = $nom;
-                $success = true;
-            } else {
-                // Mot de passe incorrect
-                $erreurs[] = "Mot de passe incorrect!";
-            }
+        // Vérifier le mot de passe
+        if (password_verify($mdp, $mdp_hashed)) {
+            // Authentification réussie
+            session_id($nom);
+            session_start();
+            $success = true;
         } else {
-            // Nom d'utilisateur non trouvé
-            $erreurs[] = "Nom d'utilisateur introuvable!";
+            // Mot de passe incorrect
+            $erreurs[] = "Mot de passe incorrect!";
         }
-
-        $requete_preparee->close();
+    } else {
+        // Nom d'utilisateur non trouvé
+        $erreurs[] = "Nom d'utilisateur introuvable!";
     }
-} else {
-    $erreurs[] = "How did we get here?";
+
+    $requete_preparee->close();
 }
 
 // Construction de la réponse JSON
