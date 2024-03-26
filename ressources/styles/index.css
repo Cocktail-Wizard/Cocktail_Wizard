@@ -27,9 +27,9 @@ body>header {
 }
 
 header h1 {
-    background-color: rgba(0, 0, 0, 10%);
+    background-color: rgb(0, 0, 0 / 10%);
     border-radius: 50px;
-    box-shadow: rgba(0, 0, 0, 10%) 0 0 20px;
+    box-shadow: rgb(0, 0, 0 / 10%) 0 0 20px;
     padding: 1em;
     text-align: center;
 }
