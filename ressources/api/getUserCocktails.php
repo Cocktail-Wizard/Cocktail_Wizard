@@ -1,4 +1,23 @@
 <?php
+/**
+ * Script getUserCocktails
+ *
+ * Script de l'API qui permet de récupérer la liste des cocktails qu'un utilisateur a créé.
+ *
+ * Type de requête : GET
+ *
+ * URL : /api/users/$username/cocktails
+ *
+ * @param string $username Le nom d'utilisateur de l'utilisateur.
+ *
+ * @return JSON Un json contenant la liste des cocktails de l'utilisateur.
+ *
+ * @version 1.0
+ *
+ * @author Yani Amellal
+ *
+ */
+header("Content-Type: application/json");
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';

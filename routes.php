@@ -1,210 +1,165 @@
 <?php
+
+require_once __DIR__.'/router.php';
+
+// ##################################################
+// ##################################################
+// ##################################################
+
+// Static GET
+// The output -> Index
+get('/', 'index.php');
+
+// Static GET
+// /galerie -> Galerie de cocktails
+get('/galerie', 'index.php');
+
+// Static GET
+// /inscription -> Page d'inscription
+get('/inscription', 'pages/inscription.php');
+
+// Static GET
+// /connexion -> Page de connexion
+get('/connexion', 'pages/connexion.php');
+
+// Static GET
+// /monbar -> Page de mon bar
+get('/monbar', 'pages/monbar.php');
+
+// Static GET
+// /profile -> Page de profil
+get('/profile', 'pages/profile.php');
+
+/******POST*******/
+
+// /api/users/authentification ->Connexion d'un utilisateur
+post('/api/users/authentification', 'ressources/api/connexion.php');
+
+// /api/users -> Inscription d'un utilisateur
+post('/api/users', 'ressources/api/inscription.php');
+
+// /api/cocktails/like ->Like d'un cocktail
+// L'API retourne le nouveau nombre de likes
+post('/api/cocktails/like', 'ressources/api/likeCocktail.php');
+
+// /api/cocktails/commentaires/like ->Like d'un commentaire
+// L'API retourne le nouveau nombre de likes
+post('/api/cocktails/commentaires/like', 'ressources/api/likeCommentaire.php');
+
+// /api/cocktails/commentaires ->Ajout d'un commentaire
+// L'API retourne le nouveau nombre de likes
+post('/api/cocktails/commentaires', 'ressources/api/ajouterCommentaire.php');
+
+// /api/cocktails ->Ajout d'un cocktail
+post('/api/cocktails', 'ressources/api/ajouterCocktail.php');
+
+// /api/user/ingredients ->Ajout d'un ingrédient dans mon bar
+post('/api/user/ingredients', 'ressources/api/ajouterIngredientMonBar.php');
+
+/******GET*********/
+
+// /api/cocktails/tri/${like/date}  ->Cocktails galerie
+get('/api/cocktails/tri/$tri', 'ressources/api/getCocktails.php');
+
+// /api/cocktails/tri/{like/date}/recherche/{mot-clé, mot-clé, mot-clé}
+//->Recherche de cocktails sans filtre
+get('/api/cocktails/tri/$tri/recherche/$mots', 'ressources/api/rechercheCocktail.php');
+
+// /api/users/{username}/recommandations/recherche/{mot-clé, mot-clé, mot-clé}
+//  ->Recherche de cocktails recommandés
+get('/api/users/$username/cocktails/tri/$tri/recherche/$mots', '/ressources/api/getUserRecommandations.php');
+
+// /api/users/{username}/recommandations/tri/{like/date}
+// ->Liste des cocktails que l'utilisateur peut faire avec ses ingrédients. Pour galerie connectée
+get('/api/users/$username/recommandations/tri/$tri', '/ressources/api/getUserRecommandations.php');
+
+// /api/users/{username}/recommandations/type/{classiques/favoris/communaute}
+// ->Liste des cocktails que l'utilisateur peut faire avec ses ingrédients. Pour mon bar
+get('/api/users/$username/recommandations/type/$type', '/ressources/api/getUserRecommandations.php');
+
+// /api/users/{username}/ingredients ->Liste des ingrédients de mon bar
+get('/api/users/$username/ingredients', '/ressources/api/getUserIngredients.php');
+
+// /api/users/{username}/cocktails ->Liste des cocktails de l'utilisateur
+get('/api/users/$username/cocktails', '/ressources/api/getUserCocktails.php');
+
+
+
+// /api/user/{username} ->Profil utilisateur
+get('/api/users/$username', '/ressources/api/getUserInfo.php');
+
+// /api/ingredients ->Liste des ingrédients de la base de données(Mon bar ou Création de cocktail)
+get('/api/ingredients', '/ressources/api/getIngredients.php');
+
+// /api/cocktails/{id_cocktail}/commentaires ->Liste des commentaires d'un cocktail
+get('/api/cocktails/$id_cocktail/commentaires', '/ressources/api/getCocktailCommentaires.php');
+
+/**********DELETE ************/
+
+// /api/users/ingredients ->Suppression d'un ingrédient de mon bar
+delete('/api/users/ingredients', '/ressources/api/enleverIngredientMonBar.php');
+
+// /api/cocktails/commentaires/dislike ->Dislike d'un commentaire
+// L'API retourne le nouveau nombre de likes
+delete('/api/cocktails/commentaires/like', 'ressources/api/dislikeCommentaire.php');
+
+// /api/cocktails/dislike ->Dislike d'un cocktail
+// L'API retourne le nouveau nombre de like
+delete('/api/cocktails/like', 'ressources/api/dislikeCocktail.php');
+
 /*
-* Implémentantion du système de routage
+// Dynamic GET. Example with 1 variable
+// The $id will be available in user.php
+get('/user/$id', 'views/user');
+
+// Dynamic GET. Example with 2 variables
+// The $name will be available in full_name.php
+// The $last_name will be available in full_name.php
+// In the browser point to: localhost/user/X/Y
+get('/user/$name/$last_name', 'views/full_name.php');
+
+// Dynamic GET. Example with 2 variables with static
+// In the URL -> http://localhost/product/shoes/color/blue
+// The $type will be available in product.php
+// The $color will be available in product.php
+get('/product/$type/color/$color', 'product.php');
+
+// A route with a callback
+get('/callback', function(){
+  echo 'Callback executed';
+});
+
+// A route with a callback passing a variable
+// To run this route, in the browser type:
+// http://localhost/user/A
+get('/callback/$name', function($name){
+  echo "Callback executed. The name is $name";
+});
+
+// Route where the query string happends right after a forward slash
+get('/product', '');
+
+// A route with a callback passing 2 variables
+// To run this route, in the browser type:
+// http://localhost/callback/A/B
+get('/callback/$name/$last_name', function($name, $last_name){
+  echo "Callback executed. The full name is $name $last_name";
+});
+
+// ##################################################
+// ##################################################
+// ##################################################
+// Route that will use POST data
+post('/user', '/api/save_user');
+
+
+
+// ##################################################
+// ##################################################
+// ##################################################
+// any can be used for GETs or POSTs
 */
-$uri = $_SERVER['REQUEST_URI'];
-$param = $_SERVER['QUERY_STRING'];
-$methode = $_SERVER['REQUEST_METHOD'];
-
-//Routes dynamiques
-if($methode == "POST") {
-    //Stockage des données reçues dans une variable
-    $json = file_get_contents('php://input');
-    $donnees = json_decode($json, true);
-
-    //Récupération de la requête
-    $requete = trim(parse_url($uri, PHP_URL_PATH), '/');
-    //Séparation de la requête en un tableau
-    $requete_separee = explode('/', $requete);
-
-
-    if(isset($requete_separee[1])){
-
-        switch($requete_separee[1]){
-
-            case 'users':
-                // /api/users/authentification ->Connexion d'un utilisateur
-                if(isset($requete_separee[2]) && $requete_separee[2] == 'authentification'){
-                    require __DIR__ . '/ressources/api/connexion.php';
-                }
-                // /api/users -> Inscription d'un utilisateur
-                elseif(!isset($requete_separee[2])) {
-                    require __DIR__ . '/ressources/api/inscription.php';
-                }
-                else {
-                    http_response_code(404);
-                    echo json_encode("requête invalide.");
-                }
-                break;
-            case 'cocktails':
-                // /api/cocktails/like ->Like d'un cocktail
-                if(isset($requete_separee[2]) && $requete_separee[2] == 'like'){
-                    require __DIR__ . '/ressources/api/likeCocktail.php';
-                }
-                // /api/cocktails/dislike ->Dislike d'un cocktail
-                elseif(isset($requete_separee[2]) && $requete_separee[2] == 'dislike'){
-                    require __DIR__ . '/ressources/api/dislikeCocktail.php';
-                }
-                // /api/cocktails/commentaires
-                elseif(isset($requete_separee[2]) && $requete_separee[2] == 'commentaires'){
-                    // /api/cocktails/commentaires/like ->Like d'un commentaire
-                    if(isset($requete_separee[3]) && $requete_separee[3] == 'like'){
-                        require __DIR__ . '/ressources/api/likeCommentaire.php';
-                    }
-                    // /api/cocktails/commentaires/dislike ->Dislike d'un commentaire
-                    elseif(isset($requete_separee[3]) && $requete_separee[3] == 'dislike'){
-                        require __DIR__ . '/ressources/api/dislikeCommentaire.php';
-                    }
-                    // /api/cocktails/commentaires ->Ajout d'un commentaire
-                    elseif(!isset($requete_separee[3])) {
-                        require __DIR__ . '/ressources/api/ajouterCommentaire.php';
-                    }
-                    else {
-                        http_response_code(404);
-                        echo json_encode("requête invalide.");
-                    }
-                }
-                // /api/cocktails ->Ajout d'un cocktail
-                elseif(!isset($requete_separee[2])) {
-                    require __DIR__ . '/ressources/api/ajouterCocktail.php';
-                }
-                else {
-                    http_response_code(404);
-                    echo json_encode("requête invalide.");
-                }
-                break;
-            // /api/ingredients ->Ajout d'un ingrédient dans mon bar
-            case 'ingredients':
-                require __DIR__ . '/ressources/api/ajouterIngredientMonBar.php';
-                break;
-            default:
-                http_response_code(404);
-                echo json_encode("requête invalide.");
-                break;
-        }
-    }
-}
-//Routes dynamiques
-else if($methode == "GET") {
-
-    //Récupération de la requête
-    $requete = trim(parse_url($uri, PHP_URL_PATH), '/');
-    //Séparation de la requête en un tableau
-    $requete_separee = explode('/', $requete);
-
-    switch ($requete_separee[1]) {
-        // /api/cocktails
-        case 'cocktails':
-            if (isset($_GET['tri'])) {
-                $tri = $_GET['tri'];
-                // /api/cocktails?tri=like ->Cocktails galerie par like
-                if ($tri == 'like') {
-                    require __DIR__ . '/ressources/api/getCocktailParLike.php';
-                }
-                // /api/cocktails?tri=date ->Cocktails galerie par date
-                elseif ($tri == 'date') {
-                    require __DIR__ . '/ressources/api/getCocktailParDate.php';
-                }
-                else {
-                    http_response_code(400);
-                    echo json_encode("Paramètre de triage invalide.");
-                }
-            }
-            // /api/cocktails?recherche=mots_cles ->Recherche de cocktails sans filtre
-            elseif (isset($_GET['recherche'])) {
-                $mots_cles = $_GET['recherche'];
-                require __DIR__ . '/ressources/api/rechercheCocktail.php';
-            }
-            else {
-                http_response_code(400);
-                echo json_encode("Requête invalide.");
-            }
-            break;
-        case 'users':
-            $username = $requete_separee[2]; //Verifier isset
-            // /api/users/{username}/recommandations?tri=tri&type=type -> Cocktail qu'un utilisateur peut faire. Pour mon bar et galerie connecté
-            if (isset($_GET['type']) && isset($requete_separee[3]) && $requete_separee[3] == 'recommandations') {
-                $type = $_GET['type'];
-                require __DIR__ . '/ressources/api/getUserRecommandations.php';
-            }
-            // /api/users/{username}/recommandations?recherche=mots_cles ->Recherche de cocktail qu'un utilisateur peut faire
-            elseif (isset($_GET['recherche']) && $requete_separee[3] == 'recommandations') {
-                $mots_cles = $_GET['recherche'];
-                require __DIR__ . '/ressources/api/rechercheUserRecommandations.php';
-            }
-            // /api/users/{username}/ingredients ->Ingrédients dans mon bar
-            elseif ($requete_separee[3] == 'ingredients') {
-                require __DIR__ . '/ressources/api/getUserIngredients.php';
-            }
-            // /api/users/{username}/cocktails -> Cocktail qu'un utilisateur a créé(Profil)
-            elseif ($requete_separee[3] == 'cocktails') {
-                require __DIR__ . '/ressources/api/getUserCocktails.php';
-            }
-            // /api/users/{username} ->Information d'un utilisateur(Profil)
-            elseif(!isset($requete_separee[3])) {
-                require __DIR__ . '/ressources/api/getUserInfo.php';
-            }
-            else {
-                http_response_code(404);
-                echo json_encode("Requête invalide.");
-            }
-            break;
-        case 'ingredients':
-            // /api/ingredients ->Liste des ingrédients disponibles(Mon bar ou création de cocktail)
-            require __DIR__ . '/ressources/api/getIngredients.php';
-            break;
-        default:
-            http_response_code(404);
-            echo json_encode("Invalid request.");
-            break;
-    }
-}
-
-else if($methode == "DELETE") {
-    $json = file_get_contents('php://input');
-    $donnees = json_decode($json, true);
-
-    //TODO
-}
-// Routes statiques
-else {
-    switch ($uri) {
-        case '/':
-        case '/galerie':
-            if (isset($_SESSION['id_utilisateur'])) {
-                require __DIR__ . '/pages/galerie_connecte.php';
-            }
-            else {
-                require __DIR__ . '/pages/galerie.php';
-            }
-            break;
-        case '/inscription':
-            require __DIR__ . '/pages/inscription.php';
-            break;
-        case '/connexion':
-            require __DIR__ . '/pages/connexion.php';
-            break;
-        case '/monbar' :
-            if(isset($_SESSION['id_utilisateur'])){
-                require __DIR__ . '/pages/monbar.php';
-
-            }
-            else{
-                require __DIR__ . '/pages/connexion.php';
-            }
-            break;
-        case '/profile':
-            if(isset($_SESSION['id_utilisateur'])){
-                require __DIR__ . '/pages/profile.php';
-            }
-            else{
-                require __DIR__ . '/pages/connexion.php';
-            }
-            break;
-        default:
-            http_response_code(404);
-            require __DIR__ . '/pages/404.php';
-            break;
-    }
-}
-?>
+// For GET or POST
+// The 404.php which is inside the views folder will be called
+// The 404.php has access to $_GET and $_POST
+any('/404','views/404.php');

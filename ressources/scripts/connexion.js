@@ -9,14 +9,14 @@ document.getElementById("form-connexion").addEventListener("submit", (event) => 
     // Envoyer les données du formulaire à l'API PHP
     let formData = new FormData(event.target);
 
-    fetch("../ressources/api/connexion.php", {
+    fetch("/api/users/authentification", {
         method: "POST",
         body: formData
     })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                window.location.href = "../index.html";
+                window.location.href = "/galerie";
             } else {
                 data.errors.forEach(error => {
                     let errorElement = document.createElement("p");

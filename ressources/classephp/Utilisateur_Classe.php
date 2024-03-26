@@ -1,15 +1,16 @@
 <?php
-/*
- * Classe Utilisateur
- *
- * Permet de créer un objet Utilisateur qui contient les informations utiliser
- * pour la gestion d'un utilisateur dans la section mon profil. La classe représente
- * un utilisateur du site web connecté.
- *
- * Auteur : Yani Amellal
- * Date : 18 mars 2023
- *
- */
+/**
+* Classe Utilisateur
+*
+* Permet de créer un objet Utilisateur qui contient les informations utiliser
+* pour la gestion d'un utilisateur dans la section mon profil. La classe représente
+* un utilisateur du site web connecté.
+*
+* @version 1.0
+*
+* @author Yani Amellal
+*
+*/
 class Utilisateur implements JsonSerializable{
    //private $id_utilisateur;
     private $nom;

@@ -151,6 +151,18 @@
     font-style: italic;
 }
 
+ul#ingredients {
+    list-style-type: none;
+    text-align: left;
+    padding: 0;
+}
+
+ul#ingredients li {
+    display: flex;
+    column-gap: .5em;
+    width: 100%;
+}
+
 @media screen and (max-width: 850px) {
     #presentation {
         width: 100%;

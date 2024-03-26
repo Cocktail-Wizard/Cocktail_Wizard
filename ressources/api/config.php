@@ -1,16 +1,25 @@
-<?php
-function connexionBD(){
-    // Charger les variables d'environnement depuis le fichier .env
-    $env = parse_ini_file('../../.env');
 
-    // Définir les constantes pour les informations sensibles de la base de données
-    define('DB_HOST', $env['DB_HOST']);
-    define('DB_USER', $env['DB_USER']);
-    define('DB_PASSWORD', $env['DB_PASSWORD']);
-    define('DB_NAME', $env['DB_NAME']);
+<?php
+/**
+ * Fonction connexionBD
+ *
+ * Fonction qui permet de se connecter à la base de données. Fait appel au fichier configDonne.php
+ * qui contient les informations de connexion à la base de données. Il se situe dans le fichier parent
+ * du root du projet afin de ne pas être accessible dans le github.
+ *
+ * @return mysqli|null Retourne la connexion à la base de données ou null si la connexion a échoué
+ *
+ * @version 1.3
+ *
+ * @author Maxim Dmitriev, Vianney Veremme, Yani Amellal
+ */
+
+function connexionBD(){
+
+    require_once (__DIR__.'/../../../configDonne.php');
 
     // Créer la connexion à la base de données directement
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    $conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
 
     if ($conn->connect_error) {
         return null;

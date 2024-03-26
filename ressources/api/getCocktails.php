@@ -1,4 +1,27 @@
 <?php
+/**
+ * Script getCocktails
+ *
+ * Script de l'API qui permet de récupérer les cocktails de la galerie non filtrée.
+ *
+ * Type de requête : GET
+ *
+ * URL : /api/cocktails/tri/$tri
+ *
+ * @param string $tri Le type de tri des cocktails (date, like)
+ *
+ * @return JSON Un json contenant les informations des cocktails de la galerie non filtrée.
+ *
+ * @version 1.0
+ *
+ * @author Yani Amellal
+ *
+ * @see InfoAffichageCocktail.php
+ *
+ * @todo Ajouter la pagination
+ *
+ */
+header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
 
@@ -10,14 +33,15 @@ if($conn == null){
     echo json_encode("Erreur de connexion à la base de données.");
     exit();
 }
-
+$tri_s = mysqli_real_escape_string($conn, $tri);
 //Liste d'objets Cocktail
 $cocktails = [];
 //Liste d'id de cocktails
 $id_cocktail = [];
 
 //Demande les id_cocktail de tous les cocktails triée par date
-$requete_preparee = $conn->prepare("CALL GetCocktailGalerieNonFiltrer('like')");
+$requete_preparee = $conn->prepare("CALL GetCocktailGalerieNonFiltrer(?)");
+$requete_preparee->bind_param('s', $tri_s);
 $requete_preparee->execute();
 $resultat = $requete_preparee->get_result();
 

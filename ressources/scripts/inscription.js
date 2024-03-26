@@ -9,7 +9,7 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
     // Envoyer les données du formulaire à l'API PHP
     let formData = new FormData(event.target);
 
-    fetch("../ressources/api/inscription.php", {
+    fetch("/api/users", {
         method: "POST",
         body: formData
     })
@@ -24,7 +24,7 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
                 });
             } else {
                 // Rediriger vers la page de connexion si l'inscription est réussie (à changer)
-                window.location.href = "connexion.html";
+                window.location.href = "/connexion";
             }
         })
         .catch(error => {
