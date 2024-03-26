@@ -35,7 +35,7 @@ function usernameToId($username, $conn){
     }
     else{
         http_response_code(404);
-        echo json_encode("Aucun utilisateur associer au nom d'utilisateur n'a été trouvé.");
+        echo json_encode("Aucun utilisateur n'a été trouvé avec ce nom d'utilisateur.");
         exit();
     }
 
