@@ -3,7 +3,7 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
     event.preventDefault();
 
     // Réinitialiser les erreurs
-    let errorsContainer = document.getElementById("messErreur");
+    let errorsContainer = document.getElementById("message-erreur");
     errorsContainer.innerHTML = "";
 
     // Envoyer les données du formulaire à l'API PHP
