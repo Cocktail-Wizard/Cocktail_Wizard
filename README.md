@@ -6,7 +6,8 @@ Bienvenue dans le README de notre projet intégrateur dédié à la création d'
 
 ## Objectif
 
-Le principal objectif de ce projet est de concevoir une plateforme en ligne intuitive qui exploite une base de données pour permettre aux utilisateurs de découvrir, créer et partager une variété de cocktails. Cette plateforme vise à offrir une expérience conviviale et interactive, où les amateurs de cocktails peuvent explorer de nouvelles recettes, partager leurs créations, et interagir au sein d'une communauté dynamique.
+Le principal objectif de ce projet est de concevoir une plateforme en ligne intuitive qui exploite une base de données pour permettre aux utilisateurs de découvrir, créer et partager une variété de cocktails.
+Cette plateforme vise à offrir une expérience conviviale et interactive, où les amateurs de cocktails peuvent explorer de nouvelles recettes, partager leurs créations, et interagir au sein d'une communauté dynamique.
 
 ---
 
