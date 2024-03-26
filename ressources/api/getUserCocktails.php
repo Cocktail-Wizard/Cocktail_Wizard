@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script getUserCocktails
  *
@@ -25,7 +26,7 @@ require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 // Connexion à la base de données
 $conn = connexionBD();
 
-if($conn == null){
+if ($conn == null) {
     http_response_code(500);
     echo json_encode("Erreur de connexion à la base de données.");
     exit();
@@ -47,24 +48,21 @@ $resultat = $requete_preparee->get_result();
 
 $requete_preparee->close();
 
-if($resultat->num_rows > 0){
+if ($resultat->num_rows > 0) {
     //Ajoute les id des cocktails à la liste
-    while($row = $resultat->fetch_assoc()){
+    while ($row = $resultat->fetch_assoc()) {
         $id_cocktail[] = $row['id_cocktail'];
     }
-}
-else{
+} else {
     http_response_code(404);
     echo json_encode("Aucun cocktail trouvé.");
     exit();
 }
 
-foreach($id_cocktail as $id) {
+foreach ($id_cocktail as $id) {
     $cocktails[] = InfoAffichageCocktail($id, $conn);
 }
 
 echo json_encode($cocktails);
 
 $conn->close();
-
-?>

@@ -1,30 +1,31 @@
 <?php
+
 /**
-* Script ajouterIngredientMonBar
-*
-* Script de l'API qui permet d'ajouter un ingredient au bar de l'utilisateur.
-*
-* Type de requête : POST
-*
-* URL : /api/ingredients
-*
-* @param FormData : nomIngredient, username.
-*
-* @return JSON Un json contenant la liste mise à jour des ingredients du bar de l'utilisateur.
-*
-* @version 1.2
-*
-* @author Yani Amellal
-*/
+ * Script ajouterIngredientMonBar
+ *
+ * Script de l'API qui permet d'ajouter un ingredient au bar de l'utilisateur.
+ *
+ * Type de requête : POST
+ *
+ * URL : /api/ingredients
+ *
+ * @param FormData : nomIngredient, username.
+ *
+ * @return JSON Un json contenant la liste mise à jour des ingredients du bar de l'utilisateur.
+ *
+ * @version 1.2
+ *
+ * @author Yani Amellal
+ */
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
-require_once __DIR__ .'/fonctionAPIphp/usernameToId.php';
+require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
 $conn = connexionBD();
 
 $ingredients = [];
 
-if($conn == null){
+if ($conn == null) {
     http_response_code(500);
     echo json_encode("Erreur de connexion à la base de données.");
     exit();
@@ -43,18 +44,15 @@ $resultat = $requete_preparee->get_result();
 $requete_preparee->close();
 
 // Récupère les ingredients du bar de l'utilisateur
-if($resultat->num_rows > 0){
-    while($row = $resultat->fetch_assoc()){
+if ($resultat->num_rows > 0) {
+    while ($row = $resultat->fetch_assoc()) {
         $ingredients[] = $row['nom'];
     }
 
     echo json_encode($ingredients);
-}
-else {
+} else {
 
     echo json_encode("Aucun ingredient trouvé.");
-
 }
 
 $conn->close();
-?>

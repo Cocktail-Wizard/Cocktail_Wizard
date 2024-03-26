@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script getUserRecommandations
  *
@@ -36,12 +37,12 @@ $cocktails = [];
 // Connexion à la base de données
 $conn = connexionBD();
 
-if($conn == null){
+if ($conn == null) {
     http_response_code(500);
     echo json_encode("Erreur de connexion à la base de données.");
     exit();
 }
-if($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != 'communaute'){
+if ($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != 'communaute') {
     http_response_code(400);
     echo json_encode("Paramètre de type invalide.");
     exit();
@@ -50,25 +51,25 @@ if($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != 'c
 $userID = usernameToId($username, $conn);
 
 // Vérifie que les paramètres sont valides
-if((isset($tri) && $tri != 'like' && $tri != 'date') ||
-(isset($type && $type != 'classiques' && $type != 'favoris'
-    && $type != 'communaute'))){
+if ((isset($tri) && $tri != 'like' && $tri != 'date') ||
+    (isset($type) && $type != 'classiques' && $type != 'favoris'
+        && $type != 'communaute')
+) {
 
     http_response_code(400);
     echo json_encode("Paramètre invalide.");
     exit();
 }
 // Demande différente à la base de données selon les paramètres définis
-elseif (isset($tri)){
+elseif (isset($tri)) {
     $triage_s = mysqli_real_escape_string($conn, $tri);
     $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?)");
     $requete_preparee->bind_param("is", $userID, $triage_s);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
-}
-elseif (isset($type)) {
-    switch($type){
+} elseif (isset($type)) {
+    switch ($type) {
         case 'classiques':
             $requete_preparee = $conn->prepare("CALL GetCocktailPossibleClassique(?)");
             $requete_preparee->bind_param("i", $userID);
@@ -97,23 +98,21 @@ elseif (isset($type)) {
     }
 }
 
-if($resultat->num_rows > 0){
+if ($resultat->num_rows > 0) {
     //Ajoute les id des cocktails à la liste
-    while($row = $resultat->fetch_assoc()){
+    while ($row = $resultat->fetch_assoc()) {
         $idCocktails[] = $row['idCocktails'];
     }
-}
-else{
+} else {
     http_response_code(404);
     echo json_encode("Aucun cocktail trouvé.");
     exit();
 }
 
-foreach($idCocktails as $id) {
+foreach ($idCocktails as $id) {
     $cocktails[] = InfoAffichageCocktail($id, $conn);
 }
 
 echo json_encode($cocktails);
 
 $conn->close();
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script connexion
  *
@@ -38,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($erreurs)) {
         $conn = connexionBD();
 
-        if($conn == null){
+        if ($conn == null) {
             http_response_code(500);
             echo json_encode("Erreur de connexion à la base de données.");
             exit();

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script enleverIngredientMonBar
  *
@@ -18,7 +19,7 @@
  */
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
-require_once __DIR__ .'/fonctionAPIphp/usernameToId.php';
+require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
 //s'assurer que on delete le bon ingredient du bon utilisateur
 $data = json_decode(file_get_contents("php://input"), true);
@@ -51,9 +52,7 @@ if ($resultat->num_rows > 0) {
     }
 
     echo json_encode($ingredients);
-}
-else {
+} else {
     echo json_encode("Aucun ingredient trouvé.");
 }
 $conn->close();
-?>
