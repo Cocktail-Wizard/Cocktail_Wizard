@@ -10,6 +10,13 @@ if ($conn == null) {
     echo json_encode("Erreur de connexion à la base de données.");
     exit();
 }
+
+if (!isset($_GET['id_cocktail'])) {
+    http_response_code(400);
+    echo json_encode("Erreur: id_cocktail manquant.");
+    exit();
+}
+
 // Liste d'objets commentaires du cocktail
 $commentaires = [];
 

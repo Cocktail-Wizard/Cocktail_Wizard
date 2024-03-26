@@ -36,16 +36,14 @@ function InfoAffichageCocktail($id_cocktail, $conn)
             $row['profil_saveur'],
             $row['type_verre']
         );
-    }
 
-    $requete_preparee->close();
+        $requete_preparee->close();
 
-    $requete_preparee = $conn->prepare("CALL GetListeIngredientsCocktail(?)");
-    $requete_preparee->bind_param("i", $id_cocktail);
-    $requete_preparee->execute();
-    $resultat = $requete_preparee->get_result();
+        $requete_preparee = $conn->prepare("CALL GetListeIngredientsCocktail(?)");
+        $requete_preparee->bind_param("i", $id_cocktail);
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
 
-    if ($resultat->num_rows > 0) {
         while ($row = $resultat->fetch_assoc()) {
             $ingredient = new IngredientCocktail($row['quantite'], $row['unite'], $row['nom']);
             $cocktail->ajouterIngredient($ingredient);
@@ -53,7 +51,6 @@ function InfoAffichageCocktail($id_cocktail, $conn)
     }
 
     $requete_preparee->close();
-
 
     return $cocktail;
 }
