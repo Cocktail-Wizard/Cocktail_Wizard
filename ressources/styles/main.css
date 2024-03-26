@@ -54,7 +54,7 @@ input {
 }
 
 body>footer {
-    background-color: rgb(0, 0, 0 / 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     height: 2em;
     align-items: center;
     display: flex;
