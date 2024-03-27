@@ -42,6 +42,7 @@ if ($conn == null) {
     echo json_encode("Erreur de connexion à la base de données.");
     exit();
 }
+
 if ($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != 'communaute') {
     http_response_code(400);
     echo json_encode("Paramètre de type invalide.");

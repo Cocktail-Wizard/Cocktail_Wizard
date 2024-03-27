@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Classe IngredientCocktail
  *
@@ -11,7 +12,6 @@
 
 class IngredientCocktail implements JsonSerializable
 {
-
     private $quantite;
     private $unite;
     private $ingredient; // Nom de l'ingrédient(peut être un alcool ou un autre ingrédient)
