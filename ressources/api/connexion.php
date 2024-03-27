@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script connexion
  *
@@ -16,6 +17,7 @@
  *
  * @author Pablo Hamel-Corôa, Vianney Veremme, Yani Amellal
  */
+
 header('Content-Type: application/json');
 require_once("config.php");
 session_start();
@@ -23,14 +25,15 @@ session_start();
 $erreurs = array();
 $success = false;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// Vérifier si la clé REQUEST_METHOD existe dans $_SERVER
+if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
     // Valider le nom d'utilisateur
-    if (empty($_POST['nom'])) {
+    if (!isset($_POST['nom']) || empty($_POST['nom'])) {
         $erreurs[] = "Le nom d'utilisateur est requis!";
     }
 
     // Valider le mot de passe
-    if (empty($_POST['mdp'])) {
+    if (!isset($_POST['mdp']) || empty($_POST['mdp'])) {
         $erreurs[] = "Le mot de passe est requis!";
     }
 
@@ -38,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($erreurs)) {
         $conn = connexionBD();
 
-        if($conn == null){
+        if ($conn == null) {
             http_response_code(500);
             echo json_encode("Erreur de connexion à la base de données.");
             exit();

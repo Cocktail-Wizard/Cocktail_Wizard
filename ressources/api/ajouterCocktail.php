@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script AjouterCocktail
  *
@@ -19,6 +20,7 @@
  *
  * @author Yani Amellal
  */
+
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/classephp/Cocktail_Classe.php';
@@ -33,12 +35,19 @@ if ($conn == null) {
 
 $donnee = json_decode(file_get_contents('php://input'), true);
 
-$userId = usernameToId(trim($donnee['username']) , $conn);
+$userId = usernameToId(trim($donnee['username']), $conn);
 
 $requete_preparee = $conn->prepare("CALL CreerCocktail(?, ?, ?, ?, ?, ?, ?,)");
-$requete_preparee->bind_param('sssssss', $donnee['nom'], $donnee['description'],
-                    $donnee['desc_cocktail'], $donnee['preparation'], $donnee['typeVerre'],
-                    $donnee['profilSaveur'], $donnee['nomAlcoolPrincipale']);
+$requete_preparee->bind_param(
+    'sssssss',
+    $donnee['nom'],
+    $donnee['description'],
+    $donnee['desc_cocktail'],
+    $donnee['preparation'],
+    $donnee['typeVerre'],
+    $donnee['profilSaveur'],
+    $donnee['nomAlcoolPrincipale']
+);
 $requete_preparee->execute();
 $resultat = $requete_preparee->get_result();
 $requete_preparee->close();
@@ -46,8 +55,7 @@ $requete_preparee->close();
 if ($resultat->num_rows == 1) {
     $row = $resultat->fetch_assoc();
     $idCocktailNouveau = $row['id_cocktail'];
-}
-else {
+} else {
     http_response_code(404);
     echo json_encode("Erreur");
     exit();
@@ -55,7 +63,6 @@ else {
 
 if (isset($donnee['ingredients'])) {
     foreach ($donnee['ingredients'] as $ingredient) {
-
         $nomIng = $ingredient['nomIng'];
         $quantite = $ingredient['quantite'];
         $unite = $ingredient['unite'];
@@ -67,8 +74,7 @@ if (isset($donnee['ingredients'])) {
     }
 
     echo json_encode("Cocktail ajouté avec succès.");
-}
-else {
+} else {
     http_response_code(404);
     echo json_encode("Erreur");
     exit();

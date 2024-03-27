@@ -3,7 +3,7 @@ async function chargerModeleHTML(url) {
     try {
         const reponse = await fetch(url);
         if (!reponse.ok) {
-            throw new Error("Impossible de charger le modèle HTML.");
+            throw new Error('Impossible de charger le modèle HTML.');
         }
 
         return await reponse.text();

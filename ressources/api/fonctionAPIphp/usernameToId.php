@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Fonction usernameToId
  *
@@ -15,8 +16,8 @@
  * @version 1.0
  * @date Mars 2024
  */
-function usernameToId($username, $conn){
-
+function usernameToId($username, $conn)
+{
 
     $username_s = mysqli_real_escape_string($conn, $username);
 
@@ -29,11 +30,10 @@ function usernameToId($username, $conn){
     $requete_preparee->close();
 
     // Si l'utilisateur n'existe pas, retourne une erreur 404
-    if($resultat->num_rows == 1){
+    if ($resultat->num_rows == 1) {
         $row = $resultat->fetch_assoc();
         $id_user = $row['id_utilisateur'];
-    }
-    else{
+    } else {
         http_response_code(404);
         echo json_encode("Aucun utilisateur n'a été trouvé avec ce nom d'utilisateur.");
         exit();
@@ -41,4 +41,3 @@ function usernameToId($username, $conn){
 
     return $id_user; // Retourne l'id de l'utilisateur
 }
-?>

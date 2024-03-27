@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script rechercheCocktail
  *
@@ -21,6 +22,7 @@
  *
  * @see InfoAffichageCocktail.php
  */
+
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
@@ -64,5 +66,3 @@ foreach ($id_cocktail as $id) {
 echo json_encode($cocktails);
 
 $conn->close();
-
-?>
