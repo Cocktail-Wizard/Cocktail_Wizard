@@ -10,8 +10,8 @@
  * @version 1.0
  *
  * @author Yani Amellal
- *
  */
+
 class Utilisateur implements JsonSerializable
 {
     //private $id_utilisateur;

@@ -10,6 +10,7 @@
  *
  * @version 1.0
  */
+
 class Cocktail implements JsonSerializable
 {
     private $id_cocktail;

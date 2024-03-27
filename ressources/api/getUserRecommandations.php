@@ -51,15 +51,15 @@ if ($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != '
 $userID = usernameToId($username, $conn);
 
 // Vérifie que les paramètres sont valides
-if ((isset($tri) && $tri != 'like' && $tri != 'date') ||
-    (isset($type) && $type != 'classiques' && $type != 'favoris'
-        && $type != 'communaute')
-) {
+$isTriInvalid = (isset($tri) && !in_array($tri, ['like', 'date']));
+$isTypeInvalid = (isset($type) && !in_array($type, ['classiques', 'favoris', 'communaute']));
 
+if ($isTriInvalid || $isTypeInvalid) {
     http_response_code(400);
     echo json_encode("Paramètre invalide.");
     exit();
 }
+
 // Demande différente à la base de données selon les paramètres définis
 elseif (isset($tri)) {
     $triage_s = mysqli_real_escape_string($conn, $tri);

@@ -7,8 +7,8 @@
  *
  * Auteur : Yani Amellal
  * Date : 18 mars 2023
- *
  */
+
 class IngredientCocktail implements JsonSerializable
 {
 
