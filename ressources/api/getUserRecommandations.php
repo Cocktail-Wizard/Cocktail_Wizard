@@ -58,12 +58,8 @@ $isTypeInvalid = (isset($type) && !in_array($type, ['classiques', 'favoris', 'co
 if ($isTriInvalid || $isTypeInvalid) {
     http_response_code(400);
     echo json_encode("Paramètre invalide.");
-
     exit();
-}
-
-// Demande différente à la base de données selon les paramètres définis
-elseif (isset($tri)) {
+} elseif (isset($tri)) {
     $triage_s = mysqli_real_escape_string($conn, $tri);
     $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?)");
     $requete_preparee->bind_param("is", $userID, $triage_s);
