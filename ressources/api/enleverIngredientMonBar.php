@@ -17,6 +17,7 @@
  *
  * @author Léonard Marcoux, Yani Amellal
  */
+
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     http_response_code(405); // Méthode non autorisée
     echo json_encode("Seules les requêtes de type DELETE sont autorisées.");

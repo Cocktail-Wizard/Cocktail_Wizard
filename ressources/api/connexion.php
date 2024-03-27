@@ -17,6 +17,7 @@
  *
  * @author Pablo Hamel-Corôa, Vianney Veremme, Yani Amellal
  */
+
 header('Content-Type: application/json');
 require_once("config.php");
 session_start();

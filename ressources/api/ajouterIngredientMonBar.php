@@ -17,6 +17,7 @@
  *
  * @author Yani Amellal
  */
+
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
@@ -52,7 +53,6 @@ if ($resultat->num_rows > 0) {
 
     echo json_encode($ingredients);
 } else {
-
     echo json_encode("Aucun ingredient trouvé.");
 }
 
