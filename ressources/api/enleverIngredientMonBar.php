@@ -1,18 +1,38 @@
 <?php
-require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
+/**
+ * Script enleverIngredientMonBar
+ *
+ * Script de l'API qui permet de retirer un ingrédient du bar d'un utilisateur.
+ *
+ * Type de requête : DELETE
+ *
+ * URL : /api/users/ingredients
+ *
+ * @param JSON : nomIngredient, username.
+ *
+ * @return JSON La liste des ingrédients du bar de l'utilisateur
+ *
+ * @version 1.1
+ *
+ * @author Léonard Marcoux, Yani Amellal
+ */
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     http_response_code(405); // Méthode non autorisée
     echo json_encode("Seules les requêtes de type DELETE sont autorisées.");
     exit();
 }
 
+header('Content-Type: application/json');
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
+
 //s'assurer que on delete le bon ingredient du bon utilisateur
 $data = json_decode(file_get_contents("php://input"), true);
-if (!isset($data['nomIngredient']) || !isset($data['typeIngredient']) || !isset($data['username'])) {
+if (!isset($data['nomIngredient']) || !isset($data['username'])) {
     http_response_code(400);
-    exit("Paramètres manquants.");
+    echo json_encode("Paramètres manquants.");
+    exit();
 }
 
 $conn = connexionBD();
@@ -24,12 +44,10 @@ if ($conn == null) {
 }
 
 $nomIngredient = mysqli_real_escape_string($conn, $data['nomIngredient']);
-$typeIngredient = mysqli_real_escape_string($conn, $data['typeIngredient']);
-$username = mysqli_real_escape_string($conn, $data['username']);
-$userId = usernameToId($username, $conn);
+$userId = usernameToId($data['username'], $conn);
 
-$requete_preparee = $conn->prepare("CALL RetraitIngredient(?,?,?)");
-$requete_preparee->bind_param('iss', $userId, $nomIngredient, $typeIngredient);
+$requete_preparee = $conn->prepare("CALL RetraitIngredient(?,?)");
+$requete_preparee->bind_param('is', $userId, $nomIngredient);
 $requete_preparee->execute();
 $resultat = $requete_preparee->get_result();
 $requete_preparee->close();
@@ -42,6 +60,7 @@ if ($resultat->num_rows > 0) {
     }
 
     echo json_encode($ingredients);
+} else {
+    echo json_encode("Aucun ingredient trouvé.");
 }
-
 $conn->close();

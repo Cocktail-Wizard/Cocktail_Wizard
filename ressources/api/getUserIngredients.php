@@ -1,8 +1,24 @@
 <?php
-/*
-* Fonction qui retourne la liste des ingrédients d'un utilisateur
-* pour mon bar.
-*/
+
+/**
+ * Script getUserIngredients
+ *
+ * Script de l'API qui permet de récupérer la liste des ingrédients qu'un utilisateur possède.
+ * Pour MonBar.
+ *
+ * Type de requête : GET
+ *
+ * URL : /api/users/$username/ingredients
+ *
+ * @param string $username Le nom d'utilisateur de l'utilisateur.
+ *
+ * @return JSON La liste des ingrédients de l'utilisateur.
+ *
+ * @version 1.0
+ *
+ * @author Yani Amellal
+ *
+ */
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';

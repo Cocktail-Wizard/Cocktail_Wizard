@@ -1,15 +1,17 @@
 <?php
-/*
+
+/**
  * Classe Cocktail
  *
  * Permet de créer un objet Cocktail qui contient les informations utiliser
  * pour l'affichage d'un cocktail.
  *
- * Auteur : Yani Amellal
- * Date : 18 mars 2023
+ * @author Yani Amellal
  *
+ * @version 1.0
  */
-class Cocktail implements JsonSerializable {
+class Cocktail implements JsonSerializable
+{
     private $id_cocktail;
     private $nom;
     private $desc;
@@ -28,8 +30,20 @@ class Cocktail implements JsonSerializable {
 
     private $ingredients_cocktail = [];
 
-    public function __construct($id_cocktail ,$nom, $desc, $preparation, $img_cocktail, $img_auteur, $auteur, $date,
-     $nb_like, $alcool_principale, $profil_saveur, $type_verre) {
+    public function __construct(
+        $id_cocktail,
+        $nom,
+        $desc,
+        $preparation,
+        $img_cocktail,
+        $img_auteur,
+        $auteur,
+        $date,
+        $nb_like,
+        $alcool_principale,
+        $profil_saveur,
+        $type_verre
+    ) {
         $this->id_cocktail = $id_cocktail;
         $this->nom = $nom;
         $this->desc = $desc;
@@ -44,13 +58,15 @@ class Cocktail implements JsonSerializable {
         $this->type_verre = $type_verre;
     }
 
+
     // Ajoute un ingrédient à la liste des ingrédients du cocktail
-    public function ajouterIngredient($ingredient) {
+    public function ajouterIngredient($ingredient)
+    {
         $this->ingredients_cocktail[] = $ingredient;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return get_object_vars($this);
     }
 }
-?>

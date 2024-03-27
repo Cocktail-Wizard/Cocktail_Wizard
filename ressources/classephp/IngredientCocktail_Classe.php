@@ -9,20 +9,22 @@
  * Date : 18 mars 2023
  *
  */
-class IngredientCocktail implements JsonSerializable {
+class IngredientCocktail implements JsonSerializable
+{
 
     private $quantite;
     private $unite;
     private $ingredient; // Nom de l'ingrédient(peut être un alcool ou un autre ingrédient)
 
-    public function __construct($quantite, $unite, $ingredient) {
+    public function __construct($quantite, $unite, $ingredient)
+    {
         $this->quantite = $quantite;
         $this->unite = $unite;
         $this->ingredient = $ingredient;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return get_object_vars($this);
     }
 }
-?>

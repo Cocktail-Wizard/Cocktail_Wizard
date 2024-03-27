@@ -1,4 +1,27 @@
 <?php
+
+/**
+ * Script rechercheCocktail
+ *
+ * Script de l'API qui permet de rechercher des cocktails en fonction de mots-clés
+ * et de les trier selon un critère donné.
+ *
+ * Type de requête : GET
+ *
+ * URL : /api/cocktails/tri/{like/date}/recherche/{mot-clé, mot-clé, mot-clé}
+ *
+ * @param string $tri Le type de triage voulu.
+ *
+ * @param string $mots Les mots-clés de recherche.
+ *
+ * @return JSON Un json contenant les informations des cocktails trouvés.
+ *
+ * @version 1.0
+ *
+ * @author Yani Amellal
+ *
+ * @see InfoAffichageCocktail.php
+ */
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
