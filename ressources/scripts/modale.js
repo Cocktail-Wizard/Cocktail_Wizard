@@ -1,4 +1,4 @@
-const sectionModale = document.getElementById('contenant-modale')
+const sectionModale = document.getElementById('contenant-modale');
 
 // Fonction pour réinitialiser la boîte modale
 function reinitialiserModale(modeleHTML) {
