@@ -58,6 +58,7 @@ $isTypeInvalid = (isset($type) && !in_array($type, ['classiques', 'favoris', 'co
 if ($isTriInvalid || $isTypeInvalid) {
     http_response_code(400);
     echo json_encode("Paramètre invalide.");
+
     exit();
 }
 
