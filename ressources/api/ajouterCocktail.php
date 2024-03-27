@@ -20,6 +20,7 @@
  *
  * @author Yani Amellal
  */
+
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/classephp/Cocktail_Classe.php';
@@ -62,7 +63,6 @@ if ($resultat->num_rows == 1) {
 
 if (isset($donnee['ingredients'])) {
     foreach ($donnee['ingredients'] as $ingredient) {
-
         $nomIng = $ingredient['nomIng'];
         $quantite = $ingredient['quantite'];
         $unite = $ingredient['unite'];

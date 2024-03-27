@@ -24,8 +24,8 @@
  * @author Yani Amellal
  *
  * @see InfoAffichageCocktail.php
- *
  */
+
 header("Content-Type: application/json");
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
@@ -42,6 +42,7 @@ if ($conn == null) {
     echo json_encode("Erreur de connexion à la base de données.");
     exit();
 }
+
 if ($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != 'communaute') {
     http_response_code(400);
     echo json_encode("Paramètre de type invalide.");
@@ -51,17 +52,14 @@ if ($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != '
 $userID = usernameToId($username, $conn);
 
 // Vérifie que les paramètres sont valides
-if ((isset($tri) && $tri != 'like' && $tri != 'date') ||
-    (isset($type) && $type != 'classiques' && $type != 'favoris'
-        && $type != 'communaute')
-) {
+$isTriInvalid = (isset($tri) && !in_array($tri, ['like', 'date']));
+$isTypeInvalid = (isset($type) && !in_array($type, ['classiques', 'favoris', 'communaute']));
 
+if ($isTriInvalid || $isTypeInvalid) {
     http_response_code(400);
     echo json_encode("Paramètre invalide.");
     exit();
-}
-// Demande différente à la base de données selon les paramètres définis
-elseif (isset($tri)) {
+} elseif (isset($tri)) {
     $triage_s = mysqli_real_escape_string($conn, $tri);
     $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?)");
     $requete_preparee->bind_param("is", $userID, $triage_s);

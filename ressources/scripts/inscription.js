@@ -1,10 +1,10 @@
 // JavaScript pour gérer la soumission du formulaire et afficher les erreurs
-document.getElementById("form-inscription").addEventListener("submit", (event) => {
+document.getElementById('form-inscription').addEventListener('submit', (event) => {
     event.preventDefault();
 
     // Réinitialiser les erreurs
-    let errorsContainer = document.getElementById("messErreur");
-    errorsContainer.innerHTML = "";
+    let errorsContainer = document.getElementById('message-erreur');
+    errorsContainer.innerHTML = '';
 
     // Envoyer les données du formulaire à l'API PHP
     let formData = new FormData(event.target);
@@ -31,6 +31,6 @@ document.getElementById("form-inscription").addEventListener("submit", (event) =
 
         })
         .catch(error => {
-            console.error("Erreur lors de la soumission du formulaire:", error);
+            console.error('Erreur lors de la soumission du formulaire:', error);
         });
 });

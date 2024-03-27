@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <section id="messErreur">
+    <section id="message-erreur">
         <!-- Messages d'erreur affichés dynamiquement par JavaScript -->
     </section>
 

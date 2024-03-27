@@ -16,7 +16,7 @@
 
     <main>
         <!-- Mettre le chemin approprié une fois que l'organisation des fichiers soit établie -->
-        <img src="../ressources/images/sparkles.png" id="logoCW" alt="Logo Cocktail Wizard">
+        <img src="../ressources/images/sparkles.png" id="logo-cocktail-wizard" alt="Logo Cocktail Wizard">
         <form id="form-connexion" method="post">
             <h1>Cocktail Wizard</h1>
 

@@ -41,10 +41,10 @@ DELIMITER //
 DROP PROCEDURE IF EXISTS InscriptionUtilisateur;
 
 CREATE PROCEDURE InscriptionUtilisateur(
-	IN var_nom VARCHAR(100),
-	IN var_courriel VARCHAR(255),
-	IN var_mdp_hashed VARCHAR(255),
-	IN var_date_naissance DATE)
+    IN var_nom VARCHAR(100),
+    IN var_courriel VARCHAR(255),
+    IN var_mdp_hashed VARCHAR(255),
+    IN var_date_naissance DATE)
 BEGIN
 	INSERT INTO Utilisateur (nom, courriel, mdp_hashed, date_naiss)
 	VALUES (var_nom, var_courriel, var_mdp_hashed, var_date_naissance);
@@ -59,7 +59,7 @@ END
 DROP PROCEDURE IF EXISTS ConnexionUtilisateur;
 CREATE PROCEDURE ConnexionUtilisateur(IN var_nom VARCHAR(255))
 BEGIN
-	SELECT mdp_hashed FROM Utilisateur WHERE nom = var_nom;
+    SELECT mdp_hashed FROM Utilisateur WHERE nom = var_nom;
 END
 //
 
@@ -71,7 +71,7 @@ DROP PROCEDURE IF EXISTS GetIdUser;
 CREATE PROCEDURE GetIdUser(IN username VARCHAR(255)
 )
 BEGIN
-	SELECT id_utilisateur FROM Utilisateur WHERE nom = username;
+    SELECT id_utilisateur FROM Utilisateur WHERE nom = username;
 END
 //
 
@@ -83,39 +83,39 @@ DROP PROCEDURE IF EXISTS AjoutIngredient;
 CREATE PROCEDURE AjoutIngredient(IN var_id_utilisateur
 INT, IN var_nom_ingredient VARCHAR(255))
 BEGIN
-	IF var_nom_ingredient IN (
-	    SELECT nom
-	    FROM Ingredient
-	) THEN
-		INSERT INTO Ingredient_Utilisateur (
-			id_utilisateur, id_ingredient
-		)
-		VALUES (
-			var_id_utilisateur,
-			(
-				SELECT id_ingredient
-				FROM Ingredient
-				WHERE nom = var_nom_ingredient
-			)
-		);
-	ELSEIF var_nom_ingredient IN (
-	    SELECT nom
-	    FROM Alcool
-	) THEN
-		INSERT INTO Alcool_Utilisateur (
-			id_utilisateur, id_alcool
-		)
-		VALUES (
-			var_id_utilisateur,
-			(
-				SELECT id_alcool
-				FROM Alcool
-				WHERE nom = var_nom_ingredient
-			)
-		);
-	END IF;
+    IF var_nom_ingredient IN (
+        SELECT nom
+        FROM Ingredient
+    ) THEN
+        INSERT INTO Ingredient_Utilisateur (
+            id_utilisateur, id_ingredient
+        )
+        VALUES (
+            var_id_utilisateur,
+            (
+                SELECT id_ingredient
+                FROM Ingredient
+                WHERE nom = var_nom_ingredient
+            )
+        );
+    ELSEIF var_nom_ingredient IN (
+        SELECT nom
+        FROM Alcool
+    ) THEN
+        INSERT INTO Alcool_Utilisateur (
+            id_utilisateur, id_alcool
+        )
+        VALUES (
+            var_id_utilisateur,
+            (
+                SELECT id_alcool
+                FROM Alcool
+                WHERE nom = var_nom_ingredient
+            )
+        );
+    END IF;
 
-	CALL GetMesIngredients (var_id_utilisateur);
+    CALL GetMesIngredients (var_id_utilisateur);
 END
 //
 
@@ -128,33 +128,33 @@ DROP PROCEDURE IF EXISTS RetraitIngredient;
 CREATE PROCEDURE RetraitIngredient(IN var_id_utilisateur
 INT, IN var_nom_ingredient VARCHAR(255))
 BEGIN
-	IF var_nom_ingredient IN (
-	    SELECT nom
-	    FROM Ingredient
-	) THEN
-		DELETE FROM Ingredient_Utilisateur
-		WHERE
-		    id_utilisateur = var_id_utilisateur
-		    AND id_ingredient = (
-		        SELECT id_ingredient
-		        FROM Ingredient
-		        WHERE nom = var_nom_ingredient
-		    );
-	ELSEIF var_nom_ingredient IN (
-		SELECT nom
-		FROM Alcool
-	) THEN
-		DELETE FROM Alcool_Utilisateur
-		WHERE
-			id_utilisateur = var_id_utilisateur
-			AND id_alcool = (
-				SELECT id_alcool
-				FROM Alcool
-				WHERE nom = var_nom_ingredient
-			);
-	END IF;
+    IF var_nom_ingredient IN (
+        SELECT nom
+        FROM Ingredient
+    ) THEN
+        DELETE FROM Ingredient_Utilisateur
+        WHERE
+            id_utilisateur = var_id_utilisateur
+            AND id_ingredient = (
+                SELECT id_ingredient
+                FROM Ingredient
+                WHERE nom = var_nom_ingredient
+            );
+    ELSEIF var_nom_ingredient IN (
+        SELECT nom
+        FROM Alcool
+    ) THEN
+        DELETE FROM Alcool_Utilisateur
+        WHERE
+            id_utilisateur = var_id_utilisateur
+            AND id_alcool = (
+                SELECT id_alcool
+                FROM Alcool
+                WHERE nom = var_nom_ingredient
+            );
+    END IF;
 
-	CALL GetMesIngredients (var_id_utilisateur);
+    CALL GetMesIngredients (var_id_utilisateur);
 END
 //
 
@@ -167,14 +167,14 @@ DROP PROCEDURE IF EXISTS LikeCocktail;
 CREATE PROCEDURE LikeCocktail(IN var_id_cocktail INT
 , IN var_id_utilisateur INT)
 BEGIN
-	INSERT INTO cocktail_liked (id_cocktail, id_utilisateur)
-	VALUES (
-	        var_id_cocktail, var_id_utilisateur
-	);
+    INSERT INTO cocktail_liked (id_cocktail, id_utilisateur)
+    VALUES (
+            var_id_cocktail, var_id_utilisateur
+    );
 
-	SELECT C.nb_like
-	FROM Cocktail C
-	WHERE id_cocktail = var_id_cocktail;
+    SELECT C.nb_like
+    FROM Cocktail C
+    WHERE id_cocktail = var_id_cocktail;
 END
 //
 
@@ -188,13 +188,13 @@ DROP PROCEDURE IF EXISTS DislikeCocktail;
 CREATE PROCEDURE DislikeCocktail(IN var_id_cocktail
 INT, IN var_id_utilisateur INT)
 BEGIN
-	DELETE FROM cocktail_liked
-	WHERE id_cocktail = var_id_cocktail
-	    AND id_utilisateur = var_id_utilisateur;
+    DELETE FROM cocktail_liked
+    WHERE id_cocktail = var_id_cocktail
+        AND id_utilisateur = var_id_utilisateur;
 
-	SELECT C.nb_like
-	FROM Cocktail C
-	WHERE id_cocktail = var_id_cocktail;
+    SELECT C.nb_like
+    FROM Cocktail C
+    WHERE id_cocktail = var_id_cocktail;
 END
 //
 
@@ -207,12 +207,12 @@ DROP PROCEDURE IF EXISTS LikeCommentaire;
 CREATE PROCEDURE LikeCommentaire(IN var_id_commentaire
 INT, IN var_id_utilisateur INT)
 BEGIN
-	INSERT INTO commentaire_liked (id_commentaire, id_utilisateur)
-	VALUES (var_id_commentaire, var_id_utilisateur);
+    INSERT INTO commentaire_liked (id_commentaire, id_utilisateur)
+    VALUES (var_id_commentaire, var_id_utilisateur);
 
-	SELECT C.nb_like
-	FROM Commentaire C
-	WHERE id_commentaire = var_id_commentaire;
+    SELECT C.nb_like
+    FROM Commentaire C
+    WHERE id_commentaire = var_id_commentaire;
 END
 //
 
@@ -224,13 +224,13 @@ DROP PROCEDURE IF EXISTS DislikeCommentaire;
 
 CREATE PROCEDURE DislikeCommentaire(IN var_id_commentaire INT, IN var_id_utilisateur INT)
 BEGIN
-	DELETE FROM commentaire_liked
-	WHERE id_commentaire = var_id_commentaire
-	    AND id_utilisateur = var_id_utilisateur;
+    DELETE FROM commentaire_liked
+    WHERE id_commentaire = var_id_commentaire
+        AND id_utilisateur = var_id_utilisateur;
 
-	SELECT C.nb_like
-	FROM Commentaire C
-	WHERE id_commentaire = var_id_commentaire;
+    SELECT C.nb_like
+    FROM Commentaire C
+    WHERE id_commentaire = var_id_commentaire;
 END
 //
 
@@ -243,24 +243,24 @@ END
 DROP PROCEDURE IF EXISTS CreerCocktail;
 
 CREATE PROCEDURE CreerCocktail(
-	IN var_nom VARCHAR(255),
-	IN var_desc_cocktail TEXT,
-	IN var_preparation TEXT,
-	IN var_type_verre VARCHAR(50),
-	IN var_profil_saveur VARCHAR(50),
-	IN var_id_utilisateur INT,
-	IN var_alcool_principal VARCHAR(255)
+    IN var_nom VARCHAR(255),
+    IN var_desc_cocktail TEXT,
+    IN var_preparation TEXT,
+    IN var_type_verre VARCHAR(50),
+    IN var_profil_saveur VARCHAR(50),
+    IN var_id_utilisateur INT,
+    IN var_alcool_principal VARCHAR(255)
 )
 BEGIN
-	INSERT INTO Cocktail (
-		nom, desc_cocktail, preparation, type_verre, profil_saveur, id_utilisateur, id_alcool
-	)
-	VALUES (
-		var_nom, var_desc_cocktail, var_preparation,
-		var_type_verre, var_profil_saveur, var_id_utilisateur
-		(SELECT id_alcool FROM Alcool WHERE nom = var_alcool_principal)
-	);
-	SELECT LAST_INSERT_ID() AS id_cocktail;
+    INSERT INTO Cocktail (
+        nom, desc_cocktail, preparation, type_verre, profil_saveur, id_utilisateur, id_alcool
+    )
+    VALUES (
+        var_nom, var_desc_cocktail, var_preparation,
+        var_type_verre, var_profil_saveur, var_id_utilisateur
+        (SELECT id_alcool FROM Alcool WHERE nom = var_alcool_principal)
+    );
+    SELECT LAST_INSERT_ID() AS id_cocktail;
 END
 //
 
@@ -323,18 +323,18 @@ END
 DROP PROCEDURE IF EXISTS AjouterIngredientAutreCocktail;
 
 CREATE PROCEDURE AjouterIngredientAutreCocktail(
-	IN var_id_cocktail INT,
-	IN var_nom_ingredient_autre VARCHAR(255),
-	IN var_quantite FLOAT,
-	IN var_unite VARCHAR(50)
+    IN var_id_cocktail INT,
+    IN var_nom_ingredient_autre VARCHAR(255),
+    IN var_quantite FLOAT,
+    IN var_unite VARCHAR(50)
 )
 BEGIN
-	INSERT INTO ingredient_cocktail (
-		id_cocktail, ingredient_autre, quantite, unite
-	)
-	VALUES (
-		var_id_cocktail, var_nom_ingredient_autre, var_quantite, var_unite
-	);
+    INSERT INTO ingredient_cocktail (
+        id_cocktail, ingredient_autre, quantite, unite
+    )
+    VALUES (
+        var_id_cocktail, var_nom_ingredient_autre, var_quantite, var_unite
+    );
 END
 //
 
@@ -344,19 +344,19 @@ END
 DROP PROCEDURE IF EXISTS AjouterCommentaireCocktail;
 
 CREATE PROCEDURE AjouterCommentaireCocktail(
-	IN var_id_cocktail INT,
-	IN var_id_utilisateur INT,
-	IN var_contenu VARCHAR(2000)
+    IN var_id_cocktail INT,
+    IN var_id_utilisateur INT,
+    IN var_contenu VARCHAR(2000)
 )
 BEGIN
-	INSERT INTO Commentaire (
-		contenu, id_utilisateur, id_cocktail
-	)
-	VALUES (
-		var_contenu, var_id_utilisateur, var_id_cocktail
-	);
+    INSERT INTO Commentaire (
+        contenu, id_utilisateur, id_cocktail
+    )
+    VALUES (
+        var_contenu, var_id_utilisateur, var_id_cocktail
+    );
 
-	CALL GetCommentairesCocktail(var_id_cocktail, 'date');
+    CALL GetCommentairesCocktail(var_id_cocktail, 'date');
 END
 //
 
@@ -371,14 +371,14 @@ DROP PROCEDURE IF EXISTS GetCocktailGalerieNonFiltrer;
 
 CREATE PROCEDURE GetCocktailGalerieNonFiltrer(IN param_orderby VARCHAR(50))
 BEGIN
-	SELECT C.id_cocktail
-	FROM Cocktail C
-	ORDER BY
-		CASE
-			WHEN param_orderby = 'date' THEN C.date_publication
-			WHEN param_orderby = 'like' THEN C.nb_like
-			ELSE C.nb_like
-		END DESC;
+    SELECT C.id_cocktail
+    FROM Cocktail C
+    ORDER BY
+        CASE
+            WHEN param_orderby = 'date' THEN C.date_publication
+            WHEN param_orderby = 'like' THEN C.nb_like
+            ELSE C.nb_like
+        END DESC;
 END
 //
 
@@ -391,25 +391,25 @@ DROP PROCEDURE IF EXISTS GetCocktailGalerieFiltrer;
 
 CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50))
 BEGIN
-	SELECT C.id_cocktail
-	FROM Cocktail C
-	WHERE NOT EXISTS (
-		SELECT IC.id_cocktail
-		FROM Ingredient_Cocktail IC
-		LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
-		LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
-		WHERE IC.id_cocktail = C.id_cocktail
-		AND (
-			(IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
-			OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
-		)
-	)
-	ORDER BY
-		CASE
-			WHEN param_orderby = 'date' THEN C.date_publication
-			WHEN param_orderby = 'like' THEN C.nb_like
-			ELSE C.nb_like
-		END DESC;
+    SELECT C.id_cocktail
+    FROM Cocktail C
+    WHERE NOT EXISTS (
+        SELECT IC.id_cocktail
+        FROM Ingredient_Cocktail IC
+        LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
+        LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
+        WHERE IC.id_cocktail = C.id_cocktail
+        AND (
+            (IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
+            OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
+        )
+    )
+    ORDER BY
+        CASE
+            WHEN param_orderby = 'date' THEN C.date_publication
+            WHEN param_orderby = 'like' THEN C.nb_like
+            ELSE C.nb_like
+        END DESC;
 END
 //
 
@@ -421,21 +421,21 @@ DROP PROCEDURE IF EXISTS GetListeIngredientsCocktail;
 
 CREATE PROCEDURE GetListeIngredientsCocktail(IN cocktail INT)
 BEGIN
-	SELECT IC.quantite, IC.unite, I.nom
-	FROM Ingredient_Cocktail IC
-	JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
-	WHERE IC.id_cocktail = cocktail
-	UNION ALL
-	SELECT IC.quantite, IC.unite, A.nom
-	FROM Ingredient_Cocktail IC
-	JOIN Alcool A ON IC.id_alcool = A.id_alcool
-	WHERE IC.id_cocktail = cocktail
-	UNION ALL
-	SELECT IC.quantite, IC.unite, IC.ingredient_autre as nom
-	FROM Ingredient_Cocktail IC
-	WHERE IC.id_alcool IS NULL
-	AND IC.id_ingredient IS NULL
-	AND IC.id_cocktail = cocktail;
+    SELECT IC.quantite, IC.unite, I.nom
+    FROM Ingredient_Cocktail IC
+    JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+    WHERE IC.id_cocktail = cocktail
+    UNION ALL
+    SELECT IC.quantite, IC.unite, A.nom
+    FROM Ingredient_Cocktail IC
+    JOIN Alcool A ON IC.id_alcool = A.id_alcool
+    WHERE IC.id_cocktail = cocktail
+    UNION ALL
+    SELECT IC.quantite, IC.unite, IC.ingredient_autre as nom
+    FROM Ingredient_Cocktail IC
+    WHERE IC.id_alcool IS NULL
+    AND IC.id_ingredient IS NULL
+    AND IC.id_cocktail = cocktail;
 END
 //
 
@@ -448,11 +448,11 @@ DROP PROCEDURE IF EXISTS GetInfoCocktailSimple;
 
 CREATE PROCEDURE GetInfoCocktailSimple(IN cocktail INT)
 BEGIN
-	SELECT C.nom, C.profil_saveur, C.nb_like, A.nom AS alcool_principale, BI.img
-	FROM Cocktail C
-	JOIN Alcool A ON C.id_alcool = A.id_alcool
-	JOIN Banque_Image BI ON C.id_image = BI.id_image
-	WHERE C.id_cocktail = cocktail;
+    SELECT C.nom, C.profil_saveur, C.nb_like, A.nom AS alcool_principale, BI.img
+    FROM Cocktail C
+    JOIN Alcool A ON C.id_alcool = A.id_alcool
+    JOIN Banque_Image BI ON C.id_image = BI.id_image
+    WHERE C.id_cocktail = cocktail;
 END
 //
 
@@ -465,13 +465,13 @@ DROP PROCEDURE IF EXISTS GetInfoCocktailComplet;
 
 CREATE PROCEDURE GetInfoCocktailComplet(IN cocktail INT)
 BEGIN
-	SELECT C.id_cocktail, C.nom, C.desc_cocktail, C.preparation, BI.img as imgCocktail, BI2.img as imgAuteur, U.nom AS auteur, C.date_publication, C.nb_like, A.nom AS alcool_principale, C.profil_saveur, C.type_verre
-	FROM Cocktail C
-	JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
-	JOIN Banque_Image BI ON C.id_image = BI.id_image
-	JOIN Alcool A ON C.id_alcool = A.id_alcool
-	JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
-	WHERE C.id_cocktail = cocktail;
+    SELECT C.id_cocktail, C.nom, C.desc_cocktail, C.preparation, BI.img as imgCocktail, BI2.img as imgAuteur, U.nom AS auteur, C.date_publication, C.nb_like, A.nom AS alcool_principale, C.profil_saveur, C.type_verre
+    FROM Cocktail C
+    JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
+    JOIN Banque_Image BI ON C.id_image = BI.id_image
+    JOIN Alcool A ON C.id_alcool = A.id_alcool
+    JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
+    WHERE C.id_cocktail = cocktail;
 END
 //
 
@@ -482,10 +482,10 @@ DROP PROCEDURE IF EXISTS GetMesCocktails;
 
 CREATE PROCEDURE GetMesCocktails(IN id_utilisateur INT)
 BEGIN
-	SELECT C.id_cocktail
-	FROM Cocktail C
-	WHERE C.id_utilisateur = id_utilisateur
-	ORDER BY C.date_publication ASC;
+    SELECT C.id_cocktail
+    FROM Cocktail C
+    WHERE C.id_utilisateur = id_utilisateur
+    ORDER BY C.date_publication ASC;
 END
 //
 
@@ -496,15 +496,15 @@ DROP PROCEDURE IF EXISTS GetMesIngredients;
 
 CREATE PROCEDURE GetMesIngredients(IN id_utilisateur INT)
 BEGIN
-	SELECT I.nom
-	FROM Ingredient_Utilisateur IU
-	JOIN Ingredient I ON IU.id_ingredient = I.id_ingredient
-	WHERE IU.id_utilisateur = id_utilisateur
-	UNION ALL
-	SELECT A.nom
-	FROM Alcool_utilisateur AU
-	JOIN Alcool A ON AU.id_alcool = A.id_alcool
-	WHERE AU.id_utilisateur = id_utilisateur;
+    SELECT I.nom
+    FROM Ingredient_Utilisateur IU
+    JOIN Ingredient I ON IU.id_ingredient = I.id_ingredient
+    WHERE IU.id_utilisateur = id_utilisateur
+    UNION ALL
+    SELECT A.nom
+    FROM Alcool_utilisateur AU
+    JOIN Alcool A ON AU.id_alcool = A.id_alcool
+    WHERE AU.id_utilisateur = id_utilisateur;
 END
 //
 
@@ -516,11 +516,11 @@ DROP PROCEDURE IF EXISTS GetListeCocktailPossibleFavorie;
 
 CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT)
 BEGIN
-	SELECT C.id_cocktail
-	FROM Cocktail C
-	JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
-	WHERE CL.id_utilisateur = id_utilisateur
-	ORDER BY CL.date_like DESC;
+    SELECT C.id_cocktail
+    FROM Cocktail C
+    JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
+    WHERE CL.id_utilisateur = id_utilisateur
+    ORDER BY CL.date_like DESC;
 END
 //
 
@@ -531,21 +531,21 @@ DROP PROCEDURE IF EXISTS GetCocktailsPossibleClassique;
 
 CREATE PROCEDURE GetCocktailsPossibleClassique(IN utilisateur INT)
 BEGIN
-	SELECT C.id_cocktail
-	FROM Cocktail C
-	WHERE NOT EXISTS (
-		SELECT IC.id_cocktail
-		FROM Ingredient_Cocktail IC
-		LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
-		LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
-		WHERE IC.id_cocktail = C.id_cocktail
-		AND (
-			(IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
-			OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
-		)
-	)
-	AND C.classique = 1
-	ORDER BY C.nb_like DESC;
+    SELECT C.id_cocktail
+    FROM Cocktail C
+    WHERE NOT EXISTS (
+        SELECT IC.id_cocktail
+        FROM Ingredient_Cocktail IC
+        LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
+        LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
+        WHERE IC.id_cocktail = C.id_cocktail
+        AND (
+            (IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
+            OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
+        )
+    )
+    AND C.classique = 1
+    ORDER BY C.nb_like DESC;
 END
 //
 
@@ -556,21 +556,21 @@ DROP PROCEDURE IF EXISTS GetCocktailsPossibleCommunautaire;
 
 CREATE PROCEDURE GetCocktailsPossibleCommunautaire(IN utilisateur INT)
 BEGIN
-	SELECT C.id_cocktail
-	FROM Cocktail C
-	WHERE NOT EXISTS (
-		SELECT IC.id_cocktail
-		FROM Ingredient_Cocktail IC
-		LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
-		LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
-		WHERE IC.id_cocktail = C.id_cocktail
-		AND (
-			(IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
-			OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
-		)
-	)
-	AND C.classique = 0
-	ORDER BY C.nb_like DESC;
+    SELECT C.id_cocktail
+    FROM Cocktail C
+    WHERE NOT EXISTS (
+        SELECT IC.id_cocktail
+        FROM Ingredient_Cocktail IC
+        LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
+        LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
+        WHERE IC.id_cocktail = C.id_cocktail
+        AND (
+            (IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
+            OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
+        )
+    )
+    AND C.classique = 0
+    ORDER BY C.nb_like DESC;
 END
 //
 
@@ -582,11 +582,11 @@ DROP PROCEDURE IF EXISTS GetlisteIngredients;
 
 CREATE PROCEDURE GetlisteIngredients()
 BEGIN
-	SELECT I.nom
-	FROM Ingredient I
-	UNION ALL
-	SELECT A.nom
-	FROM Alcool A;
+    SELECT I.nom
+    FROM Ingredient I
+    UNION ALL
+    SELECT A.nom
+    FROM Alcool A;
 END
 //
 
@@ -598,17 +598,17 @@ DROP PROCEDURE IF EXISTS GetCommentairesCocktail;
 
 CREATE PROCEDURE GetCommentairesCocktail(IN cocktail INT, IN param_orderby VARCHAR(50))
 BEGIN
-	SELECT C.id_commentaire, U.nom, C.nb_like, BI.img, C.date_commentaire, C.contenu
-	FROM Commentaire C
-	JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
-	JOIN Banque_Image BI ON U.id_image = BI.id_image
-	WHERE C.id_cocktail = cocktail
-	ORDER BY
-		CASE
-			WHEN param_orderby = 'date' THEN C.date_commentaire
-			WHEN param_orderby = 'like' THEN C.nb_like
-			ELSE C.nb_like
-		END DESC;
+    SELECT C.id_commentaire, U.nom, C.nb_like, BI.img, C.date_commentaire, C.contenu
+    FROM Commentaire C
+    JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
+    JOIN Banque_Image BI ON U.id_image = BI.id_image
+    WHERE C.id_cocktail = cocktail
+    ORDER BY
+        CASE
+            WHEN param_orderby = 'date' THEN C.date_commentaire
+            WHEN param_orderby = 'like' THEN C.nb_like
+            ELSE C.nb_like
+        END DESC;
 END
 //
 
@@ -620,21 +620,21 @@ DROP PROCEDURE IF EXISTS RechercheCocktail;
 
 CREATE PROCEDURE RechercheCocktail(IN param_recherche VARCHAR(255), IN param_orderby VARCHAR(50))
 BEGIN
-	SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like
-	FROM Cocktail C
-	JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
-	LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
-	LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-	WHERE LOCATE(C.nom, param_recherche) > 0
-	OR LOCATE(I.nom, param_recherche) > 0
-	OR LOCATE(A.nom, param_recherche) > 0
-	OR LOCATE(C.profil_saveur, param_recherche) > 0
-	ORDER BY
-		CASE
-			WHEN param_orderby = 'date' THEN C.date_publication
-			WHEN param_orderby = 'like' THEN C.nb_like
-			ELSE C.nb_like
-		END DESC;
+    SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like
+    FROM Cocktail C
+    JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
+    LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+    LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+    WHERE LOCATE(C.nom, param_recherche) > 0
+    OR LOCATE(I.nom, param_recherche) > 0
+    OR LOCATE(A.nom, param_recherche) > 0
+    OR LOCATE(C.profil_saveur, param_recherche) > 0
+    ORDER BY
+        CASE
+            WHEN param_orderby = 'date' THEN C.date_publication
+            WHEN param_orderby = 'like' THEN C.nb_like
+            ELSE C.nb_like
+        END DESC;
 END
 //
 
@@ -645,30 +645,30 @@ END
 DROP PROCEDURE IF EXISTS RechercheCocktailFiltrer;
 
 CREATE PROCEDURE RechercheCocktailFiltrer(
-	IN param_recherche VARCHAR(255), IN id_utilisateur INT, IN param_orderby VARCHAR(50)
+    IN param_recherche VARCHAR(255), IN id_utilisateur INT, IN param_orderby VARCHAR(50)
 )
 BEGIN
-	SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like
-	FROM Cocktail C
-	JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
-	LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
-	LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-	LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
-	LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
-	WHERE (LOCATE(C.nom, param_recherche) > 0
-	OR LOCATE(I.nom, param_recherche) > 0
-	OR LOCATE(A.nom, param_recherche) > 0
-	OR LOCATE(C.profil_saveur, param_recherche) > 0)
-	AND (
-		(IC.id_ingredient IS NULL OR IU.id_utilisateur = id_utilisateur)
-		AND (IC.id_alcool IS NULL OR AU.id_utilisateur = id_utilisateur)
-	)
-	ORDER BY
-		CASE
-			WHEN param_orderby = 'date' THEN C.date_publication
-			WHEN param_orderby = 'like' THEN C.nb_like
-			ELSE C.nb_like
-		END DESC;
+    SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like
+    FROM Cocktail C
+    JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
+    LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+    LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+    LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
+    LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
+    WHERE (LOCATE(C.nom, param_recherche) > 0
+    OR LOCATE(I.nom, param_recherche) > 0
+    OR LOCATE(A.nom, param_recherche) > 0
+    OR LOCATE(C.profil_saveur, param_recherche) > 0)
+    AND (
+        (IC.id_ingredient IS NULL OR IU.id_utilisateur = id_utilisateur)
+        AND (IC.id_alcool IS NULL OR AU.id_utilisateur = id_utilisateur)
+    )
+    ORDER BY
+        CASE
+            WHEN param_orderby = 'date' THEN C.date_publication
+            WHEN param_orderby = 'like' THEN C.nb_like
+            ELSE C.nb_like
+        END DESC;
 END
 //
 
@@ -680,10 +680,10 @@ DROP PROCEDURE IF EXISTS GetInfoUtilisateur;
 
 CREATE PROCEDURE GetInfoUtilisateur(IN id_utilisateur INT)
 BEGIN
-	SELECT U.nom, U.courriel, BI.img
-	FROM Utilisateur U
-	JOIN Banque_Image BI ON U.id_image = BI.id_image
-	WHERE U.id_utilisateur = id_utilisateur;
+    SELECT U.nom, U.courriel, BI.img
+    FROM Utilisateur U
+    JOIN Banque_Image BI ON U.id_image = BI.id_image
+    WHERE U.id_utilisateur = id_utilisateur;
 END
 //
 

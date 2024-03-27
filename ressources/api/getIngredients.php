@@ -15,8 +15,8 @@
  * @version 1.0
  *
  * @author Yani Amellal
- *
  */
+
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 

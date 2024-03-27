@@ -22,8 +22,8 @@ async function faireRequete(url) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-    const modeleHTML = await chargerModeleHTML("ressources/modeles/cocktail_carte.html");
+document.addEventListener('DOMContentLoaded', async () => {
+    const modeleHTML = await chargerModeleHTML('ressources/modeles/cocktail_carte.html');
 
     if (modeleHTML) {
         try {
@@ -59,17 +59,17 @@ function afficherCocktails(data, modeleHTML) {
         nomCocktail.textContent = cocktail.nom;
 
         const iconeJAime = nouveauCocktail.querySelector('.icone-jaime');
-        iconeJAime.src = "ressources/images/icone-coeur-vide.svg";
+        iconeJAime.src = 'ressources/images/icone-coeur-vide.svg';
 
         const iconeAlcool = nouveauCocktail.querySelector('.pastille-alcool');
-        iconeAlcool.src = "ressources/images/pastille-alcool.svg";
+        iconeAlcool.src = 'ressources/images/pastille-alcool.svg';
 
         const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
         umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.umami]}.svg` || iconesUmami['default'];
 
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = `https://picsum.photos/seed/${nettoyerNomCocktail(cocktail.nom)}/200/300`;
-        imageCocktail.loading = "lazy";
+        imageCocktail.loading = 'lazy';
 
         const pastilleAlcool = nouveauCocktail.querySelector('.pastille-alcool');
         pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;

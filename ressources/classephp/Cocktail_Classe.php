@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Classe;
+
+use JsonSerializable;
+
 /**
  * Classe Cocktail
  *
@@ -10,6 +14,7 @@
  *
  * @version 1.0
  */
+
 class Cocktail implements JsonSerializable
 {
     private $id_cocktail;

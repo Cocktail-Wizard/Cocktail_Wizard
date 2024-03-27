@@ -47,7 +47,7 @@
 }
 
 .nom-cocktail {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0 0 0 25%);
     bottom: 0;
     font-weight: 700;
     left: 0;
@@ -57,7 +57,7 @@
     width: 100%;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (width<=850px) {
     .cocktail {
         height: var(--publication-height-small);
         width: var(--publication-width-small);

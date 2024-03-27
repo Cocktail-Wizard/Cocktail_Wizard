@@ -35,7 +35,6 @@ if (empty($_POST['naissance'])) {
     $erreurs[] = "La date de naissance est invalide!";
 }
 
-
 // Si le formulaire est valide, insérer les données dans la base de données
 if (count($erreurs) == 0) {
     $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
