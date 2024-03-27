@@ -53,13 +53,12 @@ function InfoAffichageCocktail($id_cocktail, $conn)
         exit();
     }
 
-    $requete_preparee->close();
-
     // Envoie une requête à la base de données pour obtenir les ingrédients du cocktail à partir de son id
     $requete_preparee = $conn->prepare("CALL GetListeIngredientsCocktail(?)");
     $requete_preparee->bind_param("i", $id_cocktail);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
+    $requete_preparee->close();
 
     // Ajoute les ingrédients obtenus à la liste des ingrédients du cocktail
     if ($resultat->num_rows > 0) {
@@ -72,8 +71,6 @@ function InfoAffichageCocktail($id_cocktail, $conn)
         echo json_encode("Aucun ingrédient n'a été trouvé pour ce cocktail.");
         exit();
     }
-
-    $requete_preparee->close();
 
     return $cocktail; // Retourne l'objet Cocktail
 }
