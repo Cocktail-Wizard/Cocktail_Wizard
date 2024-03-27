@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Classe;
+
+use JsonSerializable;
+
 /**
  * Classe Utilisateur
  *
@@ -10,8 +14,8 @@
  * @version 1.0
  *
  * @author Yani Amellal
- *
  */
+
 class Utilisateur implements JsonSerializable
 {
     //private $id_utilisateur;

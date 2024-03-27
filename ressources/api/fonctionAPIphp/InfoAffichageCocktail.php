@@ -15,6 +15,7 @@
  *
  * @version 1.0
  */
+
 // Importation des classes nécessaires
 require_once(__DIR__ . "/../../classephp/Cocktail_Classe.php");
 require_once(__DIR__ . "/../../classephp/IngredientCocktail_Classe.php");
@@ -66,5 +67,5 @@ function InfoAffichageCocktail($id_cocktail, $conn)
 
     $requete_preparee->close();
 
-    return $cocktail; // Retourne l'objet Cocktail
+    return $cocktail ?? null; // Retourne l'objet Cocktail
 }

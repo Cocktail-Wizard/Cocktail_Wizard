@@ -10,12 +10,12 @@
 </head>
 
 <body>
-    <section id="messErreur">
+    <section id="message-erreur">
         <!-- Messages d'erreur affichés dynamiquement par JavaScript -->
     </section>
 
     <main>
-        <img src="../ressources/images/sparkles.png" id="logoCW" alt="Logo Cocktail Wizard">
+        <img src="../ressources/images/sparkles.png" id="logo-cocktail-wizard" alt="Logo Cocktail Wizard">
         <form id="form-inscription" method="post" action="../ressources/api/inscription.php">
             <h1>Devenir membre</h1>
 

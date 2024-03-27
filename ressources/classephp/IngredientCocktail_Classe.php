@@ -1,4 +1,9 @@
 <?php
+
+namespace App\Classe;
+
+use JsonSerializable;
+
 /*
  * Classe IngredientCocktail
  *
@@ -7,11 +12,10 @@
  *
  * Auteur : Yani Amellal
  * Date : 18 mars 2023
- *
  */
+
 class IngredientCocktail implements JsonSerializable
 {
-
     private $quantite;
     private $unite;
     private $ingredient; // Nom de l'ingrédient(peut être un alcool ou un autre ingrédient)

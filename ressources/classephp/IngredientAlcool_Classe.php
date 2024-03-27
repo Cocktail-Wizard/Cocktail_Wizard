@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Classe;
+
 /*
 * Classe IngredientAlcool
 *
@@ -7,8 +10,8 @@
 *
 * Auteur : Yani Amellal
 * Date : 18 mars 2023
-*
 */
+
 class IngredientAlcool extends IngredientCocktail
 {
     // Information sur l'alcool à afficher dans la bulle d'information
