@@ -63,7 +63,7 @@ main {
     justify-content: center;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (width<=850px) {
     #logo-cocktail-wizard {
         width: 100%;
         height: 25%;
