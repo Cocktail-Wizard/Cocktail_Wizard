@@ -30,16 +30,7 @@ if ($conn == null) {
     exit();
 }
 
-if (!isset($_GET['id_cocktail'])) {
-    http_response_code(400);
-    echo json_encode("Erreur: id_cocktail manquant.");
-    exit();
-}
 
-$id_cocktail = $_GET['id_cocktail'];
-
-// Liste d'objets commentaires du cocktail
-$commentaires = [];
 
 $id_cocktail_s = mysqli_real_escape_string($conn, $id_cocktail);
 $id_cocktails_s = intval($id_cocktail_s);
@@ -48,8 +39,11 @@ $requete_preparee = $conn->prepare("CALL GetCommentairesCocktail(?, 'like')");
 $requete_preparee->bind_param("i", $id_cocktail_s);
 $requete_preparee->execute();
 $resultat = $requete_preparee->get_result();
+$requete_preparee->close();
 
 if ($resultat->num_rows > 0) {
+    // Liste d'objets commentaires du cocktail
+    $commentaires = [];
     while ($row = $resultat->fetch_assoc()) {
         $commentaire = new Commentaire(
             $row['id_commentaire'],
@@ -65,8 +59,6 @@ if ($resultat->num_rows > 0) {
     echo json_encode("Aucun commentaire trouvé.");
     exit();
 }
-
-$requete_preparee->close();
 
 echo json_encode($commentaires);
 

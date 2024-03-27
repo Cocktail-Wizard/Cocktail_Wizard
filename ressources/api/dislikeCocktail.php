@@ -32,10 +32,6 @@ if ($conn == null) {
 
 $donnees = json_decode(file_get_contents('php://input'), true);
 
-$username = mysqli_real_escape_string($conn, $donnees['username']);
-$userId = usernameToId($username, $conn);
-$id_cocktail = mysqli_real_escape_string($conn, $donnees['id_cocktail']);
-
 $userId = usernameToId(trim($donnees['username']), $conn);
 $id_cocktail = mysqli_real_escape_string($conn, trim($donnees['id_cocktail']));
 

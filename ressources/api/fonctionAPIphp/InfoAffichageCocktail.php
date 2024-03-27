@@ -28,7 +28,7 @@ function InfoAffichageCocktail($id_cocktail, $conn)
     $requete_preparee->bind_param("i", $id_cocktail);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
-
+    $requete_preparee->close();
     // Si le cocktail est trouvé, on crée un objet Cocktail avec les informations obtenues
     if ($resultat->num_rows > 0) {
         $row = $resultat->fetch_assoc();
@@ -47,6 +47,10 @@ function InfoAffichageCocktail($id_cocktail, $conn)
             $row['profil_saveur'],
             $row['type_verre']
         );
+    } else {
+        http_response_code(404);
+        echo json_encode("Aucun cocktail n'a été trouvé avec cet id.");
+        exit();
     }
 
     $requete_preparee->close();
@@ -63,9 +67,13 @@ function InfoAffichageCocktail($id_cocktail, $conn)
             $ingredient = new IngredientCocktail($row['quantite'], $row['unite'], $row['nom']);
             $cocktail->ajouterIngredient($ingredient);
         }
+    } else {
+        http_response_code(404);
+        echo json_encode("Aucun ingrédient n'a été trouvé pour ce cocktail.");
+        exit();
     }
 
     $requete_preparee->close();
 
-    return $cocktail ?? null; // Retourne l'objet Cocktail
+    return $cocktail; // Retourne l'objet Cocktail
 }

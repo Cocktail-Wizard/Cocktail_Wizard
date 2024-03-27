@@ -20,8 +20,8 @@
  * @see InfoAffichageCocktail.php
  *
  * @todo Ajouter la pagination
+ *
  */
-
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
@@ -34,26 +34,17 @@ if ($conn == null) {
     echo json_encode("Erreur de connexion à la base de données.");
     exit();
 }
-
-if (!isset($_GET['tri'])) {
-    http_response_code(400);
-    echo json_encode("Erreur: tri manquant.");
-    exit();
-}
-
-$tri = $_GET['tri'];
 $tri_s = mysqli_real_escape_string($conn, $tri);
 //Liste d'objets Cocktail
 $cocktails = [];
 //Liste d'id de cocktails
 $id_cocktail = [];
 
-//Demande les id_cocktail de tous les cocktails triée par date
+//Demande les id_cocktail de tous les cocktails
 $requete_preparee = $conn->prepare("CALL GetCocktailGalerieNonFiltrer(?)");
 $requete_preparee->bind_param('s', $tri_s);
 $requete_preparee->execute();
 $resultat = $requete_preparee->get_result();
-
 $requete_preparee->close();
 
 if ($resultat->num_rows > 0) {
