@@ -20,7 +20,7 @@
 
 * {
     margin: 0;
-    font-family: "Prata", serif;
+    font-family: Prata, serif;
     user-select: none;
     transition-duration: 1s;
     color: var(--palette-paragraph-color);
@@ -47,15 +47,14 @@ input {
     color: var(--palette-secondary-text-color);
 }
 
-.erreur {
-    background-color: var(--palette-background-color);
+.erreur * {
     color: red;
     display: flex;
     justify-content: center;
 }
 
-footer {
-    background-color: rgba(0, 0, 0, 0.1);
+body>footer {
+    background-color: rgba(0 0 0 10%);
     height: 2em;
     align-items: center;
     display: flex;

@@ -1,4 +1,5 @@
 <?php
+
 require("config.php");
 session_start();
 // Accumulateur d'erreurs
@@ -44,14 +45,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mdp_encrypte = password_hash($mdp, PASSWORD_DEFAULT);
         $date_nais = date('Y-m-d', strtotime(trim($_POST['naissance'])));
 
-        $requete_preparee = $conn->prepare("INSERT INTO utilisateur (nom, courriel, mdp_hashed, date_naiss) VALUES (?, ?, ?, ?)");
+        $requete_preparee = $conn->prepare(
+            "INSERT INTO utilisateur (nom, courriel, mdp_hashed, date_naiss) VALUES (?, ?, ?, ?)"
+        );
         $requete_preparee->bind_param("ssss", $nom, $courriel, $mdp_encrypte, $date_nais);
         if ($requete_preparee->execute()) {
             // Rediriger vers la page de connexion si l'inscription est réussie
             header("Location: ../../pages/connexion.html");
             exit();
         } else {
-            $erreurs[] = "Erreur lors de l'inscription!<br>";
+            $erreurs[] = "Erreur lors de l'inscription!";
         }
     }
 }

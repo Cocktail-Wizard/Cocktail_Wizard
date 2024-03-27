@@ -10,14 +10,14 @@
 </head>
 
 <body>
-    <section id="messErreur">
+    <section id="message-erreur" class="erreur">
         <!-- Les erreurs seront affichées ici -->
     </section>
 
     <main>
         <!-- Mettre le chemin approprié une fois que l'organisation des fichiers soit établie -->
-        <img src="../ressources/images/sparkles.png" id="logoCW" alt="Logo Cocktail Wizard">
-        <form id="form-connexion" method="post" action="../ressources/api/connexion.php">
+        <img src="../ressources/images/sparkles.png" id="logo-cocktail-wizard" alt="Logo Cocktail Wizard">
+        <form id="form-connexion" method="post">
             <h1>Cocktail Wizard</h1>
 
             <label for="nom">Nom d'utilisateur</label>
@@ -29,11 +29,13 @@
             <button type="submit">Connexion</button>
 
             <p>Vous n'êtes pas encore membre?</p>
-            <a href="../pages/inscription.html">Créer un compte</a>
+            <a href="https://cocktailwizard.azurewebsites.net/inscription">Créer un compte</a>
         </form>
     </main>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
+
+    <script src="../ressources/scripts/connexion.js"></script>
 </body>
 
 </html>
