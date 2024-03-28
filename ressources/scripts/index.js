@@ -85,23 +85,12 @@ function afficherCocktails(data, modeleHTML) {
 }
 
 async function chargerInformationsModale(cocktail) {
-    const auteur = document.getElementById('auteur');
-    auteur.innerText = `@${cocktail.auteur}`;
-
-    const jaimes = document.getElementById('compteur-jaime');
-    jaimes.innerText = cocktail.nb_like;
-
-    const titre = document.getElementById('titre-cocktail');
-    titre.innerText = cocktail.nom;
-
-    const description = document.getElementById('description');
-    description.innerText = cocktail.desc;
-
-    const preparation = document.getElementById('preparation');
-    preparation.innerText = cocktail.preparation;
-
-    const date = document.getElementById('date-publication');
-    date.innerText = cocktail.date;
+    actualiserTextElementParId('auteur', `@${cocktail.auteur}`);
+    actualiserTextElementParId('compteur-jaime', cocktail.nb_like);
+    actualiserTextElementParId('titre-cocktail', cocktail.nom);
+    actualiserTextElementParId('description', cocktail.desc);
+    actualiserTextElementParId('preparation', cocktail.preparation);
+    actualiserTextElementParId('date-publication', cocktail.date);
 
     const ingredients = document.getElementById('ingredients');
     ingredients.innerHTML = '';

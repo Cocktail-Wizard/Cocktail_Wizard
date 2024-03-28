@@ -25,3 +25,11 @@ async function faireRequete(url) {
         return null;
     }
 }
+
+function actualiserTextElementParId(id, nouvelle_valeur) {
+    const element = document.getElementById(id);
+
+    if (element) {
+        element.innerText = nouvelle_valeur;
+    }
+}
