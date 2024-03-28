@@ -76,6 +76,9 @@ function afficherCocktails(data, modeleHTML) {
         const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
         compteurJaime.textContent = cocktail.nb_likes;
 
+        const infobulleCocktail = nouveauCocktail.querySelector('.infobulle-cocktail');
+        infobulleCocktail.textContent = cocktail.alcool_principale;
+
         nouveauCocktail.addEventListener('click', (event) => {
             const idCocktail = event.currentTarget.dataset.idCocktail;
             sectionModale.style.display = "block";
