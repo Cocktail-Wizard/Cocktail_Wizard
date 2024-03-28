@@ -27,77 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (modeleHTML) {
         try {
-            const data = [
-                {
-                    "id_cocktail": 1,
-                    "nom": "Mojito",
-                    "desc": "Cocktail rafraîchissant",
-                    "preparation": "Mélanger tous les ingrédients",
-                    "img_cocktail": "BLOB_DATA",
-                    "img_auteur": "BLOB_DATA",
-                    "auteur": "john",
-                    "date": "2024-03-26",
-                    "nb_like": 1,
-                    "alcool_principale": "Rhum",
-                    "profil_saveur": "Sucré",
-                    "type_verre": "Verre long",
-                    "liked": null,
-                    "ingredients_cocktail": [
-                        {
-                            "quantite": 1,
-                            "unite": "pièce",
-                            "ingredient": "Citron"
-                        },
-                        {
-                            "quantite": 2,
-                            "unite": "cuillère",
-                            "ingredient": "Sucre"
-                        },
-                        {
-                            "quantite": 2,
-                            "unite": "Oz",
-                            "ingredient": "Vodka"
-                        },
-                        {
-                            "quantite": 2,
-                            "unite": "Oz",
-                            "ingredient": "Rhum"
-                        }
-                    ]
-                },
-                {
-                    "id_cocktail": 2,
-                    "nom": "Gin Tonic",
-                    "desc": "Cocktail classique",
-                    "preparation": "Mélanger gin et tonic",
-                    "img_cocktail": "BLOB_DATA",
-                    "img_auteur": "BLOB_DATA",
-                    "auteur": "Jane Doe",
-                    "date": "2024-03-26",
-                    "nb_like": 3,
-                    "alcool_principale": "Gin",
-                    "profil_saveur": "Amer",
-                    "type_verre": "Verre long",
-                    "liked": null,
-                    "ingredients_cocktail": [
-                        {
-                            "quantite": 1,
-                            "unite": "pièce",
-                            "ingredient": "Menthe"
-                        },
-                        {
-                            "quantite": 1,
-                            "unite": "pièce",
-                            "ingredient": "Glace"
-                        },
-                        {
-                            "quantite": 2,
-                            "unite": "pièce",
-                            "ingredient": "coriandre"
-                        }
-                    ]
-                }
-            ];
+            const data = await faireRequete('/api/cocktails/tri/like');
             if (data) {
                 afficherCocktails(data, modeleHTML);
             }
