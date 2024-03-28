@@ -8,12 +8,14 @@ let ingredientUnit = "";
 function addIngredientToList(name, amount, unit) {
     const ingredientList = document.getElementById("ingredient_list");
     const listItem = document.createElement("div");
-    listItem.textContent = `${amount} ${unit} ${name} `;
+    listItem.innerHTML = `${amount} ${unit} ${name} <button id="remove_ingredient" onclick="removeIngredient(this)"><img  class="btn-icon" src="../ressources/images/minus.svg"
+                                    alt="+"></button>`;
     ingredientList.appendChild(listItem);
 
     // Effacer les zones de texte SEULMENT quand un ingredient est rajouté
     document.getElementById("ingredient_name").value = "";
     document.getElementById("ingredient_amount").value = "";
+    document.getElementById("ingredient_unit").value = "";
 }
 
 
@@ -31,10 +33,7 @@ function openModal(page) {
     // Remplir les champs de saisie avec les valeurs précédemment saisies (garder les ingredients si l'utilisatuer ferme la page modale)
     document.getElementById("ingredient_name").value = ingredientName;
     document.getElementById("ingredient_amount").value = ingredientAmount;
-    document.getElementById("unit_select").value = ingredientUnit;
-
-    // Définir "oz" comme unité par défaut
-    document.getElementById("unit_select").value = "oz";
+    document.getElementById("ingredient_unit").value = ingredientUnit;
 }
 
 // Ouvrir le modal de publication
@@ -52,7 +51,7 @@ document.getElementById("add_ingredient").addEventListener("click", function (ev
     // Obtenir la valeur du champ de saisie du nom de l'ingrédient
     const enteredIngredient = document.getElementById("ingredient_name").value.trim().toLowerCase();
     const enteredAmount = document.getElementById("ingredient_amount").value.trim();
-    const enteredUnit = document.getElementById("unit_select").value.trim();
+    const enteredUnit = document.getElementById("ingredient_unit").value.trim();
 
     // Vérifier si l'ingrédient saisi figure dans la liste de tous les ingrédients (insensible au minuscule/majuscule)
     if (!allIngredients.some(ingredient => ingredient.toLowerCase() === enteredIngredient)) {
@@ -105,4 +104,9 @@ function previewImage(event) {
         preview.src = dataURL;
     };
     reader.readAsDataURL(input.files[0]);
+}
+
+// Fonction pour supprimer un ingrédient de la liste
+function removeIngredient(element) {
+    element.parentNode.remove();
 }

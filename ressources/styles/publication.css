@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 /* Modal */
 #myModal {
     width: 100%;
@@ -181,18 +183,33 @@ input[type="submit"]:hover {
     border-radius: 4px;
 }
 
-#add_ingredient:hover {
+#add-form {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+#add_ingredient:hover,
+#remove_ingredient:hover {
     box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
     text-decoration: none;
     color: var(--palette-button-text-color);
     background-color: var(--palette-button-color-hover);
 }
 
-#add_ingredient {
+#add_ingredient,
+#remove_ingredient {
     cursor: pointer;
     border-radius: 4px;
     border: 2px solid --palette-border-color;
     background-image: linear-gradient(var(--pallette-button-color), #a48df0);
+    height: 25px;
+    width: 25px;
+}
+
+.btn-icon {
+    width: 100%;
+    height: 100%;
 }
 
 #unit_select {

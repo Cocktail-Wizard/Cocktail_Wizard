@@ -34,21 +34,18 @@
 
                     <label for="cocktail_ingredient">Ingrédients:</label><br>
                     <div id="ingredient_input">
-                        <div>
+                        <div id="add-form">
                             <input type="text" id="ingredient_name" placeholder="Nom de l'ingrédient...">
                             <input type="text" id="ingredient_amount" placeholder="Quantité...">
-                            <select id="unit_select" name="unit">
-                                <option value="oz" selected>oz</option>
-                                <option value="ml">ml</option>
-                                <option value="dash">Dash</option>
-                                <option value="pinch">Pincée</option>
-                                <option value="top">Top</option>
-                            </select>
+                            <input type="text" id="ingredient_unit" placeholder="Unité...">
 
-                            <button class="button" id="add_ingredient">+</button>
-
-                            <div id="ingredient_list"></div>
+                            <button class="button" id="add_ingredient">
+                                <img class="btn-icon" src="../ressources/images/plus.svg" alt="+">
+                            </button>
                         </div>
+
+                        <div id="ingredient_list"></div>
+
                     </div>
 
                     <br>
