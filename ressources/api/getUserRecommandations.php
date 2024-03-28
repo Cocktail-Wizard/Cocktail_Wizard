@@ -37,12 +37,6 @@ $cocktails = [];
 // Connexion à la base de données
 $conn = connexionBD();
 
-if ($conn == null) {
-    http_response_code(500);
-    echo json_encode("Erreur de connexion à la base de données.");
-    exit();
-}
-
 if ($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != 'communaute') {
     http_response_code(400);
     echo json_encode("Paramètre de type invalide.");

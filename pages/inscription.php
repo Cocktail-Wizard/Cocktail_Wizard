@@ -15,8 +15,8 @@
     </section>
 
     <main>
-        <img src="../ressources/images/sparkles.png" id="logo-cocktail-wizard" alt="Logo Cocktail Wizard">
-        <form id="form-inscription" method="post" action="../ressources/api/inscription.php">
+        <img src="../ressources/images/sparkles.png" id="logoCW" alt="Logo Cocktail Wizard">
+        <form id="form-inscription" method="post">
             <h1>Devenir membre</h1>
 
             <label for="nom">Nom d'utilisateur</label>
