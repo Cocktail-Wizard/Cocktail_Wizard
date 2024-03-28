@@ -39,8 +39,8 @@ function usernameToId($username, $conn)
             exit();
         }
     } catch (Exception $e) {
-        http_response_code(404);
-        echo json_encode("Erreur lors de la récupération de l'id de l'utilisateur.");
+        http_response_code(500);
+        echo json_encode("Erreur :" . $e->getMessage());
         exit();
     }
 

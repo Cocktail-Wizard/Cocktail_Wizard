@@ -34,29 +34,35 @@ $id_cocktail = [];
 // Transforme le nom d'utilisateur en id
 $id_user = usernameToId($username, $conn);
 
-//Demande les cocktails fait par l'utilisateur
-$requete_preparee = $conn->prepare("CALL GetMesCocktails(?)");
-$requete_preparee->bind_param("i", $id_user);
-$requete_preparee->execute();
-$resultat = $requete_preparee->get_result();
+try {
+    //Demande les cocktails fait par l'utilisateur
+    $requete_preparee = $conn->prepare("CALL GetMesCocktails(?)");
+    $requete_preparee->bind_param("i", $id_user);
+    $requete_preparee->execute();
+    $resultat = $requete_preparee->get_result();
 
-$requete_preparee->close();
+    $requete_preparee->close();
 
-if ($resultat->num_rows > 0) {
-    //Ajoute les id des cocktails à la liste
-    while ($row = $resultat->fetch_assoc()) {
-        $id_cocktail[] = $row['id_cocktail'];
+    if ($resultat->num_rows > 0) {
+        //Ajoute les id des cocktails à la liste
+        while ($row = $resultat->fetch_assoc()) {
+            $id_cocktail[] = $row['id_cocktail'];
+        }
+    } else {
+        http_response_code(204);
+        echo json_encode("Aucun cocktail trouvé.");
+        exit();
     }
-} else {
-    http_response_code(404);
-    echo json_encode("Aucun cocktail trouvé.");
+
+    foreach ($id_cocktail as $id) {
+        $cocktails[] = InfoAffichageCocktail($id, $conn);
+    }
+
+    echo json_encode($cocktails);
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode("Erreur : " . $e->getMessage());
     exit();
 }
-
-foreach ($id_cocktail as $id) {
-    $cocktails[] = InfoAffichageCocktail($id, $conn);
-}
-
-echo json_encode($cocktails);
 
 $conn->close();

@@ -29,25 +29,32 @@ $conn = connexionBD();
 //Liste des noms d'ingrédients(Alcool et Ingredient)
 $ingredients = [];
 
-
 // Transforme le nom d'utilisateur en id
 $id_user = usernameToId($username, $conn);
 
-//Demande les noms d'ingrédients que l'utilisateur possède
-$requete_preparee = $conn->prepare("CALL GetMesIngredients(?)");
-$requete_preparee->bind_param("i", $id_user);
-$requete_preparee->execute();
-$resultat = $requete_preparee->get_result();
-$requete_preparee->close();
+try {
+    //Demande les noms d'ingrédients que l'utilisateur possède
+    $requete_preparee = $conn->prepare("CALL GetMesIngredients(?)");
+    $requete_preparee->bind_param("i", $id_user);
+    $requete_preparee->execute();
+    $resultat = $requete_preparee->get_result();
+    $requete_preparee->close();
 
-if ($resultat->num_rows > 0) {
-    while ($row = $resultat->fetch_assoc()) {
-        $ingredients[] = $row['nom'];
+    if ($resultat->num_rows > 0) {
+        while ($row = $resultat->fetch_assoc()) {
+            $ingredients[] = $row['nom'];
+        }
+
+        echo json_encode($ingredients);
+    } else {
+        http_response_code(204);
+        echo json_encode("Aucun ingrédient trouvé.");
+        exit();
     }
-
-    echo json_encode($ingredients);
-} else {
-    echo json_encode("Aucun");
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode("Erreur : " . $e->getMessage());
+    exit();
 }
 
 $conn->close();

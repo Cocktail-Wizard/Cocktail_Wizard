@@ -28,7 +28,7 @@ function connexionBD(): ?mysqli
         }
     } catch (Exception $e) {
         http_response_code(500);
-        echo json_encode("Erreur de connexion à la base de données.");
+        echo json_encode("Erreur : " . $e->getMessage());
         exit();
     }
     return $conn;

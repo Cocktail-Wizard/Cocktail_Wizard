@@ -54,8 +54,8 @@ function InfoAffichageCocktail($id_cocktail, $conn)
             exit();
         }
     } catch (Exception $e) {
-        http_response_code(404);
-        echo json_encode("Erreur lors de la récupération des informations du cocktail.");
+        http_response_code(500);
+        echo json_encode("Erreur : " . $e->getMessage());
         exit();
     }
 
@@ -79,8 +79,8 @@ function InfoAffichageCocktail($id_cocktail, $conn)
             exit();
         }
     } catch (Exception $e) {
-        http_response_code(404);
-        echo json_encode("Erreur lors de la récupération des ingrédients.");
+        http_response_code(500);
+        echo json_encode("Erreur : " . $e->getMessage());
         exit();
     }
     return $cocktail; // Retourne l'objet Cocktail

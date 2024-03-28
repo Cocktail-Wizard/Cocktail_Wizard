@@ -29,21 +29,27 @@ $donnees = json_decode(file_get_contents('php://input'), true);
 $userId = usernameToId(trim($donnees['username']), $conn);
 $id_cocktail = mysqli_real_escape_string($conn, trim($donnees['id_cocktail']));
 
-// Envoie une requête à la base de données pour enlever un like au cocktail
-$requete_preparee = $conn->prepare("CALL DislikeCocktail(?,?)");
-$requete_preparee->bind_param('ii', $id_cocktail, $userId);
-$requete_preparee->execute();
-$resultat = $requete_preparee->get_result();
-$requete_preparee->close();
+try {
+    // Envoie une requête à la base de données pour enlever un like au cocktail
+    $requete_preparee = $conn->prepare("CALL DislikeCocktail(?,?)");
+    $requete_preparee->bind_param('ii', $id_cocktail, $userId);
+    $requete_preparee->execute();
+    $resultat = $requete_preparee->get_result();
+    $requete_preparee->close();
 
-// Récupère le nombre de like du cocktail
-if ($resultat->num_rows == 1) {
-    $row = $resultat->fetch_assoc();
-    $nbLike['nb_like'] = $row['nb_like'];
+    // Récupère le nombre de like du cocktail
+    if ($resultat->num_rows == 1) {
+        $row = $resultat->fetch_assoc();
+        $nbLike['nb_like'] = $row['nb_like'];
 
-    echo json_encode($nbLike);
-} else {
-    http_response_code(404);
-    echo json_encode("Erreur: le cocktail n'existe pas ou l'utilisateur n'a pas liké ce cocktail.");
+        echo json_encode($nbLike);
+    } else {
+        http_response_code(404);
+        echo json_encode("Erreur: le cocktail n'existe pas ou l'utilisateur n'a pas liké ce cocktail.");
+    }
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode("Erreur : " . $e->getMessage());
+    exit();
 }
 $conn->close();

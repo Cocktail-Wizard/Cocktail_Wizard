@@ -9,9 +9,9 @@
  *
  * URL : /api/cocktails
  *
- * @param JSON : nom, description, desc_cocktail, preparation, typeVerre,
+ * @param JSON : nom, description, preparation, typeVerre,
  *                   profilSaveur, username, nomAlcoolPrincipale,
- *                  [ingredients] (tableau d'objets JSON {nomIng, quantite, unite}).
+ *                  [ingredients] (tableau de string JSON {nomIng, quantite, unite}).
  *                  *nomIng peut être un nom d'ingrédient, un nom d'alcool ou un string autre.
  *
  * @return JSON Un json contenant le message de succès ou d'erreur
@@ -24,38 +24,49 @@
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/classephp/Cocktail_Classe.php';
+require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
 
 $conn = connexionBD();
 
 $donnee = json_decode(file_get_contents('php://input'), true);
 
+// Vérifie si les paramètres sont présents
+paramJSONvalide($donnee['nom'], 'nom du cocktail');
+paramJSONvalide($donnee['description'], 'description du cocktail');
+paramJSONvalide($donnee['preparation'], 'préparation du cocktail');
+paramJSONvalide($donnee['typeVerre'], 'type de verre du cocktail');
+paramJSONvalide($donnee['profilSaveur'], 'profil de saveur du cocktail');
+paramJSONvalide($donnee['nomAlcoolPrincipale'], 'nom de l\'alcool principale du cocktail');
+paramJSONvalide($donnee['username'], 'nom du créateur du cocktail');
+paramJSONvalide($donnee['ingredients'], 'ingrédients du cocktail');
+
 $userId = usernameToId(trim($donnee['username']), $conn);
+try {
+    $requete_preparee = $conn->prepare("CALL CreerCocktail(?, ?, ?, ?, ?, ?, ?)");
+    $requete_preparee->bind_param(
+        'sssssss',
+        $donnee['nom'],
+        $donnee['description'],
+        $donnee['preparation'],
+        $donnee['typeVerre'],
+        $donnee['profilSaveur'],
+        $userId,
+        $donnee['nomAlcoolPrincipale']
+    );
+    $requete_preparee->execute();
+    $resultat = $requete_preparee->get_result();
+    $requete_preparee->close();
 
-$requete_preparee = $conn->prepare("CALL CreerCocktail(?, ?, ?, ?, ?, ?, ?,)");
-$requete_preparee->bind_param(
-    'sssssss',
-    $donnee['nom'],
-    $donnee['description'],
-    $donnee['desc_cocktail'],
-    $donnee['preparation'],
-    $donnee['typeVerre'],
-    $donnee['profilSaveur'],
-    $donnee['nomAlcoolPrincipale']
-);
-$requete_preparee->execute();
-$resultat = $requete_preparee->get_result();
-$requete_preparee->close();
+    if ($resultat->num_rows == 1) {
+        $row = $resultat->fetch_assoc();
+        $idCocktailNouveau = $row['id_cocktail'];
+    } else {
+        http_response_code(404);
+        echo json_encode("Erreur de création du cocktail.");
+        exit();
+    }
 
-if ($resultat->num_rows == 1) {
-    $row = $resultat->fetch_assoc();
-    $idCocktailNouveau = $row['id_cocktail'];
-} else {
-    http_response_code(404);
-    echo json_encode("Erreur de création du cocktail.");
-    exit();
-}
 
-if (isset($donnee['ingredients'])) {
     foreach ($donnee['ingredients'] as $ingredient) {
         $nomIng = $ingredient['nomIng'];
         $quantite = $ingredient['quantite'];
@@ -68,8 +79,8 @@ if (isset($donnee['ingredients'])) {
     }
 
     echo json_encode("Cocktail ajouté avec succès.");
-} else {
-    http_response_code(404);
-    echo json_encode("Erreur");
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode("Erreur : " . $e->getMessage());
     exit();
 }

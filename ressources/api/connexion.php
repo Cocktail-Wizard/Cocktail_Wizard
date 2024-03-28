@@ -41,29 +41,34 @@ if (empty($erreurs)) {
     $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
     $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
 
-    // Rechercher le mot de passe dans la base de données
-    $requete_preparee = $conn->prepare("CALL  ConnexionUtilisateur(?)");
-    $requete_preparee->bind_param("s", $nom);
-    $requete_preparee->execute();
-    $resultat = $requete_preparee->get_result();
+    try {
+        // Rechercher le mot de passe dans la base de données
+        $requete_preparee = $conn->prepare("CALL  ConnexionUtilisateur(?)");
+        $requete_preparee->bind_param("s", $nom);
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+        $requete_preparee->close();
 
-    if ($resultat->num_rows > 0) {
-        $utilisateur = $resultat->fetch_assoc();
-        $mdp_hashed = $utilisateur['mdp_hashed'];
+        if ($resultat->num_rows > 0) {
+            $utilisateur = $resultat->fetch_assoc();
+            $mdp_hashed = $utilisateur['mdp_hashed'];
 
-        // Vérifier le mot de passe
-        if (password_verify($mdp, $mdp_hashed)) {
-            $success = true;
+            // Vérifier le mot de passe
+            if (password_verify($mdp, $mdp_hashed)) {
+                $success = true;
+            } else {
+                // Mot de passe incorrect
+                $erreurs[] = "Mot de passe incorrect!";
+            }
         } else {
-            // Mot de passe incorrect
-            $erreurs[] = "Mot de passe incorrect!";
+            // Nom d'utilisateur non trouvé
+            $erreurs[] = "Nom d'utilisateur introuvable!";
         }
-    } else {
-        // Nom d'utilisateur non trouvé
-        $erreurs[] = "Nom d'utilisateur introuvable!";
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode("Erreur : " . $e->getMessage());
+        exit();
     }
-
-    $requete_preparee->close();
 }
 
 // Construction de la réponse JSON
