@@ -16,6 +16,7 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0 0 0 / 40%);
+
     /* pas de var car, fond sombre avec transparence */
 }
 
@@ -28,25 +29,11 @@
     border: 1px solid var(--palette-border-color);
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0 0 0 / 20%), 0 6px 20px 0 rgba(0 0 0 / 19%);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s;
 }
 
-/* Ajout de l'animation (apparition par ne haut)*/
-@-webkit-keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0;
-    }
-
-    to {
-        top: 0;
-        opacity: 1;
-    }
-}
-
+/* Ajout de l'animation (apparition par ne haut) */
 @keyframes animatetop {
     from {
         top: -300px;
@@ -81,7 +68,7 @@
     color: var(--palette-secondary-text-color);
     display: flex;
     justify-content: center;
-    align-content: space-around;
+    align-items: space-around;
     gap: 40px;
 }
 
@@ -111,7 +98,7 @@
     margin-bottom: 5px;
 }
 
-/* Texte du l'infromation personelle*/
+/* Texte du l'infromation personelle */
 .userinfo-body span {
     font-weight: bold;
     color: var(--palette-button-color);
