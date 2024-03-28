@@ -2,10 +2,6 @@
 
 require_once __DIR__ . '/router.php';
 
-// ##################################################
-// ##################################################
-// ##################################################
-
 // Static GET
 // The output -> Index
 get('/', 'index.php');
@@ -82,8 +78,6 @@ get('/api/users/$username/ingredients', '/ressources/api/getUserIngredients.php'
 
 // /api/users/{username}/cocktails ->Liste des cocktails de l'utilisateur
 get('/api/users/$username/cocktails', '/ressources/api/getUserCocktails.php');
-
-
 
 // /api/user/{username} ->Profil utilisateur
 get('/api/users/$username', '/ressources/api/getUserInfo.php');

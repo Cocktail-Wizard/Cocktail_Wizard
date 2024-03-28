@@ -1,4 +1,4 @@
--- Active: 1709764745031@@cocktailwizbd.mysql.database.azure.com@3306@cocktailwizardbd
+-- Active: 1710380541515@@cocktailwizbd.mysql.database.azure.com@3306@cocktailwizardbd
 -- ============================================================
 -- Auteurs : Yani Amellal, Léonard Marcoux, Pablo Hamel-Corôa,
 --           Maxime Dmitriev et Vianney Veremme
@@ -46,8 +46,10 @@ CREATE PROCEDURE InscriptionUtilisateur(
     IN var_mdp_hashed VARCHAR(255),
     IN var_date_naissance DATE)
 BEGIN
-    INSERT INTO Utilisateur (nom, courriel, mdp_hashed, date_naiss)
-    VALUES (var_nom, var_courriel, var_mdp_hashed, var_date_naissance);
+	INSERT INTO Utilisateur (nom, courriel, mdp_hashed, date_naiss)
+	VALUES (var_nom, var_courriel, var_mdp_hashed, var_date_naissance);
+
+	SELECT LAST_INSERT_ID() AS id_utilisateur;
 END
 //
 
@@ -190,9 +192,13 @@ BEGIN
     WHERE id_cocktail = var_id_cocktail
         AND id_utilisateur = var_id_utilisateur;
 
-    SELECT C.nb_like
-    FROM Cocktail C
-    WHERE id_cocktail = var_id_cocktail;
+    IF ROW_COUNT() > 0 THEN
+        SELECT C.nb_like
+        FROM Cocktail C
+        WHERE id_cocktail = var_id_cocktail;
+    ELSE
+        SELECT * FROM Cocktail WHERE 1=0;
+    END IF;
 END
 //
 
@@ -266,46 +272,52 @@ END
 -- Permet d'ajouter un ingrédient à un cocktail
 -- Utiliser pour la création de cocktail
 DROP PROCEDURE IF EXISTS AjouterIngredientCocktail;
-CREATE PROCEDURE AjouterIngredientCockail(
-    IN var_id_cocktail INT,
-    IN var_nom_ingredient VARCHAR(255),
-    IN var_quantite FLOAT,
-    IN var_unite VARCHAR(50)
+CREATE PROCEDURE AjouterIngredientCocktail(
+	IN var_id_cocktail INT,
+	IN var_nom_ingredient VARCHAR(255),
+	IN var_quantite FLOAT,
+	IN var_unite VARCHAR(50)
 )
 BEGIN
-    IF var_nom_ingredient IN (
-        SELECT nom
-        FROM Ingredient
-    ) THEN INSERT INTO ingredient_cocktail (
-        id_cocktail, id_ingredient, quantite, unite
-    )
-    VALUES (
-        var_id_cocktail,
-        (
-            SELECT id_ingredient
-            FROM Ingredient
-            WHERE nom = var_nom_ingredient
-        ),
-        var_quantite,
-        var_unite
-    );
-    ELSEIF var_nom_ingredient IN (
-        SELECT nom
-        FROM Alcool
-    ) THEN INSERT INTO ingredient_cocktail (
-        id_cocktail, id_alcool, quantite, unite
-    )
-    VALUES (
-        var_id_cocktail,
-        (
-            SELECT id_alcool
-            FROM Alcool
-            WHERE nom = var_nom_ingredient
-        ),
-        var_quantite,
-        var_unite
-    );
-    END IF;
+	IF var_nom_ingredient IN (
+	    SELECT nom
+	    FROM Ingredient
+	) THEN INSERT INTO ingredient_cocktail (
+		id_cocktail, id_ingredient, quantite, unite
+	)
+	VALUES (
+		var_id_cocktail,
+		(
+			SELECT id_ingredient
+			FROM Ingredient
+			WHERE nom = var_nom_ingredient
+		),
+		var_quantite,
+		var_unite
+	);
+	ELSEIF var_nom_ingredient IN (
+	    SELECT nom
+	    FROM Alcool
+	) THEN INSERT INTO ingredient_cocktail (
+		id_cocktail, id_alcool, quantite, unite
+	)
+	VALUES (
+		var_id_cocktail,
+		(
+			SELECT id_alcool
+			FROM Alcool
+			WHERE nom = var_nom_ingredient
+		),
+		var_quantite,
+		var_unite
+	);
+	ELSE INSERT INTO ingredient_cocktail (
+		id_cocktail, ingredient_autre, quantite, unite
+	)
+	VALUES (
+		var_id_cocktail, var_nom_ingredient, var_quantite, var_unite
+	);
+	END IF;
 END
 //
 

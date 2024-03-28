@@ -20,41 +20,34 @@
 
 header('Content-Type: application/json');
 require_once("config.php");
-session_start();
 // Accumulateur d'erreurs
 $erreurs = array();
 $success = false;
 
-// Vérifier si la clé REQUEST_METHOD existe dans $_SERVER
-if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
-    // Valider le nom d'utilisateur
-    if (!isset($_POST['nom']) || empty($_POST['nom'])) {
-        $erreurs[] = "Le nom d'utilisateur est requis!";
-    }
+// Valider le nom d'utilisateur
+if (empty($_POST['nom'])) {
+    $erreurs[] = "Le nom d'utilisateur est requis!";
+}
 
-    // Valider le mot de passe
-    if (!isset($_POST['mdp']) || empty($_POST['mdp'])) {
-        $erreurs[] = "Le mot de passe est requis!";
-    }
+// Valider le mot de passe
+if (empty($_POST['mdp'])) {
+    $erreurs[] = "Le mot de passe est requis!";
+}
 
-    // Si aucune erreur, établir la connexion
-    if (empty($erreurs)) {
-        $conn = connexionBD();
+// Si aucune erreur, établir la connexion
+if (empty($erreurs)) {
+    $conn = connexionBD();
 
-        if ($conn == null) {
-            http_response_code(500);
-            echo json_encode("Erreur de connexion à la base de données.");
-            exit();
-        }
+    $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
+    $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
 
-        $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
-        $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
-
+    try {
         // Rechercher le mot de passe dans la base de données
         $requete_preparee = $conn->prepare("CALL  ConnexionUtilisateur(?)");
         $requete_preparee->bind_param("s", $nom);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
+        $requete_preparee->close();
 
         if ($resultat->num_rows > 0) {
             $utilisateur = $resultat->fetch_assoc();
@@ -62,8 +55,6 @@ if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Vérifier le mot de passe
             if (password_verify($mdp, $mdp_hashed)) {
-                // Authentification réussie
-                $_SESSION['nom'] = $nom;
                 $success = true;
             } else {
                 // Mot de passe incorrect
@@ -73,11 +64,11 @@ if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
             // Nom d'utilisateur non trouvé
             $erreurs[] = "Nom d'utilisateur introuvable!";
         }
-
-        $requete_preparee->close();
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode("Erreur : " . $e->getMessage());
+        exit();
     }
-} else {
-    $erreurs[] = "How did we get here?";
 }
 
 // Construction de la réponse JSON
