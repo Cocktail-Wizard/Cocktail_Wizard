@@ -12,3 +12,16 @@ async function chargerModeleHTML(url) {
         return null;
     }
 }
+
+async function faireRequete(url) {
+    try {
+        const reponse = await fetch(url);
+        if (!reponse.ok) {
+            throw new Error('La requête a échoué');
+        }
+        return await reponse.json();
+    } catch (error) {
+        console.error('Erreur : ', error);
+        return null;
+    }
+}

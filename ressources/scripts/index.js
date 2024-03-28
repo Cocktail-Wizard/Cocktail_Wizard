@@ -10,19 +10,6 @@ const iconesUmami = {
     'default': 'point-interrogation'
 };
 
-async function faireRequete(url) {
-    try {
-        const reponse = await fetch(url);
-        if (!reponse.ok) {
-            throw new Error('La requête a échoué');
-        }
-        return await reponse.json();
-    } catch (error) {
-        console.error('Erreur : ', error);
-        return null;
-    }
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
     const modeleHTML = await chargerModeleHTML('ressources/modeles/cocktail_carte.html');
 
