@@ -29,11 +29,6 @@ require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
 // Connexion à la base de données
 $conn = connexionBD();
 
-if ($conn == null) {
-    http_response_code(500);
-    echo json_encode("Erreur de connexion à la base de données.");
-    exit();
-}
 $tri_s = mysqli_real_escape_string($conn, $tri);
 //Liste d'objets Cocktail
 $cocktails = [];

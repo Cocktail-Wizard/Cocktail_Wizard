@@ -26,12 +26,6 @@ require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 // Connexion à la base de données
 $conn = connexionBD();
 
-if ($conn == null) {
-    http_response_code(500);
-    echo json_encode("Erreur de connexion à la base de données.");
-    exit();
-}
-
 //Liste d'objets Cocktail
 $cocktails = [];
 //Liste d'id de cocktails

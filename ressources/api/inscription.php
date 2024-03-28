@@ -4,12 +4,6 @@ require("config.php");
 
 $conn = connexionBD();
 
-if ($conn == null) {
-    http_response_code(500);
-    echo json_encode("Erreur de connexion à la base de données.");
-    exit();
-}
-
 // Accumulateur d'erreurs
 $erreurs = array();
 

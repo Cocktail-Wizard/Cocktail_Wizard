@@ -23,12 +23,6 @@ require_once __DIR__ . '/config.php';
 // Connexion à la base de données
 $conn = connexionBD();
 
-if ($conn == null) {
-    http_response_code(500);
-    echo json_encode("Erreur de connexion à la base de données.");
-    exit();
-}
-
 //Liste des noms d'ingrédients(Alcool et Ingredient)
 $ingredients = [];
 

@@ -24,14 +24,6 @@ require_once(__DIR__ . '/../classephp/Commentaire_Classe.php');
 
 $conn = connexionBD();
 
-if ($conn == null) {
-    http_response_code(500);
-    echo json_encode("Erreur de connexion à la base de données.");
-    exit();
-}
-
-
-
 $id_cocktail_s = mysqli_real_escape_string($conn, $id_cocktail);
 $id_cocktails_s = intval($id_cocktail_s);
 
