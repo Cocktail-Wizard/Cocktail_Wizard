@@ -1,9 +1,5 @@
 <?php
 
-namespace App\Classe;
-
-use JsonSerializable;
-
 /**
  * Classe Utilisateur
  *

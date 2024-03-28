@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="ressources/styles/modale.css">
     <link rel="stylesheet" href="ressources/styles/carte_cocktail.css">
     <script src="ressources/scripts/outils.js"></script>
-    <script src="ressources/scripts/main.js"></script>
 </head>
 
 <body>
@@ -29,7 +28,7 @@
     <aside id="contenant-modale"></aside>
 
     <aside id="contenant-boutons-fixes">
-        <a href="https://cocktailwizard.azurewebsites.net/connexion" title="Connexion">
+        <a href="/connexion" title="Connexion">
             <img src="ressources/images/icone-profile.svg" alt="Icone profile">
         </a>
     </aside>
