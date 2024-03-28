@@ -2,11 +2,6 @@
 
 /**
  * Source : https://github.com/PHPMailer/PHPMailer/blob/master/examples/gmail.phps
- *
- * Ceci est un exemple de script PHP qui permet d'envoyer un courriel en utilisant
- * la librairie PHPMailer. De plus, ce script utilise le serveur SMTP de Gmail pour
- * envoyer le courriel.
- *
  */
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -20,10 +15,10 @@ require '../vendor/phpmailer/phpmailer/src/SMTP.php';
 /**
  * Identification et configuration.
  *
- *  - identifiant     : identifiant de connexion (adresse courriel Gmail)
- *  - motDePasse      : mot de passe de connexion (mot de passe de l'application)
+ *  - identifiant     : identifiant de connexion
+ *  - motDePasse      : mot de passe de connexion
  *
- *  - source          : adresse courriel de l'expéditeur (c.-à-d. votre adresse Gmail)
+ *  - source          : adresse courriel de l'expéditeur
  *  - destinataire    : adresse courriel du destinataire
  *  - nomEnvoyeur     : nom de l'expéditeur
  *  - nomDestinataire : nom du destinataire
@@ -41,8 +36,10 @@ $nomDestinataire = 'Support';
  * Message à envoyer.
  */
 
-$sujetMessage = 'Test PHPMailer';
-$corpsMessage = 'Ceci est un test!';
+// string original
+$sujetMessage = 'Message d\'un utilisateur';
+
+$corpsMessage = $_POST['message'];;
 
 // Instancier le client
 $mail = new PHPMailer();
@@ -96,3 +93,5 @@ if (!$mail->send()) {
 } else {
     echo 'Message envoyé!';
 }
+
+header("Location:../pages/monbar.php");

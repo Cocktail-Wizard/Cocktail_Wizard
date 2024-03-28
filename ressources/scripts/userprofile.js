@@ -5,6 +5,7 @@ var modal = document.getElementById("myModal");
 var infoBtn = document.getElementById("infoBtn");
 var cocktailBtn = document.getElementById("cocktailBtn");
 var supportBtn = document.getElementById("supportBtn");
+var submitBtn = document.getElementById("submitBtn");
 
 // Récupérer l'élément <span> qui ferme le modal
 var span = document.getElementsByClassName("close")[0];
@@ -46,22 +47,13 @@ span.onclick = function () {
     modal.style.display = "none";
 }
 
+submitBtn.onclick = function () {
+    openModal(infoPage);
+}
+
 // Lorsque l'utilisateur clique n'importe où en dehors du modal, le fermer
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 }
-
-// Envoyer un email directement à notre email de support
-document.getElementById("contactForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    var message = document.getElementById("message").value;
-
-    // Envoyer l'email
-    var mailtoLink = "mailto:cocktailwizard.supp0rt@gmail.com?subject=Demande de support&body=" + encodeURIComponent(message);
-    window.location.href = mailtoLink;
-});
-
-//CETTE PARTI AVEC LE EMAIL EST A COMPLETE
