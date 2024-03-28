@@ -1,11 +1,11 @@
 // Récupérer le modal
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("my-modal");
 
 // Récupérer les boutons qui ouvrent les pages modales
-var infoBtn = document.getElementById("infoBtn");
-var cocktailBtn = document.getElementById("cocktailBtn");
-var supportBtn = document.getElementById("supportBtn");
-var submitBtn = document.getElementById("submitBtn");
+var infoBtn = document.getElementById("info-btn");
+var cocktailBtn = document.getElementById("cocktail-btn");
+var supportBtn = document.getElementById("support-btn");
+var submitBtn = document.getElementById("submit-btn");
 
 // Récupérer l'élément <span> qui ferme le modal
 var span = document.getElementsByClassName("close")[0];

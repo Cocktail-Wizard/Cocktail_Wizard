@@ -1,5 +1,5 @@
 /* Style pour le modal */
-#myModal {
+#my-modal {
     width: 100%;
     height: 100%;
 }
@@ -15,7 +15,7 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0 0 0 / 40%);
     /* pas de var car, fond sombre avec transparence */
 }
 
@@ -27,7 +27,7 @@
     padding: 0;
     border: 1px solid var(--palette-border-color);
     width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0 0 0 / 20%), 0 6px 20px 0 rgba(0 0 0 / 19%);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
@@ -188,7 +188,7 @@ input[type="submit"]:hover {
     padding: 20px;
     background-color: var(--palette-paragraph-color);
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0 0 0 / 10%);
 }
 
 /* Conteneur de défilement horizontal pour les cocktails */
@@ -198,9 +198,9 @@ input[type="submit"]:hover {
 }
 
 /* Style pour les boutons de choix de sections */
-#infoBtn,
-#cocktailBtn,
-#supportBtn {
+#info-btn,
+#cocktail-btn,
+#support-btn {
     background-color: var(--palette-button-color);
     color: var(--palette-button-text-color);
     padding: 10px 20px;
@@ -210,8 +210,8 @@ input[type="submit"]:hover {
     transition: background-color 0.3s ease;
 }
 
-#infoBtn:hover,
-#cocktailBtn:hover,
-#supportBtn:hover {
+#info-btn:hover,
+#cocktail-btn:hover,
+#support-btn:hover {
     background-color: var(--palette-button-color-hover);
 }
