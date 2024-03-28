@@ -15,17 +15,18 @@
 }
 
 .compteur-jaime {
+    font-size: 26px;
     text-shadow: 0 0 2px var(--palette-background-color);
 }
 
 .illustration-cocktail {
-    /* filter: grayscale(50%); */
+    filter: grayscale(25%);
     height: 100%;
     object-fit: cover;
     width: 100%;
 }
 
-.illustration-cocktail:hover {
+.cocktail:hover .illustration-cocktail {
     filter: none;
 }
 
@@ -41,13 +42,17 @@
     left: 0;
 }
 
+.icone-pastille-alcool {
+    height: 100%;
+}
+
 .icone-saveur {
     bottom: 0;
     right: 0;
 }
 
 .nom-cocktail {
-    background-color: rgba(0 0 0 25%);
+    background-color: rgb(0 0 0 / 25%);
     bottom: 0;
     font-weight: 700;
     left: 0;
@@ -55,6 +60,21 @@
     position: absolute;
     text-align: center;
     width: 100%;
+}
+
+.infobulle-cocktail {
+    position: absolute;
+    top: -1.5em;
+    opacity: 0;
+    background-color: var(--palette-background-color);
+    border-radius: var(--default-border-radius);
+    padding: 2px .5em;
+    font-size: 20px;
+    text-wrap: nowrap;
+}
+
+.pastille-alcool:hover .infobulle-cocktail {
+    opacity: 1;
 }
 
 @media screen and (width<=850px) {

@@ -61,21 +61,24 @@ function afficherCocktails(data, modeleHTML) {
         const iconeJAime = nouveauCocktail.querySelector('.icone-jaime');
         iconeJAime.src = 'ressources/images/icone-coeur-vide.svg';
 
-        const iconeAlcool = nouveauCocktail.querySelector('.pastille-alcool');
+        const iconeAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
         iconeAlcool.src = 'ressources/images/pastille-alcool.svg';
 
         const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
-        umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.umami]}.svg` || iconesUmami['default'];
+        umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur]}.svg` || `${iconesUmami['default']}.svg`;
 
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = `https://picsum.photos/seed/${nettoyerNomCocktail(cocktail.nom)}/200/300`;
         imageCocktail.loading = 'lazy';
 
-        const pastilleAlcool = nouveauCocktail.querySelector('.pastille-alcool');
+        const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
         pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
 
         const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
-        compteurJaime.textContent = cocktail.nb_likes;
+        compteurJaime.textContent = cocktail.nb_like;
+
+        const infobulleCocktail = nouveauCocktail.querySelector('.text-infobulle');
+        infobulleCocktail.textContent = cocktail.alcool_principale;
 
         nouveauCocktail.addEventListener('click', (event) => {
             const idCocktail = event.currentTarget.dataset.idCocktail;
