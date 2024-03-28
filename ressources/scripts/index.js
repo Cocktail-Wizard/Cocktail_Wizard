@@ -1,5 +1,6 @@
 const ordreCommentaires = 'date';
 const galerie = document.getElementById('galerie');
+const barreRecherche = document.getElementById('barre-recherche');
 const iconesUmami = {
     'Sucré': 'icone-sucre-sucre',
     'Aigre': 'icone-citron-aigre',
@@ -27,7 +28,78 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (modeleHTML) {
         try {
-            const data = await faireRequete('/api/cocktails/tri/like');
+            // const data = await faireRequete('/api/cocktails/tri/like');
+            const data = [
+                {
+                    "id_cocktail": 1,
+                    "nom": "Mojito",
+                    "desc": "Cocktail rafraîchissant",
+                    "preparation": "Mélanger tous les ingrédients",
+                    "img_cocktail": "BLOB_DATA",
+                    "img_auteur": "BLOB_DATA",
+                    "auteur": "john",
+                    "date": "2024-03-26",
+                    "nb_like": 1,
+                    "alcool_principale": "Rhum",
+                    "profil_saveur": "Sucré",
+                    "type_verre": "Verre long",
+                    "liked": null,
+                    "ingredients_cocktail": [
+                        {
+                            "quantite": 1,
+                            "unite": "pièce",
+                            "ingredient": "Citron"
+                        },
+                        {
+                            "quantite": 2,
+                            "unite": "cuillère",
+                            "ingredient": "Sucre"
+                        },
+                        {
+                            "quantite": 2,
+                            "unite": "Oz",
+                            "ingredient": "Vodka"
+                        },
+                        {
+                            "quantite": 2,
+                            "unite": "Oz",
+                            "ingredient": "Rhum"
+                        }
+                    ]
+                },
+                {
+                    "id_cocktail": 2,
+                    "nom": "Gin Tonic",
+                    "desc": "Cocktail classique",
+                    "preparation": "Mélanger gin et tonic",
+                    "img_cocktail": "BLOB_DATA",
+                    "img_auteur": "BLOB_DATA",
+                    "auteur": "Jane Doe",
+                    "date": "2024-03-26",
+                    "nb_like": 3,
+                    "alcool_principale": "Gin",
+                    "profil_saveur": "Amer",
+                    "type_verre": "Verre long",
+                    "liked": null,
+                    "ingredients_cocktail": [
+                        {
+                            "quantite": 1,
+                            "unite": "pièce",
+                            "ingredient": "Menthe"
+                        },
+                        {
+                            "quantite": 1,
+                            "unite": "pièce",
+                            "ingredient": "Glace"
+                        },
+                        {
+                            "quantite": 2,
+                            "unite": "pièce",
+                            "ingredient": "coriandre"
+                        }
+                    ]
+                }
+            ];
             if (data) {
                 afficherCocktails(data, modeleHTML);
             }
@@ -35,6 +107,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Erreur : ', error);
         }
     }
+
+    barreRecherche.addEventListener('keyup', chercherCocktail);
 });
 
 function afficherCocktails(data, modeleHTML) {
@@ -173,5 +247,18 @@ async function chargerCommentairesModale(idCocktail) {
         } catch (error) {
             console.error('Erreur : ', error);
         }
+    }
+}
+
+function chercherCocktail() {
+    let filter = barreRecherche.value.toLowerCase();
+    let cocktails = galerie.getElementsByTagName('article');
+
+    for (i = 0; i < cocktails.length; i++) {
+        const nomCocktail = cocktails[i].getElementsByClassName("nom-cocktail")[0];
+
+        const textNom = nomCocktail.textContent || nomCocktail.innerText;
+
+        cocktails[i].style.display = (textNom.toLowerCase().indexOf(filter) > -1) ? "" : "none";
     }
 }
