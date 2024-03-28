@@ -13,15 +13,15 @@ const iconesUmami = {
 document.addEventListener('DOMContentLoaded', async () => {
     const modeleHTML = await chargerModeleHTML('ressources/modeles/cocktail_carte.html');
 
-    if (modeleHTML) {
-        try {
-            const data = await faireRequete('/api/cocktails/tri/like');
-            if (data) {
-                afficherCocktails(data, modeleHTML);
-            }
-        } catch (error) {
-            console.error('Erreur : ', error);
+    if (!modeleHTML) return;
+
+    try {
+        const data = await faireRequete('/api/cocktails/tri/like');
+        if (data) {
+            afficherCocktails(data, modeleHTML);
         }
+    } catch (error) {
+        console.error('Erreur : ', error);
     }
 
     barreRecherche.addEventListener('keyup', chercherCocktail);
@@ -30,18 +30,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 function afficherCocktails(data, modeleHTML) {
     const fragment = document.createDocumentFragment();
     const modeleTemp = document.createElement('div');
-
     modeleTemp.innerHTML = modeleHTML;
-
     const modeleClone = modeleTemp.firstElementChild.cloneNode(true);
 
     data.forEach((cocktail) => {
-
-        if (!cocktail) {
-            return;
-        }
-
-        console.debug(cocktail);
+        if (!cocktail) return;
 
         const nouveauCocktail = modeleClone.cloneNode(true);
 
@@ -72,12 +65,13 @@ function afficherCocktails(data, modeleHTML) {
 
         nouveauCocktail.addEventListener('click', (event) => {
             const idCocktail = event.currentTarget.dataset.idCocktail;
-            sectionModale.style.display = "block";
+            sectionModale.style.display = 'block';
             chargerInformationsModale(cocktail);
             chargerCommentairesModale(idCocktail, ordreCommentaires);
         });
 
         nouveauCocktail.dataset.idCocktail = cocktail.id_cocktail;
+
         fragment.appendChild(nouveauCocktail);
     });
 
@@ -114,7 +108,7 @@ async function chargerInformationsModale(cocktail) {
 }
 
 async function chargerCommentairesModale(idCocktail) {
-    const modeleHTML = await chargerModeleHTML("ressources/modeles/modale_commentaire.html");
+    const modeleHTML = await chargerModeleHTML('ressources/modeles/modale_commentaire.html');
 
     if (modeleHTML) {
         try {
@@ -152,14 +146,19 @@ async function chargerCommentairesModale(idCocktail) {
 }
 
 function chercherCocktail() {
-    let filter = barreRecherche.value.toLowerCase();
-    let cocktails = galerie.getElementsByTagName('article');
+    const filter = barreRecherche.value.toLowerCase().trim();
+    const cocktails = galerie.getElementsByTagName('article');
 
-    for (i = 0; i < cocktails.length; i++) {
-        const nomCocktail = cocktails[i].getElementsByClassName("nom-cocktail")[0];
+    if (!filter) {
+        for (let i = 0; i < cocktails.length; i++) {
+            cocktails[i].style.display = '';
+        }
+        return;
+    }
 
+    for (let i = 0; i < cocktails.length; i++) {
+        const nomCocktail = cocktails[i].getElementsByClassName('nom-cocktail')[0];
         const textNom = nomCocktail.textContent || nomCocktail.innerText;
-
-        cocktails[i].style.display = (textNom.toLowerCase().indexOf(filter) > -1) ? "" : "none";
+        cocktails[i].style.display = (textNom.toLowerCase().includes(filter)) ? '' : 'none';
     }
 }
