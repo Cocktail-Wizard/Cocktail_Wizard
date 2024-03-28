@@ -58,7 +58,7 @@ function afficherCocktails(data, modeleHTML) {
         umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur]}.svg` || `${iconesUmami['default']}.svg`;
 
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
-        imageCocktail.src = `https://picsum.photos/seed/${nettoyerNomCocktail(cocktail.nom)}/200/300`;
+        imageCocktail.src = `https://picsum.photos/200/300`;
         imageCocktail.loading = 'lazy';
 
         const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
@@ -82,10 +82,6 @@ function afficherCocktails(data, modeleHTML) {
     });
 
     galerie.appendChild(fragment);
-}
-
-function nettoyerNomCocktail(nom) {
-    return nom.replace(/[^a-zA-Z0-9]/g, '');
 }
 
 async function chargerInformationsModale(cocktail) {
