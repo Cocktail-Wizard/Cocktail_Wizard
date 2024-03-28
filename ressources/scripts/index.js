@@ -64,7 +64,7 @@ function afficherCocktails(data, modeleHTML) {
         iconeAlcool.src = 'ressources/images/pastille-alcool.svg';
 
         const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
-        umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.umami]}.svg` || iconesUmami['default'];
+        umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur]}.svg` || `${iconesUmami['default']}.svg`;
 
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = `https://picsum.photos/seed/${nettoyerNomCocktail(cocktail.nom)}/200/300`;
