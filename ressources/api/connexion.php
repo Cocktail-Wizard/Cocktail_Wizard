@@ -38,12 +38,6 @@ if (empty($_POST['mdp'])) {
 if (empty($erreurs)) {
     $conn = connexionBD();
 
-    if ($conn == null) {
-        http_response_code(500);
-        echo json_encode("Erreur de connexion à la base de données.");
-        exit();
-    }
-
     $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
     $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
 

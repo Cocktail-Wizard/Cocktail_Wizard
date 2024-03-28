@@ -37,14 +37,14 @@ $userId = usernameToId(trim($donnees['username']), $conn);
 // Envoie une requête à la base de données pour ajouter un like au cocktail et
 // récupérer le nouveau nombre de like
 $requete_preparee = $conn->prepare("CALL LikeCocktail(?,?)");
-$requete_preparee->bind_param('ii', $userId, $id_cocktail);
+$requete_preparee->bind_param('ii', $id_cocktail, $userId);
 $requete_preparee->execute();
 $resultat = $requete_preparee->get_result();
 $requete_preparee->close();
 
 if ($resultat->num_rows == 1) {
     $row = $resultat->fetch_assoc();
-    $nbLike = $row['nb_like'];
+    $nbLike['nb_like'] = $row['nb_like'];
 
     echo json_encode($nbLike);
 } else {

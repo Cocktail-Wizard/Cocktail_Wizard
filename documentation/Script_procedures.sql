@@ -192,9 +192,13 @@ BEGIN
     WHERE id_cocktail = var_id_cocktail
         AND id_utilisateur = var_id_utilisateur;
 
-    SELECT C.nb_like
-    FROM Cocktail C
-    WHERE id_cocktail = var_id_cocktail;
+    IF ROW_COUNT() > 0 THEN
+        SELECT C.nb_like
+        FROM Cocktail C
+        WHERE id_cocktail = var_id_cocktail;
+    ELSE
+        SELECT * FROM Cocktail WHERE 1=0;
+    END IF;
 END
 //
 

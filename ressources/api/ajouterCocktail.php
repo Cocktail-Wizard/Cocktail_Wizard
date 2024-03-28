@@ -27,12 +27,6 @@ require_once __DIR__ . '/classephp/Cocktail_Classe.php';
 
 $conn = connexionBD();
 
-if ($conn == null) {
-    http_response_code(500);
-    echo json_encode("Erreur de connexion à la base de données.");
-    exit();
-}
-
 $donnee = json_decode(file_get_contents('php://input'), true);
 
 $userId = usernameToId(trim($donnee['username']), $conn);
@@ -57,7 +51,7 @@ if ($resultat->num_rows == 1) {
     $idCocktailNouveau = $row['id_cocktail'];
 } else {
     http_response_code(404);
-    echo json_encode("Erreur");
+    echo json_encode("Erreur de création du cocktail.");
     exit();
 }
 

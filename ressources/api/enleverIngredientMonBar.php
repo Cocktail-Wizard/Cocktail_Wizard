@@ -32,12 +32,6 @@ if (!isset($data['nomIngredient']) || !isset($data['username'])) {
 
 $conn = connexionBD();
 
-if ($conn == null) {
-    http_response_code(500);
-    echo json_encode("Erreur de connexion à la base de données.");
-    exit();
-}
-
 $nomIngredient = mysqli_real_escape_string($conn, $data['nomIngredient']);
 $userId = usernameToId($data['username'], $conn);
 
