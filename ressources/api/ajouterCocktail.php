@@ -31,14 +31,14 @@ $conn = connexionBD();
 $donnee = json_decode(file_get_contents('php://input'), true);
 
 // Vérifie si les paramètres sont présents
-paramJSONvalide($donnee['nom'], 'nom du cocktail');
-paramJSONvalide($donnee['description'], 'description du cocktail');
-paramJSONvalide($donnee['preparation'], 'préparation du cocktail');
-paramJSONvalide($donnee['typeVerre'], 'type de verre du cocktail');
-paramJSONvalide($donnee['profilSaveur'], 'profil de saveur du cocktail');
-paramJSONvalide($donnee['nomAlcoolPrincipale'], 'nom de l\'alcool principale du cocktail');
-paramJSONvalide($donnee['username'], 'nom du créateur du cocktail');
-paramJSONvalide($donnee['ingredients'], 'ingrédients du cocktail');
+$nom = paramJSONvalide($donnee['nom'], 'nom du cocktail', $conn);
+$description = paramJSONvalide($donnee['description'], 'description du cocktail', $conn);
+$preparation = paramJSONvalide($donnee['preparation'], 'préparation du cocktail', $conn);
+$typeVerre = paramJSONvalide($donnee['typeVerre'], 'type de verre du cocktail', $conn);
+$profilSaveur = paramJSONvalide($donnee['profilSaveur'], 'profil de saveur du cocktail', $conn);
+$nomAlcoolPrincipale = paramJSONvalide($donnee['nomAlcoolPrincipale'], 'nom de l\'alcool principale du cocktail', $conn);
+$username = paramJSONvalide($donnee['username'], 'nom du créateur du cocktail', $conn);
+$ingredients[] = paramJSONvalide($donnee['ingredients'], 'ingrédients du cocktail', $conn);
 
 $userId = usernameToId(trim($donnee['username']), $conn);
 try {
