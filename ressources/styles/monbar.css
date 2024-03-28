@@ -50,7 +50,7 @@ main {
     background-image: linear-gradient(#7f5af0, #a48df0);
     border: 3px solid #010101;
     border-radius: 4px;
-    box-shadow: rgba(0 0 0 12%) 0 1px 1px;
+    box-shadow: rgba(0, 0, 0, 12%) 0 1px 1px;
     cursor: pointer;
     z-index: -1;
     transform-origin: bottom left;
@@ -95,7 +95,7 @@ header h1 {
     background-image: linear-gradient(var(--pallette-button-color), #a48df0);
     border: 2px solid --palette-border-color;
     border-radius: 4px;
-    box-shadow: rgba(0 0 0 12%) 0 1px 1px;
+    box-shadow: rgba(0, 0, 0, 12%) 0 1px 1px;
     cursor: pointer;
     font-size: 17px;
     outline: 0;
@@ -106,14 +106,14 @@ header h1 {
 }
 
 .button:hover {
-    box-shadow: rgba(255 255 255 30%) 0 0 2px inset, rgba(0 0 0 40%) 0 1px 2px;
+    box-shadow: rgba(255 255 255 30%) 0 0 2px inset, rgba(0, 0, 0, 40%) 0 1px 2px;
     text-decoration: none;
     color: var(--palette-button-text-color);
     background-color: var(--palette-button-color-color);
 }
 
 .button:active {
-    box-shadow: rgba(0 0 0 15%) 0 2px 4px inset, rgba(0 0 0 40%) 0 1px 1px;
+    box-shadow: rgba(0, 0, 0, 15%) 0 2px 4px inset, rgba(0, 0, 0, 40%) 0 1px 1px;
 }
 
 /* Ingredients Section Styles */
@@ -198,7 +198,7 @@ header h1 {
     background-color: var(--palette-button-color);
     margin: 5px;
     white-space: nowrap;
-    box-shadow: 2px 2px 4px rgba(0 0 0 30%);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 30%);
 }
 
 /* Body Styles */
