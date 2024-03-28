@@ -74,7 +74,7 @@ function afficherCocktails(data, modeleHTML) {
         pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
 
         const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
-        compteurJaime.textContent = cocktail.nb_likes;
+        compteurJaime.textContent = cocktail.nb_like;
 
         const infobulleCocktail = nouveauCocktail.querySelector('.infobulle-cocktail');
         infobulleCocktail.textContent = cocktail.alcool_principale;
