@@ -59,6 +59,29 @@
                     <textarea id="description_texte" name="cocktail_description" rows="4" cols="50"
                         placeholder="Une description n'est pas nécessaire, mais elle permet à notre communauté de voir à travers vos yeux."></textarea><br>
 
+                    <div id="dropdown-choices">
+                        <label for="flavor-profile">Profil de saveur:</label>
+                        <select name="flavor-profile" id="flavor">
+                            <option value="sucre" selected>sucré</option>
+                            <option value="sale">salée</option>
+                            <option value="amer">amer</option>
+                            <option value="epicé">epice</option>
+                            <option value="acide">acide</option>
+                        </select>
+                        <label for="main-alcool">Alcool principal:</label>
+                        <select name="main-alcool" id="alcool">
+                            <option value="vodka" selected>vodka</option>
+                            <option value="gin">gin</option>
+                            <option value="whiskey">whiskey</option>
+                            <option value="tequila">tequila</option>
+                            <option value="rhum">rhum</option>
+                            <option value="aperitif">apéritif</option>
+                            <option value="liqueur">liqueur</option>
+                        </select>
+                    </div>
+
+                    <br>
+
                     <label for="cocktail_image">Photo de votre cocktail:</label><br>
                     <input type="file" accept="image/*" onchange="previewImage(event)" />
                     <img id="preview" src="#" alt="Votre image" />

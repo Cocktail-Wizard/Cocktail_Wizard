@@ -8,8 +8,8 @@ let ingredientUnit = "";
 function addIngredientToList(name, amount, unit) {
     const ingredientList = document.getElementById("ingredient_list");
     const listItem = document.createElement("div");
-    listItem.innerHTML = `${amount} ${unit} ${name} <button id="remove_ingredient" onclick="removeIngredient(this)"><img  class="btn-icon" src="../ressources/images/minus.svg"
-                                    alt="+"></button>`;
+    listItem.innerHTML = `<button id="remove_ingredient" onclick="removeIngredient(this)"><img  class="btn-icon" src="../ressources/images/minus.svg"
+                                    alt="+"></button> ${amount} ${unit} ${name} `;
     ingredientList.appendChild(listItem);
 
     // Effacer les zones de texte SEULMENT quand un ingredient est rajouté

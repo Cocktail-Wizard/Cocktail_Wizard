@@ -116,7 +116,6 @@ h2 {
 /* Formulaire */
 form {
     margin-top: 20px;
-    margin-right: 10px;
 }
 
 label {
@@ -132,6 +131,8 @@ textarea {
     border-radius: 4px;
     background-color: var(--palette-secondary-background-color);
     color: var(--palette-paragraph-color);
+    resize: none;
+    box-sizing: border-box;
 }
 
 #ingredient_input {
@@ -141,6 +142,7 @@ textarea {
     border-radius: 4px;
     background-color: var(--palette-secondary-background-color);
     color: var(--palette-paragraph-color);
+    box-sizing: border-box;
 }
 
 .ingredient-box {
@@ -187,6 +189,7 @@ input[type="submit"]:hover {
     display: flex;
     align-items: center;
     gap: 3px;
+    margin: 0;
 }
 
 #add_ingredient:hover,
@@ -214,6 +217,10 @@ input[type="submit"]:hover {
 
 #unit_select {
     color: var(--palette-secondary-text-color);
+}
+
+select {
+    color: black;
 }
 
 select option {
@@ -260,4 +267,15 @@ select option {
 #ingredient_list {
     padding-top: 4px;
     color: black;
+}
+
+#dropdown-choices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#flavor {
+    margin-right: 20px;
 }
