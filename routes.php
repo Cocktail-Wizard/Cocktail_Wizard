@@ -50,7 +50,7 @@ post('/api/cocktails/commentaires', 'ressources/api/ajouterCommentaire.php');
 post('/api/cocktails', 'ressources/api/ajouterCocktail.php');
 
 // /api/user/ingredients ->Ajout d'un ingrédient dans mon bar
-post('/api/user/ingredients', 'ressources/api/ajouterIngredientMonBar.php');
+post('/api/users/ingredients', 'ressources/api/ajouterIngredientMonBar.php');
 
 /******GET*********/
 

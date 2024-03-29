@@ -38,8 +38,8 @@ if (empty($_POST['mdp'])) {
 if (empty($erreurs)) {
     $conn = connexionBD();
 
-    $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
-    $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
+    $nom =  trim($_POST['nom']);
+    $mdp = trim($_POST['mdp']);
 
     try {
         // Rechercher le mot de passe dans la base de données

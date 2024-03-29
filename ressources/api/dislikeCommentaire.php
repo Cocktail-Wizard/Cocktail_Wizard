@@ -26,8 +26,11 @@ $conn = connexionBD();
 
 $donnees = json_decode(file_get_contents('php://input'), true);
 
-$userId = usernameToId(trim($donnees['username']), $conn);
-$id_commentaire = mysqli_real_escape_string($conn, trim($donnees['id_comemntaire']));
+// Vérifie si les paramètres sont présents et les échappe
+$username = paramJSONvalide($donnees, 'username');
+$id_commentaire = paramJSONvalide($donnees, 'id_commentaire');
+$userId = usernameToId($username, $conn);
+
 
 try {
     $requete_preparee = $conn->prepare("CALL DislikeCocktail(?,?)");

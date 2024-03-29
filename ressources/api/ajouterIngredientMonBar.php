@@ -29,11 +29,10 @@ $conn = connexionBD();
 $donnee = json_decode(file_get_contents('php://input'), true);
 
 // Vérifie si les paramètres sont présents
-paramJSONvalide($donnee['nomIngredient'], 'nom de l\'ingredient');
-paramJSONvalide($donnee['username'], 'nom de l\'utilisateur');
+$nomIngredient = paramJSONvalide($donnee,'nomIngredient');
+$username = paramJSONvalide($donnee, 'username');
 
-$nomIngredient = mysqli_real_escape_string($conn, trim($donnee['nomIngredient']));
-$userId = usernameToId(trim($donnee['username']), $conn);
+$userId = usernameToId($username, $conn);
 
 try {
     // Envoie une requête à la base de données pour ajouter l'ingredient au bar de l'utilisateur

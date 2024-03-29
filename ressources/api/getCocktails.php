@@ -29,7 +29,6 @@ require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
 // Connexion à la base de données
 $conn = connexionBD();
 
-$tri_s = mysqli_real_escape_string($conn, $tri);
 //Liste d'objets Cocktail
 $cocktails = [];
 //Liste d'id de cocktails
@@ -38,7 +37,7 @@ $id_cocktail = [];
 try {
     //Demande les id_cocktail de tous les cocktails
     $requete_preparee = $conn->prepare("CALL GetCocktailGalerieNonFiltrer(?)");
-    $requete_preparee->bind_param('s', $tri_s);
+    $requete_preparee->bind_param('s', $tri);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
