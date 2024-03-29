@@ -1,4 +1,4 @@
--- Active: 1710380541515@@cocktailwizbd.mysql.database.azure.com@3306@cocktailwizardbd
+-- Active: 1709764745031@@cocktailwizbd.mysql.database.azure.com@3306@cocktailwizardbd
 -- ============================================================
 -- Auteurs : Yani Amellal, Léonard Marcoux, Pablo Hamel-Corôa,
 --           Maxime Dmitriev et Vianney Veremme
@@ -261,7 +261,7 @@ BEGIN
     )
     VALUES (
         var_nom, var_desc_cocktail, var_preparation,
-        var_type_verre, var_profil_saveur, var_id_utilisateur
+        var_type_verre, var_profil_saveur, var_id_utilisateur,
         (SELECT id_alcool FROM Alcool WHERE nom = var_alcool_principal)
     );
     SELECT LAST_INSERT_ID() AS id_cocktail;
@@ -472,7 +472,8 @@ BEGIN
     SELECT C.id_cocktail, C.nom, C.desc_cocktail, C.preparation, BI.img as imgCocktail, BI2.img as imgAuteur, U.nom AS auteur, C.date_publication, C.nb_like, A.nom AS alcool_principale, C.profil_saveur, C.type_verre
     FROM Cocktail C
     JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
-    JOIN Banque_Image BI ON C.id_image = BI.id_image
+    -- Enlever LEFT quand les images seront gérées
+    LEFT JOIN Banque_Image BI ON C.id_image = BI.id_image
     JOIN Alcool A ON C.id_alcool = A.id_alcool
     JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
     WHERE C.id_cocktail = cocktail;
@@ -605,7 +606,8 @@ BEGIN
     SELECT C.id_commentaire, U.nom, C.nb_like, BI.img, C.date_commentaire, C.contenu
     FROM Commentaire C
     JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
-    JOIN Banque_Image BI ON U.id_image = BI.id_image
+    -- Enlever LEFT quand les images seront gérées
+    LEFT JOIN Banque_Image BI ON U.id_image = BI.id_image
     WHERE C.id_cocktail = cocktail
     ORDER BY
         CASE

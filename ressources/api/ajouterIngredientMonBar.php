@@ -36,7 +36,7 @@ $userId = usernameToId($username, $conn);
 
 try {
     // Envoie une requête à la base de données pour ajouter l'ingredient au bar de l'utilisateur
-    $requete_preparee = $conn->prepare("CALL AjouterIngredient(?,?)");
+    $requete_preparee = $conn->prepare("CALL AjoutIngredient(?,?)");
     $requete_preparee->bind_param('is', $userId, $nomIngredient);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();

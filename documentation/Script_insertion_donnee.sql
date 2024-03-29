@@ -152,6 +152,7 @@ INSERT INTO Ingredient (nom) VALUES ('Citron');
 INSERT INTO Ingredient (nom) VALUES ('Menthe');
 
 INSERT INTO Ingredient (nom) VALUES ('Glace');
+INSERT INTO Ingredient (nom) VALUES ("Jus d'orange");
 
 -- Insertion des données dans la table Alcool
 INSERT INTO

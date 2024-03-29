@@ -28,7 +28,8 @@ class Commentaire implements JsonSerializable
         $this->id_commentaire = $id_commentaire;
         $this->img_auteur = $img_auteur;
         $this->auteur = $auteur;
-        $this->date = $date;
+        $dateTemps = new DateTime($date);
+        $this->date = $dateTemps->format('d-m-Y');
         $this->contenu = $contenu;
         $this->nb_like = $nb_like;
     }

@@ -23,8 +23,8 @@
 
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/classephp/Cocktail_Classe.php';
 require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
+require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
 $conn = connexionBD();
 
@@ -83,7 +83,7 @@ try {
             }
 
             $requete_preparee = $conn->prepare("CALL AjouterIngredientCocktail(?, ?, ?, ?)");
-            $requete_preparee->bind_param('ids', $idCocktailNouveau, $nomIng, $quantite, $unite);
+            $requete_preparee->bind_param('idss', $idCocktailNouveau, $nomIng, $quantite, $unite);
             $requete_preparee->execute();
             $requete_preparee->close();
 

@@ -21,6 +21,7 @@
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
+require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
 
 $conn = connexionBD();
 
@@ -31,14 +32,14 @@ $userId = usernameToId($username, $conn);
 
 try {
     $requete_preparee = $conn->prepare("CALL LikeCommentaire(?,?)");
-    $requete_preparee->bind_param('ii', $userId, $id_commentaire);
+    $requete_preparee->bind_param('ii', $id_commentaire, $userId);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
 
     if ($resultat->num_rows == 1) {
         $row = $resultat->fetch_assoc();
-        $nbLike = $row['nb_like'];
+        $nbLike["nouvNbLike"] = $row['nb_like'];
 
         echo json_encode($nbLike);
     } else {

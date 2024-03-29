@@ -43,7 +43,7 @@ post('/api/cocktails/like', 'ressources/api/likeCocktail.php');
 post('/api/cocktails/commentaires/like', 'ressources/api/likeCommentaire.php');
 
 // /api/cocktails/commentaires ->Ajout d'un commentaire
-// L'API retourne le nouveau nombre de likes
+// L'API retourne une nouvel liste de commentaires
 post('/api/cocktails/commentaires', 'ressources/api/ajouterCommentaire.php');
 
 // /api/cocktails ->Ajout d'un cocktail

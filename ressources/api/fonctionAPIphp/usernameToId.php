@@ -27,8 +27,9 @@ function usernameToId($username, $conn)
     try {
         // Envoie une requête à la base de données pour obtenir l'id de l'utilisateur en fonction
         // de son nom d'utilisateur
+        $username = trim($username);    // Enlève les espaces inutiles
         $requete_preparee = $conn->prepare("CALL GetIdUser(?)");
-        $requete_preparee->bind_param("s", trim($username));
+        $requete_preparee->bind_param("s", $username);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
         $requete_preparee->close();
