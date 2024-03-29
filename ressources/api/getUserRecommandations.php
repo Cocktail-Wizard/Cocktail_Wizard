@@ -21,7 +21,7 @@
  *
  * @version 1.2
  *
- * @author Yani Amellal
+ * @author Yani Amellal, Vianney Veremme
  *
  * @see InfoAffichageCocktail.php
  */
@@ -37,12 +37,6 @@ $cocktails = [];
 // Connexion à la base de données
 $conn = connexionBD();
 
-if ($type != 'tout' && $type != 'classiques' && $type != 'favoris' && $type != 'communaute') {
-    http_response_code(400);
-    echo json_encode("Paramètre de type invalide.");
-    exit();
-}
-
 $userID = usernameToId($username, $conn);
 
 // Vérifie que les paramètres sont valides
@@ -54,39 +48,50 @@ if ($isTriInvalid || $isTypeInvalid) {
     echo json_encode("Paramètre invalide.");
     exit();
 } elseif (isset($tri)) {
-    $triage_s = mysqli_real_escape_string($conn, $tri);
-    $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?)");
-    $requete_preparee->bind_param("is", $userID, $triage_s);
-    $requete_preparee->execute();
-    $resultat = $requete_preparee->get_result();
-    $requete_preparee->close();
+    try {
+        $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?)");
+        $requete_preparee->bind_param("is", $userID, trim($tri));
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+        $requete_preparee->close();
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode("Erreur : " . $e->getMessage());
+        exit();
+    }
 } elseif (isset($type)) {
-    switch ($type) {
-        case 'classiques':
-            $requete_preparee = $conn->prepare("CALL GetCocktailPossibleClassique(?)");
-            $requete_preparee->bind_param("i", $userID);
-            $requete_preparee->execute();
-            $resultat = $requete_preparee->get_result();
-            $requete_preparee->close();
-            break;
-        case 'favoris':
-            $requete_preparee = $conn->prepare("CALL getCocktailFavorieMonBar(?)");
-            $requete_preparee->bind_param("i", $userID);
-            $requete_preparee->execute();
-            $resultat = $requete_preparee->get_result();
-            $requete_preparee->close();
-            break;
-        case 'communaute':
-            $requete_preparee = $conn->prepare("CALL getCocktailCommunataireMonBar(?)");
-            $requete_preparee->bind_param("i", $userID);
-            $requete_preparee->execute();
-            $resultat = $requete_preparee->get_result();
-            $requete_preparee->close();
-            break;
-        default:
-            http_response_code(400);
-            echo json_encode("Paramètre de type invalide.");
-            exit();
+    try {
+        switch ($type) {
+            case 'classiques':
+                $requete_preparee = $conn->prepare("CALL GetCocktailPossibleClassique(?)");
+                $requete_preparee->bind_param("i", $userID);
+                $requete_preparee->execute();
+                $resultat = $requete_preparee->get_result();
+                $requete_preparee->close();
+                break;
+            case 'favoris':
+                $requete_preparee = $conn->prepare("CALL getCocktailFavorieMonBar(?)");
+                $requete_preparee->bind_param("i", $userID);
+                $requete_preparee->execute();
+                $resultat = $requete_preparee->get_result();
+                $requete_preparee->close();
+                break;
+            case 'communaute':
+                $requete_preparee = $conn->prepare("CALL getCocktailCommunataireMonBar(?)");
+                $requete_preparee->bind_param("i", $userID);
+                $requete_preparee->execute();
+                $resultat = $requete_preparee->get_result();
+                $requete_preparee->close();
+                break;
+            default:
+                http_response_code(400);
+                echo json_encode("Paramètre de type invalide.");
+                exit();
+        }
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode("Erreur : " . $e->getMessage());
+        exit();
     }
 }
 

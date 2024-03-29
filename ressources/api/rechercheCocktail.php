@@ -30,33 +30,36 @@ require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
 
 $conn = connexionBD();
 
-$tri_s = mysqli_real_escape_string($conn, $tri);
-$mots_s = mysqli_real_escape_string($conn, $mots);
-
 $cocktails = [];
 $id_cocktail = [];
 
-$requete_preparee = $conn->prepare("CALL RechercheCocktail(?,?)");
-$requete_preparee->bind_param('ss', $mots_s, $tri_s);
-$requete_preparee->execute();
-$resultat = $requete_preparee->get_result();
+try {
+    $requete_preparee = $conn->prepare("CALL RechercheCocktail(?,?)");
+    $requete_preparee->bind_param('ss', trim($mots), trim($tri));
+    $requete_preparee->execute();
+    $resultat = $requete_preparee->get_result();
 
-$requete_preparee->close();
+    $requete_preparee->close();
 
-if ($resultat->num_rows > 0) {
-    while ($row = $resultat->fetch_assoc()) {
-        $id_cocktail[] = $row['id_cocktail'];
+    if ($resultat->num_rows > 0) {
+        while ($row = $resultat->fetch_assoc()) {
+            $id_cocktail[] = $row['id_cocktail'];
+        }
+    } else {
+        http_response_code(404);
+        echo json_encode("Aucun cocktail trouvé.");
+        exit();
     }
-} else {
-    http_response_code(404);
-    echo json_encode("Aucun cocktail trouvé.");
+
+    foreach ($id_cocktail as $id) {
+        $cocktails[] = InfoAffichageCocktail($id, $conn);
+    }
+
+    echo json_encode($cocktails);
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode("Erreur : " . $e->getMessage());
     exit();
 }
-
-foreach ($id_cocktail as $id) {
-    $cocktails[] = InfoAffichageCocktail($id, $conn);
-}
-
-echo json_encode($cocktails);
 
 $conn->close();

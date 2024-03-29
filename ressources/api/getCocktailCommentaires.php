@@ -24,7 +24,6 @@ require_once(__DIR__ . '/../classephp/Commentaire_Classe.php');
 
 $conn = connexionBD();
 
-
 try {
     $requete_preparee = $conn->prepare("CALL GetCommentairesCocktail(?, 'like')");
     $requete_preparee->bind_param("i", $id_cocktail);

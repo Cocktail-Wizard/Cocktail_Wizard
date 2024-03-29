@@ -26,7 +26,6 @@ require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
 $conn = connexionBD();
 
-$username = mysqli_real_escape_string($conn, $_POST['username']);
 $userId = usernameToId($username, $conn);
 
 try {
