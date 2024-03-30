@@ -8,9 +8,7 @@
  *
  * @param String $username Le nom d'utilisateur de l'utilisateur
  * @param mysqli $conn La connexion à la base de données
- * @param Boolean $sqliEsacpeNecessaire Détermine si l'échappement SQL est nécessaire.
- *                 Par défaut, il est activé. L'échappement SQL ne doit pas être activé si le username
- *                 est passé en JSON et que la fonction paramJSONvalide a été utilisé sur celui-ci.
+ *
  *
  * @return Cocktail L'objet Cocktail rempli avec les informations du cocktail
  *

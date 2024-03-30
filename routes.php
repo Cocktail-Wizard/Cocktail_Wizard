@@ -63,7 +63,7 @@ get('/api/cocktails/tri/$tri/recherche/$mots', 'ressources/api/rechercheCocktail
 
 // /api/users/{username}/recommandations/recherche/{mot-clé, mot-clé, mot-clé}
 //  ->Recherche de cocktails recommandés
-get('/api/users/$username/cocktails/tri/$tri/recherche/$mots', '/ressources/api/getUserRecommandations.php');
+get('/api/users/$username/cocktails/tri/$tri/recherche/$mots', '/ressources/api/rechercheUserRecommandations.php');
 
 // /api/users/{username}/recommandations/tri/{like/date}
 // ->Liste des cocktails que l'utilisateur peut faire avec ses ingrédients. Pour galerie connectée

@@ -72,7 +72,7 @@ try {
 
         foreach ($donnee['ingredients'] as $ingredient) {
 
-            if(!empty($ingredient['nomIng']) && !empty($ingredient['quantite']) && !empty($ingredient['unite'])) {
+            if (!empty($ingredient['nomIng']) && !empty($ingredient['quantite']) && !empty($ingredient['unite'])) {
                 $nomIng = $ingredient['nomIng'];
                 $quantite = $ingredient['quantite'];
                 $unite = $ingredient['unite'];
@@ -81,16 +81,13 @@ try {
                 echo json_encode("Les paramètres nomIng, quantite et unite sont requis pour chaque ingrédient.");
                 exit();
             }
-
             $requete_preparee = $conn->prepare("CALL AjouterIngredientCocktail(?, ?, ?, ?)");
-            $requete_preparee->bind_param('idss', $idCocktailNouveau, $nomIng, $quantite, $unite);
+            $requete_preparee->bind_param('isds', $idCocktailNouveau, $nomIng, $quantite, $unite);
             $requete_preparee->execute();
             $requete_preparee->close();
-
         }
 
         echo json_encode("Cocktail ajouté avec succès.");
-
     } else {
         http_response_code(400);
         echo json_encode("Le cocktail doit contenir au moins un ingrédient.");
