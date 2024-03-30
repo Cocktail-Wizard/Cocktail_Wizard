@@ -1,4 +1,5 @@
 const ordreCommentaires = 'date';
+const ordreCocktails = 'date';
 const galerie = document.getElementById('galerie');
 const barreRecherche = document.getElementById('barre-recherche');
 const finAttenteEcriture = 1000; // 1 seconde
@@ -156,11 +157,9 @@ async function chargerCommentairesModale(idCocktail) {
 }
 
 async function chercherCocktail() {
-    recherche = barreRecherche.value.replace(/[^a-zA-Z0-9]/g, '_');
-
-    const data = await faireRequete(
-        '/api/cocktails/tri' + (recherche ? `/${ordreCommentaires}/recherche/${recherche}` : '/like')
-    )
+    const recherche = barreRecherche.value.replace(/[^a-zA-Z0-9]/g, '_');
+    const endpoint = recherche ? `/recherche/${recherche}` : '';
+    const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}${endpoint}`);
 
     if (data) {
         galerie.innerHTML = '';
