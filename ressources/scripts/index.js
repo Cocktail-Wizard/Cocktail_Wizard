@@ -156,7 +156,9 @@ async function chargerCommentairesModale(idCocktail) {
 }
 
 async function chercherCocktail() {
-    if (!barreRecherche.value) return;
+    if (!barreRecherche.value) {
+        const data = await faireRequete('/api/cocktails/tri/like');
+    }
 
     const data = await faireRequete(`/api/cocktails/tri/${ordreCommentaires}/recherche/${barreRecherche.value}`);
 
