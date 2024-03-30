@@ -1,6 +1,7 @@
 const ordreCommentaires = 'date';
 const galerie = document.getElementById('galerie');
 const barreRecherche = document.getElementById('barre-recherche');
+const finAttenteEcriture = 1000; // 1 seconde
 const iconesUmami = {
     'Sucré': 'icone-sucre-sucre',
     'Aigre': 'icone-citron-aigre',
@@ -10,21 +11,30 @@ const iconesUmami = {
     'default': 'point-interrogation'
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const modeleHTML = await chargerModeleHTML('ressources/modeles/cocktail_carte.html');
+let chronoEcriture;
+let modeleCarteCocktail;
 
-    if (!modeleHTML) return;
+document.addEventListener('DOMContentLoaded', async () => {
+    modeleCarteCocktail = await chargerModeleHTML('ressources/modeles/cocktail_carte.html');
+
+    if (!modeleCarteCocktail) return;
+
+    // Rendre la constante immuable
+    Object.freeze(modeleCarteCocktail);
 
     try {
         const data = await faireRequete('/api/cocktails/tri/like');
         if (data) {
-            afficherCocktails(data, modeleHTML);
+            afficherCocktails(data, modeleCarteCocktail);
         }
     } catch (error) {
         console.error('Erreur : ', error);
     }
 
-    barreRecherche.addEventListener('keyup', chercherCocktail);
+    barreRecherche.addEventListener('input', () => {
+        clearTimeout(chronoEcriture);
+        chronoEcriture = setTimeout(chercherCocktail, finAttenteEcriture);
+    });
 });
 
 function afficherCocktails(data, modeleHTML) {
@@ -145,20 +155,13 @@ async function chargerCommentairesModale(idCocktail) {
     }
 }
 
-function chercherCocktail() {
-    const filter = barreRecherche.value.toLowerCase().trim();
-    const cocktails = galerie.getElementsByTagName('article');
+async function chercherCocktail() {
+    if (!barreRecherche.value) return;
 
-    if (!filter) {
-        for (let i = 0; i < cocktails.length; i++) {
-            cocktails[i].style.display = '';
-        }
-        return;
-    }
+    const data = await faireRequete(`/api/cocktails/tri/${ordreCommentaires}/recherche/${barreRecherche.value}`);
 
-    for (let i = 0; i < cocktails.length; i++) {
-        const nomCocktail = cocktails[i].getElementsByClassName('nom-cocktail')[0];
-        const textNom = nomCocktail.textContent || nomCocktail.innerText;
-        cocktails[i].style.display = (textNom.toLowerCase().includes(filter)) ? '' : 'none';
+    if (data) {
+        galerie.innerHTML = '';
+        afficherCocktails(data, modeleCarteCocktail);
     }
 }
