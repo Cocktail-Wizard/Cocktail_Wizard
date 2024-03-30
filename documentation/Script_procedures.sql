@@ -631,10 +631,10 @@ BEGIN
     JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
     LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
     LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-    WHERE LOCATE(C.nom, param_recherche) > 0
-    OR LOCATE(I.nom, param_recherche) > 0
-    OR LOCATE(A.nom, param_recherche) > 0
-    OR LOCATE(C.profil_saveur, param_recherche) > 0
+    WHERE LOCATE(param_recherche ,C.nom) > 0
+    OR LOCATE(param_recherche , I.nom) > 0
+    OR LOCATE( param_recherche,A.nom) > 0
+    OR LOCATE(param_recherche ,C.profil_saveur) > 0
     ORDER BY
         CASE
             WHEN param_orderby = 'date' THEN C.date_publication
@@ -666,8 +666,8 @@ BEGIN
     OR LOCATE(A.nom, param_recherche) > 0
     OR LOCATE(C.profil_saveur, param_recherche) > 0)
     AND (
-        (IC.id_ingredient IS NULL OR IU.id_utilisateur = id_utilisateur)
-        AND (IC.id_alcool IS NULL OR AU.id_utilisateur = id_utilisateur)
+        (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
+        OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
     )
     ORDER BY
         CASE
