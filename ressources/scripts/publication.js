@@ -36,10 +36,23 @@ function openModal(page) {
     document.getElementById("ingredient_unit").value = ingredientUnit;
 }
 
+
+document.addEventListener("DOMContentLoaded", function () {
+    var btnPublish = document.getElementById("btnPublish");
+
+    // onclick listener pour le btn publish
+    btnPublish.addEventListener("click", function () {
+        // Trigger the openModal function from publication.js
+        openModal();
+    });
+});
+
 // Ouvrir le modal de publication
-document.getElementById("myBtn").onclick = function () {
+document.getElementById("btnPublish").onclick = function () {
+    var publicationPage = document.getElementById("publicationPage");
     openModal(publicationPage);
 }
+
 
 // Lorsque l'utilisateur clique sur <span> (x), fermer le modal
 span.onclick = function () {

@@ -82,6 +82,7 @@
 
     <script src="../ressources/scripts/outils.js"></script>
     <script src="../ressources/scripts/monbar.js"></script>
+    <script src="../ressources/scripts/publication.js"></script>
 </body>
 
 </html>
