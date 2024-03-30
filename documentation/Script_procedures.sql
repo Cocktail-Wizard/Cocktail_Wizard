@@ -404,8 +404,8 @@ BEGIN
         LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
         WHERE IC.id_cocktail = C.id_cocktail
         AND (
-            (IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
-            OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
+            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
+            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
         )
     )
     ORDER BY
@@ -545,8 +545,8 @@ BEGIN
         LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
         WHERE IC.id_cocktail = C.id_cocktail
         AND (
-            (IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
-            OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
+            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
+            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
         )
     )
     AND C.classique = 1
@@ -570,8 +570,8 @@ BEGIN
         LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
         WHERE IC.id_cocktail = C.id_cocktail
         AND (
-            (IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
-            OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
+            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
+            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
         )
     )
     AND C.classique = 0

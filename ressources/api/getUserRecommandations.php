@@ -50,7 +50,7 @@ if ($isTriInvalid || $isTypeInvalid) {
 } elseif (isset($tri)) {
     try {
         $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?)");
-        $requete_preparee->bind_param("is", $userID, trim($tri));
+        $requete_preparee->bind_param("is", $userID, $tri);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
         $requete_preparee->close();
@@ -98,7 +98,7 @@ if ($isTriInvalid || $isTypeInvalid) {
 if ($resultat->num_rows > 0) {
     //Ajoute les id des cocktails à la liste
     while ($row = $resultat->fetch_assoc()) {
-        $idCocktails[] = $row['idCocktails'];
+        $idCocktails[] = $row['id_cocktail'];
     }
 } else {
     http_response_code(404);
