@@ -156,11 +156,11 @@ async function chargerCommentairesModale(idCocktail) {
 }
 
 async function chercherCocktail() {
-    if (!barreRecherche.value) {
-        const data = await faireRequete('/api/cocktails/tri/like');
-    }
+    recherche = barreRecherche.value.replace(/[^a-zA-Z0-9]/g, '_');
 
-    const data = await faireRequete(`/api/cocktails/tri/${ordreCommentaires}/recherche/${barreRecherche.value}`);
+    const data = await faireRequete(
+        '/api/cocktails/tri' + (recherche ? `/${ordreCommentaires}/recherche/${recherche}` : '/like')
+    )
 
     if (data) {
         galerie.innerHTML = '';
