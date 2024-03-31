@@ -63,21 +63,21 @@ if ($isTriInvalid || $isTypeInvalid) {
     try {
         switch ($type) {
             case 'classiques':
-                $requete_preparee = $conn->prepare("CALL GetCocktailPossibleClassique(?)");
+                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleClassique(?)");
                 $requete_preparee->bind_param("i", $userID);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
                 break;
             case 'favoris':
-                $requete_preparee = $conn->prepare("CALL getCocktailFavorieMonBar(?)");
+                $requete_preparee = $conn->prepare("CALL GetListeCocktailPossibleFavorie(?)");
                 $requete_preparee->bind_param("i", $userID);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
                 break;
             case 'communaute':
-                $requete_preparee = $conn->prepare("CALL getCocktailCommunataireMonBar(?)");
+                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleCommunautaire(?)");
                 $requete_preparee->bind_param("i", $userID);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();

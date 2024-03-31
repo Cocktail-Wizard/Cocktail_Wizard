@@ -42,7 +42,7 @@ try {
 
     if ($resultat->num_rows == 1) {
         $row = $resultat->fetch_assoc();
-        $nbLike = $row['nb_Like'];
+        $nbLike['nb_like'] = $row['nb_like'];
 
         echo json_encode($nbLike);
     } else {
