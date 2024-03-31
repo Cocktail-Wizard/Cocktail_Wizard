@@ -1,52 +1,3 @@
-<?php
-require("../ressources/api/connexion.php");
-session_start();
-// Accumulateur d'erreurs
-$erreurs = array();
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Valider le nom d'utilisateur
-    if (empty($_POST['nom'])) {
-        $erreurs[] = "Le nom d'utilisateur entré est invalide!<br>";
-    }
-
-    // Valider le mot de passe
-    if (empty($_POST['mdp'])) {
-        $erreurs[] = "Le mot de passe entré est invalide!<br>";
-    }
-
-    // Si aucune erreur, etablir la connexion
-    if (count($erreurs) == 0) {
-        //  Etablir la connexion avec la base de donnée
-        $conn = connexion("cocktailwizbd.mysql.database.azure.com", "cocktail", "Cw-yplmv");
-        $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
-        $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
-        if ($conn == null)
-            die("Erreur");
-
-        //  Rechercher le mot de passe dans la base de donnée
-        $requete_preparee = $conn->prepare("SELECT mdp FROM utilisateur WHERE nom = ?");
-        //  Lié le mot de passe (String) à l'identifiant
-        $requete_preparee->bind_param("s", $nom);
-        $requete_preparee->execute();
-        $resultat = $requete_preparee->get_result();
-        $util = $resultat->fetch_assoc();
-        if ($resultat->num_rows > 0) {
-            $mdp_encrypter = $util['mdp'];
-        }
-        $requete_preparee->close();
-
-        if ($resultat->num_rows > 0 && password_verify($mdp, $mdp_encrypter)) {
-            $_SESSION['nom'] = $nom;
-            //  Rediriger l'utilisateur vers la page de galerie
-            header("Location: galerie.php");
-            exit();
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -59,17 +10,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <section id="messErreur">
-        <?php if (count($erreurs) > 0) { ?>
-            <?php foreach ($erreurs as $erreur) { ?>
-                <p class="erreur"><?php echo $erreur; ?></p><br>
-            <?php } ?>
-        <?php } ?>
+    <section id="message-erreur" class="erreur">
+        <!-- Les erreurs seront affichées ici -->
     </section>
 
     <main>
-        <!-- Mettre le chemin appropriee une fois que l'organisation des fichiers soient etabli -->
-        <img src="../ressources/images/sparkles.png" id="logoCW" alt="Logo Cocktail Wizard">
+        <!-- Mettre le chemin approprié une fois que l'organisation des fichiers soit établie -->
+        <img src="../ressources/images/sparkles.png" id="logo-cocktail-wizard" alt="Logo Cocktail Wizard">
         <form id="form-connexion" method="post">
             <h1>Cocktail Wizard</h1>
 
@@ -82,16 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit">Connexion</button>
 
             <p>Vous n'êtes pas encore membre?</p>
-            <a href="../pages/inscription.php">Créer un compte</a>
-            <?php if (!empty($erreurs)) : ?>
-                <?php foreach ($erreurs as $erreur) : ?>
-                    <p class="erreur"><?= $erreur ?></p><br>
-                <?php endforeach; ?>
-            <?php endif; ?>
+            <a href="/inscription">Créer un compte</a>
         </form>
     </main>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
+
+    <script src="../ressources/scripts/connexion.js"></script>
 </body>
 
 </html>

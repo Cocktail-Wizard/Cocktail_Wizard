@@ -1,5 +1,8 @@
+const ordreCommentaires = 'date';
+const ordreCocktails = 'date';
 const galerie = document.getElementById('galerie');
-const nombreCocktailsAffiches = 20;
+const barreRecherche = document.getElementById('barre-recherche');
+const finAttenteEcriture = 1000; // 1 seconde
 const iconesUmami = {
     'Sucré': 'icone-sucre-sucre',
     'Aigre': 'icone-citron-aigre',
@@ -9,68 +12,157 @@ const iconesUmami = {
     'default': 'point-interrogation'
 };
 
-// Générer la liste complète des cocktails
-let nomsCocktails = [];
+let chronoEcriture;
+let modeleCarteCocktail;
 
-for (let i = 0; i < nombreCocktailsAffiches; i++) {
-    const nomAleatoire = genererMotAleatoire(genererNombreAleatoire(6, 12));
-    nomsCocktails.push(nomAleatoire);
-}
+document.addEventListener('DOMContentLoaded', async () => {
+    modeleCarteCocktail = await chargerModeleHTML('ressources/modeles/cocktail_carte.html');
 
-const cocktails = genererListeCocktails(nomsCocktails);
+    if (!modeleCarteCocktail) return;
 
-document.addEventListener("DOMContentLoaded", async () => {
-    const modeleHTML = await chargerModeleHTML("ressources/modeles/cocktail_carte.html");
+    // Rendre la constante immuable
+    Object.freeze(modeleCarteCocktail);
 
-    if (modeleHTML) {
-        cocktails.forEach((cocktail) => {
-            // Créer une copie du modèle HTML pour chaque cocktail
-            const nouveauCocktail = document.createElement('article');
-            nouveauCocktail.classList.add('cocktail')
-            nouveauCocktail.innerHTML = modeleHTML;
-
-            // Définir le nom
-            const nomCocktail = nouveauCocktail.querySelector('.nom-cocktail');
-            nomCocktail.textContent = cocktail.nom;
-
-            // Afficher l'icone "j'aime"
-            const iconeJAime = nouveauCocktail.querySelector('.icone-jaime');
-            iconeJAime.src = "ressources/images/icone-coeur-vide.svg"
-
-            // Afficher l'icone de l'alcool principal
-            const iconeAlcool = nouveauCocktail.querySelector('.pastille-alcool');
-            iconeAlcool.src = "ressources/images/pastille-alcool.svg";
-
-            // Afficher l'icone du profil gustatif
-            const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
-            umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.umami]}.svg` || iconesUmami['default'];
-
-            // Ajouter l'image du cocktail
-            const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
-            imageCocktail.src = `https://picsum.photos/seed/${cocktail.nom.replace(/[^a-zA-Z0-9]/g, '')}/200/300`;
-            imageCocktail.loading = "lazy";
-
-            // Choisir la couleur de la pastille pour l'alcool principal
-            const pastilleAlcool = nouveauCocktail.querySelector('.pastille-alcool');
-            pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
-
-            // Afficher le nombre de mentions "j'aime"
-            const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
-            compteurJaime.textContent = cocktail.nb_likes;
-
-            // Ajouter la fonctionnalité d'ouvrir la boite modale à la publication
-            nouveauCocktail.addEventListener('click', () => {
-                console.debug("id cocktail: ", cocktail.id_cocktail);
-                chargerInformationsModale(cocktail.id_cocktail);
-                sectionModale.style.display = "block";
-            })
-
-            // Ajouter le cocktail à la galerie
-            galerie.appendChild(nouveauCocktail);
-        });
+    try {
+        const data = await faireRequete('/api/cocktails/tri/like');
+        if (data) {
+            afficherCocktails(data, modeleCarteCocktail);
+        }
+    } catch (error) {
+        console.error('Erreur : ', error);
     }
+
+    barreRecherche.addEventListener('input', () => {
+        clearTimeout(chronoEcriture);
+        chronoEcriture = setTimeout(chercherCocktail, finAttenteEcriture);
+    });
 });
 
-function chargerInformationsModale(idCocktail) {
-    // Envoyer une requête à l'API pour ce cocktail, exemple: "https://cocktailwizard.com/cocktail/{id}"
+function afficherCocktails(data, modeleHTML) {
+    const fragment = document.createDocumentFragment();
+    const modeleTemp = document.createElement('div');
+    modeleTemp.innerHTML = modeleHTML;
+    const modeleClone = modeleTemp.firstElementChild.cloneNode(true);
+
+    data.forEach((cocktail) => {
+        if (!cocktail) return;
+
+        const nouveauCocktail = modeleClone.cloneNode(true);
+
+        const nomCocktail = nouveauCocktail.querySelector('.nom-cocktail');
+        nomCocktail.textContent = cocktail.nom;
+
+        const iconeJAime = nouveauCocktail.querySelector('.icone-jaime');
+        iconeJAime.src = 'ressources/images/icone-coeur-vide.svg';
+
+        const iconeAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
+        iconeAlcool.src = 'ressources/images/pastille-alcool.svg';
+
+        const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
+        umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur]}.svg` || `${iconesUmami['default']}.svg`;
+
+        const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
+        imageCocktail.src = `https://picsum.photos/200/300`;
+        imageCocktail.loading = 'lazy';
+
+        const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
+        pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+
+        const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
+        compteurJaime.textContent = cocktail.nb_like;
+
+        const infobulleCocktail = nouveauCocktail.querySelector('.text-infobulle');
+        infobulleCocktail.textContent = cocktail.alcool_principale;
+
+        nouveauCocktail.addEventListener('click', (event) => {
+            const idCocktail = event.currentTarget.dataset.idCocktail;
+            sectionModale.style.display = 'block';
+            chargerInformationsModale(cocktail);
+            chargerCommentairesModale(idCocktail, ordreCommentaires);
+        });
+
+        nouveauCocktail.dataset.idCocktail = cocktail.id_cocktail;
+
+        fragment.appendChild(nouveauCocktail);
+    });
+
+    galerie.appendChild(fragment);
+}
+
+async function chargerInformationsModale(cocktail) {
+    actualiserTextElementParId('auteur', `@${cocktail.auteur}`);
+    actualiserTextElementParId('compteur-jaime', cocktail.nb_like);
+    actualiserTextElementParId('titre-cocktail', cocktail.nom);
+    actualiserTextElementParId('description', cocktail.desc);
+    actualiserTextElementParId('preparation', cocktail.preparation);
+    actualiserTextElementParId('date-publication', cocktail.date);
+
+    const ingredients = document.getElementById('ingredients');
+    ingredients.innerHTML = '';
+
+    cocktail.ingredients_cocktail.forEach((ingredient) => {
+        const ligneIngredient = document.createElement('li');
+        const quantiteIngredient = document.createElement('span');
+        const uniteIngredient = document.createElement('span');
+        const nomIngredient = document.createElement('span');
+
+        quantiteIngredient.innerText = ingredient.quantite;
+        uniteIngredient.innerText = ingredient.unite;
+        nomIngredient.innerText = ingredient.ingredient;
+
+        ligneIngredient.appendChild(quantiteIngredient);
+        ligneIngredient.appendChild(uniteIngredient);
+        ligneIngredient.appendChild(nomIngredient);
+
+        ingredients.appendChild(ligneIngredient);
+    });
+}
+
+async function chargerCommentairesModale(idCocktail) {
+    const modeleHTML = await chargerModeleHTML('ressources/modeles/modale_commentaire.html');
+
+    if (modeleHTML) {
+        try {
+            const data = await faireRequete('/api/cocktails/' + idCocktail + '/commentaires');
+            if (data === null) {
+                return;
+            }
+
+            const listeCommentaires = document.getElementById('commentaires');
+            listeCommentaires.innerHTML = '';
+
+            data.forEach((commentaire) => {
+                const nouveauCommentaireTemp = document.createElement('li');
+
+                nouveauCommentaireTemp.innerHTML = modeleHTML;
+
+                const nouveauCommentaire = nouveauCommentaireTemp.firstElementChild.cloneNode(true);
+
+                const auteurCommentaire = nouveauCommentaire.querySelector('.auteur');
+                auteurCommentaire.innerText = `@${commentaire.auteur}`;
+
+                const dateCommentaire = nouveauCommentaire.querySelector('.date');
+                dateCommentaire.innerText = commentaire.date;
+
+                const messageCommentaire = nouveauCommentaire.querySelector('.contenu');
+                messageCommentaire.innerText = commentaire.contenu;
+
+                listeCommentaires.appendChild(nouveauCommentaire);
+            });
+
+        } catch (error) {
+            console.error('Erreur : ', error);
+        }
+    }
+}
+
+async function chercherCocktail() {
+    const recherche = barreRecherche.value.replace(/[^a-zA-Z0-9]/g, '_');
+    const endpoint = recherche ? `/recherche/${recherche}` : '';
+    const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}${endpoint}`);
+
+    if (data) {
+        galerie.innerHTML = '';
+        afficherCocktails(data, modeleCarteCocktail);
+    }
 }

@@ -3,7 +3,7 @@ async function chargerModeleHTML(url) {
     try {
         const reponse = await fetch(url);
         if (!reponse.ok) {
-            throw new Error("Impossible de charger le modèle HTML.");
+            throw new Error('Impossible de charger le modèle HTML.');
         }
 
         return await reponse.text();
@@ -13,7 +13,23 @@ async function chargerModeleHTML(url) {
     }
 }
 
-// Fonction pour générer un entier aléatoire entre deux bornes
-const genererNombreAleatoire = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+async function faireRequete(url) {
+    try {
+        const reponse = await fetch(url);
+        if (!reponse.ok) {
+            throw new Error('La requête a échoué');
+        }
+        return await reponse.json();
+    } catch (error) {
+        console.error('Erreur : ', error);
+        return null;
+    }
+}
+
+function actualiserTextElementParId(id, nouvelle_valeur) {
+    const element = document.getElementById(id);
+
+    if (element) {
+        element.innerText = nouvelle_valeur;
+    }
+}

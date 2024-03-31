@@ -10,7 +10,7 @@
     z-index: 2;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgb(0 0 0 / 75%);
 }
 
 #modale {
@@ -21,22 +21,23 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--palette-background-color);
-    filter: invert(100%);
+    background-color: var(--palette-secondary-background-color);
     padding: 1em;
     border-radius: var(--default-border-radius);
     display: flex;
     flex-direction: column;
-}
-
-#modale img {
-    filter: invert(100%);
+    gap: var(--default-gap);
 }
 
 #fermer {
     position: fixed;
-    color: #aaa;
-    right: var(--default-border-radius);
+    top: var(--space-from-corner);
+    right: var(--space-from-corner);
+    height: 1em;
+    width: 1em;
+    text-align: center;
+    line-height: 1em;
+    color: var(--palette-secondary-text-color);
     font-size: 28px;
     font-weight: bold;
     z-index: 1;
@@ -44,7 +45,7 @@
 
 #fermer:hover,
 #fermer:focus {
-    color: black;
+    filter: invert(100%);
     text-decoration: none;
     cursor: pointer;
 }
@@ -62,7 +63,7 @@
 }
 
 #presentation {
-    width: clamp(var(--modal-content-min-width), 40%, 40%);
+    width: 40%;
     height: 100%;
 }
 
@@ -92,7 +93,7 @@
 }
 
 #liste-ingredients::-webkit-scrollbar {
-    width: 5px;
+    width: 1px;
 }
 
 #affichage-jaime {
@@ -103,4 +104,67 @@
 #affichage-jaime img {
     height: 28px;
     width: 28px;
+}
+
+#commenter>form {
+    border-radius: var(--default-border-radius);
+    overflow: hidden;
+    background-color: rgb(0 0 0 / 15%);
+    display: flex;
+    flex-direction: column;
+}
+
+#commenter>form>textarea {
+    resize: none;
+    height: 100px;
+    color: var(--palette-secondary-text-color);
+}
+
+#commenter>form>button {
+    align-self: flex-end;
+    border: none;
+    padding: .5em;
+    font-size: large;
+    border-radius: var(--default-border-radius);
+}
+
+#commentaires {
+    display: flex;
+    gap: calc(var(--default-gap) / 2);
+    flex-direction: column;
+    padding-left: var(--default-gap);
+}
+
+.commentaire {
+    border-radius: var(--default-border-radius);
+    background-color: rgba(255 255 255 15%);
+    padding: 1em;
+}
+
+#commentaires header {
+    display: flex;
+    gap: calc(var(--default-gap) / 2);
+}
+
+#commentaires .date {
+    color: rgb(0 0 0 / 25%);
+    font-style: italic;
+}
+
+ul#ingredients {
+    list-style-type: none;
+    text-align: left;
+    padding: 0;
+}
+
+ul#ingredients li {
+    display: flex;
+    column-gap: .5em;
+    width: 100%;
+}
+
+@media screen and (width<=850px) {
+    #presentation {
+        width: 100%;
+    }
 }

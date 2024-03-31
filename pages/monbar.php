@@ -20,13 +20,12 @@
                 <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Profile Picture">
             </div>
             <span class="username">@UsernameSuperWizard</span>
-            <button class="button" id="btnDeconnect" style="display: none;">Déconnexion</button>
+            <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
         </div>
 
         <h1>Cocktail <img src="../favicon.ico" id="w-icon">izard</h1>
         <div class="button-container">
-            <a class="button" id="btnHome" href="../index.html">Galerie</a>
-
+            <a class="button" id="bouton-galerie" href="../index.html">Galerie</a>
         </div>
     </header>
 
@@ -38,13 +37,13 @@
             <hr class="line right" />
 
             <section class="ingredients">
-                <div id="searchBoxContainer" class="dropdown">
-                    <input type="text" id="searchBox" placeholder="Ajouter un ingredient...">
-                    <div id="ingredientList" class="dropdown-content"></div>
+                <div id="contenant-boite-recherche" class="dropdown">
+                    <input type="text" id="boite-recherche" placeholder="Ajouter un ingredient...">
+                    <div id="liste-ingredients" class="dropdown-content"></div>
                 </div>
             </section>
         </div>
-        <div class="selectIngredient-box" id="selectedIngredients"></div>
+        <div class="boite-ingredients-selectionnes" id="selectedIngredients"></div>
         <div class="body">
             <div class="separator">
                 <span class="section-name">Les classiques</span>
@@ -70,7 +69,7 @@
         </div>
     </main>
 
-    <aside id="twoBtn">
+    <aside id="deux-boutons">
         <button>
             <img id="btnAbout" src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
         </button>
@@ -82,7 +81,6 @@
     <footer>Cocktail Wizard &copy - 2024</footer>
 
     <script src="../ressources/scripts/outils.js"></script>
-    <script src="../ressources/scripts/test_modale.js"></script>
     <script src="../ressources/scripts/monbar.js"></script>
 </body>
 

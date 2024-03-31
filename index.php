@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="ressources/styles/modale.css">
     <link rel="stylesheet" href="ressources/styles/carte_cocktail.css">
     <script src="ressources/scripts/outils.js"></script>
-    <script src="ressources/scripts/test_modale.js"></script>
 </head>
 
 <body>
@@ -20,11 +19,19 @@
         <h1>Cocktail Wizard</h1>
     </header>
 
-    <nav><input id="barre-recherche" type="text" placeholder="Search for a drink..." autocomplete="off"></nav>
+    <main>
+        <nav><input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus></nav>
 
-    <section id="galerie"></section>
+        <section id="galerie"></section>
+    </main>
 
     <aside id="contenant-modale"></aside>
+
+    <aside id="contenant-boutons-fixes">
+        <a href="/connexion" title="Connexion">
+            <img src="ressources/images/icone-profile.svg" alt="Icone profile">
+        </a>
+    </aside>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
 
