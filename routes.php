@@ -52,6 +52,9 @@ post('/api/cocktails', 'ressources/api/ajouterCocktail.php');
 // /api/user/ingredients ->Ajout d'un ingrédient dans mon bar
 post('/api/users/ingredients', 'ressources/api/ajouterIngredientMonBar.php');
 
+// /authentification ->Connexion d'un utilisateu utilisé pour le site web
+post('/authentification', 'ressources/scripts/connexionWeb.php');
+
 /******GET*********/
 
 // /api/cocktails/tri/${like/date}  ->Cocktails galerie
