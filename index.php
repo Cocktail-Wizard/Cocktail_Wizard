@@ -21,7 +21,7 @@
 
     <main>
         <nav><input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus></nav>
-
+        
         <section id="galerie"></section>
     </main>
 
