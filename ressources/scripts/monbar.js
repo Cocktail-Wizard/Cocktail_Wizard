@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // onclick listener for the publish button
     publish.addEventListener("click", async function () {
         // Load the content of publication.html
-        const htmlContent = await loadHTMLTemplate('../ressources/modeles/modale_publication.html');
+        const htmlContent = await chargerModeleHTML('../ressources/modeles/modale_publication.html');
         if (htmlContent) {
             document.body.innerHTML = htmlContent;
         } else {
