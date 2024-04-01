@@ -15,7 +15,15 @@ const iconesUmami = {
 const allIngredients = ['Vodka', 'Rhum', 'Gin', 'Tequila', 'Whiskey', 'Triple sec', 'Sirop simple', 'Jus de citron', 'Jus de lime', "Jus d'orange", 'Jus de canneberge', 'Grenadine', 'Jus de pomme', 'Jujutsu Kaisen'];
 let selectedIngredients = [];
 
-//Liste des ingredients (vas eventuellement etre update avec la bd)
+/**
+ * Filtre et affiche les ingrédients en fonction de la valeur de recherche fournie.
+ * Met à jour la liste des ingrédients disponibles en fonction de la saisie dans la barre de recherche.
+ * Affiche les ingrédients filtrés dans une boîte déroulante et permet à l'utilisateur de sélectionner un ingrédient.
+ * Les ingrédients déjà sélectionnés ne sont pas inclus dans les résultats.
+ *
+ * @function filterIngredients
+ * @returns {void}
+ */
 function filterIngredients() {
     const searchValue = document.getElementById('boite-recherche').value.toLowerCase();
     const listeIngredients = document.getElementById('liste-ingredients');
@@ -42,14 +50,28 @@ function filterIngredients() {
     });
 }
 
-//fonction pour selctionner un ingredient
+/**
+ * Sélectionne un ingrédient et le rajoute à la liste des ingrédients sélectionnés.
+ * Met à jour l'affichage des ingrédients sélectionnés et filtre les ingrédients disponibles pour éviter les doublons.
+ *
+ * @function selectIngredient
+ * @param {string} ingredient - L'ingrédient à sélectionner.
+ * @returns {void}
+ */
 function selectIngredient(ingredient) {
     selectedIngredients.push(ingredient);
     updateSelectedIngredients();
     filterIngredients(); //update le dropdown pour pas pouvoiur rajouter 100 fois la meme chose
 }
 
-//fonction pour deselectionenr un ingredient
+/**
+ * Désélectionne un ingrédient de la liste des ingrédients sélectionnés.
+ * Met à jour l'affichage des ingrédients sélectionnés et filtre les ingrédients disponibles.
+ *
+ * @function unselectIngredient
+ * @param {string} ingredient - L'ingrédient à désélectionner.
+ * @returns {void}
+ */
 function unselectIngredient(ingredient) {
     const index = selectedIngredients.indexOf(ingredient);
     if (index !== -1) {
@@ -59,7 +81,14 @@ function unselectIngredient(ingredient) {
     }
 }
 
-//fonction qui met a jour l'affichage des element selectionner
+/**
+ * Met à jour l'affichage des ingrédients sélectionnés dans la boîte dédiée.
+ * Affiche chaque ingrédient sélectionné avec la possibilité de le désélectionner.
+ * Assure que la boîte des ingrédients sélectionnés est visible même si elle est vide.
+ *
+ * @function updateSelectedIngredients
+ * @returns {void}
+ */
 function updateSelectedIngredients() {
     const selectedIngredientsDiv = document.getElementById('selectedIngredients');
     selectedIngredientsDiv.innerHTML = '';
@@ -74,7 +103,15 @@ function updateSelectedIngredients() {
     selectedIngredientsDiv.style.display = 'flex'; // s'ssurer que la boîte des ingrédients sélectionnés est visible meme si vide
 }
 
-// Ferme la liste des ingrédients lorsque l'utilisateur clique à l'extérieur
+/**
+ * Écouteur d'événements qui se déclenche lorsqu'un clic est effectué n'importe où sur le document.
+ * Gère la fermeture de la liste des ingrédients déroulante si le clic est en dehors de la zone de recherche ou de la liste des ingrédients.
+ * Assure que la liste des ingrédients reste visible tant que l'utilisateur ne clique pas en dehors de celle-ci.
+ *
+ * @event click
+ * @param {Object} event - L'événement de clic déclenché.
+ * @returns {void}
+ */
 document.addEventListener('click', function (event) {
     const boiteRecherche = document.getElementById('boite-recherche');
     const listeIngredients = document.getElementById('liste-ingredients');
@@ -92,10 +129,30 @@ document.addEventListener('click', function (event) {
     }
 });
 
-// Initial call to display all ingredients
-filterIngredients();
-updateSelectedIngredients(); // Display initially selected ingredients
+/**
+ * Appel initial pour afficher tous les ingrédients disponibles et les ingrédients sélectionnés.
+ *
+ * @function initialSetup
+ * @returns {void}
+ */
+function initialSetup() {
+    filterIngredients(); // Appel initial pour afficher tous les ingrédients disponibles
+    updateSelectedIngredients(); // Affiche initialement les ingrédients sélectionnés
+}
 
+// Appels initiaux
+initialSetup();
+
+
+/**
+ * Écouteur d'événements qui se déclenche lorsque le DOM est entièrement chargé.
+ * Initialise les fonctionnalités de recherche d'ingrédients, charge le modèle HTML pour la carte de cocktail,
+ * récupère les données des cocktails depuis une API et affiche les cocktails sur la page.
+ *
+ * @event DOMContentLoaded
+ * @param {Object} event - L'événement DOMContentLoaded déclenché.
+ * @returns {void}
+ */
 document.addEventListener('DOMContentLoaded', async () => {
     inputRechercheIngredient = document.getElementById('boite-recherche');
     inputRechercheIngredient.addEventListener('input', filterIngredients);
@@ -116,6 +173,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+/**
+ * Affiche les cocktails sur la page en utilisant les données fournies et le modèle HTML spécifié.
+ * Chaque cocktail est affiché avec son nom, icône "j'aime", icône d'alcool principal, icône de profil gustatif,
+ * image, couleur de pastille alcool, nombre de mentions "j'aime", et la fonctionnalité pour ouvrir la boîte modale.
+ * Les cocktails sont ajoutés aux sections classiques, personnels et communautaires.
+ *
+ * @function afficherCocktails
+ * @param {Array} data - Les données des cocktails à afficher.
+ * @param {HTMLElement} modeleHTML - Le modèle HTML pour la carte de cocktail.
+ * @returns {void}
+ */
 function afficherCocktails(data, modeleHTML) {
     data.forEach((cocktail) => {
         const nouveauCocktail = document.createElement('article');
@@ -170,6 +238,13 @@ function afficherCocktails(data, modeleHTML) {
     });
 }
 
+/**
+ * Nettoie le nom du cocktail en supprimant tous les caractères spéciaux, sauf les lettres de l'alphabet (minuscules et majuscules) et les chiffres.
+ *
+ * @function nettoyerNomCocktail
+ * @param {string} nom - Le nom du cocktail à nettoyer.
+ * @returns {string} - Le nom du cocktail nettoyé.
+ */
 function nettoyerNomCocktail(nom) {
     return nom.replace(/[^a-zA-Z0-9]/g, '');
 }
@@ -178,6 +253,15 @@ function chargerInformationsModale(idCocktail) {
     // Envoyer une requête à l'API pour ce cocktail, exemple: 'https://cocktailwizard.com/cocktail/{id}'
 }
 
+/**
+ * Écouteur d'événements qui se déclenche lorsque le DOM est entièrement chargé.
+ * Ajoute un gestionnaire d'événements pour le bouton "publish" qui, lorsqu'il est cliqué,
+ * charge le contenu du fichier publication.html dans le corps du document.
+ *
+ * @event DOMContentLoaded
+ * @param {Object} event - L'événement DOMContentLoaded déclenché.
+ * @returns {void}
+ */
 document.addEventListener("DOMContentLoaded", function () {
     var publish = document.getElementById("publish");
 
@@ -187,8 +271,152 @@ document.addEventListener("DOMContentLoaded", function () {
         const htmlContent = await chargerModeleHTML('../ressources/modeles/modale_publication.html');
         if (htmlContent) {
             document.body.innerHTML = htmlContent;
+
+            var closeButton = document.querySelector('.close');
+            closeButton.addEventListener('click', closeModal);
+
         } else {
             console.error('Failed to load HTML template.');
         }
     });
 });
+
+
+
+//SECTION PUBLICATION
+let ingredientName = "";
+let ingredientAmount = "";
+let ingredientUnit = "";
+
+/**
+ * Ajoute un ingrédient à la liste d'ingrédients affichée sur la page.
+ *
+ * @function addIngredientToList
+ * @param {string} name - Le nom de l'ingrédient.
+ * @param {string} amount - La quantité de l'ingrédient.
+ * @param {string} unit - L'unité de mesure de l'ingrédient.
+ * @returns {void}
+ */
+function addIngredientToList(name, amount, unit) {
+    const ingredientList = document.getElementById("ingredient_list");
+    const listItem = document.createElement("div");
+    listItem.innerHTML = `<button id="remove_ingredient" onclick="removeIngredient(this)"><img  class="btn-icon" src="../ressources/images/minus.svg"
+                                    alt="+"></button> ${amount} ${unit} ${name} `;
+    ingredientList.appendChild(listItem);
+
+    // Effacer les zones de texte SEULMENT quand un ingredient est rajouté
+    document.getElementById("ingredient_name").value = "";
+    document.getElementById("ingredient_amount").value = "";
+    document.getElementById("ingredient_unit").value = "";
+}
+
+/**
+ * Ferme la boîte modale en changeant son style d'affichage pour "none".
+ *
+ * @function closeModal
+ * @returns {void}
+ */
+function closeModal() {
+    modal.style.display = "none";
+}
+
+
+/**
+ * Écouteur d'événements qui se déclenche lorsque le bouton "add_ingredient" est cliqué.
+ * Vérifie les données saisies pour l'ajout d'un ingrédient à la liste, applique des animations d'erreur
+ * et ajoute l'ingrédient à la liste si les conditions sont remplies.
+ * Empêche également le comportement par défaut du bouton pour éviter de fermer la modale.
+ *
+ * @event click
+ * @param {Object} event - L'événement de clic déclenché.
+ * @returns {void}
+ */
+document.getElementById("add_ingredient").addEventListener("click", function (event) {
+    // Obtenir la valeur du champ de saisie du nom de l'ingrédient
+    const enteredIngredient = document.getElementById("ingredient_name").value.trim().toLowerCase();
+    const enteredAmount = document.getElementById("ingredient_amount").value.trim();
+    const enteredUnit = document.getElementById("ingredient_unit").value.trim();
+
+    // Vérifier si l'ingrédient saisi figure dans la liste de tous les ingrédients (insensible au minuscule/majuscule)
+    if (!allIngredients.some(ingredient => ingredient.toLowerCase() === enteredIngredient)) {
+        // Changer la couleur du champ de saisie en rouge et appliquer l'animation d"erreur
+        const ingredientInput = document.getElementById("ingredient_name");
+        ingredientInput.classList.add("invalid-input");
+
+        // Supprimer la classe invalid-input après la fin de l'animation (pour pas que la case reste rouge)
+        ingredientInput.addEventListener("animationend", removeInvalidClass);
+    }
+
+    // Vérifier si la quantité saisie est numérique dans "enteredAmount"
+    if (isNaN(parseFloat(enteredAmount))) {
+        // Changer la couleur du champ de saisie en rouge et appliquer l'animation d'erreur
+        const amountInput = document.getElementById("ingredient_amount");
+        amountInput.classList.add("invalid-input");
+
+        // Supprimer la classe invalid-input après la fin de l'animation
+        amountInput.addEventListener("animationend", removeInvalidClass);
+    }
+
+    // Si les deux conditions sont remplies, ajouter l'ingrédient à la liste
+    if (allIngredients.some(ingredient => ingredient.toLowerCase() === enteredIngredient) && !isNaN(parseFloat(enteredAmount))) {
+        addIngredientToList(enteredIngredient, enteredAmount, enteredUnit);
+    }
+
+    // Empêcher le comportement par défaut du bouton (pour ne pas fermer la modale)
+    event.preventDefault();
+});
+
+/**
+ * Supprime la classe "invalid-input" d'un élément après la fin de l'animation.
+ *
+ * @function removeInvalidClass
+ * @param {Object} event - L'événement animationend déclenché.
+ * @returns {void}
+ */
+function removeInvalidClass(event) {
+    event.target.classList.remove("invalid-input");
+}
+
+/**
+ * Gestionnaire d'événements qui se déclenche lorsqu'un clic est effectué n'importe où sur la fenêtre.
+ * S'il est cliqué en dehors de la boîte modale, la boîte modale est masquée.
+ *
+ * @event onclick
+ * @param {Object} event - L'événement de clic déclenché.
+ * @returns {void}
+ */
+window.onclick = function (event) {
+    var modal = document.getElementById('myModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+/**
+ * Affiche une image prévisualisée à partir d'un fichier sélectionné.
+ *
+ * @function previewImage
+ * @param {Object} event - L'événement de changement déclenché lorsqu'un fichier est sélectionné.
+ * @returns {void}
+ */
+function previewImage(event) {
+    var input = event.target;
+    var reader = new FileReader();
+    reader.onload = function () {
+        var dataURL = reader.result;
+        var preview = document.getElementById('preview');
+        preview.src = dataURL;
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+
+/**
+ * Supprime l'élément parent de l'élément passé en paramètre.
+ *
+ * @function removeIngredient
+ * @param {HTMLElement} element - L'élément dont l'élément parent doit être supprimé.
+ * @returns {void}
+ */
+function removeIngredient(element) {
+    element.parentNode.remove();
+}
