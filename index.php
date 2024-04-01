@@ -1,42 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    galerieNonConnecte();
+} else {
+    galerieConnecte();
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cocktail Wizard</title>
-    <link rel="stylesheet" href="ressources/styles/main.css">
-    <link rel="stylesheet" href="ressources/styles/index.css">
-    <link rel="stylesheet" href="ressources/styles/modale.css">
-    <link rel="stylesheet" href="ressources/styles/carte_cocktail.css">
-    <script src="ressources/scripts/outils.js"></script>
-</head>
+function galerieNonConnecte()
+{
+    echo '<!DOCTYPE html>
+    <html lang="en">
 
-<body>
-    <noscript class="erreur">Vous devez activer JavaScript pour charger ce site web.</noscript>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cocktail Wizard</title>
+        <link rel="stylesheet" href="ressources/styles/main.css">
+        <link rel="stylesheet" href="ressources/styles/index.css">
+        <link rel="stylesheet" href="ressources/styles/modale.css">
+        <link rel="stylesheet" href="ressources/styles/carte_cocktail.css">
+        <script src="ressources/scripts/outils.js"></script>
+    </head>
 
-    <header>
-        <h1>Cocktail Wizard</h1>
-    </header>
+    <body>
+        <noscript class="erreur">Vous devez activer JavaScript pour charger ce site web.</noscript>
 
-    <main>
-        <nav><input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus></nav>
+        <header>
+            <h1>Cocktail Wizard</h1>
+        </header>
 
-        <section id="galerie"></section>
-    </main>
+        <main>
 
-    <aside id="contenant-modale"></aside>
+            <section id="galerie"></section>
+        </main>
 
-    <aside id="contenant-boutons-fixes">
-        <a href="/connexion" title="Connexion">
-            <img src="ressources/images/icone-profile.svg" alt="Icone profile">
-        </a>
-    </aside>
+        <aside id="contenant-modale"></aside>
 
-    <footer>Cocktail Wizard &copy - 2024</footer>
+        <aside id="contenant-boutons-fixes">
+            <a href="/connexion" title="Connexion">
+                <img src="ressources/images/icone-profile.svg" alt="Icone profile">
+            </a>
+        </aside>
 
-    <script src="ressources/scripts/index.js"></script>
-    <script src="ressources/scripts/modale.js"></script>
-</body>
+        <footer>Cocktail Wizard &copy - 2024</footer>
 
-</html>
+        <script src="ressources/scripts/index.js"></script>
+        <script src="ressources/scripts/modale.js"></script>
+    </body>
+
+    </html>';
+}
+
+function galerieConnecte()
+{
+    echo '<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cocktail Wizard</title>
+        <link rel="stylesheet" href="ressources/styles/main.css">
+        <link rel="stylesheet" href="ressources/styles/index.css">
+        <link rel="stylesheet" href="ressources/styles/modale.css">
+        <link rel="stylesheet" href="ressources/styles/carte_cocktail.css">
+        <script src="ressources/scripts/outils.js"></script>
+    </head>
+
+    <body>
+        <noscript class="erreur">Vous devez activer JavaScript pour charger ce site web.</noscript>
+
+        <header>
+            <h1>Cocktail Wizard</h1>
+        </header>
+
+        <main>
+            <nav><input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus></nav>
+
+            <section id="galerie"></section>
+        </main>
+
+        <aside id="contenant-modale"></aside>
+
+        <aside id="contenant-boutons-fixes">
+            <a href="/connexion" title="Connexion">
+                <img src="ressources/images/icone-profile.svg" alt="Icone profile">
+            </a>
+        </aside>
+
+        <footer>Cocktail Wizard &copy - 2024</footer>
+
+        <script src="ressources/scripts/index.js"></script>
+        <script src="ressources/scripts/modale.js"></script>
+    </body>
+
+    </html>';
+}

@@ -21,20 +21,18 @@
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
-
-//s'assurer que on delete le bon ingredient du bon utilisateur
-$donnees = json_decode(file_get_contents("php://input"), true);
-if (!isset($donnees['nomIngredient']) || !isset($donnees['username'])) {
-    http_response_code(400);
-    echo json_encode("Paramètres manquants.");
-    exit();
-}
+require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
 
 $conn = connexionBD();
 
+//s'assurer que on delete le bon ingredient du bon utilisateur
+$donnees = json_decode(file_get_contents("php://input"), true);
+
+$nomIngredient = paramJSONvalide($donnees, 'nomIngredient');
+$username = paramJSONvalide($donnees, 'username');
+$userId = usernameToId($username, $conn);
+
 try {
-    $nomIngredient = mysqli_real_escape_string($conn, $donnees['nomIngredient']);
-    $userId = usernameToId($donnees['username'], $conn);
 
     $requete_preparee = $conn->prepare("CALL RetraitIngredient(?,?)");
     $requete_preparee->bind_param('is', $userId, $nomIngredient);
@@ -51,6 +49,7 @@ try {
 
         echo json_encode($ingredients);
     } else {
+        http_response_code(204);
         echo json_encode("Aucun ingredient trouvé.");
     }
 } catch (Exception $e) {

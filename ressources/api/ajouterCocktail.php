@@ -23,36 +23,38 @@
 
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/classephp/Cocktail_Classe.php';
 require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
+require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
 $conn = connexionBD();
 
 $donnee = json_decode(file_get_contents('php://input'), true);
 
 // Vérifie si les paramètres sont présents
-paramJSONvalide($donnee['nom'], 'nom du cocktail');
-paramJSONvalide($donnee['description'], 'description du cocktail');
-paramJSONvalide($donnee['preparation'], 'préparation du cocktail');
-paramJSONvalide($donnee['typeVerre'], 'type de verre du cocktail');
-paramJSONvalide($donnee['profilSaveur'], 'profil de saveur du cocktail');
-paramJSONvalide($donnee['nomAlcoolPrincipale'], 'nom de l\'alcool principale du cocktail');
-paramJSONvalide($donnee['username'], 'nom du créateur du cocktail');
-paramJSONvalide($donnee['ingredients'], 'ingrédients du cocktail');
+$nom = paramJSONvalide($donnee, 'nom');
+$description = paramJSONvalide($donnee, 'description');
+$preparation = paramJSONvalide($donnee, 'preparation');
+$typeVerre = paramJSONvalide($donnee, 'typeVerre');
+$profilSaveur = paramJSONvalide($donnee, 'profilSaveur');
+$nomAlcoolPrincipale = paramJSONvalide($donnee, 'nomAlcoolPrincipale');
+$username = paramJSONvalide($donnee, 'username');
 
-$userId = usernameToId(trim($donnee['username']), $conn);
+
+$userId = usernameToId($username, $conn);
+
 try {
     $requete_preparee = $conn->prepare("CALL CreerCocktail(?, ?, ?, ?, ?, ?, ?)");
     $requete_preparee->bind_param(
-        'sssssss',
-        $donnee['nom'],
-        $donnee['description'],
-        $donnee['preparation'],
-        $donnee['typeVerre'],
-        $donnee['profilSaveur'],
+        'sssssis',
+        $nom,
+        $description,
+        $preparation,
+        $typeVerre,
+        $profilSaveur,
         $userId,
-        $donnee['nomAlcoolPrincipale']
+        $nomAlcoolPrincipale
     );
+
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
@@ -66,19 +68,31 @@ try {
         exit();
     }
 
+    if (!empty($donnee['ingredients'])) {
 
-    foreach ($donnee['ingredients'] as $ingredient) {
-        $nomIng = $ingredient['nomIng'];
-        $quantite = $ingredient['quantite'];
-        $unite = $ingredient['unite'];
+        foreach ($donnee['ingredients'] as $ingredient) {
 
-        $requete_preparee = $conn->prepare("CALL AjouterIngredientCocktail(?, ?, ?, ?)");
-        $requete_preparee->bind_param('isss', $idCocktailNouveau, $nomIng, $quantite, $unite);
-        $requete_preparee->execute();
-        $requete_preparee->close();
+            if (!empty($ingredient['nomIng']) && !empty($ingredient['quantite']) && !empty($ingredient['unite'])) {
+                $nomIng = $ingredient['nomIng'];
+                $quantite = $ingredient['quantite'];
+                $unite = $ingredient['unite'];
+            } else {
+                http_response_code(400);
+                echo json_encode("Les paramètres nomIng, quantite et unite sont requis pour chaque ingrédient.");
+                exit();
+            }
+            $requete_preparee = $conn->prepare("CALL AjouterIngredientCocktail(?, ?, ?, ?)");
+            $requete_preparee->bind_param('isds', $idCocktailNouveau, $nomIng, $quantite, $unite);
+            $requete_preparee->execute();
+            $requete_preparee->close();
+        }
+
+        echo json_encode("Cocktail ajouté avec succès.");
+    } else {
+        http_response_code(400);
+        echo json_encode("Le cocktail doit contenir au moins un ingrédient.");
+        exit();
     }
-
-    echo json_encode("Cocktail ajouté avec succès.");
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode("Erreur : " . $e->getMessage());

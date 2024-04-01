@@ -31,8 +31,8 @@ if (empty($_POST['naissance'])) {
 
 // Si le formulaire est valide, insérer les données dans la base de données
 if (count($erreurs) == 0) {
-    $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
-    $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
+    $nom = trim($_POST['nom']);
+    $mdp = trim($_POST['mdp']);
     $mdp_encrypte = password_hash($mdp, PASSWORD_DEFAULT);
     $date_nais = date('Y-m-d', strtotime(trim($_POST['naissance'])));
     $courriel = filter_var($_POST['courriel'], FILTER_SANITIZE_EMAIL);
