@@ -17,6 +17,8 @@ let modeleCarteCocktail;
 
 document.addEventListener('DOMContentLoaded', async () => {
     modeleCarteCocktail = await chargerModeleHTML('ressources/modeles/cocktail_carte.html');
+    const username = getCookie("username");
+    console.debug("Username:", username);
 
     if (!modeleCarteCocktail) return;
 
