@@ -8,7 +8,7 @@ let ingredientUnit = "";
 function addIngredientToList(name, amount, unit) {
     const ingredientList = document.getElementById("ingredient_list");
     const listItem = document.createElement("div");
-    listItem.innerHTML = `<button id="remove_ingredient" onclick="removeIngredient(this)"><img  class="btn-icon" src="../images/minus.svg"
+    listItem.innerHTML = `<button id="remove_ingredient" onclick="removeIngredient(this)"><img  class="btn-icon" src="../ressources/images/minus.svg"
                                     alt="+"></button> ${amount} ${unit} ${name} `;
     ingredientList.appendChild(listItem);
 
