@@ -270,6 +270,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Load the content of publication.html
         const htmlContent = await chargerModeleHTML('../ressources/modeles/modale_publication.html');
         if (htmlContent) {
+            // Stocke le contenu initial du corps du document
+            originalBodyContent = document.body.innerHTML;
+
             document.body.innerHTML = htmlContent;
 
             var closeButton = document.querySelector('.close');
@@ -287,6 +290,8 @@ document.addEventListener("DOMContentLoaded", function () {
 let ingredientName = "";
 let ingredientAmount = "";
 let ingredientUnit = "";
+// Déclare une variable globale pour stocker le contenu initial du corps du document
+var originalBodyContent;
 
 /**
  * Ajoute un ingrédient à la liste d'ingrédients affichée sur la page.
@@ -317,7 +322,8 @@ function addIngredientToList(name, amount, unit) {
  * @returns {void}
  */
 function closeModal() {
-    modal.style.display = "none";
+    // Réinitialise le contenu du corps du document à son état initial
+    document.body.innerHTML = originalBodyContent;
 }
 
 
