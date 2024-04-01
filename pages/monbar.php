@@ -82,8 +82,8 @@
     <footer>Cocktail Wizard &copy - 2024</footer>
 
     <script src="../ressources/scripts/outils.js"></script>
-<script type="module" src="../ressources/scripts/publication.js"></script>
-   <script type="module" src="../ressources/scripts/monbar.js"></script>
+    <script type="module" src="../ressources/scripts/publication.js"></script>
+    <script type="module" src="../ressources/scripts/monbar.js"></script>
 
 
 
