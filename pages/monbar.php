@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../ressources/styles/main.css">
     <link rel="stylesheet" href="../ressources/styles/monbar.css">
     <link rel="stylesheet" href="../ressources/styles/carte_cocktail.css">
+    <link rel="stylesheet" href="../ressources/styles/publication.css">
 </head>
 
 <body>
@@ -73,7 +74,7 @@
         <button>
             <img id="btnAbout" src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
         </button>
-        <button>
+        <button id="publish">
             <img id="btnPublish" src="../ressources/images/feather.svg" alt="Feather" width="24" height="24">
         </button>
     </aside>
@@ -81,8 +82,11 @@
     <footer>Cocktail Wizard &copy - 2024</footer>
 
     <script src="../ressources/scripts/outils.js"></script>
-    <script src="../ressources/scripts/monbar.js"></script>
-    <script src="../ressources/scripts/publication.js"></script>
+<script type="module" src="../ressources/scripts/publication.js"></script>
+   <script type="module" src="../ressources/scripts/monbar.js"></script>
+
+
+
 </body>
 
 </html>

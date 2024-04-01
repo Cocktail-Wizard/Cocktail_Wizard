@@ -18,13 +18,6 @@ function addIngredientToList(name, amount, unit) {
     document.getElementById("ingredient_unit").value = "";
 }
 
-
-// Récupérer le modal
-var modal = document.getElementById("myModal");
-
-// Récupérer l'élément qui ferme le modal
-var span = document.getElementsByClassName("close")[0];
-
 // Fonction pour afficher le modal et la page de publication
 function openModal(page) {
     modal.style.display = "block";
@@ -36,28 +29,36 @@ function openModal(page) {
     document.getElementById("ingredient_unit").value = ingredientUnit;
 }
 
-
+// Wait for the DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", function () {
-    var btnPublish = document.getElementById("btnPublish");
+    var modal = document.getElementById("myModal");
 
-    // onclick listener pour le btn publish
-    btnPublish.addEventListener("click", function () {
-        // Trigger the openModal function from publication.js
-        openModal();
+    // Function to handle closing the modal
+    function closeModal() {
+        modal.style.display = "none";
+    }
+
+    // Attach onclick handler to close button after the modal has been loaded
+    function attachCloseHandler() {
+        var span = document.querySelector(".close");
+        if (span) {
+            span.onclick = closeModal;
+        } else {
+            console.error("Close button element not found");
+        }
+    }
+
+    attachCloseHandler();
+
+    // Event listener for clicking the add_ingredient button
+    document.getElementById("add_ingredient").addEventListener("click", function (event) {
+        // Your existing code for adding ingredients
     });
 });
 
-// Ouvrir le modal de publication
-document.getElementById("btnPublish").onclick = function () {
-    var publicationPage = document.getElementById("publicationPage");
-    openModal(publicationPage);
-}
+// Variable declarations moved outside the DOMContentLoaded event
+var modal = document.getElementById("myModal");
 
-
-// Lorsque l'utilisateur clique sur <span> (x), fermer le modal
-span.onclick = function () {
-    modal.style.display = "none";
-}
 
 // Evenement dans le formulaire lors du clic sur le bouton "+"
 document.getElementById("add_ingredient").addEventListener("click", function (event) {

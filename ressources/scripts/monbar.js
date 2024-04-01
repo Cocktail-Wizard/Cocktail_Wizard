@@ -177,3 +177,26 @@ function nettoyerNomCocktail(nom) {
 function chargerInformationsModale(idCocktail) {
     // Envoyer une requête à l'API pour ce cocktail, exemple: 'https://cocktailwizard.com/cocktail/{id}'
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    var publish = document.getElementById("publish");
+
+    // onclick listener for the publish button
+    publish.addEventListener("click", function () {
+        // Fetch the content of publication.html
+        fetch('publication.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load publication.html');
+                }
+                return response.text();
+            })
+            .then(data => {
+                // Insert the content into the current document
+                document.body.innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+});
