@@ -56,10 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Variable declarations moved outside the DOMContentLoaded event
-var modal = document.getElementById("myModal");
-
-
 // Evenement dans le formulaire lors du clic sur le bouton "+"
 document.getElementById("add_ingredient").addEventListener("click", function (event) {
     // Obtenir la valeur du champ de saisie du nom de l'ingrédient
