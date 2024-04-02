@@ -1,4 +1,4 @@
-const allIngredients = ["Vodka", "Rhum", "Gin", "Tequila", "Whiskey", "Triple sec", "Sirop simple", "Jus de citron", "Jus de lime", "Jus d'orange", "Jus de canneberge", "Grenadine", "Jus de pomme", "Jujutsu Kaisen"];
+const allIngredients = await faireRequete('/api/ingredients');
 const boutonAjouterIngredient = document.getElementById('ajouter-ingredient');
 const nouvelIngredientNom = document.getElementById("ingredient-nom");
 const nouvelIngredientQtt = document.getElementById("ingredient-quantite");
