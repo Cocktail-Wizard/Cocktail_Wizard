@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Rendre la constante immuable
     Object.freeze(modeleCarteCocktail);
 
-    ordonnerCocktails(ordreCocktails);
+    ordonnerCocktails();
 
     barreRecherche.addEventListener('input', () => {
         clearTimeout(chronoEcriture);
@@ -26,14 +26,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     boutonOrdre.addEventListener('click', () => {
-        ordonnerCocktails(ordreCocktails);
+        ordonnerCocktails();
     });
 });
 
-function afficherCocktails(data, modeleHTML) {
+function afficherCocktails(data) {
     const fragment = document.createDocumentFragment();
     const modeleTemp = document.createElement('div');
-    modeleTemp.innerHTML = modeleHTML;
+    modeleTemp.innerHTML = modeleCarteCocktail;
     const modeleClone = modeleTemp.firstElementChild.cloneNode(true);
 
     data.forEach((cocktail) => {
@@ -155,16 +155,24 @@ async function chercherCocktail() {
 
     if (data) {
         galerie.innerHTML = '';
-        afficherCocktails(data, modeleCarteCocktail);
+        afficherCocktails(data);
     }
 }
 
-async function ordonnerCocktails(ordre) {
-    const data = await faireRequete(`/api/cocktails/tri/${ordre}`);
+async function ordonnerCocktails() {
+    ordreCocktails = ordreCocktails === 'like' ? 'date' : 'like';
+
+    const recherche = barreRecherche.value.replace(/[^a-zA-Z0-9]/g, '_');
+    const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}`);
 
     if (data) {
         galerie.innerHTML = '';
-        afficherCocktails(data, modeleCarteCocktail);
+
+        if (recherche) {
+            chercherCocktail();
+        } else {
+            afficherCocktails(data);
+        }
 
         if (ordreCocktails === 'like') {
             boutonOrdreIcone.src = 'ressources/images/icone-coeur-plein.svg';
@@ -173,7 +181,5 @@ async function ordonnerCocktails(ordre) {
             boutonOrdreIcone.src = 'ressources/images/icone-calendrier.svg';
             boutonOrdre.title = 'Trier par popularité';
         }
-
-        ordreCocktails = ordreCocktails === 'like' ? 'date' : 'like';
     }
 }
