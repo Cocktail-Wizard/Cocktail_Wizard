@@ -1,59 +1,47 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publication</title>
-    <link rel="stylesheet" href="../ressources/styles/publication.css">
-    <link rel="stylesheet" href="../ressources/styles/main.css">
-</head>
-
-<body>
-
-    <!-- Le modal -->
-    <div id="myModal" class="modal">
+<!-- Le modal -->
+<div id="my-modal" class="modal fade">
+    <div class="modal-dialog">
         <!-- Contenu du modal -->
-        <div class="publication-content">
-            <div class="publication-header">
-                <h1> Publication </h1>
-                <span class="close">&times;</span> <!-- symbole x pour fermer -->
+        <div id="publication-content" class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Publication</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">&times;</button>
+                <!-- symbole x pour fermer -->
             </div>
 
-
-            <div class="publication-body" id="publicationPage">
+            <div class="modal-body" id="page-publication">
 
                 <h2>Ajouter un nouveau cocktail à nos archives</h2>
 
                 <form>
-                    <label for="cocktail_name">Nom du cocktail:</label><br>
-                    <textarea id="name_texte" name="cocktail_name" rows="1" cols="50"></textarea><br>
+                    <label for="nom-cocktail">Nom du cocktail:</label><br>
+                    <textarea id="name-texte" name="nom-cocktail" rows="1" cols="50"></textarea><br>
 
-                    <label for="cocktail_ingredient">Ingrédients:</label><br>
-                    <div id="ingredient_input">
+                    <label for="ingredient-cocktail">Ingrédients:</label><br>
+                    <div id="ingredient-input">
                         <div id="add-form">
-                            <input type="text" id="ingredient_name" placeholder="Nom de l'ingrédient...">
-                            <input type="text" id="ingredient_amount" placeholder="Quantité...">
-                            <input type="text" id="ingredient_unit" placeholder="Unité...">
+                            <input type="text" id="ingredient-nom" placeholder="Nom de l'ingrédient...">
+                            <input type="text" id="ingredient-quantite" placeholder="Quantité...">
+                            <input type="text" id="ingredient-unit" placeholder="Unité...">
 
-                            <button class="button" id="add_ingredient">
+                            <button class="button" id="ajouter-ingredient">
                                 <img class="btn-icon" src="../ressources/images/plus.svg" alt="+">
                             </button>
                         </div>
 
-                        <div id="ingredient_list"></div>
+                        <div id="liste-ingredients"></div>
 
                     </div>
 
                     <br>
 
-                    <label for="cocktail_preparation">Préparation:</label><br>
-                    <textarea id="preparation_texte" name="cocktail_preparation" rows="4" cols="50"
+                    <label for="preparation-cocktail">Préparation:</label><br>
+                    <textarea id="preparation-texte" name="preparation-cocktail" rows="4" cols="50"
                         placeholder="Expliquez-nous comment créer votre fabuleuse création, les étapes, la méthode et, si jamais vous avez des petites notes à rajouter, faites-nous en part!"></textarea><br>
 
 
-                    <label for="cocktail_description">Description:</label><br>
-                    <textarea id="description_texte" name="cocktail_description" rows="4" cols="50"
+                    <label for="description-cocktail">Description:</label><br>
+                    <textarea id="description_texte" name="description-cocktail" rows="4" cols="50"
                         placeholder="Une description n'est pas nécessaire, mais elle permet à notre communauté de voir à travers vos yeux."></textarea><br>
 
                     <div id="dropdown-choices">
@@ -62,7 +50,7 @@
                             <option value="sucre" selected>sucré</option>
                             <option value="sale">salée</option>
                             <option value="amer">amer</option>
-                            <option value="epicé">epice</option>
+                            <option value="epice">epicé</option>
                             <option value="acide">acide</option>
                         </select>
                         <label for="main-alcool">Alcool principal:</label>
@@ -85,18 +73,7 @@
 
                     <input type="submit" value="Publier">
                 </form>
-
-            </div>
-            <div class="publication-footer">
-                <h3>Cocktail Wizard &copy - 2024</h3>
             </div>
         </div>
-
     </div>
-
-    <!-- <script type="module" src="../ressources/scripts/outils.js"></script>
-    <script type="module" src="../ressources/scripts/publication.js"></script>
-    <script type="module" src="../ressources/scripts/monbar.js"></script> -->
-</body>
-
-</html>
+</div>
