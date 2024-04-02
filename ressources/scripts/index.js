@@ -162,24 +162,13 @@ async function chercherCocktail() {
 async function ordonnerCocktails() {
     ordreCocktails = ordreCocktails === 'like' ? 'date' : 'like';
 
-    const recherche = barreRecherche.value.replace(/[^a-zA-Z0-9]/g, '_');
-    const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}`);
+    chercherCocktail();
 
-    if (data) {
-        galerie.innerHTML = '';
-
-        if (recherche) {
-            chercherCocktail();
-        } else {
-            afficherCocktails(data);
-        }
-
-        if (ordreCocktails === 'like') {
-            boutonOrdreIcone.src = 'ressources/images/icone-coeur-plein.svg';
-            boutonOrdre.title = 'Trier par date';
-        } else {
-            boutonOrdreIcone.src = 'ressources/images/icone-calendrier.svg';
-            boutonOrdre.title = 'Trier par popularité';
-        }
+    if (ordreCocktails === 'like') {
+        boutonOrdreIcone.src = 'ressources/images/icone-coeur-plein.svg';
+        boutonOrdre.title = 'Trier par date';
+    } else {
+        boutonOrdreIcone.src = 'ressources/images/icone-calendrier.svg';
+        boutonOrdre.title = 'Trier par popularité';
     }
 }
