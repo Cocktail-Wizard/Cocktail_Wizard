@@ -74,7 +74,7 @@ aside#contenant-boutons-fixes a img {
     background-repeat: no-repeat;
     background-size: contain;
     border: 0;
-    border-radius: var(--default-border-radius);
+    border-radius: var(--default-border-radius) 0 0 var(--default-border-radius);
     box-shadow: #666 0 0 10px;
     color: var(--palette-button-text-color);
     font-size: x-large;
@@ -82,6 +82,12 @@ aside#contenant-boutons-fixes a img {
     outline: none;
     padding: 10px 0 10px 50px;
     width: clamp(200px, calc(var(--publication-width) * 2), 75%);
+}
+
+#ordre-tri {
+    border-radius: 0 var(--default-border-radius) var(--default-border-radius) 0;
+    border: 0;
+    font-size: x-large;
 }
 
 #barre-recherche:focus {

@@ -168,8 +168,10 @@ async function ordonnerCocktails(ordre) {
 
         if (ordreCocktails === 'like') {
             boutonOrdreIcone.src = 'ressources/images/icone-coeur-plein.svg';
+            boutonOrdre.title = 'Trier par date';
         } else {
             boutonOrdreIcone.src = 'ressources/images/icone-calendrier.svg';
+            boutonOrdre.title = 'Trier par popularité';
         }
 
         ordreCocktails = ordreCocktails === 'like' ? 'date' : 'like';
