@@ -117,12 +117,12 @@ header h1 {
 }
 
 /* Ingredients Section Styles */
-/* .ingredients {
+.ingredients {
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
     border: solid, 1px, var(--palette-border-color);
-} */
+}
 
 #contenant-boite-recherche {
     position: relative;
