@@ -81,7 +81,7 @@ aside#contenant-boutons-fixes a img {
     opacity: 0.8;
     outline: none;
     padding: 10px 0 10px 50px;
-    width: clamp(200px, calc(var(--publication-width) * 2), 75%);
+    width: clamp(200px, calc(var(--publication-width) * 1.85), 75%);
 }
 
 #ordre-tri {
