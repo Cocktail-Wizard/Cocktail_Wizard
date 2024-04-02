@@ -1,3 +1,13 @@
+// Dictionnaire des icônes de saveur
+const iconesUmami = {
+    'Sucré': 'icone-sucre-sucre',
+    'Aigre': 'icone-citron-aigre',
+    'Amer': 'icone-cafe-amer',
+    'Épicé': 'icone-piment-epice',
+    'Salé': 'icone-sel-sale',
+    'default': 'point-interrogation'
+};
+
 // Fonction pour charger le modèle HTML
 async function chargerModeleHTML(url) {
     try {
