@@ -142,7 +142,7 @@ header h1 {
     color: var(--palette-secondary-text-color);
 }
 
-/* #liste-ingredients {
+#liste-ingredients {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -159,7 +159,7 @@ header h1 {
     max-height: 200px;
     overflow-y: auto;
     width: 310px;
-} */
+}
 
 .ingredient-item {
     padding: 5px 0;
