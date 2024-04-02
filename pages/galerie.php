@@ -20,7 +20,13 @@
     </header>
 
     <main>
-        <nav><input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus></nav>
+        <nav>
+            <input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus>
+            <button id="ordre-tri" title="Ordonner par mentions j'aime">
+                <img id="ordre-tri-icone" src="" alt="Ordre par mentions j'aime">
+                <img src="ressources/images/tete-fleche-bas.svg" alt="Ordre décroissant">
+            </button>
+        </nav>
 
         <section id="galerie"></section>
     </main>
