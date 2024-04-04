@@ -95,6 +95,21 @@ async function chargerInformationsModale(cocktail) {
     const iconeJAime = document.getElementById('icone-jaime');
     iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
 
+    const utilisateur = getCookie("username");
+
+    if (utilisateur && utilisateur !== cocktail.auteur) {
+        iconeJAime.addEventListener('click', async () => {
+            fetch('/api/cocktails/commentaires/like', {
+                method: 'POST',
+                body: JSON.stringify({
+                    id_cocktail: cocktail.id_cocktail,
+                    username: utilisateur
+                }),
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+            })
+        });
+    }
+
     cocktail.ingredients_cocktail.forEach((ingredient) => {
         const ligneIngredient = document.createElement('li');
         const quantiteIngredient = document.createElement('span');
