@@ -1,4 +1,5 @@
-const allIngredients = await faireRequete('/api/ingredients');
+// const allIngredients = await faireRequete('/api/ingredients');
+const allIngredients = ["Vodka", "Rhum", "Gin", "Tequila", "Whiskey", "Triple sec", "Sirop simple", "Jus de citron", "Jus de lime", "Jus d'orange", "Jus de canneberge", "Grenadine", "Jus de pomme", "Jujutsu Kaisen"];
 const boutonAjouterIngredient = document.getElementById('ajouter-ingredient');
 const nouvelIngredientNom = document.getElementById("ingredient-nom");
 const nouvelIngredientQtt = document.getElementById("ingredient-quantite");
@@ -8,18 +9,26 @@ const modal = document.getElementById('monModal');
 
 // Fonction pour ajouter un ingrédient à la liste d'ingrédients
 function addIngredientToList(name, amount, unit) {
-    const ingredientList = modal.querySelector("#liste-ingredients");
+    const ingredientList = modal.querySelector("#liste-ingredients-publish");
     const listItem = document.createElement("div");
     const button = document.createElement('button');
 
-    button.classList.add('remove_ingredient');
+    button.classList.add('enlever_ingredient');
     button.classList.add('button-publish');
 
     const img = document.createElement('img');
     img.classList.add('btn-icon');
     img.src = '../ressources/images/minus.svg';
     img.alt = '-';
+
+    // Ajouter l'image à l'intérieur du bouton
     button.appendChild(img);
+
+    // Ajouter le bouton à l'élément listItem
+    listItem.appendChild(button);
+
+    // Ajouter l'élément listItem à la liste des ingrédients
+    ingredientList.appendChild(listItem);
 
     button.addEventListener('click', function (event) {
         removeIngredient(this, event);
@@ -41,6 +50,8 @@ boutonAjouterIngredient.addEventListener("click", function (event) {
     const enteredIngredient = nouvelIngredientNom.value.trim().toLowerCase();
     const enteredAmount = nouvelIngredientQtt.value.trim();
     const enteredUnit = nouvelIngredientUnite.value.trim();
+
+
 
     // Vérifier si l'ingrédient saisi figure dans la liste de tous les ingrédients (insensible au minuscule/majuscule)
     if (!allIngredients.some(ingredient => ingredient.toLowerCase() === enteredIngredient)) {
@@ -75,12 +86,6 @@ function removeInvalidClass(event) {
     event.target.classList.remove("invalid-input");
 }
 
-// // Lorsque l'utilisateur clique n'importe où en dehors du modal, le fermer
-// window.onclick = function (event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
 
 function previewImage(event) {
     let input = event.target;

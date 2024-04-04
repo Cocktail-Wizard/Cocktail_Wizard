@@ -58,6 +58,11 @@ textarea {
     box-sizing: border-box;
 }
 
+#liste-ingredients-publish {
+    padding-top: 4px;
+    color: black;
+}
+
 /* .ingredient-box {
     width: 100%;
     padding: 10px;
@@ -92,11 +97,6 @@ input[type="submit"]:hover {
     margin: auto;
 }
 
-#ingredient-input {
-    background-color: var(--palette-secondary-background-color);
-    padding: 5px;
-    border-radius: 4px;
-}
 
 #add-form {
     display: flex;
@@ -104,25 +104,6 @@ input[type="submit"]:hover {
     gap: 3px;
     margin: 0;
 }
-
-/* #ajouter-ingredient:hover,
-#remove_ingredient:hover {
-    box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
-    text-decoration: none;
-    color: var(--palette-button-text-color);
-    background-color: var(--palette-button-color-hover);
-}
-
-#ajouter-ingredient,
-#remove_ingredient {
-    cursor: pointer;
-    border-radius: 4px;
-    border: 2px solid --palette-border-color;
-    background-image: linear-gradient(var(--pallette-button-color), #a48df0);
-    height: 25px;
-    width: 25px;
-} */
-
 
 #unit_select {
     color: var(--palette-secondary-text-color);
@@ -173,10 +154,6 @@ select option {
     animation: shake 0.5s ease;
 }
 
-#liste-ingredients {
-    padding-top: 4px;
-    color: black;
-}
 
 #dropdown-choices {
     display: flex;
@@ -190,17 +167,19 @@ select option {
 }
 
 #ajouter-ingredient,
-#remove_ingredient {
+#enlever_ingredient {
     width: 30px;
     height: 30px;
     padding: 3px;
     border: 2px solid black;
     cursor: pointer;
     background-color: var(--palette-button-color);
+    overflow: hidden;
+    /* Ajout de cette ligne */
 }
 
-#ajouter-ingredient .btn-icon,
-#remove_ingredient .btn-icon {
+#ajouter-ingredient>.btn-icon,
+#enlever_ingredient>.btn-icon {
     width: 100%;
     height: 100%;
     display: flex;
@@ -208,6 +187,8 @@ select option {
 }
 
 .button-publish {
+    width: 30px;
+    height: 30px;
     background-image: linear-gradient(var(--pallette-button-color), #a48df0);
     border: 2px solid --palette-border-color;
     border-radius: 4px;

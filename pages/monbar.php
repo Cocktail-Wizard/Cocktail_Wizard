@@ -106,12 +106,13 @@
                                 <input type="text" id="ingredient-quantite" placeholder="Quantité...">
                                 <input type="text" id="ingredient-unit" placeholder="Unité...">
 
-                                <button class="button-publish" id="ajouter-ingredient">
+                                <button type="button" class="button-publish" id="ajouter-ingredient">
                                     <img class="btn-icon" src="../ressources/images/plus.svg" alt="+">
                                 </button>
+
                             </div>
 
-                            <div id="liste-ingredients"></div>
+                            <div id="liste-ingredients-publish"></div>
 
                         </div>
 
