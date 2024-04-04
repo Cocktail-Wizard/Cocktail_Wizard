@@ -26,39 +26,41 @@ let selectedIngredients = [];
  * @returns {void}
  */
 function filterIngredients() {
-    const searchValue = document.getElementById('boite-recherche').value.toLowerCase();
+    const searchValue = document.getElementById('boite-recherche').value.toLowerCase().trim();
     const listeIngredients = document.getElementById('liste-ingredients');
 
-    //affiche la liste si la searchbar contient quelquechose
-    if (searchValue.trim() !== '') {
-        listeIngredients.style.display = 'block';
-    } else {
-        //cache le drop down si la barre de recherche est vide
-        listeIngredients.style.display = 'none';
-    }
+    // Affiche la liste uniquement si la recherche n'est pas vide
+    listeIngredients.style.display = searchValue !== '' ? 'block' : 'none';
 
-    // filtre les ingredient en fonctions de la rechercher ET des element deja selectionner
+    // filtre les ingrédients en fonction de la recherche et des ingrédients déjà sélectionnés
     const filteredIngredients = allIngredients.filter(ingredient => !selectedIngredients.includes(ingredient) && ingredient.toLowerCase().includes(searchValue));
 
     // Efface le contenu précédent de la liste d'ingrédients
     listeIngredients.innerHTML = '';
 
-    if (filteredIngredients.length === 0) {
-        // Affiche "Aucun résultat..." si aucun ingrédient n'est trouvé
-        const noResultItem = document.createElement('div');
-        noResultItem.textContent = 'Aucun résultat...';
-        listeIngredients.appendChild(noResultItem);
-    } else {
-        //creation et ajout des ingredients selectionner a la boite d'ingredients
-        filteredIngredients.forEach(ingredient => {
-            const ingredientItem = document.createElement('div');
-            ingredientItem.textContent = ingredient;
-            ingredientItem.classList.add('ingredient-item');
-            ingredientItem.addEventListener('click', () => selectIngredient(ingredient));
-            listeIngredients.appendChild(ingredientItem);
-        });
+    if (searchValue !== '') {
+        if (filteredIngredients.length === 0) {
+            // Affiche "Aucun résultat..." si aucun ingrédient n'est trouvé
+            const noResultItem = document.createElement('div');
+            noResultItem.textContent = 'Aucun résultat...';
+            listeIngredients.appendChild(noResultItem);
+        } else {
+            // Crée et ajoute les ingrédients filtrés à la liste d'ingrédients
+            filteredIngredients.forEach(ingredient => {
+                const ingredientItem = document.createElement('div');
+                ingredientItem.textContent = ingredient;
+                ingredientItem.classList.add('ingredient-item');
+                ingredientItem.addEventListener('click', () => selectIngredient(ingredient));
+                listeIngredients.appendChild(ingredientItem);
+            });
+        }
     }
 }
+
+
+// Ajoute un événement keyup à la barre de recherche pour filtrer les ingrédients à chaque frappe de touche
+document.getElementById('boite-recherche').addEventListener('keyup', filterIngredients);
+
 
 
 /**
