@@ -95,17 +95,26 @@ async function chargerInformationsModale(cocktail) {
     const iconeJAime = document.getElementById('icone-jaime');
     iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
 
+    const spanJAime = document.getElementById('affichage-jaime');
     const utilisateur = getCookie("username");
 
     if (utilisateur && utilisateur !== cocktail.auteur) {
-        iconeJAime.addEventListener('click', async () => {
-            fetch('/api/cocktails/commentaires/like', {
-                method: 'POST',
+        spanJAime.addEventListener('click', async () => {
+            fetch('/api/cocktails/like', {
+                method: cocktail.liked ? 'DELETE' : 'POST',
                 body: JSON.stringify({
                     id_cocktail: cocktail.id_cocktail,
                     username: utilisateur
                 }),
                 headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+            }
+            ).then((response) => {
+                if (response.ok) {
+                    cocktail.nb_like = cocktail.liked ? cocktail.nb_like - 1 : cocktail.nb_like + 1;
+                    cocktail.liked = !cocktail.liked;
+                    iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
+                    actualiserTextElementParId('compteur-jaime', cocktail.nb_like);
+                }
             })
         });
     }
