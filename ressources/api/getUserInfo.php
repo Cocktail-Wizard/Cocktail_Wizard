@@ -21,12 +21,11 @@
 
 header("Content-Type: application/json");
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/classephp/Utilisateur_Classe.php';
+require_once __DIR__ . '/../classephp/Utilisateur_Classe.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
 $conn = connexionBD();
 
-$username = mysqli_real_escape_string($conn, $_POST['username']);
 $userId = usernameToId($username, $conn);
 
 try {
@@ -36,7 +35,7 @@ try {
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
 
-    if ($resultat->num_rows > 1) {
+    if ($resultat->num_rows > 0) {
         $row = $resultat->fetch_assoc();
         $user = new Utilisateur($row['nom'], $row['courriel'], $row['img']);
     } else {

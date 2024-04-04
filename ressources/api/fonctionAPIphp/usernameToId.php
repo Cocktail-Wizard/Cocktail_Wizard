@@ -9,22 +9,26 @@
  * @param String $username Le nom d'utilisateur de l'utilisateur
  * @param mysqli $conn La connexion à la base de données
  *
+ *
  * @return Cocktail L'objet Cocktail rempli avec les informations du cocktail
+ *
+ * @see paramJSONvalide.php
  *
  * @author Yani Amellal
  *
  * @version 1.0
- * @date Mars 2024
+ *
  */
 function usernameToId($username, $conn)
 {
 
-    $username_s = mysqli_real_escape_string($conn, $username);
     try {
         // Envoie une requête à la base de données pour obtenir l'id de l'utilisateur en fonction
         // de son nom d'utilisateur
+        $username = trim($username);    // Enlève les espaces inutiles
+        $username = str_replace('_', ' ', $username); // Enlève les caractères spéciaux
         $requete_preparee = $conn->prepare("CALL GetIdUser(?)");
-        $requete_preparee->bind_param("s", $username_s);
+        $requete_preparee->bind_param("s", $username);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
         $requete_preparee->close();

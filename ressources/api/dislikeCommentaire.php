@@ -21,13 +21,17 @@
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
+require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
 
 $conn = connexionBD();
 
 $donnees = json_decode(file_get_contents('php://input'), true);
 
-$userId = usernameToId(trim($donnees['username']), $conn);
-$id_commentaire = mysqli_real_escape_string($conn, trim($donnees['id_comemntaire']));
+// Vérifie si les paramètres sont présents et les échappe
+$username = paramJSONvalide($donnees, 'username');
+$id_commentaire = paramJSONvalide($donnees, 'id_commentaire');
+$userId = usernameToId($username, $conn);
+
 
 try {
     $requete_preparee = $conn->prepare("CALL DislikeCocktail(?,?)");
@@ -38,7 +42,7 @@ try {
 
     if ($resultat->num_rows == 1) {
         $row = $resultat->fetch_assoc();
-        $nbLike = $row['nb_Like'];
+        $nbLike['nb_like'] = $row['nb_like'];
 
         echo json_encode($nbLike);
     } else {

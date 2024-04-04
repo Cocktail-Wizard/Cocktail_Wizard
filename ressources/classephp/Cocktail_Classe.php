@@ -52,7 +52,8 @@ class Cocktail implements JsonSerializable
         $this->img_cocktail = $img_cocktail;
         $this->img_auteur = $img_auteur;
         $this->auteur = $auteur;
-        $this->date = $date;
+        $dateTemps = new DateTime($date);
+        $this->date = $dateTemps->format('d-m-Y');
         $this->nb_like = $nb_like;
         $this->alcool_principale = $alcool_principale;
         $this->profil_saveur = $profil_saveur;

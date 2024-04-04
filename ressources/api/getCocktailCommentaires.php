@@ -24,12 +24,9 @@ require_once(__DIR__ . '/../classephp/Commentaire_Classe.php');
 
 $conn = connexionBD();
 
-$id_cocktail_s = mysqli_real_escape_string($conn, $id_cocktail);
-$id_cocktails_s = intval($id_cocktail_s);
-
 try {
     $requete_preparee = $conn->prepare("CALL GetCommentairesCocktail(?, 'like')");
-    $requete_preparee->bind_param("i", $id_cocktail_s);
+    $requete_preparee->bind_param("i", $id_cocktail);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();

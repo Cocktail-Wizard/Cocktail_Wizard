@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Router
+ *
+ * Ce fichier contient les fonctions de routage pour les requêtes HTTP.
+ *
+ * @author
+ *
+ * @see
+ */
 function get($route, $path_to_include)
 {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {

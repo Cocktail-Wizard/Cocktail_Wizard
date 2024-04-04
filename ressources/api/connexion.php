@@ -19,7 +19,7 @@
  */
 
 header('Content-Type: application/json');
-require_once("config.php");
+require_once(__DIR__ . "/config.php");
 // Accumulateur d'erreurs
 $erreurs = array();
 $success = false;
@@ -38,8 +38,8 @@ if (empty($_POST['mdp'])) {
 if (empty($erreurs)) {
     $conn = connexionBD();
 
-    $nom = mysqli_real_escape_string($conn, trim($_POST['nom']));
-    $mdp = mysqli_real_escape_string($conn, trim($_POST['mdp']));
+    $nom =  trim($_POST['nom']);
+    $mdp = trim($_POST['mdp']);
 
     try {
         // Rechercher le mot de passe dans la base de données
@@ -77,6 +77,13 @@ $response = array(
     "errors" => $erreurs
 );
 
+if ($success) {
+    $response["username"] = $nom;
+}
+
+if (!empty($erreurs)) {
+    http_response_code(400);
+}
 // Répondre avec la réponse JSON
 echo json_encode($response);
 

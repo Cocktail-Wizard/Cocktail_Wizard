@@ -21,13 +21,16 @@
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
+require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
 
 $conn = connexionBD();
 
 $donnees = json_decode(file_get_contents('php://input'), true);
 
-$userId = usernameToId(trim($donnees['username']), $conn);
-$id_cocktail = mysqli_real_escape_string($conn, trim($donnees['id_cocktail']));
+// Vérifie si les paramètres sont présents
+$username = paramJSONvalide($donnees, 'username');
+$id_cocktail = paramJSONvalide($donnees, 'id_cocktail');
+$userId = usernameToId($username, $conn);
 
 try {
     // Envoie une requête à la base de données pour enlever un like au cocktail
