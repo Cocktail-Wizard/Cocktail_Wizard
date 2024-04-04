@@ -13,11 +13,12 @@ function addIngredientToList(name, amount, unit) {
     const button = document.createElement('button');
 
     button.classList.add('remove_ingredient');
+    button.classList.add('button-publish');
 
     const img = document.createElement('img');
     img.classList.add('btn-icon');
     img.src = '../ressources/images/minus.svg';
-    img.alt = '+';
+    img.alt = '-';
     button.appendChild(img);
 
     button.addEventListener('click', function (event) {
