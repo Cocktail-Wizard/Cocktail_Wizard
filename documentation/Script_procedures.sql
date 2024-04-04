@@ -693,4 +693,18 @@ BEGIN
 END
 //
 
+
+-- Création de la procédure ModifierMotDePasse
+-- Permet de modifier le mot de passe d'un utilisateur
+-- Utiliser pour modifier le mot de passe dans mon profil
+DROP PROCEDURE IF EXISTS ModifierMotDePasse;
+
+CREATE PROCEDURE ModifierMotDePasse(IN var_id_utilisateur INT, IN var_mdp_hashed VARCHAR(255))
+BEGIN
+    UPDATE Utilisateur
+    SET mdp_hashed = var_mdp_hashed
+    WHERE id_utilisateur = var_id_utilisateur;
+END
+//
+
 DELIMITER ;
