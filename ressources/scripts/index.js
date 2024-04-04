@@ -45,7 +45,7 @@ function afficherCocktails(data) {
         nomCocktail.textContent = cocktail.nom;
 
         const iconeJAime = nouveauCocktail.querySelector('.icone-jaime');
-        iconeJAime.src = 'ressources/images/icone-coeur-vide.svg';
+        iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
 
         const iconeAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
         iconeAlcool.src = 'ressources/images/pastille-alcool.svg';
