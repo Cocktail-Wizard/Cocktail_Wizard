@@ -1,64 +1,24 @@
 /* Style pour le modal */
-#my-modal {
-    width: 100%;
-    height: 100%;
-}
-
-/* Le Modal (fond) */
-.modal {
-    display: block;
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0 0 0 / 40%);
-
-    /* pas de var car, fond sombre avec transparence */
-}
-
 /* Contenu du Modal */
 .userprofile-content {
     position: relative;
     background-color: var(--palette-secondary-background-color);
     margin: auto;
-    padding: 0;
+    padding-top: 10px;
     border: 1px solid var(--palette-border-color);
     width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0 0 0 / 20%), 0 6px 20px 0 rgba(0 0 0 / 19%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /*template de "boxshadow"*/
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s;
-}
-
-/* Ajout de l'animation (apparition par ne haut) */
-@keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0;
-    }
-
-    to {
-        top: 0;
-        opacity: 1;
-    }
-}
-
-/* Le bouton de fermeture */
-.close {
-    color: var(--palette-headline-color);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: var(--palette-border-color);
-    text-decoration: none;
-    cursor: pointer;
+    height: auto;
+    max-height: 80%;
+    overflow-y: auto;
+    width: 80%;
+    box-sizing: border-box;
+    margin-top: 5%;
 }
 
 /* En-tête de la section profil utilisateur */

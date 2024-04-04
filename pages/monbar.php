@@ -76,7 +76,7 @@
 
     <!-- Modale pour le profil utilisateur -->
     <!-- la page modale -->
-    <div id="my-modal" class="modal fade">
+    <div id="my-modal" class="modal">
         <!-- Contenue de la boite modale -->
         <div class="userprofile-content">
             <div class="userprofile-header">
@@ -104,7 +104,7 @@
 
             <div class="support-body" id="supportPage">
 
-                <h2>Contactez-nous</h2>
+                <h2 style="color: #7f5af0;">Contactez-nous</h2>
 
                 <form action="../ressources/email.php" method="post">
                     <label for="message">Message:</label><br>
