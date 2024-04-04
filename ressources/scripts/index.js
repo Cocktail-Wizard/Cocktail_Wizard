@@ -70,7 +70,7 @@ function afficherCocktails(data) {
             const idCocktail = event.currentTarget.dataset.idCocktail;
             sectionModale.style.display = 'block';
             chargerInformationsModale(cocktail);
-            // chargerCommentairesModale(idCocktail, ordreCommentaires);
+            chargerCommentairesModale(idCocktail, ordreCommentaires);
         });
 
         nouveauCocktail.dataset.idCocktail = cocktail.id_cocktail;
