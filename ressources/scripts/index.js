@@ -70,7 +70,7 @@ function afficherCocktails(data) {
             const idCocktail = event.currentTarget.dataset.idCocktail;
             sectionModale.style.display = 'block';
             chargerInformationsModale(cocktail);
-            chargerCommentairesModale(idCocktail, ordreCommentaires);
+            // chargerCommentairesModale(idCocktail, ordreCommentaires);
         });
 
         nouveauCocktail.dataset.idCocktail = cocktail.id_cocktail;
@@ -91,6 +91,9 @@ async function chargerInformationsModale(cocktail) {
 
     const ingredients = document.getElementById('ingredients');
     ingredients.innerHTML = '';
+
+    const iconeJAime = document.getElementById('icone-jaime');
+    iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
 
     cocktail.ingredients_cocktail.forEach((ingredient) => {
         const ligneIngredient = document.createElement('li');
@@ -115,7 +118,7 @@ async function chargerCommentairesModale(idCocktail) {
 
     if (modeleHTML) {
         try {
-            const data = await faireRequete('/api/cocktails/' + idCocktail + '/commentaires');
+            const data = await faireRequete(`/api/cocktails/${idCocktail}/commentaires`);
             if (data === null) {
                 return;
             }
