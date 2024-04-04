@@ -12,7 +12,8 @@ const iconesUmami = {
     'default': 'point-interrogation'
 };
 
-const allIngredients = await faireRequete('/api/ingredients');
+// const allIngredients = await faireRequete('/api/ingredients');
+const allIngredients = ["Vodka", "Rhum", "Gin", "Tequila", "Whiskey", "Triple sec", "Sirop simple", "Jus de citron", "Jus de lime", "Jus d'orange", "Jus de canneberge", "Grenadine", "Jus de pomme", "Jujutsu Kaisen"];
 let selectedIngredients = [];
 
 /**
@@ -27,7 +28,6 @@ let selectedIngredients = [];
 function filterIngredients() {
     const searchValue = document.getElementById('boite-recherche').value.toLowerCase();
     const listeIngredients = document.getElementById('liste-ingredients');
-    listeIngredients.innerHTML = '';
 
     //affiche la liste si la searchbar contient quelquechose
     if (searchValue.trim() !== '') {
@@ -40,15 +40,26 @@ function filterIngredients() {
     // filtre les ingredient en fonctions de la rechercher ET des element deja selectionner
     const filteredIngredients = allIngredients.filter(ingredient => !selectedIngredients.includes(ingredient) && ingredient.toLowerCase().includes(searchValue));
 
-    //creation et ajout des ingredients selectionner a la boite d'ingredients
-    filteredIngredients.forEach(ingredient => {
-        const ingredientItem = document.createElement('div');
-        ingredientItem.textContent = ingredient;
-        ingredientItem.classList.add('ingredient-item');
-        ingredientItem.addEventListener('click', () => selectIngredient(ingredient));
-        listeIngredients.appendChild(ingredientItem);
-    });
+    // Efface le contenu précédent de la liste d'ingrédients
+    listeIngredients.innerHTML = '';
+
+    if (filteredIngredients.length === 0) {
+        // Affiche "Aucun résultat..." si aucun ingrédient n'est trouvé
+        const noResultItem = document.createElement('div');
+        noResultItem.textContent = 'Aucun résultat...';
+        listeIngredients.appendChild(noResultItem);
+    } else {
+        //creation et ajout des ingredients selectionner a la boite d'ingredients
+        filteredIngredients.forEach(ingredient => {
+            const ingredientItem = document.createElement('div');
+            ingredientItem.textContent = ingredient;
+            ingredientItem.classList.add('ingredient-item');
+            ingredientItem.addEventListener('click', () => selectIngredient(ingredient));
+            listeIngredients.appendChild(ingredientItem);
+        });
+    }
 }
+
 
 /**
  * Sélectionne un ingrédient et le rajoute à la liste des ingrédients sélectionnés.
