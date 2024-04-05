@@ -104,7 +104,6 @@ async function chargerInformationsModale(cocktail) {
     iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
 
     const spanJAime = document.getElementById('affichage-jaime');
-    const utilisateur = getCookie("username");
 
     if (utilisateur && utilisateur !== cocktail.auteur) {
         spanJAime.addEventListener('click', async () => {
