@@ -187,6 +187,11 @@ function chargerCommenter(id_cocktail) {
     formulaire.addEventListener('submit', async (event) => {
         event.preventDefault();
 
+        if (!utilisateur) {
+            window.location.href = '/connexion';
+            return;
+        }
+
         const contenu = document.getElementById('commentaire').value;
 
         const data = {
