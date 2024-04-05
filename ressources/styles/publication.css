@@ -11,12 +11,12 @@
     padding-top: 10px;
     border: 1px solid var(--palette-border-color);
     width: 80%;
+
     /* template de "boxshadow" */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 20%), 0 6px 20px 0 rgba(0, 0, 0, 19%);
     height: auto;
     max-height: 80%;
     overflow-y: auto;
-    width: 80%;
     box-sizing: border-box;
 }
 
@@ -151,7 +151,6 @@ select option {
     cursor: pointer;
     background-color: var(--palette-button-color);
     overflow: hidden;
-    /* Ajout de cette ligne */
 }
 
 #ajouter-ingredient>.btn-icon,
