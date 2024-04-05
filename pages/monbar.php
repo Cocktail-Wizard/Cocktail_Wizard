@@ -18,13 +18,10 @@
 
     <header id="top">
         <div class="user">
-            <span id="backgroundshape"></span>
-
-            <button type="button" class="profile-pic-container" data-bs-toggle="modal" data-bs-target="#my-modal">
+            <button type="button" id="profil-utilisateur" data-bs-toggle="modal" data-bs-target="#my-modal">
                 <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Profile Picture">
             </button>
 
-            <span class="username">@UsernameSuperWizard</span>
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
         </div>
 
