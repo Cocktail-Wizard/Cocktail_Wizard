@@ -150,7 +150,7 @@ async function chargerCommentairesModale(idCocktail) {
     if (modeleHTML) {
         try {
             const data = await faireRequete(`/api/cocktails/${idCocktail}/commentaires`);
-            if (data === null) return;
+            if (!data) return;
 
             const listeCommentaires = document.getElementById('commentaires');
             listeCommentaires.innerHTML = '';
