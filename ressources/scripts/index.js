@@ -227,8 +227,6 @@ function chargerCommenter(id_cocktail) {
             commentaire: contenu
         };
 
-        console.log(data)
-
         fetch('/api/cocktails/commentaires', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
