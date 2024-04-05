@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../ressources/styles/main.css">
     <link rel="stylesheet" href="../ressources/styles/monbar.css">
     <link rel="stylesheet" href="../ressources/styles/carte_cocktail.css">
+    <link rel="stylesheet" href="../ressources/styles/userprofile.css">
     <link rel="stylesheet" href="../ressources/styles/publication.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -18,11 +19,9 @@
 
     <header id="top">
         <div class="user">
-            <span id="backgroundshape"></span>
-            <div class="profile-pic-container">
-                <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Photo de profil">
-            </div>
-            <span class="username">@UsernameSuperWizard</span>
+            <button type="button" id="profil-utilisateur" data-bs-toggle="modal" data-bs-target="#my-modal">
+                <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Profile Picture">
+            </button>
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
         </div>
 
@@ -71,6 +70,56 @@
 
         </div>
     </main>
+
+    <!-- Modale pour le profil utilisateur -->
+    <!-- la page modale -->
+    <div id="my-modal" class="modal">
+        <div class="modal-dialog modal-xl">
+            <!-- Contenue de la boite modale -->
+            <div id="userprofile-content" class="modal-content">
+                <div class="modal-header">
+                    <div id="userprofile-header">
+                        <button id="info-btn">Info personnelle</button>
+                        <button id="cocktail-btn">Mes cocktails</button>
+                        <button id="support-btn">Support</button>
+                    </div>
+                    <button type="button" id="fuck-bootstrap" class="btn-close" data-bs-dismiss="modal"></button>
+                    <!-- symbole x pour fermer -->
+                </div>
+
+                <div class="modal-body">
+                    <div class="userinfo-body" id="infoPage">
+                        <img src="../ressources/images/lionWizard.jpg" alt="Photo de profil de l'utilisateur">
+                        <h3>Nom de l'utilisateur: Lionel Wizard</h3>
+                        <p>Nombre de likes : <span id="likeCount">0</span></p>
+                        <p>Nombre de cocktails : <span id="cocktailCount">0</span></p>
+                        <p>Nombre de commentaires : <span id="commentCount">0</span></p>
+                    </div>
+
+                    <div class="mycocktail-body" id="mycocktailPage">
+                        <div class="cocktail-container">
+                            <!-- Les cartes de cocktail seront ajoutées ici -->
+                        </div>
+                    </div>
+
+                    <div class="support-body" id="supportPage">
+
+                        <h2 style="color: #7f5af0;">Contactez-nous</h2>
+
+                        <form action="../ressources/email.php" method="post">
+                            <label for="message">Message:</label><br>
+                            <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+                            <input id="submit-btn" type="submit" value="Envoyer">
+                        </form>
+
+                    </div>
+                </div>
+                <div class="userprofile-footer">
+                    <h3>Cocktail Wizard &copy - 2024</h3>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <aside id="deux-boutons">
         <button>
@@ -162,6 +211,7 @@
 
     <footer>Cocktail Wizard &copy - 2024</footer>
 
+    <script src="../ressources/scripts/userprofile.js"></script>
     <script src="../ressources/scripts/outils.js"></script>
     <script type="module" src="../ressources/scripts/publication.js"></script>
     <script type="module" src="../ressources/scripts/monbar.js"></script>

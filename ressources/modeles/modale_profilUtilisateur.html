@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="../ressources/styles/userprofile.css">
+    <link rel="stylesheet" href="../ressources/styles/main.css"><!-- Include your CSS file -->
+</head>
+
+<body>
+
+    <!-- Déclancheur pour ouvrir la page modal -->
+    <button id="myBtn">Profile User</button>
+
+    <!-- la page modale -->
+    <div id="my-modal" class="modal">
+        <!-- Contenue de la boite modale -->
+        <div class="userprofile-content">
+            <div class="userprofile-header">
+
+                <button id="info-btn">Info personnelle</button>
+                <button id="cocktail-btn">Mes cocktails</button>
+                <button id="support-btn">Support</button>
+                <span class="close">&times;</span> <!--c'est le symbole x-->
+            </div>
+
+            <div class="userinfo-body" id="infoPage">
+                <img src="../ressources/images/lionWizard.jpg" alt="Photo de profil de l'utilisateur">
+                <h3>Nom de l'utilisateur: Lionel Wizard</h3>
+                <p>Nombre de likes : <span id="likeCount">0</span></p>
+                <p>Nombre de cocktails : <span id="cocktailCount">0</span></p>
+                <p>Nombre de commentaires : <span id="commentCount">0</span></p>
+            </div>
+
+            <div class="mycocktail-body" id="mycocktailPage">
+                <div class="cocktail-container">
+                    <!-- Les cartes de cocktail seront ajoutées ici -->
+                </div>
+            </div>
+
+            <div class="support-body" id="supportPage">
+
+                <h2>Contactez-nous</h2>
+
+                <form action="../ressources/email.php" method="post">
+                    <label for="message">Message:</label><br>
+                    <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+                    <input id="submit-btn" type="submit" value="Envoyer">
+                </form>
+
+            </div>
+            <div class="userprofile-footer">
+                <h3>Cocktail Wizard &copy - 2024</h3>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="../ressources/scripts/userprofile.js"></script>
+</body>
+
+</html>

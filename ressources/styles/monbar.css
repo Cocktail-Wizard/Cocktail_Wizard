@@ -57,24 +57,22 @@ main {
     transform: skewX(20deg);
 }
 
-.profile-pic-container {
-    width: 5vh;
-    height: 5vh;
+#profil-utilisateur {
+    width: 10vh;
+    height: 10vh;
     border-radius: 50%;
     border: 2px solid var(--palette-border-color);
     overflow: hidden;
     margin-left: 1vh;
+    display: flex;
+    justify-content: center;
 }
 
 .profile-pic {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.username {
-    padding: 1vh 2vh;
-    border-radius: 5px;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    margin-left: 0;
 }
 
 header h1 {

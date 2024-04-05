@@ -1,0 +1,168 @@
+/* Style pour le modal */
+/* Contenu du Modal */
+#userprofile-content {
+    position: relative;
+    background-color: var(--palette-secondary-background-color);
+    margin: auto;
+    border: 1px solid var(--palette-border-color);
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /*template de "boxshadow"*/
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    height: auto;
+    max-height: 80%;
+    overflow-y: auto;
+    width: 80%;
+    box-sizing: border-box;
+    margin-top: 5%;
+}
+
+/* En-tête de la section profil utilisateur */
+#userprofile-header {
+    padding: 5px 16px 5px 16px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-secondary-text-color);
+    gap: 40px;
+    display: flex;
+    justify-content: center;
+    margin-left: 18%;
+}
+
+/* Corps des informations utilisateur */
+.userinfo-body {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Image de profil */
+.userinfo-body img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+/* nom de l'utilisateur */
+.userinfo-body h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Paragraphe d'informations */
+.userinfo-body p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+/* Texte du l'infromation personelle */
+.userinfo-body span {
+    font-weight: bold;
+    color: var(--palette-button-color);
+}
+
+/* Pied de page de la page modale */
+.userprofile-footer {
+    padding: 2px 16px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-paragraph-color);
+    text-align: center;
+    font-size: small;
+}
+
+/* Style pour la section support */
+.support-body {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--palette-paragraph-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px #010101;
+}
+
+/* Titre de la section */
+h2 {
+    color: #7f5af0;
+    margin-bottom: 20px;
+}
+
+/* Formulaire */
+form {
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+/* Étiquette du formulaire */
+label {
+    font-weight: bold;
+    color: #7f5af0;
+}
+
+/* Zone de texte */
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-paragraph-color);
+}
+
+/* Bouton de soumission */
+input[type="submit"] {
+    background-color: var(--palette-button-color);
+    color: var(--palette-button-text-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Effet au survol du bouton de soumission */
+input[type="submit"]:hover {
+    background-color: var(--palette-button-color-hover);
+}
+
+/* Corps de la section Mes cocktails */
+.mycocktail-body {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--palette-paragraph-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0 0 0 / 10%);
+}
+
+/* Conteneur de défilement horizontal pour les cocktails */
+.cocktail-container {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Style pour les boutons de choix de sections */
+#info-btn,
+#cocktail-btn,
+#support-btn {
+    background-color: var(--palette-button-color);
+    color: var(--palette-button-text-color);
+    padding: 10px 20px;
+    border: 2px solid var(--palette-border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#info-btn:hover,
+#cocktail-btn:hover,
+#support-btn:hover {
+    background-color: var(--palette-button-color-hover);
+}
+
+#fuck-bootstrap {
+    top: 5px;
+    left: 5px;
+}
