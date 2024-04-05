@@ -92,7 +92,7 @@ async function chargerInformationsModale(cocktail) {
     actualiserTextElementParId('date-publication', cocktail.date);
 
     if (utilisateur) {
-        actualiserTextElementParId('auteur-commentaire', `@${utilisateur}`);
+        actualiserTextElementParId('auteur-commentaire', utilisateur);
     } else {
         actualiserTextElementParId('text-auteur', 'Vous devez être connecté(e) pour commenter.');
     }
