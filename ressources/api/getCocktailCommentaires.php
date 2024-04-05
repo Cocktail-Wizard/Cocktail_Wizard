@@ -31,9 +31,10 @@ try {
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
 
+    // Liste d'objets commentaires du cocktail
+    $commentaires = [];
+
     if ($resultat->num_rows > 0) {
-        // Liste d'objets commentaires du cocktail
-        $commentaires = [];
         while ($row = $resultat->fetch_assoc()) {
             $commentaire = new Commentaire(
                 $row['id_commentaire'],
