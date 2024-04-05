@@ -261,7 +261,7 @@ BEGIN
     )
     VALUES (
         var_nom, var_desc_cocktail, var_preparation,
-        var_type_verre, var_profil_saveur, var_id_utilisateur
+        var_type_verre, var_profil_saveur, var_id_utilisateur,
         (SELECT id_alcool FROM Alcool WHERE nom = var_alcool_principal)
     );
     SELECT LAST_INSERT_ID() AS id_cocktail;
@@ -404,8 +404,8 @@ BEGIN
         LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
         WHERE IC.id_cocktail = C.id_cocktail
         AND (
-            (IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
-            OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
+            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
+            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
         )
     )
     ORDER BY
@@ -472,7 +472,8 @@ BEGIN
     SELECT C.id_cocktail, C.nom, C.desc_cocktail, C.preparation, BI.img as imgCocktail, BI2.img as imgAuteur, U.nom AS auteur, C.date_publication, C.nb_like, A.nom AS alcool_principale, C.profil_saveur, C.type_verre
     FROM Cocktail C
     JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
-    JOIN Banque_Image BI ON C.id_image = BI.id_image
+    -- Enlever LEFT quand les images seront gérées
+    LEFT JOIN Banque_Image BI ON C.id_image = BI.id_image
     JOIN Alcool A ON C.id_alcool = A.id_alcool
     JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
     WHERE C.id_cocktail = cocktail;
@@ -544,8 +545,8 @@ BEGIN
         LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
         WHERE IC.id_cocktail = C.id_cocktail
         AND (
-            (IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
-            OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
+            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
+            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
         )
     )
     AND C.classique = 1
@@ -569,8 +570,8 @@ BEGIN
         LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
         WHERE IC.id_cocktail = C.id_cocktail
         AND (
-            (IC.id_ingredient IS NOT NULL AND IU.id_utilisateur != utilisateur)
-            OR (IC.id_alcool IS NOT NULL AND AU.id_utilisateur != utilisateur)
+            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
+            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
         )
     )
     AND C.classique = 0
@@ -605,7 +606,8 @@ BEGIN
     SELECT C.id_commentaire, U.nom, C.nb_like, BI.img, C.date_commentaire, C.contenu
     FROM Commentaire C
     JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
-    JOIN Banque_Image BI ON U.id_image = BI.id_image
+    -- Enlever LEFT quand les images seront gérées
+    LEFT JOIN Banque_Image BI ON U.id_image = BI.id_image
     WHERE C.id_cocktail = cocktail
     ORDER BY
         CASE
@@ -629,10 +631,10 @@ BEGIN
     JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
     LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
     LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-    WHERE LOCATE(C.nom, param_recherche) > 0
-    OR LOCATE(I.nom, param_recherche) > 0
-    OR LOCATE(A.nom, param_recherche) > 0
-    OR LOCATE(C.profil_saveur, param_recherche) > 0
+    WHERE LOCATE(param_recherche ,C.nom) > 0
+    OR LOCATE(param_recherche , I.nom) > 0
+    OR LOCATE( param_recherche,A.nom) > 0
+    OR LOCATE(param_recherche ,C.profil_saveur) > 0
     ORDER BY
         CASE
             WHEN param_orderby = 'date' THEN C.date_publication
@@ -664,8 +666,8 @@ BEGIN
     OR LOCATE(A.nom, param_recherche) > 0
     OR LOCATE(C.profil_saveur, param_recherche) > 0)
     AND (
-        (IC.id_ingredient IS NULL OR IU.id_utilisateur = id_utilisateur)
-        AND (IC.id_alcool IS NULL OR AU.id_utilisateur = id_utilisateur)
+        (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
+        OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
     )
     ORDER BY
         CASE
@@ -688,6 +690,20 @@ BEGIN
     FROM Utilisateur U
     JOIN Banque_Image BI ON U.id_image = BI.id_image
     WHERE U.id_utilisateur = id_utilisateur;
+END
+//
+
+
+-- Création de la procédure ModifierMotDePasse
+-- Permet de modifier le mot de passe d'un utilisateur
+-- Utiliser pour modifier le mot de passe dans mon profil
+DROP PROCEDURE IF EXISTS ModifierMotDePasse;
+
+CREATE PROCEDURE ModifierMotDePasse(IN var_id_utilisateur INT, IN var_mdp_hashed VARCHAR(255))
+BEGIN
+    UPDATE Utilisateur
+    SET mdp_hashed = var_mdp_hashed
+    WHERE id_utilisateur = var_id_utilisateur;
 END
 //
 

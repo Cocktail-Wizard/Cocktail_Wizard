@@ -28,14 +28,12 @@ $conn = connexionBD();
 
 $donnees = json_decode(file_get_contents('php://input'), true);
 
-paramJSONvalide($donnees['username'], 'nom de l\'utilisateur');
-paramJSONvalide($donnees['id_cocktail'], 'id du cocktail');
-paramJSONvalide($donnees['commentaire'], 'contenu du commentaire');
+// Vérifie si les paramètres sont présents et les échappe
+$username = paramJSONvalide($donnees, 'username');
+$idCocktail = paramJSONvalide($donnees, 'id_cocktail');
+$contenuCommentaire = paramJSONvalide($donnees, 'commentaire');
 
-$idCocktail = mysqli_real_escape_string($conn, trim($donnees['id_cocktail']));
-$contenuCommentaire = mysqli_real_escape_string($conn, trim($donnees['commentaire']));
-
-$userId = usernameToId(trim($donnees['username']), $conn);
+$userId = usernameToId($username, $conn);
 
 try {
     $requete_preparee = $conn->prepare("CALL AjouterCommentaireCocktail(?, ?, ?)");

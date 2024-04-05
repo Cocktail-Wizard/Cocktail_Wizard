@@ -1,3 +1,13 @@
+// Dictionnaire des icônes de saveur
+const iconesUmami = {
+    'Sucré': 'icone-sucre-sucre',
+    'Aigre': 'icone-citron-aigre',
+    'Amer': 'icone-cafe-amer',
+    'Épicé': 'icone-piment-epice',
+    'Salé': 'icone-sel-sale',
+    'default': 'point-interrogation'
+};
+
 // Fonction pour charger le modèle HTML
 async function chargerModeleHTML(url) {
     try {
@@ -32,4 +42,15 @@ function actualiserTextElementParId(id, nouvelle_valeur) {
     if (element) {
         element.innerText = nouvelle_valeur;
     }
+}
+
+function getCookie(nom) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(nom + '=')) {
+            return cookie.substring(nom.length + 1);
+        }
+    }
+    return null;
 }

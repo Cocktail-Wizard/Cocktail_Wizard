@@ -43,6 +43,41 @@ nav {
     z-index: 1;
 }
 
+#deux-boutons {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#deux-boutons button {
+    border: none;
+    background-color: var(--palette-button-color);
+    border-radius: 50%;
+    opacity: 0.4;
+    width: 50px;
+    height: 50px;
+}
+
+#deux-boutons button:hover {
+    opacity: 1;
+}
+
+#deux-boutons button img {
+    display: block;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+}
+
+#deux-boutons button:focus {
+    outline: none;
+}
+
 aside#contenant-boutons-fixes>* {
     position: absolute;
     right: var(--space-from-corner);
@@ -74,14 +109,19 @@ aside#contenant-boutons-fixes a img {
     background-repeat: no-repeat;
     background-size: contain;
     border: 0;
-    border-radius: var(--default-border-radius);
-    box-shadow: #666 0 0 10px;
+    border-radius: var(--default-border-radius) 0 0 var(--default-border-radius);
     color: var(--palette-button-text-color);
     font-size: x-large;
     opacity: 0.8;
     outline: none;
     padding: 10px 0 10px 50px;
-    width: clamp(200px, calc(var(--publication-width) * 2), 75%);
+    width: clamp(200px, calc(var(--publication-width) * 1.85), 75%);
+}
+
+#ordre-tri {
+    border-radius: 0 var(--default-border-radius) var(--default-border-radius) 0;
+    border: 0;
+    font-size: x-large;
 }
 
 #barre-recherche:focus {

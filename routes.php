@@ -26,6 +26,11 @@ get('/monbar', 'pages/monbar.php');
 // /profile -> Page de profil
 get('/profile', 'pages/profile.php');
 
+/*****PATCH*******/
+
+// /api/users -> Modification d'un mot de passe
+patch('/api/users', 'ressources/api/modifierMotDePasse.php');
+
 /******POST*******/
 
 // /api/users/authentification ->Connexion d'un utilisateur
@@ -43,14 +48,17 @@ post('/api/cocktails/like', 'ressources/api/likeCocktail.php');
 post('/api/cocktails/commentaires/like', 'ressources/api/likeCommentaire.php');
 
 // /api/cocktails/commentaires ->Ajout d'un commentaire
-// L'API retourne le nouveau nombre de likes
+// L'API retourne une nouvel liste de commentaires
 post('/api/cocktails/commentaires', 'ressources/api/ajouterCommentaire.php');
 
 // /api/cocktails ->Ajout d'un cocktail
 post('/api/cocktails', 'ressources/api/ajouterCocktail.php');
 
 // /api/user/ingredients ->Ajout d'un ingrédient dans mon bar
-post('/api/user/ingredients', 'ressources/api/ajouterIngredientMonBar.php');
+post('/api/users/ingredients', 'ressources/api/ajouterIngredientMonBar.php');
+
+// /authentification ->Connexion d'un utilisateu utilisé pour le site web
+post('/authentification', 'ressources/scripts/connexionWeb.php');
 
 /******GET*********/
 
@@ -63,7 +71,7 @@ get('/api/cocktails/tri/$tri/recherche/$mots', 'ressources/api/rechercheCocktail
 
 // /api/users/{username}/recommandations/recherche/{mot-clé, mot-clé, mot-clé}
 //  ->Recherche de cocktails recommandés
-get('/api/users/$username/cocktails/tri/$tri/recherche/$mots', '/ressources/api/getUserRecommandations.php');
+get('/api/users/$username/cocktails/tri/$tri/recherche/$mots', '/ressources/api/rechercheUserRecommandations.php');
 
 // /api/users/{username}/recommandations/tri/{like/date}
 // ->Liste des cocktails que l'utilisateur peut faire avec ses ingrédients. Pour galerie connectée

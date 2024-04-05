@@ -9,7 +9,7 @@ document.getElementById('form-connexion').addEventListener('submit', (event) => 
     // Envoyer les données du formulaire à l'API PHP
     let formData = new FormData(event.target);
 
-    fetch("/api/users/authentification", {
+    fetch("/authentification", {
         method: "POST",
         body: formData
     })

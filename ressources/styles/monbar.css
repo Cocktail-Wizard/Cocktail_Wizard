@@ -107,7 +107,7 @@ header h1 {
     box-shadow: rgba(255 255 255 30%) 0 0 2px inset, rgb(0 0 0 / 40%) 0 1px 2px;
     text-decoration: none;
     color: var(--palette-button-text-color);
-    background-color: var(--palette-button-color-color);
+    background-color: var(--palette-button-color-hover);
 }
 
 .button:active {
