@@ -15,41 +15,33 @@ var infoPage = document.getElementById("infoPage");
 var mycocktailPage = document.getElementById("mycocktailPage");
 var supportPage = document.getElementById("supportPage");
 
-// Fonction pour afficher le modal et la page correspondante
-function openModal(page) {
-    modal.style.display = "block";
-    infoPage.style.display = "none";
-    mycocktailPage.style.display = "none";
-    supportPage.style.display = "none";
-    page.style.display = "block";
-}
 
-// S'assurer que ca sois la page Info personnelle lorsque le bouton Profile User est cliqué
-document.getElementById("myBtn").onclick = function () {
-    openModal(infoPage);
-}
+document.addEventListener("DOMContentLoaded", function () {
+    // Cacher les pages autres que la page d'informations de l'utilisateur
+    document.getElementById("mycocktailPage").style.display = "none";
+    document.getElementById("supportPage").style.display = "none";
 
-// Lorsque l'utilisateur clique sur les boutons pour ouvrir les pages correspondantes
-infoBtn.onclick = function () {
-    openModal(infoPage);
-}
+    // Fonction pour afficher la page d'informations de l'utilisateur
+    document.getElementById("info-btn").addEventListener("click", function () {
+        document.getElementById("infoPage").style.display = "block";
+        document.getElementById("mycocktailPage").style.display = "none";
+        document.getElementById("supportPage").style.display = "none";
+    });
 
-cocktailBtn.onclick = function () {
-    openModal(mycocktailPage);
-}
+    // Fonction pour afficher la page Mes cocktails
+    document.getElementById("cocktail-btn").addEventListener("click", function () {
+        document.getElementById("infoPage").style.display = "none";
+        document.getElementById("mycocktailPage").style.display = "block";
+        document.getElementById("supportPage").style.display = "none";
+    });
 
-supportBtn.onclick = function () {
-    openModal(supportPage);
-}
-
-// Lorsque l'utilisateur clique sur <span> (x), fermer le modal
-span.onclick = function () {
-    modal.style.display = "none";
-}
-
-submitBtn.onclick = function () {
-    openModal(infoPage);
-}
+    // Fonction pour afficher la page Support
+    document.getElementById("support-btn").addEventListener("click", function () {
+        document.getElementById("infoPage").style.display = "none";
+        document.getElementById("mycocktailPage").style.display = "none";
+        document.getElementById("supportPage").style.display = "block";
+    });
+});
 
 // Lorsque l'utilisateur clique n'importe où en dehors du modal, le fermer
 window.onclick = function (event) {
