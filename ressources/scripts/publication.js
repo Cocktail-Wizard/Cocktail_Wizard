@@ -13,7 +13,10 @@ function addIngredientToList(name, amount, unit) {
     const listItem = document.createElement("div");
     const button = document.createElement('button');
 
-    button.classList.add('enlever_ingredient');
+    listItem.id = "ingredient-rajoute";
+
+    // button.classList.add('enlever_ingredient');
+    button.id = 'enlever-ingredient';
     button.classList.add('button-publish');
 
     const img = document.createElement('img');
@@ -35,7 +38,7 @@ function addIngredientToList(name, amount, unit) {
     });
 
     listItem.appendChild(button);
-    listItem.appendChild(document.createTextNode(`${amount} ${unit} ${name}`));
+    listItem.appendChild(document.createTextNode(` ${amount} ${unit} ${name}`));
     ingredientList.appendChild(listItem);
 
     // Effacer les zones de texte SEULMENT quand un ingredient est rajouté
@@ -98,13 +101,7 @@ function previewImage(event) {
     reader.readAsDataURL(input.files[0]);
 }
 
-// function removeIngredient(button) {
-//     // Accéder à l'élément parent du bouton, qui est le conteneur de l'ingrédient
-//     console.log(button);
-//     const listItem = button.parentElement;
-//     // Supprimer cet élément de la liste d'ingrédients
-//     listItem.remove();
-// }
+
 function removeIngredient(element, event) {
     event.preventDefault();
     element.parentNode.remove();
