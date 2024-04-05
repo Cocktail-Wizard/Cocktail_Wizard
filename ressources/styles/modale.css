@@ -120,12 +120,22 @@
     color: var(--palette-secondary-text-color);
 }
 
-#commenter>form>button {
+#commenter>form button {
     align-self: flex-end;
     border: none;
     padding: .5em;
     font-size: large;
     border-radius: var(--default-border-radius);
+}
+
+#commenter #soumettre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#commenter #soumettre #auteur-commentaire {
+    font-weight: bold;
 }
 
 #commentaires {
