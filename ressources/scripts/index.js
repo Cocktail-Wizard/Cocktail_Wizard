@@ -216,7 +216,10 @@ function chargerCommenter(id_cocktail) {
             return;
         }
 
-        const contenu = document.getElementById('commentaire').value;
+        // Nettoyer les caractères spéciaux
+        const contenu = document.getElementById('commentaire').value.toString().replace(/[^\x00-\x7F]/g, '').trim();
+
+        if (!contenu) return;
 
         const data = {
             username: utilisateur,
