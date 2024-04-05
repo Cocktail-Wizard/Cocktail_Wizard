@@ -42,10 +42,3 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("supportPage").style.display = "block";
     });
 });
-
-// Lorsque l'utilisateur clique n'importe où en dehors du modal, le fermer
-window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
