@@ -26,6 +26,11 @@ get('/monbar', 'pages/monbar.php');
 // /profile -> Page de profil
 get('/profile', 'pages/profile.php');
 
+/*****PATCH*******/
+
+// /api/users -> Modification d'un mot de passe
+patch('/api/users', 'ressources/api/modifierMotDePasse.php');
+
 /******POST*******/
 
 // /api/users/authentification ->Connexion d'un utilisateur
