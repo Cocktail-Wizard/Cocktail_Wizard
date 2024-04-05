@@ -131,6 +131,7 @@
 
     </aside>
 
+    <!-- Modale pour la publication de cocktail -->
     <!-- Le modal -->
     <div id="monModal" class="modal fade">
         <div class="modal-dialog modal-xl">
@@ -177,21 +178,34 @@
                         <div id="dropdown-choices">
                             <label for="flavor-profile">Profil de saveur:</label>
                             <select name="flavor-profile" id="flavor">
-                                <option value="sucre" selected>sucré</option>
-                                <option value="sale">salée</option>
-                                <option value="amer">amer</option>
-                                <option value="epice">epicé</option>
                                 <option value="acide">acide</option>
+                                <option value="amer">amer</option>
+                                <option value="epicé">epicé</option>
+                                <option value="sale">salée</option>
+                                <option value="sucre" selected>sucré</option>
                             </select>
                             <label for="main-alcool">Alcool principal:</label>
                             <select name="main-alcool" id="alcool">
-                                <option value="vodka" selected>vodka</option>
+                                <option value="apéritif">apéritif</option>
                                 <option value="gin">gin</option>
-                                <option value="whiskey">whiskey</option>
-                                <option value="tequila">tequila</option>
-                                <option value="rhum">rhum</option>
-                                <option value="aperitif">apéritif</option>
                                 <option value="liqueur">liqueur</option>
+                                <option value="rhum">rhum</option>
+                                <option value="tequila">tequila</option>
+                                <option value="vodka" selected>vodka</option>
+                                <option value="whiskey">whiskey</option>
+                            </select>
+                            <label for="type-glass">Verre de service:</label>
+                            <select name="type-glass" id="glass">
+                                <option value="balloon">balloon</option>
+                                <option value="clay cup">clay cup</option>
+                                <option value="collins">collins</option>
+                                <option value="copper cup">copper cup</option>
+                                <option value="coupe">coupe</option>
+                                <option value="highball">highball</option>
+                                <option value="marie-antoinette">marie-antoinette</option>
+                                <option value="martini">martini</option>
+                                <option value="nick & nora">nick & nora</option>
+                                <option value="old-fashionned" selected>old-fashionned</option>
                             </select>
                         </div>
 

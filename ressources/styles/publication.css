@@ -133,13 +133,9 @@ select option {
 
 #dropdown-choices {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: nowrap;
-}
-
-#flavor {
-    margin-right: 20px;
 }
 
 #ajouter-ingredient,
