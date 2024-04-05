@@ -3,9 +3,9 @@ session_start();
 
 require_once __DIR__ . "/../api/connexion.php";
 
-$cookie_domain = ""; // Set to your domain if needed
-$cookie_secure = true; // Only transmit cookie over HTTPS
-$cookie_http_only = false; // Prevent cookie from being accessed through JavaScript
+$cookie_domain = "";
+$cookie_secure = 0; // Transmit cookie over HTTPS
+$cookie_http_only = 0; // Access through JavaScript
 
 if ($success) {
     $_SESSION['username'] = $nom;
