@@ -4,6 +4,7 @@ const barreRecherche = document.getElementById('barre-recherche');
 const boutonOrdre = document.getElementById('ordre-tri');
 const boutonOrdreIcone = document.getElementById('ordre-tri-icone');
 const finAttenteEcriture = 1000; // 1 seconde
+const utilisateur = getCookie('username');
 
 let ordreCocktails = 'like';
 
@@ -71,6 +72,7 @@ function afficherCocktails(data) {
             sectionModale.style.display = 'block';
             chargerInformationsModale(cocktail);
             chargerCommentairesModale(idCocktail, ordreCommentaires);
+            chargerCommenter(cocktail.id_cocktail);
         });
 
         nouveauCocktail.dataset.idCocktail = cocktail.id_cocktail;
@@ -88,6 +90,12 @@ async function chargerInformationsModale(cocktail) {
     actualiserTextElementParId('description', cocktail.desc);
     actualiserTextElementParId('preparation', cocktail.preparation);
     actualiserTextElementParId('date-publication', cocktail.date);
+
+    if (utilisateur) {
+        actualiserTextElementParId('auteur-commentaire', utilisateur);
+    } else {
+        actualiserTextElementParId('text-auteur', 'Vous devez être connecté(e) pour commenter.');
+    }
 
     const ingredients = document.getElementById('ingredients');
     ingredients.innerHTML = '';
@@ -198,4 +206,36 @@ async function ordonnerCocktails() {
         boutonOrdreIcone.src = 'ressources/images/icone-calendrier.svg';
         boutonOrdre.title = 'Trier par popularité';
     }
+}
+
+function chargerCommenter(id_cocktail) {
+    const formulaire = document.getElementById('formulaire-commentaire');
+
+    formulaire.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!utilisateur) {
+            window.location.href = '/connexion';
+            return;
+        }
+
+        const contenu = document.getElementById('commentaire').value;
+
+        const data = {
+            username: utilisateur,
+            id_cocktail: id_cocktail,
+            commentaire: contenu
+        };
+
+        fetch('/api/cocktails/commentaires', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then((reponse) => {
+            if (reponse.ok) {
+                chargerCommentairesModale(id_cocktail);
+                document.getElementById('commentaire').value = '';
+            }
+        });
+    });
 }
