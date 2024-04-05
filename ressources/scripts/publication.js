@@ -12,7 +12,7 @@ function addIngredientToList(name, amount, unit) {
     const listItem = document.createElement("div");
     const button = document.createElement('button');
 
-    button.classList.add('enlever_ingredient');
+    button.id = 'enlever-ingredient';
     button.classList.add('button-publish');
 
     const img = document.createElement('img');
@@ -50,8 +50,6 @@ boutonAjouterIngredient.addEventListener("click", function (event) {
     const enteredAmount = nouvelIngredientQtt.value.trim();
     const enteredUnit = nouvelIngredientUnite.value.trim();
 
-
-
     // Vérifier si l'ingrédient saisi figure dans la liste de tous les ingrédients (insensible au minuscule/majuscule)
     if (!allIngredients.some(ingredient => ingredient.toLowerCase() === enteredIngredient)) {
         // Changer la couleur du champ de saisie en rouge et appliquer l'animation d"erreur
@@ -80,11 +78,9 @@ boutonAjouterIngredient.addEventListener("click", function (event) {
 
 });
 
-
 function removeInvalidClass(event) {
     event.target.classList.remove("invalid-input");
 }
-
 
 function previewImage(event) {
     let input = event.target;
@@ -97,14 +93,66 @@ function previewImage(event) {
     reader.readAsDataURL(input.files[0]);
 }
 
-// function removeIngredient(button) {
-//     // Accéder à l'élément parent du bouton, qui est le conteneur de l'ingrédient
-//     console.log(button);
-//     const listItem = button.parentElement;
-//     // Supprimer cet élément de la liste d'ingrédients
-//     listItem.remove();
-// }
 function removeIngredient(element, event) {
     event.preventDefault();
     element.parentNode.remove();
 }
+
+document.getElementById('formId').addEventListener('submit', function (event) {
+    event.preventDefault(); // Empêcher le comportement par défaut du formulaire
+
+    // Crée et récupérer les valeurs pour le formulaire
+    const nom = document.getElementById('name-texte').value;
+    const description = document.getElementById('description-texte').value;
+    const preparation = document.getElementById('preparation-texte').value;
+    const typeVerre = document.getElementById('glass').value;
+    const profilSaveur = document.getElementById('flavor').value;
+    const nomAlcoolPrincipale = document.getElementById('alcool').value;
+    const username = $utilisateur; //ICI JE SUIS PAS SUR SI JE DOIT FAIRE `$utilisateur`
+    const image = document.getElementById('preview').value;
+
+    // Récupérer les valeurs des ingrédients
+    const ingredients = [];
+    const ingredientElements = document.querySelectorAll('.ingredient');
+    ingredientElements.forEach(element => {
+        const nomIng = element.querySelector('.nomIng').value;
+        const quantite = element.querySelector('.quantite').value;
+        const unite = element.querySelector('.unite').value;
+        ingredients.push({ nomIng, quantite, unite });
+    });
+
+    // Créer l'objet JSON à envoyer
+    const formData = {
+        nom,
+        description,
+        preparation,
+        typeVerre,
+        profilSaveur,
+        nomAlcoolPrincipale,
+        username,
+        ingredients,
+        image
+    };
+
+    // Envoyer les données au serveur
+    fetch('/api/cocktail', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors de la requête');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data); // Afficher la réponse du serveur
+            window.location.href = '../pages/monbar.php';
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
+});
