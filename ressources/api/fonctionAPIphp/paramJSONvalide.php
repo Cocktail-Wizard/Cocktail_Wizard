@@ -6,11 +6,11 @@
  * Cette fonction permet de vérifier si les paramètres JSON nécessaires
  * sont présents dans la requête.
  *
- * @param Array $JSON Le tableau JSON contenant les paramètres de la requête
- * @param String $nomParametre Le nom du paramètre à vérifier
+ * @param string $JSON Le tableau JSON contenant les paramètres de la requête
+ * @param string $nomParametre Le nom du paramètre à vérifier
  *
  *
- * @return String Le paramètre
+ * @return string Le paramètre
  *
  * @version 1.0
  *
