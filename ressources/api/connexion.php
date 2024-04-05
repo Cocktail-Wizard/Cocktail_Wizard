@@ -85,6 +85,6 @@ if (!empty($erreurs)) {
     http_response_code(400);
 }
 // Répondre avec la réponse JSON
-echo json_encode($response);
+// echo json_encode($response);
 
 $conn->close();
