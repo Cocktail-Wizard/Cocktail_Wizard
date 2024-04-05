@@ -12,6 +12,8 @@ function addIngredientToList(name, amount, unit) {
     const listItem = document.createElement("div");
     const button = document.createElement('button');
 
+    listItem.id = "ingredient-rajoute";
+
     button.id = 'enlever-ingredient';
     button.classList.add('button-publish');
 
@@ -34,7 +36,7 @@ function addIngredientToList(name, amount, unit) {
     });
 
     listItem.appendChild(button);
-    listItem.appendChild(document.createTextNode(`${amount} ${unit} ${name}`));
+    listItem.appendChild(document.createTextNode(` ${amount} ${unit} ${name}`));
     ingredientList.appendChild(listItem);
 
     // Effacer les zones de texte SEULMENT quand un ingredient est rajouté
