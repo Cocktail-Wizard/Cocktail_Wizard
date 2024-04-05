@@ -97,7 +97,6 @@ input[type="submit"]:hover {
     margin: auto;
 }
 
-
 #add-form {
     display: flex;
     align-items: center;
@@ -167,7 +166,7 @@ select option {
 }
 
 #ajouter-ingredient,
-#enlever_ingredient {
+#enlever-ingredient {
     width: 30px;
     height: 30px;
     padding: 3px;
@@ -179,7 +178,7 @@ select option {
 }
 
 #ajouter-ingredient>.btn-icon,
-#enlever_ingredient>.btn-icon {
+#enlever-ingredient>.btn-icon {
     width: 100%;
     height: 100%;
     display: flex;
@@ -207,4 +206,9 @@ select option {
     text-decoration: none;
     color: var(--palette-button-text-color);
     background-color: var(--palette-button-color-hover);
+}
+
+#ingredient-rajoute {
+    font-size: larger;
+    font-style: bold;
 }
