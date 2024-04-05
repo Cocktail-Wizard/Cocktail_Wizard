@@ -130,7 +130,6 @@ select option {
     animation: shake 0.5s ease;
 }
 
-
 #dropdown-choices {
     display: flex;
     justify-content: space-around;

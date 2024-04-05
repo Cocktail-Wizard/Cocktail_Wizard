@@ -139,7 +139,7 @@
             <div id="publication-content" class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Créer un cocktail</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal">&times;</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     <!-- symbole x pour fermer -->
                 </div>
 
@@ -227,8 +227,8 @@
 
     <script src="../ressources/scripts/userprofile.js"></script>
     <script src="../ressources/scripts/outils.js"></script>
-    <script type="module" src="../ressources/scripts/publication.js"></script>
-    <script type="module" src="../ressources/scripts/monbar.js"></script>
+    <script src="../ressources/scripts/publication.js"></script>
+    <script src="../ressources/scripts/monbar.js"></script>
 
 </body>
 
