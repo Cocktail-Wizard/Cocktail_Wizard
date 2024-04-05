@@ -16,7 +16,7 @@
     <noscript class="erreur">Vous devez activer JavaScript pour charger ce site web.</noscript>
 
     <header>
-        <h1>CONNECTEEEE</h1>
+        <h1><?php echo $nom; ?></h1>
     </header>
 
     <main>
