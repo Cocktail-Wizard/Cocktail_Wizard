@@ -4,7 +4,6 @@
     position: relative;
     background-color: var(--palette-secondary-background-color);
     margin: auto;
-    padding-top: 10px;
     border: 1px solid var(--palette-border-color);
     width: 80%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -23,15 +22,13 @@
 
 /* En-tête de la section profil utilisateur */
 #userprofile-header {
-    padding: 2px 16px;
+    padding: 5px 16px 5px 16px;
     background-color: var(--palette-secondary-background-color);
     color: var(--palette-secondary-text-color);
+    gap: 40px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    /* Utilisation de 'center' pour aligner au centre */
-    gap: 40px;
-    justify-content: space-around;
+    margin-left: 18%;
 }
 
 /* Corps des informations utilisateur */
@@ -163,4 +160,9 @@ input[type="submit"]:hover {
 #cocktail-btn:hover,
 #support-btn:hover {
     background-color: var(--palette-button-color-hover);
+}
+
+#fuck-bootstrap {
+    top: 5px;
+    left: 5px;
 }
