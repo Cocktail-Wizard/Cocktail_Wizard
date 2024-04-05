@@ -11,20 +11,14 @@
     padding-top: 10px;
     border: 1px solid var(--palette-border-color);
     width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /*template de "boxshadow"*/
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
+    /* template de "boxshadow" */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 20%), 0 6px 20px 0 rgba(0, 0, 0, 19%);
     height: auto;
     max-height: 80%;
     overflow-y: auto;
     width: 80%;
     box-sizing: border-box;
 }
-
-
 
 h2 {
     color: var(--palette-button-color);
@@ -63,19 +57,6 @@ textarea {
     color: black;
 }
 
-/* .ingredient-box {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid var(--palette-border-color);
-    border-radius: 4px;
-    background-color: var(--palette-secondary-background-color);
-    color: var(--palette-paragraph-color);
-    min-height: 100px;
-    resize: vertical;
-    overflow-y: auto;
-} */
-
 input[type="submit"] {
     background-color: var(--palette-button-color);
     color: var(--palette-button-text-color);
@@ -102,10 +83,6 @@ input[type="submit"]:hover {
     align-items: center;
     gap: 3px;
     margin: 0;
-}
-
-#unit_select {
-    color: var(--palette-secondary-text-color);
 }
 
 select {
