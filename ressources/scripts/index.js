@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function afficherCocktails(data) {
+    if (!data) return;
+
     const fragment = document.createDocumentFragment();
     const modeleTemp = document.createElement('div');
     modeleTemp.innerHTML = modeleCarteCocktail;
