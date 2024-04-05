@@ -45,10 +45,6 @@ try {
             );
             $commentaires[] = $commentaire;
         }
-    } else {
-        http_response_code(204);
-        echo json_encode("Aucun commentaire trouvé.");
-        exit();
     }
 
     echo json_encode($commentaires);

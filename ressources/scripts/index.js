@@ -32,8 +32,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function afficherCocktails(data) {
-    if (!data) return;
-
     const fragment = document.createDocumentFragment();
     const modeleTemp = document.createElement('div');
     modeleTemp.innerHTML = modeleCarteCocktail;
@@ -152,9 +150,7 @@ async function chargerCommentairesModale(idCocktail) {
     if (modeleHTML) {
         try {
             const data = await faireRequete(`/api/cocktails/${idCocktail}/commentaires`);
-            if (data === null) {
-                return;
-            }
+            if (data === null) return;
 
             const listeCommentaires = document.getElementById('commentaires');
             listeCommentaires.innerHTML = '';
