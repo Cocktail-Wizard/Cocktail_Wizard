@@ -77,9 +77,10 @@
     <!-- Modale pour le profil utilisateur -->
     <!-- la page modale -->
     <div id="my-modal" class="modal">
+        <div class="modal-dialog modal-xl">
         <!-- Contenue de la boite modale -->
-        <div class="userprofile-content">
-            <div class="userprofile-header">
+        <div id="userprofile-content" class="modal-content">
+            <div id="userprofile-header" class="modal-header">
 
                 <button id="info-btn">Info personnelle</button>
                 <button id="cocktail-btn">Mes cocktails</button>
@@ -88,6 +89,7 @@
                     <!-- symbole x pour fermer -->
             </div>
 
+            <div class="modal-body">
             <div class="userinfo-body" id="infoPage">
                 <img src="../ressources/images/lionWizard.jpg" alt="Photo de profil de l'utilisateur">
                 <h3>Nom de l'utilisateur: Lionel Wizard</h3>
@@ -113,11 +115,12 @@
                 </form>
 
             </div>
+            </div>
             <div class="userprofile-footer">
                 <h3>Cocktail Wizard &copy - 2024</h3>
             </div>
         </div>
-
+        </div>
     </div>
 
     <aside id="deux-boutons">

@@ -1,6 +1,6 @@
 /* Style pour le modal */
 /* Contenu du Modal */
-.userprofile-content {
+#userprofile-content {
     position: relative;
     background-color: var(--palette-secondary-background-color);
     margin: auto;
@@ -22,14 +22,16 @@
 }
 
 /* En-tête de la section profil utilisateur */
-.userprofile-header {
+#userprofile-header {
     padding: 2px 16px;
     background-color: var(--palette-secondary-background-color);
     color: var(--palette-secondary-text-color);
     display: flex;
     justify-content: center;
-    align-items: space-around;
+    align-items: center;
+    /* Utilisation de 'center' pour aligner au centre */
     gap: 40px;
+    justify-content: space-around;
 }
 
 /* Corps des informations utilisateur */
