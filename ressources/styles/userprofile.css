@@ -6,23 +6,19 @@
     margin: auto;
     border: 1px solid var(--palette-border-color);
     width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /*template de "boxshadow"*/
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
+
+    /* template de "boxshadow" */
+    box-shadow: 0 4px 8px 0 rgba(0 0 0 / 20%), 0 6px 20px 0 rgba(0 0 0 / 19%);
     height: auto;
     max-height: 80%;
     overflow-y: auto;
-    width: 80%;
     box-sizing: border-box;
     margin-top: 5%;
 }
 
 /* En-tête de la section profil utilisateur */
 #userprofile-header {
-    padding: 5px 16px 5px 16px;
+    padding: 5px 16px;
     background-color: var(--palette-secondary-background-color);
     color: var(--palette-secondary-text-color);
     gap: 40px;
