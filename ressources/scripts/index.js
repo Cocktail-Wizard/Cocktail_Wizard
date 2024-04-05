@@ -46,7 +46,7 @@ function afficherCocktails(data) {
         nomCocktail.textContent = cocktail.nom;
 
         const iconeJAime = nouveauCocktail.querySelector('.icone-jaime');
-        iconeJAime.src = 'ressources/images/icone-coeur-vide.svg';
+        iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
 
         const iconeAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
         iconeAlcool.src = 'ressources/images/pastille-alcool.svg';
@@ -100,6 +100,33 @@ async function chargerInformationsModale(cocktail) {
     const ingredients = document.getElementById('ingredients');
     ingredients.innerHTML = '';
 
+    const iconeJAime = document.getElementById('icone-jaime');
+    iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
+
+    const spanJAime = document.getElementById('affichage-jaime');
+    const utilisateur = getCookie("username");
+
+    if (utilisateur && utilisateur !== cocktail.auteur) {
+        spanJAime.addEventListener('click', async () => {
+            fetch('/api/cocktails/like', {
+                method: cocktail.liked ? 'DELETE' : 'POST',
+                body: JSON.stringify({
+                    id_cocktail: cocktail.id_cocktail,
+                    username: utilisateur
+                }),
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+            }
+            ).then((response) => {
+                if (response.ok) {
+                    cocktail.nb_like = cocktail.liked ? cocktail.nb_like - 1 : cocktail.nb_like + 1;
+                    cocktail.liked = !cocktail.liked;
+                    iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
+                    actualiserTextElementParId('compteur-jaime', cocktail.nb_like);
+                }
+            })
+        });
+    }
+
     cocktail.ingredients_cocktail.forEach((ingredient) => {
         const ligneIngredient = document.createElement('li');
         const quantiteIngredient = document.createElement('span');
@@ -123,7 +150,7 @@ async function chargerCommentairesModale(idCocktail) {
 
     if (modeleHTML) {
         try {
-            const data = await faireRequete('/api/cocktails/' + idCocktail + '/commentaires');
+            const data = await faireRequete(`/api/cocktails/${idCocktail}/commentaires`);
             if (data === null) {
                 return;
             }
