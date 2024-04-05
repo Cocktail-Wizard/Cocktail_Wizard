@@ -20,7 +20,7 @@
         <div class="user">
             <span id="backgroundshape"></span>
             <div class="profile-pic-container">
-                <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Profile Picture">
+                <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Photo de profil">
             </div>
             <span class="username">@UsernameSuperWizard</span>
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
@@ -74,10 +74,10 @@
 
     <aside id="deux-boutons">
         <button>
-            <img id="btnAbout" src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
+            <img id="btnAbout" src="../ressources/images/info.svg" alt="Info sur la page">
         </button>
         <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#monModal">
-            <img id="btnPublish" src="../ressources/images/feather.svg" alt="Publier">
+            <img id="btnPublish" src="../ressources/images/feather.svg" alt="Modale de publication">
         </button>
 
     </aside>
@@ -107,7 +107,7 @@
                                 <input type="text" id="ingredient-unit" placeholder="Unité...">
 
                                 <button type="button" class="button-publish" id="ajouter-ingredient">
-                                    <img class="btn-icon" src="../ressources/images/plus.svg" alt="+">
+                                    <img class="btn-icon" src="../ressources/images/plus.svg" alt="ajouter un ingredient">
                                 </button>
 
                             </div>
