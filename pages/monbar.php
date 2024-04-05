@@ -215,7 +215,7 @@
                         <input type="file" accept="image/*" onchange="previewImage(event)" />
                         <img id="preview" src="#" alt="Votre image" />
 
-                        <input type="submit" value="Publier">
+                        <input type="button" id="bouton-publier" value=" Publier">
                     </form>
 
                 </div>

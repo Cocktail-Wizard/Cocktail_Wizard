@@ -100,7 +100,7 @@ function removeIngredient(element, event) {
     element.parentNode.remove();
 }
 
-document.getElementById('formId').addEventListener('submit', function (event) {
+document.getElementById('bouton-publier').addEventListener('click', function (event) {
     event.preventDefault(); // Empêcher le comportement par défaut du formulaire
 
     // Crée et récupérer les valeurs pour le formulaire
@@ -110,16 +110,21 @@ document.getElementById('formId').addEventListener('submit', function (event) {
     const typeVerre = document.getElementById('glass').value;
     const profilSaveur = document.getElementById('flavor').value;
     const nomAlcoolPrincipale = document.getElementById('alcool').value;
-    const username = $utilisateur; //ICI JE SUIS PAS SUR SI JE DOIT FAIRE `$utilisateur`
+    const username = getCookie('username'); //ICI JE SUIS PAS SUR SI JE DOIT FAIRE `$utilisateur`
     const image = document.getElementById('preview').value;
 
-    // Récupérer les valeurs des ingrédients
+    // Créer un tableau pour stocker les informations des ingrédients restants
     const ingredients = [];
-    const ingredientElements = document.querySelectorAll('.ingredient');
+
+    // Parcourir chaque div .ingredient dans #liste-ingredients-publish
+    const ingredientElements = document.querySelectorAll('#liste-ingredients-publish .ingredient-rajoute');
     ingredientElements.forEach(element => {
-        const nomIng = element.querySelector('.nomIng').value;
-        const quantite = element.querySelector('.quantite').value;
-        const unite = element.querySelector('.unite').value;
+        // Récupérer les informations de chaque ingrédient restant
+        const nomIng = element.querySelector('.nomIng').textContent;
+        const quantite = element.querySelector('.quantite').textContent;
+        const unite = element.querySelector('.unite').textContent;
+
+        // Ajouter ces informations au tableau des ingrédients restants
         ingredients.push({ nomIng, quantite, unite });
     });
 
