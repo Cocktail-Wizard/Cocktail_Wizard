@@ -43,3 +43,14 @@ function actualiserTextElementParId(id, nouvelle_valeur) {
         element.innerText = nouvelle_valeur;
     }
 }
+
+function getCookie(nom) {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(nom + '=')) {
+            return cookie.substring(nom.length + 1);
+        }
+    }
+    return null;
+}
