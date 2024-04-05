@@ -4,7 +4,6 @@ const barreRecherche = document.getElementById('barre-recherche');
 const boutonOrdre = document.getElementById('ordre-tri');
 const boutonOrdreIcone = document.getElementById('ordre-tri-icone');
 const finAttenteEcriture = 1000; // 1 seconde
-const utilisateur = getCookie('username');
 
 let ordreCocktails = 'like';
 
