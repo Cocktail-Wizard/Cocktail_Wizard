@@ -15,7 +15,6 @@ document.getElementById('form-inscription').addEventListener('submit', (event) =
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             // Afficher les erreurs
             if (Array.isArray(data) && data.length > 0) {
                 data.forEach(error => {

@@ -154,9 +154,7 @@ async function chargerCommentairesModale(idCocktail) {
     if (modeleHTML) {
         try {
             const data = await faireRequete(`/api/cocktails/${idCocktail}/commentaires`);
-            if (data === null) {
-                return;
-            }
+            if (!data) return;
 
             const listeCommentaires = document.getElementById('commentaires');
             listeCommentaires.innerHTML = '';
@@ -222,7 +220,10 @@ function chargerCommenter(id_cocktail) {
             return;
         }
 
-        const contenu = document.getElementById('commentaire').value;
+        // Nettoyer les caractères spéciaux
+        const contenu = document.getElementById('commentaire').value.toString().replace(/[^\x00-\x7F]/g, '').trim();
+
+        if (!contenu) return;
 
         const data = {
             username: utilisateur,
