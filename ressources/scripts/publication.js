@@ -124,8 +124,9 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
         const quantite = element.querySelector('.quantite').textContent;
         const unite = element.querySelector('.unite').textContent;
 
+
         // Ajouter ces informations au tableau des ingrédients restants
-        ingredients.push({ nomIng, quantite, unite });
+        ingredients.push({ "nomIng": nomIng, "quantite": quantite, "unite": unite });
     });
 
     // Créer l'objet JSON à envoyer
@@ -157,7 +158,7 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
         })
         .then(data => {
             console.log(data); // Afficher la réponse du serveur
-            window.location.href = '../pages/monbar.php';
+            window.location.href = '/monbar';
         })
         .catch(error => {
             console.error('Erreur:', error);
