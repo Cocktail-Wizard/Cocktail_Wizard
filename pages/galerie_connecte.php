@@ -16,8 +16,7 @@
     <noscript class="erreur">Vous devez activer JavaScript pour charger ce site web.</noscript>
 
     <header>
-        <h1><?php echo $nom; ?></h1>
-        <p><?php setcookie('test', 'testok-$nom', 0, '/', "", 0, 0); ?></p>
+        <h1>Cocktail Wizard</h1>
     </header>
 
     <main>

@@ -55,7 +55,7 @@ function afficherCocktails(data) {
         umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur]}.svg` || `${iconesUmami['default']}.svg`;
 
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
-        imageCocktail.src = `https://picsum.photos/200/300`;
+        imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
         imageCocktail.loading = 'lazy';
 
         const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
@@ -90,6 +90,10 @@ async function chargerInformationsModale(cocktail) {
     actualiserTextElementParId('description', cocktail.desc);
     actualiserTextElementParId('preparation', cocktail.preparation);
     actualiserTextElementParId('date-publication', cocktail.date);
+
+
+    const imageCocktail = document.getElementById('illustration');
+    imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
 
     if (utilisateur) {
         actualiserTextElementParId('auteur-commentaire', utilisateur);

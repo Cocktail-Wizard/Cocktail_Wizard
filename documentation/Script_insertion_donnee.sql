@@ -11,9 +11,37 @@
 --
 -- ============================================================
 
-/*
+
+
+
+-- Suppression des données
+SET FOREIGN_KEY_CHECKS = 0;
+
+TRUNCATE TABLE Ingredient;
+
+TRUNCATE TABLE Alcool;
+
+TRUNCATE TABLE Banque_Image;
+
+TRUNCATE TABLE Utilisateur;
+
+TRUNCATE TABLE Ingredient_Utilisateur;
+
+TRUNCATE TABLE Alcool_utilisateur;
+
+TRUNCATE TABLE Cocktail;
+
+TRUNCATE TABLE Ingredient_Cocktail;
+
+TRUNCATE TABLE Commentaire;
+
+TRUNCATE TABLE Commentaire_Liked;
+
+TRUNCATE TABLE Cocktail_Liked;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
 -- Insertion des données dans la table Ingredient
-DELETE FROM Ingredient;
 INSERT INTO Ingredient (nom) VALUES ('Sel');
 INSERT INTO Ingredient (nom) VALUES ('Poivre');
 INSERT INTO Ingredient (nom) VALUES ('Sucre');
@@ -68,9 +96,8 @@ INSERT INTO Ingredient (nom) VALUES ('Jus de litchi');
 INSERT INTO Ingredient (nom) VALUES ('Jus de pêche');
 INSERT INTO Ingredient (nom) VALUES ('Jus de poire');
 INSERT INTO Ingredient (nom) VALUES ('Jus de melon');
-INSERT INTO Ingredient (nom) VALUES ('Jus de litchi');
+
 -- Insertion des données dans la table Alcool
-DELETE FROM Alcool;
 INSERT INTO Alcool (nom) VALUES ('Vodka');
 INSERT INTO Alcool (nom) VALUES ('Tequila');
 INSERT INTO Alcool (nom) VALUES ('Rhum');
@@ -116,73 +143,15 @@ INSERT INTO Alcool (nom) VALUES ('Kahlúa');
 INSERT INTO Alcool (nom) VALUES ('Jägermeister');
 INSERT INTO Alcool (nom) VALUES ('Campari');
 INSERT INTO Alcool (nom) VALUES ('Fernet');
-*/
--- Suppression des données
-SET FOREIGN_KEY_CHECKS = 0;
-
-TRUNCATE TABLE Ingredient;
-
-TRUNCATE TABLE Alcool;
-
-TRUNCATE TABLE Banque_Image;
-
-TRUNCATE TABLE Utilisateur;
-
-TRUNCATE TABLE Ingredient_Utilisateur;
-
-TRUNCATE TABLE Alcool_utilisateur;
-
-TRUNCATE TABLE Cocktail;
-
-TRUNCATE TABLE Ingredient_Cocktail;
-
-TRUNCATE TABLE Commentaire;
-
-TRUNCATE TABLE Commentaire_Liked;
-
-TRUNCATE TABLE Cocktail_Liked;
-
-SET FOREIGN_KEY_CHECKS = 1;
-
--- Insertion des données dans la table Ingredient
-INSERT INTO Ingredient (nom) VALUES ('Sucre');
-
-INSERT INTO Ingredient (nom) VALUES ('Citron');
-
-INSERT INTO Ingredient (nom) VALUES ('Menthe');
-
-INSERT INTO Ingredient (nom) VALUES ('Glace');
-INSERT INTO Ingredient (nom) VALUES ("Jus d'orange");
-
--- Insertion des données dans la table Alcool
-INSERT INTO
-    Alcool (nom, information, lien_saq)
-VALUES (
-        'Vodka', 'Alcool fort', 'http://example.com/vodka'
-    );
-
-INSERT INTO
-    Alcool (nom, information, lien_saq)
-VALUES (
-        'Rhum', 'Alcool des Caraïbes', 'http://example.com/rum'
-    );
-
-INSERT INTO
-    Alcool (nom, information, lien_saq)
-VALUES (
-        'Gin', 'Spiritueux aromatisé au genièvre', 'http://example.com/gin'
-    );
-
-INSERT INTO
-    Alcool (nom, information, lien_saq)
-VALUES (
-        'Tequila', 'Spiritueux mexicain', 'http://example.com/tequila'
-    );
 
 -- Insertion des données dans la table Banque_Image
-INSERT INTO Banque_Image (img, img_cocktail) VALUES ('BLOB_DATA', 1);
+INSERT INTO Banque_Image (img, img_cocktail) VALUES ('gintonic.jpg', 1);
 
-INSERT INTO Banque_Image (img, img_cocktail) VALUES ('BLOB_DATA', 0);
+INSERT INTO Banque_Image (img, img_cocktail) VALUES ('mojito.jpg', 1);
+
+INSERT INTO Banque_Image (img, img_cocktail) VALUES ('tqsunise.jpg', 1);
+
+
 
 -- Insertion des données dans la table Utilisateur
 INSERT INTO
