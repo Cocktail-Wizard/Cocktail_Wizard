@@ -1,4 +1,4 @@
--- Active: 1710380541515@@cocktailwizbd.mysql.database.azure.com@3306@cocktailwizardbd
+-- Active: 1712109793272@@cocktailwizardbd.mysql.database.azure.com@3306@cocktailwizardbd
 -- ============================================================
 -- Auteurs : Yani Amellal, Léonard Marcoux, Pablo Hamel-Corôa,
 --           Maxime Dmitriev et Vianney Veremme
@@ -253,18 +253,35 @@ CREATE PROCEDURE CreerCocktail(
     IN var_type_verre VARCHAR(50),
     IN var_profil_saveur VARCHAR(50),
     IN var_id_utilisateur INT,
-    IN var_alcool_principal VARCHAR(255)
+    IN var_alcool_principal VARCHAR(255),
+    IN var_image_id INT
 )
 BEGIN
     INSERT INTO Cocktail (
-        nom, desc_cocktail, preparation, type_verre, profil_saveur, id_utilisateur, id_alcool
+        nom, desc_cocktail, preparation, type_verre, profil_saveur, id_utilisateur, id_alcool, id_image
     )
     VALUES (
         var_nom, var_desc_cocktail, var_preparation,
         var_type_verre, var_profil_saveur, var_id_utilisateur,
-        (SELECT id_alcool FROM Alcool WHERE nom = var_alcool_principal)
+        (SELECT id_alcool FROM Alcool WHERE nom = var_alcool_principal),
+        var_image_id
     );
     SELECT LAST_INSERT_ID() AS id_cocktail;
+END
+//
+
+-- Création de la procédure AjouterImageCocktail
+-- Permet d'ajouter une image à un cocktail
+-- Utiliser pour la création de cocktail
+DROP PROCEDURE IF EXISTS AjouterImageCocktail;
+CREATE PROCEDURE AjouterImageCocktail
+(
+    IN var_nom_image VARCHAR(255)
+)
+BEGIN
+    INSERT INTO Banque_Image (img, img_cocktail)
+    VALUES (var_nom_image, 1);
+    SELECT LAST_INSERT_ID() AS id_image;
 END
 //
 

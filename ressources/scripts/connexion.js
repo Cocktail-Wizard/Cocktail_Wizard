@@ -16,9 +16,8 @@ document.getElementById('form-connexion').addEventListener('submit', (event) => 
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Verifier s'il y'a des cookies
-                alert('connection ok');
-                alert(document.cookie);
+                const username = data.username;
+                document.cookie = "username=" + username + "; path=/";
 
                 window.location.href = "/galerie";
             } else {
