@@ -44,31 +44,35 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const username = getCookie('username');
-
+//Sa devrait fonctionner une fois que la branche AjoutisLiked est mergé avec la branche develop
 fetch(`/api/users/${username}`)
     .then(response => response.json())
     .then(user => {
         document.getElementById('username').textContent = user.nom;
+        //document.getElementById('email').textContent = user.courriel;
+        document.getElementById('cocktailCount').textContent = user.nb_cocktail_cree;
+        document.getElementById('likeCount').textContent = user.nb_cocktail_favoris;
+        document.getElementById('commentCount').textContent = user.nb_commentaire;
     })
     .catch(error => console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error));
 
 //récuperer les cocktails de l'utilisateur pour completer les infos
-fetch(`/api/users/${username}/cocktails`)
-    .then(response => response.json())
-    .then(cocktails => {
-        let totalLikes = 0;
-        cocktails.forEach(cocktail => {
-            // Pour chaque cocktail, récupérer le nombre de likes
-            fetch(`/api/cocktails/${cocktail.id}/likes`)
-                .then(response => response.json())
-                .then(data => {
-                    totalLikes += data.likeCount;
-                    // Mettre à jour le nombre total de likes
-                    document.getElementById('likeCount').textContent = totalLikes;
-                })
-                .catch(error => console.error('Erreur lors de la récupération du nombre de likes pour le cocktail', cocktail.id, ':', error));
-        });
-        document.getElementById('likeCount').textContent = cocktails.likeCount;
-        document.getElementById('cocktailCount').textContent = cocktails.cocktailCount;
-    })
-    .catch(error => console.error('Erreur lors de la récupération des cocktails de l\'utilisateur:', error));
+// fetch(`/api/users/${username}/cocktails`)
+//     .then(response => response.json())
+//     .then(cocktails => {
+//         let totalLikes = 0;
+//         cocktails.forEach(cocktail => {
+//             // Pour chaque cocktail, récupérer le nombre de likes
+//             fetch(`/api/cocktails/${cocktail.id}/likes`)
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     totalLikes += data.likeCount;
+//                     // Mettre à jour le nombre total de likes
+//                     document.getElementById('likeCount').textContent = totalLikes;
+//                 })
+//                 .catch(error => console.error('Erreur lors de la récupération du nombre de likes pour le cocktail', cocktail.id, ':', error));
+//         });
+//         document.getElementById('likeCount').textContent = cocktails.likeCount;
+//         document.getElementById('cocktailCount').textContent = cocktails.cocktailCount;
+//     })
+//     .catch(error => console.error('Erreur lors de la récupération des cocktails de l\'utilisateur:', error));
