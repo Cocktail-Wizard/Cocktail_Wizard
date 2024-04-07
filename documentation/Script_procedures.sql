@@ -492,7 +492,8 @@ BEGIN
     -- Enlever LEFT quand les images seront gérées
     LEFT JOIN Banque_Image BI ON C.id_image = BI.id_image
     JOIN Alcool A ON C.id_alcool = A.id_alcool
-    JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
+    -- Enlever LEFT quand les images seront gérées
+    LEFT JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
     WHERE C.id_cocktail = cocktail;
 END
 //
