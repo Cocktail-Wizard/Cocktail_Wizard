@@ -72,56 +72,6 @@
         </div>
     </main>
 
-    <!-- Modale pour le profil utilisateur -->
-    <!-- la page modale -->
-    <div id="my-modal" class="modal">
-        <div class="modal-dialog modal-xl">
-            <!-- Contenue de la boite modale -->
-            <div id="userprofile-content" class="modal-content">
-                <div class="modal-header">
-                    <div id="userprofile-header">
-                        <button id="info-btn">Info personnelle</button>
-                        <button id="cocktail-btn">Mes cocktails</button>
-                        <button id="support-btn">Support</button>
-                    </div>
-                    <button type="button" id="fuck-bootstrap" class="btn-close" data-bs-dismiss="modal"></button>
-                    <!-- symbole x pour fermer -->
-                </div>
-
-                <div class="modal-body">
-                    <div class="userinfo-body" id="infoPage">
-                        <img src="../ressources/images/lionWizard.jpg" alt="Photo de profil de l'utilisateur">
-                        <h3>Nom de l'utilisateur: Lionel Wizard</h3>
-                        <p>Nombre de likes : <span id="likeCount">0</span></p>
-                        <p>Nombre de cocktails : <span id="cocktailCount">0</span></p>
-                        <p>Nombre de commentaires : <span id="commentCount">0</span></p>
-                    </div>
-
-                    <div class="mycocktail-body" id="mycocktailPage">
-                        <div class="cocktail-container">
-                            <!-- Les cartes de cocktail seront ajoutées ici -->
-                        </div>
-                    </div>
-
-                    <div class="support-body" id="supportPage">
-
-                        <h2 style="color: #7f5af0;">Contactez-nous</h2>
-
-                        <form action="../ressources/email.php" method="post">
-                            <label for="message">Message:</label><br>
-                            <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
-                            <input id="submit-btn" type="submit" value="Envoyer">
-                        </form>
-
-                    </div>
-                </div>
-                <div class="userprofile-footer">
-                    <h3>Cocktail Wizard &copy - 2024</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <aside id="deux-boutons">
         <button>
             <img id="btnAbout" src="../ressources/images/info.svg" alt="Info sur la page">
@@ -132,97 +82,8 @@
 
     </aside>
 
-    <!-- Modale pour la publication de cocktail -->
-    <!-- Le modal -->
-    <div id="monModal" class="modal fade">
-        <div class="modal-dialog modal-xl">
-            <!-- Contenu du modal -->
-            <div id="publication-content" class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Créer un cocktail</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    <!-- symbole x pour fermer -->
-                </div>
-
-                <div class="modal-body" id="page-publication">
-
-                    <form>
-                        <label for="nom-cocktail">Nom du cocktail:</label><br>
-                        <textarea id="name-texte" name="nom-cocktail" rows="1" cols="50"></textarea><br>
-
-                        <label for="ingredient-cocktail">Ingrédients:</label><br>
-                        <div id="ingredient-input">
-                            <div id="add-form">
-                                <input type="text" id="ingredient-nom" placeholder="Nom de l'ingrédient...">
-                                <input type="text" id="ingredient-quantite" placeholder="Quantité...">
-                                <input type="text" id="ingredient-unit" placeholder="Unité...">
-
-                                <button type="button" class="button-publish" id="ajouter-ingredient">
-                                    <img class="btn-icon" src="../ressources/images/plus.svg" alt="ajouter un ingredient">
-                                </button>
-
-                            </div>
-
-                            <div id="liste-ingredients-publish"></div>
-
-                        </div>
-
-                        <br>
-
-                        <label for="preparation-cocktail">Préparation:</label><br>
-                        <textarea id="preparation-texte" name="preparation-cocktail" rows="4" cols="50" placeholder="Expliquez-nous comment créer votre fabuleuse création, les étapes, la méthode et, si jamais vous avez des petites notes à rajouter, faites-nous en part!"></textarea><br>
-
-
-                        <label for="description-cocktail">Description:</label><br>
-                        <textarea id="description-texte" name="description-cocktail" rows="4" cols="50" placeholder="Une description n'est pas nécessaire, mais elle permet à notre communauté de voir à travers vos yeux."></textarea><br>
-
-                        <div id="dropdown-choices">
-                            <label for="flavor-profile">Profil de saveur:</label>
-                            <select name="flavor-profile" id="flavor">
-                                <option value="acide">acide</option>
-                                <option value="amer">amer</option>
-                                <option value="epicé">epicé</option>
-                                <option value="sale">salée</option>
-                                <option value="sucre" selected>sucré</option>
-                            </select>
-                            <label for="main-alcool">Alcool principal:</label>
-                            <select name="main-alcool" id="alcool">
-                                <option value="apéritif">apéritif</option>
-                                <option value="gin">gin</option>
-                                <option value="liqueur">liqueur</option>
-                                <option value="rhum">rhum</option>
-                                <option value="tequila">tequila</option>
-                                <option value="vodka" selected>vodka</option>
-                                <option value="whiskey">whiskey</option>
-                            </select>
-                            <label for="type-glass">Verre de service:</label>
-                            <select name="type-glass" id="glass">
-                                <option value="balloon">balloon</option>
-                                <option value="clay cup">clay cup</option>
-                                <option value="collins">collins</option>
-                                <option value="copper cup">copper cup</option>
-                                <option value="coupe">coupe</option>
-                                <option value="highball">highball</option>
-                                <option value="marie-antoinette">marie-antoinette</option>
-                                <option value="martini">martini</option>
-                                <option value="nick & nora">nick & nora</option>
-                                <option value="old-fashionned" selected>old-fashionned</option>
-                            </select>
-                        </div>
-
-                        <br>
-
-                        <label for="cocktail-image">Photo de votre cocktail:</label><br>
-                        <input id="cocktail-image" type="file" accept="image/*" />
-                        <img id="preview" src="#" alt="Votre image" />
-
-                        <input type="button" id="bouton-publier" value=" Publier">
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php require_once(__DIR__ . "/../ressources/modeles/modale_publication.html") ?>
+    <?php require_once(__DIR__ . "/../ressources/modeles/modale_profilUtilisateur.html") ?>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
 
