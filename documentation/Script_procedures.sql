@@ -703,10 +703,14 @@ DROP PROCEDURE IF EXISTS GetInfoUtilisateur;
 
 CREATE PROCEDURE GetInfoUtilisateur(IN id_utilisateur INT)
 BEGIN
-    SELECT U.nom, U.courriel, BI.img
+    SELECT U.nom, U.courriel, BI.img, COUNT(DISTINCT CL.id_cocktail) AS nb_cocktail_liked, COUNT(DISTINCT CO.id_commentaire) AS nb_commentaire, COUNT(DISTINCT C.id_cocktail) as nb_cocktail
     FROM Utilisateur U
-    JOIN Banque_Image BI ON U.id_image = BI.id_image
-    WHERE U.id_utilisateur = id_utilisateur;
+    LEFT JOIN Banque_Image BI ON U.id_image = BI.id_image
+    LEFT JOIN cocktail_liked CL ON U.id_utilisateur = CL.id_utilisateur
+    LEFT JOIN commentaire CO ON U.id_utilisateur = CO.id_utilisateur
+    LEFT JOIN cocktail C ON U.id_utilisateur = C.id_utilisateur
+    WHERE U.id_utilisateur = id_utilisateur
+    GROUP BY U.id_utilisateur;
 END
 //
 
