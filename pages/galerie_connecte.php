@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONNECTEEEE</title>
+    <title>Galerie</title>
     <link rel="stylesheet" href="ressources/styles/main.css">
     <link rel="stylesheet" href="ressources/styles/index.css">
     <link rel="stylesheet" href="ressources/styles/modale.css">

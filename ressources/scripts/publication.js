@@ -3,6 +3,7 @@ const boutonAjouterIngredient = document.getElementById('ajouter-ingredient');
 const nouvelIngredientNom = document.getElementById("ingredient-nom");
 const nouvelIngredientQtt = document.getElementById("ingredient-quantite");
 const nouvelIngredientUnite = document.getElementById("ingredient-unit");
+let base64Image = '';
 
 const modal = document.getElementById('monModal');
 
@@ -12,7 +13,7 @@ function addIngredientToList(name, amount, unit) {
     const listItem = document.createElement("div");
     const button = document.createElement('button');
 
-    listItem.id = "ingredient-rajoute";
+    listItem.className = "ingredient-rajoute";
 
     button.id = 'enlever-ingredient';
     button.classList.add('button-publish');
@@ -91,17 +92,22 @@ function previewImage(event) {
         reader.onload = function (e) {
             let preview = document.getElementById('preview');
             preview.src = e.target.result;
+            base64Image = e.target.result.split(',')[1];
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
+
 
 function removeIngredient(element, event) {
     event.preventDefault();
     element.parentNode.remove();
 }
 
-document.getElementById('cocktail-image').addEventListener('change', previewImage);
+document.getElementById('cocktail-image').addEventListener('change', function (event) {
+    previewImage(event);
+
+});
 
 
 document.getElementById('bouton-publier').addEventListener('click', function (event) {
@@ -115,18 +121,18 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
     const profilSaveur = document.getElementById('flavor').value;
     const nomAlcoolPrincipale = document.getElementById('alcool').value;
     const username = getCookie('username'); //ICI JE SUIS PAS SUR SI JE DOIT FAIRE `$utilisateur`
-    const image = document.getElementById('preview').value;
+    const image = base64Image;
 
     // Créer un tableau pour stocker les informations des ingrédients restants
     const ingredients = [];
 
     // Parcourir chaque div .ingredient dans #liste-ingredients-publish
-    const ingredientElements = document.querySelectorAll('#liste-ingredients-publish .ingredient-rajoute');
+    const ingredientElements = document.querySelectorAll('.ingredient-rajoute');
     ingredientElements.forEach(element => {
         // Récupérer les informations de chaque ingrédient restant
-        const nomIng = element.querySelector('.nomIng').textContent;
-        const quantite = element.querySelector('.quantite').textContent;
-        const unite = element.querySelector('.unite').textContent;
+        const nomIng = element.textContent.split(' ')[3];
+        const quantite = element.textContent.split(' ')[1];
+        const unite = element.textContent.split(' ')[2];
 
 
         // Ajouter ces informations au tableau des ingrédients restants
@@ -147,7 +153,7 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
     };
 
     // Envoyer les données au serveur
-    fetch('/api/cocktail', {
+    fetch('/api/cocktails', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
