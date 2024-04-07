@@ -48,7 +48,7 @@ const username = getCookie('username');
 fetch(`/api/users/${username}`)
     .then(response => response.json())
     .then(user => {
-        document.getElementById('username').textContent = "Nom de l'utilisateur: " + user.nom;
+        document.getElementById('username').textContent = user.nom;
     })
     .catch(error => console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error));
 
@@ -68,7 +68,7 @@ fetch(`/api/users/${username}/cocktails`)
                 })
                 .catch(error => console.error('Erreur lors de la récupération du nombre de likes pour le cocktail', cocktail.id, ':', error));
         });
-        document.getElementById('likeCount').textContent = user.likeCount;
-        document.getElementById('cocktailCount').textContent = user.cocktailCount;
+        document.getElementById('likeCount').textContent = cocktails.likeCount;
+        document.getElementById('cocktailCount').textContent = cocktails.cocktailCount;
     })
     .catch(error => console.error('Erreur lors de la récupération des cocktails de l\'utilisateur:', error));
