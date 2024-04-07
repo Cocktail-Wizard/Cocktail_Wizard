@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: /connexion");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -28,7 +35,7 @@
 
         <h1>Cocktail <img src="../icone.ico" id="w-icon">izard</h1>
         <div class="button-container">
-            <a class="button" id="bouton-galerie" href="../index.html">Galerie</a>
+            <a class="button" id="bouton-galerie" href="/galerie">Galerie</a>
         </div>
     </header>
 
