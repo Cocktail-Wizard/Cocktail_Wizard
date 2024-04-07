@@ -5,6 +5,7 @@ const boutonOrdre = document.getElementById('ordre-tri');
 const boutonOrdreIcone = document.getElementById('ordre-tri-icone');
 const finAttenteEcriture = 1000; // 1 seconde
 const utilisateur = getCookie('username');
+const monBar = document.getElementById('lien-monbar');
 
 let ordreCocktails = 'like';
 
@@ -12,6 +13,9 @@ let chronoEcriture;
 let modeleCarteCocktail;
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // Afficher le lien vers "Mon bar" si l'utilisateur est connecté
+    if (utilisateur) monBar.style.display = 'block';
+
     modeleCarteCocktail = await chargerModeleHTML('ressources/modeles/cocktail_carte.html');
 
     if (!modeleCarteCocktail) return;

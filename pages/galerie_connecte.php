@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONNECTEEEE</title>
+    <title>Cocktail Wizard</title>
     <link rel="stylesheet" href="ressources/styles/main.css">
     <link rel="stylesheet" href="ressources/styles/index.css">
     <link rel="stylesheet" href="ressources/styles/modale.css">
@@ -36,6 +36,9 @@
     <aside id="contenant-boutons-fixes">
         <a href="/connexion" title="Connexion">
             <img src="ressources/images/icone-profile.svg" alt="Icone profile">
+        </a>
+        <a href="/monbar" title="Mon bar" id="lien-monbar">
+            <img src="ressources/images/icone-monbar.svg" alt="Mon bar">
         </a>
     </aside>
 
