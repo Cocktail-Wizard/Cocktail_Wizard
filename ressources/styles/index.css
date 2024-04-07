@@ -58,7 +58,6 @@ aside#contenant-boutons-fixes a {
     border-radius: var(--default-border-radius);
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
     width: 4em;
     justify-content: space-between;
 }
