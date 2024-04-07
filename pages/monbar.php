@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../ressources/styles/userprofile.css">
     <link rel="stylesheet" href="../ressources/styles/publication.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../ressources/scripts/publication.js"></script>
 </head>
 
 <body>
@@ -25,7 +26,7 @@
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
         </div>
 
-        <h1>Cocktail <img src="../favicon.ico" id="w-icon">izard</h1>
+        <h1>Cocktail <img src="../icone.ico" id="w-icon">izard</h1>
         <div class="button-container">
             <a class="button" id="bouton-galerie" href="../index.html">Galerie</a>
         </div>
@@ -212,7 +213,7 @@
                         <br>
 
                         <label for="cocktail-image">Photo de votre cocktail:</label><br>
-                        <input type="file" accept="image/*" onchange="previewImage(event)" />
+                        <input id="cocktail-image" type="file" accept="image/*" />
                         <img id="preview" src="#" alt="Votre image" />
 
                         <input type="button" id="bouton-publier" value=" Publier">
@@ -225,7 +226,6 @@
 
     <footer>Cocktail Wizard &copy - 2024</footer>
 
-    <script type="module" src="../ressources/scripts/publication.js"></script>
     <script src="../ressources/scripts/userprofile.js"></script>
     <script src="../ressources/scripts/outils.js"></script>
     <script type="module" src="../ressources/scripts/monbar.js"></script>

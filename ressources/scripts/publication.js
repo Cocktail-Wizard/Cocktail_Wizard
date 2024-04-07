@@ -86,19 +86,23 @@ function removeInvalidClass(event) {
 
 function previewImage(event) {
     let input = event.target;
-    let reader = new FileReader();
-    reader.onload = function () {
-        let dataURL = reader.result;
-        let preview = document.getElementById('preview');
-        preview.src = dataURL;
-    };
-    reader.readAsDataURL(input.files[0]);
+    if (input.files && input.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            let preview = document.getElementById('preview');
+            preview.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 
 function removeIngredient(element, event) {
     event.preventDefault();
     element.parentNode.remove();
 }
+
+document.getElementById('cocktail-image').addEventListener('change', previewImage);
+
 
 document.getElementById('bouton-publier').addEventListener('click', function (event) {
     event.preventDefault(); // Empêcher le comportement par défaut du formulaire
