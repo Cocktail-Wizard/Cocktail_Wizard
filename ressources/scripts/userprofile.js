@@ -42,3 +42,33 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("supportPage").style.display = "block";
     });
 });
+
+const username = getCookie('username');
+
+fetch(`/api/users/${username}`)
+    .then(response => response.json())
+    .then(user => {
+        document.getElementById('username').textContent = "Nom de l'utilisateur: " + user.nom;
+    })
+    .catch(error => console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error));
+
+//récuperer les cocktails de l'utilisateur pour completer les infos
+fetch(`/api/users/${username}/cocktails`)
+    .then(response => response.json())
+    .then(cocktails => {
+        let totalLikes = 0;
+        cocktails.forEach(cocktail => {
+            // Pour chaque cocktail, récupérer le nombre de likes
+            fetch(`/api/cocktails/${cocktail.id}/likes`)
+                .then(response => response.json())
+                .then(data => {
+                    totalLikes += data.likeCount;
+                    // Mettre à jour le nombre total de likes
+                    document.getElementById('likeCount').textContent = totalLikes;
+                })
+                .catch(error => console.error('Erreur lors de la récupération du nombre de likes pour le cocktail', cocktail.id, ':', error));
+        });
+        document.getElementById('likeCount').textContent = user.likeCount;
+        document.getElementById('cocktailCount').textContent = user.cocktailCount;
+    })
+    .catch(error => console.error('Erreur lors de la récupération des cocktails de l\'utilisateur:', error));
