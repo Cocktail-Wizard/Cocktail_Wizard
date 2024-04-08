@@ -118,6 +118,12 @@ function updateSelectedIngredients() {
         ingredientBox.classList.add('ingredients-selectionne');
         ingredientBox.addEventListener('click', () => unselectIngredient(ingredient));
         selectedIngredientsDiv.appendChild(ingredientBox);
+        fetch(`/api/{$username}/ingredients`)
+        then(response => response.json())
+            .then(enleverBD => {
+                document.getElementsByClassName('ingredientselectionne').textContent = enleverBD.nomIngredient;
+            })
+            .catch(error => console.error('Erreur lors du retirement de l\'ingredient:', error));
     });
     selectedIngredientsDiv.style.display = 'flex'; // s'ssurer que la boîte des ingrédients sélectionnés est visible meme si vide
 }
