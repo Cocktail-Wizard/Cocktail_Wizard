@@ -106,7 +106,6 @@ function removeIngredient(element, event) {
 
 document.getElementById('cocktail-image').addEventListener('change', function (event) {
     previewImage(event);
-
 });
 
 

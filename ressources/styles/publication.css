@@ -20,17 +20,17 @@
     box-sizing: border-box;
 }
 
-h2 {
+#monModal h2 {
     color: var(--palette-button-color);
     margin-bottom: 20px;
 }
 
-label {
+#monModal label {
     font-weight: bold;
     color: var(--palette-button-color);
 }
 
-textarea {
+#monModal textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -57,7 +57,7 @@ textarea {
     color: black;
 }
 
-input[type="submit"] {
+#monModal input[type="submit"] {
     background-color: var(--palette-button-color);
     color: var(--palette-button-text-color);
     padding: 10px 20px;
@@ -67,7 +67,7 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover {
+#monModal input[type="submit"]:hover {
     background-color: var(--palette-button-color-hover);
 }
 
@@ -85,11 +85,11 @@ input[type="submit"]:hover {
     margin: 0;
 }
 
-select {
+#monModal select {
     color: black;
 }
 
-select option {
+#monModal select option {
     color: black;
 }
 

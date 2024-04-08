@@ -78,25 +78,25 @@
 }
 
 /* Titre de la section */
-h2 {
+#my-modal h2 {
     color: #7f5af0;
     margin-bottom: 20px;
 }
 
 /* Formulaire */
-form {
+#my-modal form {
     margin-top: 20px;
     margin-right: 10px;
 }
 
 /* Étiquette du formulaire */
-label {
+#my-modal label {
     font-weight: bold;
     color: #7f5af0;
 }
 
 /* Zone de texte */
-textarea {
+#my-modal textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -107,7 +107,7 @@ textarea {
 }
 
 /* Bouton de soumission */
-input[type="submit"] {
+#my-modal input[type="submit"] {
     background-color: var(--palette-button-color);
     color: var(--palette-button-text-color);
     padding: 10px 20px;
@@ -118,7 +118,7 @@ input[type="submit"] {
 }
 
 /* Effet au survol du bouton de soumission */
-input[type="submit"]:hover {
+#my-modal input[type="submit"]:hover {
     background-color: var(--palette-button-color-hover);
 }
 

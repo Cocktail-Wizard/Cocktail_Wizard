@@ -78,7 +78,7 @@ nav {
     outline: none;
 }
 
-aside#contenant-boutons-fixes>* {
+aside#contenant-boutons-fixes {
     position: absolute;
     top: var(--space-from-corner);
     left: var(--space-from-corner);
@@ -95,10 +95,6 @@ aside#contenant-boutons-fixes a {
     flex-direction: row;
     width: 4em;
     justify-content: space-between;
-}
-
-aside#contenant-boutons-fixes #lien-monbar {
-    display: none;
 }
 
 aside#contenant-boutons-fixes a img {
@@ -144,6 +140,33 @@ aside#contenant-boutons-fixes a img {
     justify-content: center;
     margin: auto;
     width: 80%;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 1vh;
+    left: 3vh;
+    z-index: 1;
+}
+
+#profil-utilisateur {
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    border: 2px solid var(--palette-border-color);
+    overflow: hidden;
+    margin-left: 1vh;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-pic {
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    margin-left: 0;
 }
 
 @media screen and (width<=850px) {
