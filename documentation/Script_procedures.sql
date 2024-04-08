@@ -492,11 +492,29 @@ BEGIN
     -- Enlever LEFT quand les images seront gérées
     LEFT JOIN Banque_Image BI ON C.id_image = BI.id_image
     JOIN Alcool A ON C.id_alcool = A.id_alcool
-    JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
+    LEFT JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
     WHERE C.id_cocktail = cocktail;
 END
 //
 
+-- Création de la procédure cocktailLiked
+-- Permet de voir si un utilisateur a liké un cocktail
+DROP PROCEDURE IF EXISTS cocktailLiked;
+
+CREATE PROCEDURE cocktailLiked(IN var_id_cocktail INT, IN var_id_utilisateur INT)
+BEGIN
+    IF EXISTS (
+        SELECT id_cocktail
+        FROM cocktail_liked
+        WHERE id_cocktail = var_id_cocktail
+        AND id_utilisateur = var_id_utilisateur
+    ) THEN
+        SELECT 1 AS liked;
+    ELSE
+        SELECT 0 AS liked;
+    END IF;
+END
+//
 --Création de la procédure GetMesCocktails
 -- Permet de voir les cocktails que chaque utilisateur a créé
 -- Utiliser pour liste la liste de cocktail dans mon profil
