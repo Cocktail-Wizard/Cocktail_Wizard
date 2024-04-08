@@ -306,14 +306,15 @@ hr {
     background-color: var(--palette-button-color-hover);
 }
 
-.selected-ingredient {
+.ingredients-selectionne {
     background-color: var(--palette-button-color);
-    padding: 3px;
+    padding: 10px;
     margin: 10px;
     color: black;
-    border: 2 solid var(--palette-border-color);
+    border: 3px solid var(--palette-border-color);
+    border-radius: 25px;
 }
 
-.selected-ingredient:hover {
+.ingredients-selectionne:hover {
     background-color: var(--palette-button-color-hover);
 }
