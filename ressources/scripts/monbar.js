@@ -15,6 +15,7 @@ const iconesUmami = {
 //on vas chercher la liste d'ingredient dans la bd
 const allIngredients = await faireRequete(`/api/ingredients`);
 let selectedIngredients = [];
+const username = getCookie('username');
 
 /**
  * Filtre et affiche les ingrédients en fonction de la valeur de recherche fournie.
@@ -50,14 +51,17 @@ function filterIngredients() {
                 const ingredientItem = document.createElement('div');
                 ingredientItem.textContent = ingredient;
                 ingredientItem.classList.add('ingredient-item');
-                ingredientItem.addEventListener('click', () => selectIngredient(ingredient));
+                ingredientItem.addEventListener('click', () => {
+                    selectIngredient(ingredient);
+                    ajouterIngredientBD(ingredient);
+                });
                 listeIngredients.appendChild(ingredientItem);
-                fetch(`/api/{$username}/ingredients`)
-                then(response => response.json())
-                    .then(rajouterBD => {
-                        document.getElementsByClassName('ingredientselectionne').textContent = rajouterBD.nomIngredient;
-                    })
-                    .catch(error => console.error('Erreur lors de l\'ajout de l\'ingredient:', error));
+                //     fetch(`/api/{$username}/ingredients`)
+                //     then(response => response.json())
+                //         .then(rajouterBD => {
+                //             document.getElementsByClassName('ingredientselectionne').textContent = rajouterBD.nomIngredient;
+                //         })
+                //         .catch(error => console.error('Erreur lors de l\'ajout de l\'ingredient:', error));
             });
         }
     }
@@ -117,13 +121,14 @@ function updateSelectedIngredients() {
         ingredientBox.textContent = ingredient;
         ingredientBox.classList.add('ingredients-selectionne');
         ingredientBox.addEventListener('click', () => unselectIngredient(ingredient));
+        ingredientBox.addEventListener('click', () => enleverIngredientBD(ingredient));
         selectedIngredientsDiv.appendChild(ingredientBox);
-        fetch(`/api/{$username}/ingredients`)
-        then(response => response.json())
-            .then(enleverBD => {
-                document.getElementsByClassName('ingredientselectionne').textContent = enleverBD.nomIngredient;
-            })
-            .catch(error => console.error('Erreur lors du retirement de l\'ingredient:', error));
+        //     fetch(`/api/{$username}/ingredients`)
+        //     then(response => response.json())
+        //         .then(enleverBD => {
+        //             document.getElementsByClassName('ingredientselectionne').textContent = enleverBD.nomIngredient;
+        //         })
+        //         .catch(error => console.error('Erreur lors du retirement de l\'ingredient:', error));
     });
     selectedIngredientsDiv.style.display = 'flex'; // s'ssurer que la boîte des ingrédients sélectionnés est visible meme si vide
 }
@@ -276,4 +281,33 @@ function nettoyerNomCocktail(nom) {
 
 function chargerInformationsModale(idCocktail) {
     // Envoyer une requête à l'API pour ce cocktail, exemple: 'https://cocktailwizard.com/cocktail/{id}'
+}
+
+function ajouterIngredientBD(nomIngredient) {
+    const data = {
+        username: username,
+        nomIngredient: nomIngredient
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+
+    fetch(`/api/${username}/ingredients`, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors de la requête.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Ingrédient ajouté avec succès :', data);
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'ajout de l\'ingrédient :', error);
+        });
 }
