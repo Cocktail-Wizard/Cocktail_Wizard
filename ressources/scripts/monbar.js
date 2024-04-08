@@ -286,10 +286,10 @@ function chargerInformationsModale(idCocktail) {
 
 function ajouterIngredientBD(nomIngredient) {
     const data = {
-        username: username,
-        nomIngredient: nomIngredient
+        username,
+        nomIngredient
     };
-
+    console.log(JSON.stringify(data));
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -298,7 +298,7 @@ function ajouterIngredientBD(nomIngredient) {
         body: JSON.stringify(data)
     };
 
-    fetch(`/api/${username}/ingredients`, requestOptions)
+    fetch(`/api/users/ingredients`, requestOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erreur lors de la requête.');
@@ -315,19 +315,19 @@ function ajouterIngredientBD(nomIngredient) {
 
 function enleverIngredientBD(nomIngredient) {
     const data = {
-        username: username,
-        nomIngredient: nomIngredient
+        username,
+        nomIngredient
     };
 
     const requestOptions = {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     };
 
-    fetch(`/api/${username}/ingredients`, requestOptions)
+    fetch(`/api/users/ingredients`, requestOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erreur lors de la requête.');
