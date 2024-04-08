@@ -94,8 +94,8 @@ if (!isset($_SESSION['username'])) {
     <footer>Cocktail Wizard &copy - 2024</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="../ressources/scripts/publication.js"></script>
     <script src="../ressources/scripts/outils.js"></script>
+    <script type="module" src="../ressources/scripts/publication.js"></script>
     <script src="../ressources/scripts/userprofile.js"></script>
     <script src="../ressources/scripts/monbar.js"></script>
 
