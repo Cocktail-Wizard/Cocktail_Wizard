@@ -159,7 +159,7 @@ document.addEventListener('click', function (event) {
 async function initialSetup() {
 
     getTousIngredients();
-    const listIng = await faireRequete(`/api/users/${username}/ingredients`);
+    const listIng = await faireRequete(`/api/users/${utilisateur}/ingredients`);
     if (listIng) {
         selectedIngredients = listIng;
     }
@@ -282,6 +282,7 @@ function chargerInformationsModale(idCocktail) {
 }
 
 function ajouterIngredientBD(nomIngredient) {
+    const username = utilisateur;
     const data = {
         username,
         nomIngredient
@@ -311,6 +312,7 @@ function ajouterIngredientBD(nomIngredient) {
 }
 
 function enleverIngredientBD(nomIngredient) {
+    const username = utilisateur;
     const data = {
         username,
         nomIngredient
