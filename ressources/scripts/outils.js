@@ -31,6 +31,9 @@ async function faireRequete(url) {
         if (!reponse.ok) {
             throw new Error('La requête a échoué');
         }
+        if (reponse.status === 204) {
+            return null;
+        }
         return await reponse.json();
     } catch (error) {
         console.error('Erreur : ', error);

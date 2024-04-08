@@ -3,19 +3,16 @@ const cocktailsPersonnels = document.getElementById('cocktails-personnels');
 const cocktailsCommunautaires = document.getElementById('cocktails-communautaires');
 
 const nombreCocktailsAffiches = 10;
-const iconesUmami = {
-    'Sucré': 'icone-sucre-sucre',
-    'Aigre': 'icone-citron-aigre',
-    'Amer': 'icone-cafe-amer',
-    'Épicé': 'icone-piment-epice',
-    'Salé': 'icone-sel-sale',
-    'default': 'point-interrogation'
-};
 
 //on vas chercher la liste d'ingredient dans la bd
-const allIngredients = await faireRequete(`/api/ingredients`);
+let allIngredients = [];
+
+async function getTousIngredients() {
+    allIngredients = await faireRequete('/api/ingredients');
+}
+
 let selectedIngredients = [];
-const username = getCookie('username');
+
 
 /**
  * Filtre et affiche les ingrédients en fonction de la valeur de recherche fournie.
@@ -32,15 +29,16 @@ function filterIngredients() {
 
     // Affiche la liste uniquement si la recherche n'est pas vide
     listeIngredients.style.display = searchValue !== '' ? 'block' : 'none';
-
     // filtre les ingrédients en fonction de la recherche et des ingrédients déjà sélectionnés
+
     const filteredIngredients = allIngredients.filter(ingredient => !selectedIngredients.includes(ingredient) && ingredient.toLowerCase().includes(searchValue));
+
 
     // Efface le contenu précédent de la liste d'ingrédients
     listeIngredients.innerHTML = '';
 
     if (searchValue !== '') {
-        if (filteredIngredients.length === 0) {
+        if (filteredIngredients === null || filteredIngredients.length === 0) {
             // Affiche "Aucun résultat..." si aucun ingrédient n'est trouvé
             const noResultItem = document.createElement('div');
             noResultItem.textContent = 'Aucun résultat...';
@@ -51,18 +49,12 @@ function filterIngredients() {
                 const ingredientItem = document.createElement('div');
                 ingredientItem.textContent = ingredient;
                 ingredientItem.classList.add('ingredient-item');
-                ingredientItem.addEventListener('click', () => {
+                ingredientItem.addEventListener('click', (event) => {
                     selectIngredient(ingredient);
                     const ingredientClique = event.target.textContent;
                     ajouterIngredientBD(ingredientClique);
                 });
                 listeIngredients.appendChild(ingredientItem);
-                //     fetch(`/api/{$username}/ingredients`)
-                //     then(response => response.json())
-                //         .then(rajouterBD => {
-                //             document.getElementsByClassName('ingredientselectionne').textContent = rajouterBD.nomIngredient;
-                //         })
-                //         .catch(error => console.error('Erreur lors de l\'ajout de l\'ingredient:', error));
             });
         }
     }
@@ -114,6 +106,7 @@ function unselectIngredient(ingredient) {
  * @returns {void}
  */
 function updateSelectedIngredients() {
+
     const selectedIngredientsDiv = document.getElementById('ingredients-selectionne');
     selectedIngredientsDiv.innerHTML = '';
 
@@ -121,15 +114,12 @@ function updateSelectedIngredients() {
         const ingredientBox = document.createElement('span');
         ingredientBox.textContent = ingredient;
         ingredientBox.classList.add('ingredients-selectionne');
-        ingredientBox.addEventListener('click', () => unselectIngredient(ingredient));
-        ingredientBox.addEventListener('click', () => enleverIngredientBD(ingredient));
+        ingredientBox.addEventListener('click', (event) => {
+            unselectIngredient(ingredient);
+            const ingredientClique = event.target.textContent;
+            enleverIngredientBD(ingredientClique);
+        });
         selectedIngredientsDiv.appendChild(ingredientBox);
-        //     fetch(`/api/{$username}/ingredients`)
-        //     then(response => response.json())
-        //         .then(enleverBD => {
-        //             document.getElementsByClassName('ingredientselectionne').textContent = enleverBD.nomIngredient;
-        //         })
-        //         .catch(error => console.error('Erreur lors du retirement de l\'ingredient:', error));
     });
     selectedIngredientsDiv.style.display = 'flex'; // s'ssurer que la boîte des ingrédients sélectionnés est visible meme si vide
 }
@@ -166,13 +156,18 @@ document.addEventListener('click', function (event) {
  * @function initialSetup
  * @returns {void}
  */
-function initialSetup() {
+async function initialSetup() {
+
+    getTousIngredients();
+    const listIng = await faireRequete(`/api/users/${username}/ingredients`);
+    if (listIng) {
+        selectedIngredients = listIng;
+    }
     filterIngredients(); // Appel initial pour afficher tous les ingrédients disponibles
     updateSelectedIngredients(); // Affiche initialement les ingrédients sélectionnés
 }
 
-// Appels initiaux
-initialSetup();
+
 
 
 /**
@@ -189,19 +184,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     inputRechercheIngredient.addEventListener('input', filterIngredients);
 
     const modeleHTML = await chargerModeleHTML('../ressources/modeles/cocktail_carte.html');
+    // Appels initiaux
+    initialSetup();
 
-    if (modeleHTML) {
-        try {
-            const response = await fetch(`../ressources/api/galerie.php?nombre=${nombreCocktailsAffiches}`);
-            if (!response.ok) {
-                throw new Error('La requête a échoué');
-            }
-            const data = await response.json();
-            afficherCocktails(data, modeleHTML);
-        } catch (error) {
-            console.error('Erreur : ', error);
-        }
-    }
+    // if (modeleHTML) {
+    //     try {
+    //         const response = await fetch(`../ressources/api/galerie.php?nombre=${nombreCocktailsAffiches}`);
+    //         if (!response.ok) {
+    //             throw new Error('La requête a échoué');
+    //         }
+    //         const data = await response.json();
+    //         afficherCocktails(data, modeleHTML);
+    //     } catch (error) {
+    //         console.error('Erreur : ', error);
+    //     }
+    // }
 });
 
 /**
@@ -318,7 +315,7 @@ function enleverIngredientBD(nomIngredient) {
         username,
         nomIngredient
     };
-
+    console.log(JSON.stringify(data));
     const requestOptions = {
         method: 'DELETE',
         headers: {
@@ -331,6 +328,9 @@ function enleverIngredientBD(nomIngredient) {
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erreur lors de la requête.');
+            }
+            if (response.status === 204) {
+                return null;
             }
             return response.json();
         })

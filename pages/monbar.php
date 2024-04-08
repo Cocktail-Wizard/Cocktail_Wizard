@@ -97,7 +97,7 @@ if (!isset($_SESSION['username'])) {
 
     <script src="../ressources/scripts/outils.js"></script>
     <script src="../ressources/scripts/userprofile.js"></script>
-    <script type="module" src="../ressources/scripts/monbar.js"></script>
+    <script src="../ressources/scripts/monbar.js"></script>
 
 </body>
 
