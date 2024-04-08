@@ -1,6 +1,8 @@
+const boiteRecherche = document.getElementById('boite-recherche');
 const cocktailsClassiques = document.getElementById('cocktails-classiques');
 const cocktailsPersonnels = document.getElementById('cocktails-personnels');
 const cocktailsCommunautaires = document.getElementById('cocktails-communautaires');
+const listeIngredients = document.getElementById('liste-ingredients');
 
 const nombreCocktailsAffiches = 10;
 
@@ -135,16 +137,13 @@ function updateSelectedIngredients() {
  * @returns {void}
  */
 document.addEventListener('click', function (event) {
-    const boiteRecherche = document.getElementById('boite-recherche');
-    const listeIngredients = document.getElementById('liste-ingredients');
-
     if (event.target !== boiteRecherche && event.target !== listeIngredients) {
-        // Verifier si le clic n'est pas à l'intérieur de la liste
-        if (!selectedIngredients.includes(event.target.textContent)) {
+        // Vérifier si le clic n'est pas à l'intérieur de la liste
+        if (!event.target.closest('.ingredient-item')) {
             listeIngredients.style.display = 'none'; // Ferme la liste si oui
         }
     } else {
-        //s'assure que la liste reste visible tant que l'utilisateur clique pas a l'exterieur
+        // S'assurer que la liste reste visible tant que l'utilisateur ne clique pas à l'extérieur
         if (listeIngredients.style.display !== 'block') {
             filterIngredients();
         }
