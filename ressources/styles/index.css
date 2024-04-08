@@ -80,17 +80,25 @@ nav {
 
 aside#contenant-boutons-fixes>* {
     position: absolute;
-    right: var(--space-from-corner);
     top: var(--space-from-corner);
+    left: var(--space-from-corner);
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: calc(100% - 2 * var(--space-from-corner));
+    height: 4em;
 }
 
 aside#contenant-boutons-fixes a {
-    height: 4em;
-    position: absolute;
-    right: var(--space-from-corner);
-    top: var(--space-from-corner);
-    width: 4em;
     border-radius: var(--default-border-radius);
+    display: flex;
+    flex-direction: row;
+    width: 4em;
+    justify-content: space-between;
+}
+
+aside#contenant-boutons-fixes #lien-monbar {
+    display: none;
 }
 
 aside#contenant-boutons-fixes a img {
