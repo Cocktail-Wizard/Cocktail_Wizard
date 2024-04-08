@@ -101,8 +101,7 @@ if ($resultat->num_rows > 0) {
         $idCocktails[] = $row['id_cocktail'];
     }
 } else {
-    http_response_code(404);
-    echo json_encode("Aucun cocktail trouvé.");
+    http_response_code(204);
     exit();
 }
 
