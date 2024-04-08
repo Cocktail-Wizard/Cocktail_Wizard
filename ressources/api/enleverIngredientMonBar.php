@@ -50,7 +50,6 @@ try {
         echo json_encode($ingredients);
     } else {
         http_response_code(204);
-        echo json_encode("Aucun ingredient trouvé.");
     }
 } catch (Exception $e) {
     http_response_code(500);

@@ -40,7 +40,6 @@ try {
         $user = new Utilisateur($row['nom'], $row['courriel'], $row['img'], $row['nb_cocktail'], $row['nb_cocktail_liked'], $row['nb_commentaire']);
     } else {
         http_response_code(204);
-        echo json_encode("Aucun utilisateur trouvé.");
         exit();
     }
 

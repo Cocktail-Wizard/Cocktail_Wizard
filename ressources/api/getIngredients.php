@@ -39,7 +39,6 @@ try {
         }
     } else {
         http_response_code(204);
-        echo json_encode("Aucun ingrédient trouvé.");
         exit();
     }
     echo json_encode($ingredients);
