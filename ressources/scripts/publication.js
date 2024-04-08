@@ -119,7 +119,7 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
     const typeVerre = document.getElementById('glass').value;
     const profilSaveur = document.getElementById('flavor').value;
     const nomAlcoolPrincipale = document.getElementById('alcool').value;
-    const username = getCookie('username'); //ICI JE SUIS PAS SUR SI JE DOIT FAIRE `$utilisateur`
+    const username = utilisateur;
     const image = base64Image;
 
     // Créer un tableau pour stocker les informations des ingrédients restants
