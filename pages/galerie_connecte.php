@@ -51,13 +51,13 @@
         <button>
             <img id="btnAbout" src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
         </button>
-        <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#monModal">
+        <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#mon-modal">
             <img id="btnPublish" src="../ressources/images/feather.svg" alt="Feather" width="24" height="24">
         </button>
     </aside>
 
-    <?php require_once(__DIR__ . "/../ressources/modeles/modale_publication.html") ?>
-    <?php require_once(__DIR__ . "/../ressources/modeles/modale_profilUtilisateur.html") ?>
+    <?php require_once(__DIR__ . "/../ressources/modeles/modale_publication.php") ?>
+    <?php require_once(__DIR__ . "/../ressources/modeles/modale_profilUtilisateur.php") ?>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

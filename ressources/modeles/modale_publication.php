@@ -1,7 +1,7 @@
 <!-- DOCTYPE pas nécessaire pas include avec php. Fuck linter -->
 <!-- Modale pour la publication de cocktail -->
 <!-- Le modal -->
-<div id="monModal" class="modal fade">
+<div id="mon-modal" class="modal fade">
     <div class="modal-dialog modal-xl">
         <!-- Contenu du modal -->
         <div id="publication-content" class="modal-content">

@@ -5,7 +5,7 @@ const nouvelIngredientQtt = document.getElementById("ingredient-quantite");
 const nouvelIngredientUnite = document.getElementById("ingredient-unit");
 let base64Image = '';
 
-const modal = document.getElementById('monModal');
+const modal = document.getElementById('mon-modal');
 
 // Fonction pour ajouter un ingrédient à la liste d'ingrédients
 function addIngredientToList(name, amount, unit) {

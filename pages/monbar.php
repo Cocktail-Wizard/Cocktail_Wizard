@@ -83,14 +83,14 @@ if (!isset($_SESSION['username'])) {
         <button>
             <img id="btnAbout" src="../ressources/images/info.svg" alt="Info sur la page">
         </button>
-        <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#monModal">
+        <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#mon-modal">
             <img id="btnPublish" src="../ressources/images/feather.svg" alt="Modale de publication">
         </button>
 
     </aside>
 
-    <?php require_once(__DIR__ . "/../ressources/modeles/modale_publication.html") ?>
-    <?php require_once(__DIR__ . "/../ressources/modeles/modale_profilUtilisateur.html") ?>
+    <?php require_once(__DIR__ . "/../ressources/modeles/modale_publication.php") ?>
+    <?php require_once(__DIR__ . "/../ressources/modeles/modale_profilUtilisateur.php") ?>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
 

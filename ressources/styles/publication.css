@@ -20,17 +20,17 @@
     box-sizing: border-box;
 }
 
-#monModal h2 {
+#mon-modal h2 {
     color: var(--palette-button-color);
     margin-bottom: 20px;
 }
 
-#monModal label {
+#mon-modal label {
     font-weight: bold;
     color: var(--palette-button-color);
 }
 
-#monModal textarea {
+#mon-modal textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -57,7 +57,7 @@
     color: black;
 }
 
-#monModal input[type="submit"] {
+#mon-modal input[type="submit"] {
     background-color: var(--palette-button-color);
     color: var(--palette-button-text-color);
     padding: 10px 20px;
@@ -67,7 +67,7 @@
     transition: background-color 0.3s ease;
 }
 
-#monModal input[type="submit"]:hover {
+#mon-modal input[type="submit"]:hover {
     background-color: var(--palette-button-color-hover);
 }
 
@@ -85,11 +85,11 @@
     margin: 0;
 }
 
-#monModal select {
+#mon-modal select {
     color: black;
 }
 
-#monModal select option {
+#mon-modal select option {
     color: black;
 }
 
