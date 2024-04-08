@@ -49,7 +49,7 @@ fetch(`/api/users/${username}`)
     .then(response => response.json())
     .then(user => {
         document.getElementById('username').textContent = user.nom;
-        //document.getElementById('email').textContent = user.courriel;
+        document.getElementById('email').textContent = user.courriel;
         document.getElementById('cocktailCount').textContent = user.nb_cocktail_cree;
         document.getElementById('likeCount').textContent = user.nb_cocktail_favoris;
         document.getElementById('commentCount').textContent = user.nb_commentaire;

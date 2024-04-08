@@ -52,6 +52,12 @@ function filterIngredients() {
                 ingredientItem.classList.add('ingredient-item');
                 ingredientItem.addEventListener('click', () => selectIngredient(ingredient));
                 listeIngredients.appendChild(ingredientItem);
+                fetch(`/api/{$username}/ingredients`)
+                then(response => response.json())
+                    .then(rajouterBD => {
+                        document.getElementsByClassName('ingredientselectionne').textContent = rajouterBD.nomIngredient;
+                    })
+                    .catch(error => console.error('Erreur lors de l\'ajout de l\'ingredient:', error));
             });
         }
     }
