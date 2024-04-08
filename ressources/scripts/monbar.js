@@ -53,7 +53,8 @@ function filterIngredients() {
                 ingredientItem.classList.add('ingredient-item');
                 ingredientItem.addEventListener('click', () => {
                     selectIngredient(ingredient);
-                    ajouterIngredientBD(ingredient);
+                    const ingredientClique = event.target.textContent;
+                    ajouterIngredientBD(ingredientClique);
                 });
                 listeIngredients.appendChild(ingredientItem);
                 //     fetch(`/api/{$username}/ingredients`)
@@ -309,5 +310,34 @@ function ajouterIngredientBD(nomIngredient) {
         })
         .catch(error => {
             console.error('Erreur lors de l\'ajout de l\'ingrédient :', error);
+        });
+}
+
+function enleverIngredientBD(nomIngredient) {
+    const data = {
+        username: username,
+        nomIngredient: nomIngredient
+    };
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+
+    fetch(`/api/${username}/ingredients`, requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors de la requête.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Ingrédient enlevé avec succès :', data);
+        })
+        .catch(error => {
+            console.error('Erreur lors du retrait de l\'ingrédient :', error);
         });
 }
