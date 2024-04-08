@@ -23,6 +23,10 @@
                     <p>Nombre de likes : <span id="likeCount">0</span></p>
                     <p>Nombre de cocktails : <span id="cocktailCount">0</span></p>
                     <p>Nombre de commentaires : <span id="commentCount">0</span></p>
+                    <div class="userprofile-footer" id="boutton-profile">
+                        <button id="edit-btn">Modifier</button>
+                        <button id="delete-btn">Supprimer</button>
+                    </div>
                 </div>
 
                 <div class="mycocktail-body" id="mycocktailPage">
@@ -42,10 +46,6 @@
                     </form>
 
                 </div>
-            </div>
-            <div class="userprofile-footer">
-                <button id="edit-btn">Modifier</button>
-                <button id="delete-btn">Supprimer</button>
             </div>
         </div>
     </div>
