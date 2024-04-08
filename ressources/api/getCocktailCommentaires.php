@@ -46,6 +46,9 @@ try {
             );
             $commentaires[] = $commentaire;
         }
+    } else {
+        http_response_code(204);
+        exit();
     }
 
     echo json_encode($commentaires);

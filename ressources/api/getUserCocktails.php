@@ -50,7 +50,6 @@ try {
         }
     } else {
         http_response_code(204);
-        echo json_encode("Aucun cocktail trouvé.");
         exit();
     }
 
