@@ -6,12 +6,14 @@ const nombreCocktailsAffiches = 10;
 
 //on vas chercher la liste d'ingredient dans la bd
 let allIngredients = [];
+let selectedIngredients = [];
 
 async function getTousIngredients() {
     allIngredients = await faireRequete('/api/ingredients');
 }
 
-let selectedIngredients = [];
+// Ajoute un événement keyup à la barre de recherche pour filtrer les ingrédients à chaque frappe de touche
+document.getElementById('boite-recherche').addEventListener('keyup', filterIngredients);
 
 /**
  * Filtre et affiche les ingrédients en fonction de la valeur de recherche fournie.
@@ -60,9 +62,6 @@ function filterIngredients() {
     }
 }
 
-// Ajoute un événement keyup à la barre de recherche pour filtrer les ingrédients à chaque frappe de touche
-document.getElementById('boite-recherche').addEventListener('keyup', filterIngredients);
-
 /**
  * Sélectionne un ingrédient et le rajoute à la liste des ingrédients sélectionnés.
  * Met à jour l'affichage des ingrédients sélectionnés et filtre les ingrédients disponibles pour éviter les doublons.
@@ -103,9 +102,10 @@ function unselectIngredient(ingredient) {
  * @returns {void}
  */
 function updateSelectedIngredients() {
-
     const selectedIngredientsDiv = document.getElementById('ingredients-selectionne');
     selectedIngredientsDiv.innerHTML = '';
+
+    const fragment = document.createDocumentFragment();
 
     selectedIngredients.forEach(ingredient => {
         const ingredientBox = document.createElement('span');
@@ -116,9 +116,13 @@ function updateSelectedIngredients() {
             const ingredientClique = event.target.textContent;
             enleverIngredientBD(ingredientClique);
         });
-        selectedIngredientsDiv.appendChild(ingredientBox);
+        fragment.appendChild(ingredientBox);
     });
-    selectedIngredientsDiv.style.display = 'flex'; // s'ssurer que la boîte des ingrédients sélectionnés est visible meme si vide
+
+    selectedIngredientsDiv.appendChild(fragment);
+
+    // s'assurer que la boîte des ingrédients sélectionnés est visible meme si vide
+    selectedIngredientsDiv.style.display = selectedIngredients.length > 0 ? 'flex' : 'none';
 }
 
 /**
