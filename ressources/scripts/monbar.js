@@ -27,23 +27,24 @@ function filterIngredients() {
     const listeIngredients = document.getElementById('liste-ingredients');
 
     // Affiche la liste uniquement si la recherche n'est pas vide
-    listeIngredients.style.display = searchValue !== '' ? 'block' : 'none';
-    // filtre les ingrédients en fonction de la recherche et des ingrédients déjà sélectionnés
+    listeIngredients.classList.toggle('hidden', searchValue === '');
 
-    const filteredIngredients = allIngredients.filter(ingredient => !selectedIngredients.includes(ingredient) && ingredient.toLowerCase().includes(searchValue));
+    // filtre les ingrédients en fonction de la recherche et des ingrédients déjà sélectionnés
+    const filteredIngredients = allIngredients.filter(ingredient =>
+        !selectedIngredients.includes(ingredient) && ingredient.toLowerCase().includes(searchValue)
+    );
 
     // Efface le contenu précédent de la liste d'ingrédients
     listeIngredients.innerHTML = '';
 
-    if (searchValue === '') return;
-
-    if (filteredIngredients === null || filteredIngredients.length === 0) {
+    if (filteredIngredients.length === 0) {
         // Affiche "Aucun résultat..." si aucun ingrédient n'est trouvé
         const noResultItem = document.createElement('div');
         noResultItem.textContent = 'Aucun résultat...';
         listeIngredients.appendChild(noResultItem);
     } else {
         // Crée et ajoute les ingrédients filtrés à la liste d'ingrédients
+        const fragment = document.createDocumentFragment();
         filteredIngredients.forEach(ingredient => {
             const ingredientItem = document.createElement('div');
             ingredientItem.textContent = ingredient;
@@ -53,8 +54,9 @@ function filterIngredients() {
                 const ingredientClique = event.target.textContent;
                 ajouterIngredientBD(ingredientClique);
             });
-            listeIngredients.appendChild(ingredientItem);
+            fragment.appendChild(ingredientItem);
         });
+        listeIngredients.appendChild(fragment);
     }
 }
 

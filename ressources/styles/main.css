@@ -35,6 +35,14 @@ body {
     background-color: var(--palette-background-color);
 }
 
+body>footer {
+    background-color: rgb(0 0 0 / 10%);
+    height: 2em;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
 h1 {
     color: var(--palette-headline-color);
 }
@@ -53,12 +61,8 @@ input {
     justify-content: center;
 }
 
-body>footer {
-    background-color: rgb(0 0 0 / 10%);
-    height: 2em;
-    align-items: center;
-    display: flex;
-    justify-content: center;
+.hidden {
+    display: none;
 }
 
 *:disabled {
