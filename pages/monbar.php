@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: /connexion");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -5,9 +12,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon bar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../ressources/styles/main.css">
     <link rel="stylesheet" href="../ressources/styles/monbar.css">
     <link rel="stylesheet" href="../ressources/styles/carte_cocktail.css">
+    <link rel="stylesheet" href="../ressources/styles/userprofile.css">
+    <link rel="stylesheet" href="../ressources/styles/publication.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../ressources/scripts/publication.js"></script>
 </head>
 
 <body>
@@ -15,15 +27,13 @@
 
     <header id="top">
         <div class="user">
-            <span id="backgroundshape"></span>
-            <div class="profile-pic-container">
+            <button type="button" id="profil-utilisateur" data-bs-toggle="modal" data-bs-target="#my-modal">
                 <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Profile Picture">
-            </div>
-            <span class="username">@UsernameSuperWizard</span>
+            </button>
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
         </div>
 
-        <h1>Cocktail <img src="../favicon.ico" id="w-icon">izard</h1>
+        <h1>Cocktail <img src="../icone.ico" id="w-icon">izard</h1>
         <div class="button-container">
             <a class="button" id="bouton-galerie" href="/galerie">Galerie</a>
         </div>
@@ -43,7 +53,7 @@
                 </div>
             </section>
         </div>
-        <div class="boite-ingredients-selectionnes" id="selectedIngredients"></div>
+        <div class="boite-ingredients-selectionnes" id="ingredients-selectionne"></div>
         <div class="body">
             <div class="separator">
                 <span class="section-name">Les classiques</span>
@@ -71,17 +81,24 @@
 
     <aside id="deux-boutons">
         <button>
-            <img id="btnAbout" src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
+            <img id="btnAbout" src="../ressources/images/info.svg" alt="Info sur la page">
         </button>
-        <button>
-            <img id="btnPublish" src="../ressources/images/feather.svg" alt="Feather" width="24" height="24">
+        <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#mon-modal">
+            <img id="btnPublish" src="../ressources/images/feather.svg" alt="Modale de publication">
         </button>
+
     </aside>
+
+    <?php require_once(__DIR__ . "/../ressources/modeles/modale_publication.php") ?>
+    <?php require_once(__DIR__ . "/../ressources/modeles/modale_profilUtilisateur.php") ?>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
 
+
     <script src="../ressources/scripts/outils.js"></script>
+    <script src="../ressources/scripts/userprofile.js"></script>
     <script src="../ressources/scripts/monbar.js"></script>
+
 </body>
 
 </html>

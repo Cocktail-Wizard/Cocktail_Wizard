@@ -1,3 +1,5 @@
+const utilisateur = getCookie('username');
+
 // Dictionnaire des icônes de saveur
 const iconesUmami = {
     'Sucré': 'icone-sucre-sucre',
@@ -28,6 +30,9 @@ async function faireRequete(url) {
         const reponse = await fetch(url);
         if (!reponse.ok) {
             throw new Error('La requête a échoué');
+        }
+        if (reponse.status === 204) {
+            return null;
         }
         return await reponse.json();
     } catch (error) {

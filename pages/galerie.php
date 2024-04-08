@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="ressources/styles/index.css">
     <link rel="stylesheet" href="ressources/styles/modale.css">
     <link rel="stylesheet" href="ressources/styles/carte_cocktail.css">
-    <script src="ressources/scripts/outils.js"></script>
 </head>
 
 <body>
@@ -37,13 +36,16 @@
         <a href="/connexion" title="Connexion">
             <img src="ressources/images/icone-profile.svg" alt="Icone profile">
         </a>
-        <a href="/monbar" title="Mon bar" id="lien-monbar">
-            <img src="ressources/images/icone-monbar.svg" alt="Mon bar">
-        </a>
+    </aside>
+
+    <aside id="deux-boutons">
+        <button>
+            <img id="btnAbout" src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
+        </button>
     </aside>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
-
+    <script src="ressources/scripts/outils.js"></script>
     <script src="ressources/scripts/index.js"></script>
     <script src="ressources/scripts/modale.js"></script>
 </body>

@@ -43,6 +43,41 @@ nav {
     z-index: 1;
 }
 
+#deux-boutons {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#deux-boutons button {
+    border: none;
+    background-color: var(--palette-button-color);
+    border-radius: 50%;
+    opacity: 0.4;
+    width: 50px;
+    height: 50px;
+}
+
+#deux-boutons button:hover {
+    opacity: 1;
+}
+
+#deux-boutons button img {
+    display: block;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+}
+
+#deux-boutons button:focus {
+    outline: none;
+}
+
 aside#contenant-boutons-fixes {
     position: absolute;
     top: var(--space-from-corner);
@@ -60,10 +95,6 @@ aside#contenant-boutons-fixes a {
     flex-direction: row;
     width: 4em;
     justify-content: space-between;
-}
-
-aside#contenant-boutons-fixes #lien-monbar {
-    display: none;
 }
 
 aside#contenant-boutons-fixes a img {
@@ -109,6 +140,33 @@ aside#contenant-boutons-fixes a img {
     justify-content: center;
     margin: auto;
     width: 80%;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 1vh;
+    left: 3vh;
+    z-index: 1;
+}
+
+#profil-utilisateur {
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    border: 2px solid var(--palette-border-color);
+    overflow: hidden;
+    margin-left: 1vh;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-pic {
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    margin-left: 0;
 }
 
 @media screen and (width<=850px) {

@@ -9,6 +9,7 @@ body {
     flex-direction: column;
     height: 100vh;
     padding: 0;
+    background-color: var(--palette-background-color);
 }
 
 header {
@@ -57,24 +58,22 @@ main {
     transform: skewX(20deg);
 }
 
-.profile-pic-container {
-    width: 5vh;
-    height: 5vh;
+#profil-utilisateur {
+    width: 10vh;
+    height: 10vh;
     border-radius: 50%;
     border: 2px solid var(--palette-border-color);
     overflow: hidden;
     margin-left: 1vh;
+    display: flex;
+    justify-content: center;
 }
 
 .profile-pic {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.username {
-    padding: 1vh 2vh;
-    border-radius: 5px;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    margin-left: 0;
 }
 
 header h1 {
@@ -109,7 +108,7 @@ header h1 {
     box-shadow: rgba(255 255 255 30%) 0 0 2px inset, rgb(0 0 0 / 40%) 0 1px 2px;
     text-decoration: none;
     color: var(--palette-button-text-color);
-    background-color: var(--palette-button-color-color);
+    background-color: var(--palette-button-color-hover);
 }
 
 .button:active {
@@ -304,5 +303,18 @@ hr {
 
 #bouton-galerie:hover,
 #bouton-deconnexion:hover {
+    background-color: var(--palette-button-color-hover);
+}
+
+.ingredients-selectionne {
+    background-color: var(--palette-button-color);
+    padding: 10px;
+    margin: 10px;
+    color: black;
+    border: 3px solid var(--palette-border-color);
+    border-radius: 25px;
+}
+
+.ingredients-selectionne:hover {
     background-color: var(--palette-button-color-hover);
 }

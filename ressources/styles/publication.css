@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+/* Modal */
+
+
+/* Contenu du Modal */
+#publication-content {
+    position: relative;
+    background-color: var(--palette-secondary-background-color);
+    margin: auto;
+    padding-top: 10px;
+    border: 1px solid var(--palette-border-color);
+    width: 80%;
+
+    /* template de "boxshadow" */
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    height: auto;
+    max-height: 80%;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#mon-modal h2 {
+    color: var(--palette-button-color);
+    margin-bottom: 20px;
+}
+
+#mon-modal label {
+    font-weight: bold;
+    color: var(--palette-button-color);
+}
+
+#mon-modal textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--palette-border-color);
+    border-radius: 4px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-paragraph-color);
+    resize: none;
+    box-sizing: border-box;
+}
+
+#ingredient-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--palette-border-color);
+    border-radius: 4px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-paragraph-color);
+    box-sizing: border-box;
+}
+
+#liste-ingredients-publish {
+    padding-top: 4px;
+    color: black;
+}
+
+#mon-modal input[type="submit"] {
+    background-color: var(--palette-button-color);
+    color: var(--palette-button-text-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#mon-modal input[type="submit"]:hover {
+    background-color: var(--palette-button-color-hover);
+}
+
+#preview {
+    max-width: 100%;
+    max-height: 300px;
+    display: block;
+    margin: auto;
+}
+
+#add-form {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin: 0;
+}
+
+#mon-modal select {
+    color: black;
+}
+
+#mon-modal select option {
+    color: black;
+}
+
+/* Animation d'erreur */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    10%,
+    90% {
+        transform: translateX(-10px);
+    }
+
+    20%,
+    80% {
+        transform: translateX(10px);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translateX(-10px);
+    }
+
+    40%,
+    60% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.invalid-input {
+    border-color: red;
+    animation: shake 0.5s ease;
+}
+
+#dropdown-choices {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#ajouter-ingredient,
+#enlever-ingredient {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    border: 2px solid black;
+    cursor: pointer;
+    background-color: var(--palette-button-color);
+    overflow: hidden;
+}
+
+#ajouter-ingredient>.btn-icon,
+#enlever-ingredient>.btn-icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.button-publish {
+    width: 30px;
+    height: 30px;
+    background-image: linear-gradient(var(--pallette-button-color), #a48df0);
+    border: 2px solid --palette-border-color;
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 12%) 0 1px 1px;
+    cursor: pointer;
+    font-size: 17px;
+    outline: 0;
+    padding: 0;
+    text-align: center;
+    touch-action: manipulation;
+    display: inline-block;
+}
+
+.button-publish:hover {
+    box-shadow: rgba(255 255 255 30%) 0 0 2px inset, rgb(0 0 0 / 40%) 0 1px 2px;
+    text-decoration: none;
+    color: var(--palette-button-text-color);
+    background-color: var(--palette-button-color-hover);
+}
+
+#ingredient-rajoute {
+    font-size: larger;
+    font-style: bold;
+}

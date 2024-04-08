@@ -65,6 +65,7 @@ post('/authentification', 'ressources/scripts/connexionWeb.php');
 // /api/cocktails/tri/${like/date}  ->Cocktails galerie
 get('/api/cocktails/tri/$tri', 'ressources/api/getCocktails.php');
 
+
 // /api/cocktails/tri/{like/date}/recherche/{mot-clé, mot-clé, mot-clé}
 //->Recherche de cocktails sans filtre
 get('/api/cocktails/tri/$tri/recherche/$mots', 'ressources/api/rechercheCocktail.php');
