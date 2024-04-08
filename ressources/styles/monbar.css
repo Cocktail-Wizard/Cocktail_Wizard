@@ -305,3 +305,15 @@ hr {
 #bouton-deconnexion:hover {
     background-color: var(--palette-button-color-hover);
 }
+
+.selected-ingredient {
+    background-color: var(--palette-button-color);
+    padding: 3px;
+    margin: 10px;
+    color: black;
+    border: 2 solid var(--palette-border-color);
+}
+
+.selected-ingredient:hover {
+    background-color: var(--palette-button-color-hover);
+}
