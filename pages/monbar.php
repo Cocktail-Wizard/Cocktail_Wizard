@@ -25,7 +25,7 @@
 
         <h1>Cocktail <img src="../favicon.ico" id="w-icon">izard</h1>
         <div class="button-container">
-            <a class="button" id="bouton-galerie" href="../index.html">Galerie</a>
+            <a class="button" id="bouton-galerie" href="/galerie">Galerie</a>
         </div>
     </header>
 
