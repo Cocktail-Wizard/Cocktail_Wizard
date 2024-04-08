@@ -13,7 +13,6 @@ async function getTousIngredients() {
 
 let selectedIngredients = [];
 
-
 /**
  * Filtre et affiche les ingrédients en fonction de la valeur de recherche fournie.
  * Met à jour la liste des ingrédients disponibles en fonction de la saisie dans la barre de recherche.
@@ -33,38 +32,34 @@ function filterIngredients() {
 
     const filteredIngredients = allIngredients.filter(ingredient => !selectedIngredients.includes(ingredient) && ingredient.toLowerCase().includes(searchValue));
 
-
     // Efface le contenu précédent de la liste d'ingrédients
     listeIngredients.innerHTML = '';
 
-    if (searchValue !== '') {
-        if (filteredIngredients === null || filteredIngredients.length === 0) {
-            // Affiche "Aucun résultat..." si aucun ingrédient n'est trouvé
-            const noResultItem = document.createElement('div');
-            noResultItem.textContent = 'Aucun résultat...';
-            listeIngredients.appendChild(noResultItem);
-        } else {
-            // Crée et ajoute les ingrédients filtrés à la liste d'ingrédients
-            filteredIngredients.forEach(ingredient => {
-                const ingredientItem = document.createElement('div');
-                ingredientItem.textContent = ingredient;
-                ingredientItem.classList.add('ingredient-item');
-                ingredientItem.addEventListener('click', (event) => {
-                    selectIngredient(ingredient);
-                    const ingredientClique = event.target.textContent;
-                    ajouterIngredientBD(ingredientClique);
-                });
-                listeIngredients.appendChild(ingredientItem);
+    if (searchValue === '') return;
+
+    if (filteredIngredients === null || filteredIngredients.length === 0) {
+        // Affiche "Aucun résultat..." si aucun ingrédient n'est trouvé
+        const noResultItem = document.createElement('div');
+        noResultItem.textContent = 'Aucun résultat...';
+        listeIngredients.appendChild(noResultItem);
+    } else {
+        // Crée et ajoute les ingrédients filtrés à la liste d'ingrédients
+        filteredIngredients.forEach(ingredient => {
+            const ingredientItem = document.createElement('div');
+            ingredientItem.textContent = ingredient;
+            ingredientItem.classList.add('ingredient-item');
+            ingredientItem.addEventListener('click', (event) => {
+                selectIngredient(ingredient);
+                const ingredientClique = event.target.textContent;
+                ajouterIngredientBD(ingredientClique);
             });
-        }
+            listeIngredients.appendChild(ingredientItem);
+        });
     }
 }
 
-
 // Ajoute un événement keyup à la barre de recherche pour filtrer les ingrédients à chaque frappe de touche
 document.getElementById('boite-recherche').addEventListener('keyup', filterIngredients);
-
-
 
 /**
  * Sélectionne un ingrédient et le rajoute à la liste des ingrédients sélectionnés.
@@ -166,9 +161,6 @@ async function initialSetup() {
     filterIngredients(); // Appel initial pour afficher tous les ingrédients disponibles
     updateSelectedIngredients(); // Affiche initialement les ingrédients sélectionnés
 }
-
-
-
 
 /**
  * Écouteur d'événements qui se déclenche lorsque le DOM est entièrement chargé.
@@ -282,17 +274,14 @@ function chargerInformationsModale(idCocktail) {
 }
 
 function ajouterIngredientBD(nomIngredient) {
-    const username = utilisateur;
     const data = {
-        username,
+        username: utilisateur,
         nomIngredient
     };
     console.log(JSON.stringify(data));
     const requestOptions = {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     };
 
@@ -312,17 +301,14 @@ function ajouterIngredientBD(nomIngredient) {
 }
 
 function enleverIngredientBD(nomIngredient) {
-    const username = utilisateur;
     const data = {
-        username,
+        utilisateur,
         nomIngredient
     };
     console.log(JSON.stringify(data));
     const requestOptions = {
         method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     };
 
