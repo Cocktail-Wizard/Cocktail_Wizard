@@ -32,6 +32,8 @@ header h1 {
     box-shadow: rgb(0 0 0 / 10%) 0 0 20px;
     padding: 1em;
     text-align: center;
+    font-size: 2em;
+    font-weight: bold;
 }
 
 nav {

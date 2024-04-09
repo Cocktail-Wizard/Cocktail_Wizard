@@ -52,6 +52,7 @@ try {
         echo json_encode($ingredients);
     } else {
         http_response_code(204);
+        exit();
     }
 } catch (Exception $e) {
     http_response_code(500);

@@ -516,6 +516,7 @@ BEGIN
     END IF;
 END
 //
+
 --Création de la procédure GetMesCocktails
 -- Permet de voir les cocktails que chaque utilisateur a créé
 -- Utiliser pour liste la liste de cocktail dans mon profil

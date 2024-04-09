@@ -26,7 +26,7 @@ if (!isset($_SESSION['username'])) {
 
     <header id="top">
         <div class="user">
-            <button type="button" id="profil-utilisateur" data-bs-toggle="modal" data-bs-target="#my-modal">
+            <button type="button" id="profil-utilisateur" title="Profile" data-bs-toggle="modal" data-bs-target="#my-modal">
                 <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Profile Picture">
             </button>
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
@@ -34,7 +34,9 @@ if (!isset($_SESSION['username'])) {
 
         <h1>Cocktail <img src="../icone.ico" id="w-icon">izard</h1>
         <div class="button-container">
-            <a class="button" id="bouton-galerie" href="/galerie">Galerie</a>
+            <a class="button" id="bouton-galerie" href="/galerie">
+                <img src="../ressources/images/icone-galerie.svg" alt="Galerie de cocktails">
+            </a>
         </div>
     </header>
 

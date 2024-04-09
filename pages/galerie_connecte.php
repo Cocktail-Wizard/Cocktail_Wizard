@@ -19,7 +19,7 @@
 
     <header>
         <div class="user">
-            <button type="button" id="profil-utilisateur" data-bs-toggle="modal" data-bs-target="#my-modal">
+            <button type="button" title="Profile" id="profil-utilisateur" data-bs-toggle="modal" data-bs-target="#my-modal">
                 <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Profile Picture">
             </button>
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
@@ -31,7 +31,7 @@
         <nav>
             <input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus>
             <button id="ordre-tri" title="Ordonner par mentions j'aime">
-                <img id="ordre-tri-icone" alt="Ordre">
+                <img id="ordre-tri-icone" src="ressources/images/icone-calendrier.svg" alt="Ordre">
                 <img src="ressources/images/tete-fleche-bas.svg" alt="Ordre décroissant">
             </button>
         </nav>

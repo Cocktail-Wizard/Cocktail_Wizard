@@ -3,6 +3,7 @@ const utilisateur = getCookie('username');
 // Dictionnaire des icônes de saveur
 const iconesUmami = {
     'Sucré': 'icone-sucre-sucre',
+    'Acide': 'icone-citron-acide',
     'Aigre': 'icone-citron-aigre',
     'Amer': 'icone-cafe-amer',
     'Épicé': 'icone-piment-epice',

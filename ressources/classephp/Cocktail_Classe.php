@@ -58,6 +58,7 @@ class Cocktail implements JsonSerializable
         $this->alcool_principale = $alcool_principale;
         $this->profil_saveur = $profil_saveur;
         $this->type_verre = $type_verre;
+        $this->liked = null;
     }
 
 
@@ -65,6 +66,11 @@ class Cocktail implements JsonSerializable
     public function ajouterIngredient($ingredient)
     {
         $this->ingredients_cocktail[] = $ingredient;
+    }
+
+    public function setLiked($liked)
+    {
+        $this->liked = $liked;
     }
 
     public function jsonSerialize()
