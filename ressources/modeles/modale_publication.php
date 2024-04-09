@@ -48,11 +48,12 @@
                     <div id="dropdown-choices">
                         <label for="flavor-profile">Profil de saveur:</label>
                         <select name="flavor-profile" id="flavor">
-                            <option value="acide">acide</option>
-                            <option value="amer">amer</option>
-                            <option value="epicé">epicé</option>
-                            <option value="sale">salée</option>
-                            <option value="sucre" selected>sucré</option>
+                            <option value="Aigre">Aigre</option>
+                            <option value="Amer">Amer</option>
+                            <option value="Épicé">Épicé</option>
+                            <option value="Salé">Salé</option>
+                            <option value="Acide">Acide</option>
+                            <option value="Sucré" selected>Sucré</option>
                         </select>
                         <label for="main-alcool">Alcool principal:</label>
                         <select name="main-alcool" id="alcool">
