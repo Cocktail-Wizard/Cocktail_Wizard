@@ -124,7 +124,9 @@ async function chargerInformationsModale(cocktail) {
             }
             ).then((response) => {
                 if (response.ok) {
+                    const comptJaime = document.querySelector('article[data-id-cocktail="' + cocktail.id_cocktail + '"] .compteur-jaime');
                     cocktail.nb_like = cocktail.liked ? cocktail.nb_like - 1 : cocktail.nb_like + 1;
+                    comptJaime.textContent = cocktail.nb_like;
                     cocktail.liked = !cocktail.liked;
                     iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
                     actualiserTextElementParId('compteur-jaime', cocktail.nb_like);
