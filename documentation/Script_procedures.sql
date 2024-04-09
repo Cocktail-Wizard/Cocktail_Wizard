@@ -668,10 +668,12 @@ BEGIN
     JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
     LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
     LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+    LEFT JOIN utilisateur U ON C.id_utilisateur = U.id_utilisateur
     WHERE LOCATE(param_recherche ,C.nom) > 0
     OR LOCATE(param_recherche , I.nom) > 0
     OR LOCATE( param_recherche,A.nom) > 0
     OR LOCATE(param_recherche ,C.profil_saveur) > 0
+    OR LOCATE(param_recherche , U.nom) > 0
     ORDER BY
         CASE
             WHEN param_orderby = 'date' THEN C.date_publication
