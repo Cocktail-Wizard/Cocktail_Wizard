@@ -748,4 +748,73 @@ BEGIN
 END
 //
 
+-- Création de la procédure SupprimerCompte
+-- Permet de supprimer un compte utilisateur
+-- Utiliser pour supprimer un compte dans mon profil
+DROP PROCEDURE IF EXISTS SupprimerCompte;
+
+CREATE PROCEDURE SupprimerCompte(IN var_id_utilisateur INT)
+BEGIN
+
+
+END
+//
+
+-- Création de la procédure supprimerCocktail
+-- Permet de supprimer un cocktail
+-- Utiliser pour supprimer un cocktail dans mon profil
+DROP PROCEDURE IF EXISTS SupprimerCocktail;
+
+CREATE PROCEDURE SupprimerCocktail(IN var_id_cocktail INT)
+BEGIN
+    DELETE FROM cocktail_liked
+    WHERE id_cocktail = var_id_cocktail;
+    CALL SupprimerCommentaireDeCocktail(var_id_cocktail);
+    DELETE FROM ingredient_cocktail
+    WHERE id_cocktail = var_id_cocktail;
+    DELETE FROM cocktail
+    WHERE id_cocktail = var_id_cocktail;
+    IF ROW_COUNT() > 0 THEN
+        SELECT 1 AS success;
+    ELSE
+        SELECT 0 AS success;
+    END IF;
+END
+//
+
+-- Création de la procédure supprimerCommentaire
+-- Permet de supprimer un commentaire
+DROP PROCEDURE IF EXISTS SupprimerCommentaire;
+
+CREATE PROCEDURE SupprimerCommentaire(IN var_id_commentaire INT)
+BEGIN
+    DELETE FROM commentaire_liked
+    WHERE id_commentaire = var_id_commentaire;
+    DELETE FROM commentaire
+    WHERE id_commentaire = var_id_commentaire;
+    IF ROW_COUNT() > 0 THEN
+        SELECT 1 AS success;
+    ELSE
+        SELECT 0 AS success;
+    END IF;
+END
+//
+
+-- Création de la procédure supprimerCommentaireDeCocktail
+-- Permet de supprimer les commentaires d'un cocktail`
+DROP PROCEDURE IF EXISTS SupprimerCommentaireDeCocktail;
+
+CREATE PROCEDURE SupprimerCommentaireDeCocktail(IN var_id_cocktail INT)
+BEGIN
+    DELETE FROM commentaire_liked
+    WHERE id_commentaire IN (
+        SELECT id_commentaire
+        FROM Commentaire
+        WHERE id_cocktail = var_id_cocktail
+    );
+    DELETE FROM commentaire
+    WHERE id_cocktail = var_id_cocktail;
+END
+//
+
 DELIMITER ;

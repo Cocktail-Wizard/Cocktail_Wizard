@@ -60,3 +60,7 @@ function getCookie(nom) {
     }
     return null;
 }
+
+function deleteCookie(nom) {
+    document.cookie = `${nom}=; expires=Thu, 01 Jan 2001 00:00:00 UTC; path=/;`;
+}

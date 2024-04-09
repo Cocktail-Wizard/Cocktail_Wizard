@@ -1,9 +1,17 @@
 <?php
 session_start();
 
-require_once __DIR__ . "/../api/connexion.php";
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
-if ($success) {
-    $_SESSION['username'] = $nom;
+    require_once __DIR__ . "/../api/connexion.php";
+
+
+    if ($success) {
+        $_SESSION['username'] = $nom;
+    }
+}
+elseif($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    $_SESSION = array();
+    session_destroy();
 }

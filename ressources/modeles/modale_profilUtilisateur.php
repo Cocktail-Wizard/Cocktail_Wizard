@@ -17,6 +17,7 @@
 
             <div class="modal-body">
                 <div class="userinfo-body" id="infoPage">
+                    <button id="deconnexion">Déconnexion</button>
                     <img src="../ressources/images/lionWizard.jpg" alt="Photo de profil de l'utilisateur">
                     <h3>Nom de l'utilisateur: <span id="username">Lilwizard</span></h3>
                     <p>Email : <span id="email">@mail</span></p>

@@ -41,6 +41,22 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("mycocktailPage").style.display = "none";
         document.getElementById("supportPage").style.display = "block";
     });
+
+    // Fonction pour se déconnecter
+    document.getElementById("deconnexion").addEventListener("click", function () {
+        fetch('/authentification', {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    deleteCookie('username');
+                    window.location.href = '/';
+                } else {
+                    throw new Error('La déconnexion a échoué.');
+                }
+            })
+            .catch(error => console.error('Erreur lors de la déconnexion:', error));
+    });
 });
 
 fetch(`/api/users/${utilisateur}`)
