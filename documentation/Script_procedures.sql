@@ -755,8 +755,24 @@ DROP PROCEDURE IF EXISTS SupprimerCompte;
 
 CREATE PROCEDURE SupprimerCompte(IN var_id_utilisateur INT)
 BEGIN
-
-
+    DELETE FROM Ingredient_Utilisateur
+    WHERE id_utilisateur = var_id_utilisateur;
+    DELETE FROM Alcool_Utilisateur
+    WHERE id_utilisateur = var_id_utilisateur;
+    DELETE FROM cocktail_liked
+    WHERE id_utilisateur = var_id_utilisateur;
+    DELETE FROM commentaire_liked
+    WHERE id_utilisateur = var_id_utilisateur;
+    DELETE FROM commentaire
+    WHERE id_utilisateur = var_id_utilisateur;
+    DELETE FROM ingredient_cocktail
+    WHERE id_cocktail IN (
+        SELECT id_cocktail
+        FROM Cocktail
+        WHERE id_utilisateur = var_id_utilisateur
+    );
+    DELETE FROM cocktail
+    WHERE id_utilisateur = var_id_utilisateur;
 END
 //
 
