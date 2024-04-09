@@ -229,7 +229,7 @@ function chargerCommenter(id_cocktail) {
         }
 
         // Nettoyer les caractères spéciaux
-        const contenu = document.getElementById('commentaire').value.toString().replace(/[^\x00-\x7F]/g, '').trim();
+        const contenu = document.getElementById('commentaire').value.toString().replace(/[^\x00-\xFF]/g, '').trim();
 
         if (!contenu) return;
 
