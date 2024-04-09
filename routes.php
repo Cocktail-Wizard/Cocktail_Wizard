@@ -113,6 +113,14 @@ delete('/api/cocktails/like', 'ressources/api/dislikeCocktail.php');
 // /authentification ->Déconnexion d'un utilisateur
 delete('/authentification', 'ressources/scripts/connexionWeb.php');
 
+// /api/cocktails ->Suppression d'un cocktail
+delete('/api/cocktails', 'ressources/api/supprimerCocktail.php');
+
+// /api/cocktails/commentaires ->Suppression d'un commentaire
+delete('/api/cocktails/commentaires', 'ressources/api/supprimerCommentaire.php');
+
+// /api/users ->Suppression d'un profile
+delete('/api/users', 'ressources/api/supprimerProfile.php');
 /*
 // Dynamic GET. Example with 1 variable
 // The $id will be available in user.php
