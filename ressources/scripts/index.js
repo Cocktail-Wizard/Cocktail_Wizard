@@ -55,7 +55,7 @@ function afficherCocktails(data) {
         iconeAlcool.src = 'ressources/images/pastille-alcool.svg';
 
         const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
-        umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur]}.svg` || `${iconesUmami['default']}.svg`;
+        umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur] ?? iconesUmami['default']}.svg`;
 
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
