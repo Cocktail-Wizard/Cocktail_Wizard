@@ -20,6 +20,7 @@
 require_once(__DIR__ . "/../../classephp/Cocktail_Classe.php");
 require_once(__DIR__ . "/../../classephp/IngredientCocktail_Classe.php");
 require_once(__DIR__ . "/../../classephp/Commentaire_Classe.php");
+require_once(__DIR__ . "/usernameToId.php");
 
 function InfoAffichageCocktail($id_cocktail, $conn)
 {
@@ -59,7 +60,29 @@ function InfoAffichageCocktail($id_cocktail, $conn)
         echo json_encode("Erreur : " . $e->getMessage());
         exit();
     }
-
+    if(isset($_GET['user'])) {
+        $userId = usernameToId($_GET['user'], $conn);
+        try {
+            $requete_preparee = $conn->prepare("CALL cocktailLiked(?, ?)");
+            $requete_preparee->bind_param("ii", $id_cocktail, $userId);
+            $requete_preparee->execute();
+            $resultat = $requete_preparee->get_result();
+            $requete_preparee->close();
+            if ($resultat->num_rows > 0) {
+                $row = $resultat->fetch_assoc();
+                $cocktail->setLiked($row['liked']);
+            }
+            else {
+                http_response_code(404);
+                echo json_encode("Aucun cocktail n'a été trouvé avec cet id.");
+                exit();
+            }
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode("Erreur : " . $e->getMessage());
+            exit();
+        }
+    }
     try {
         // Envoie une requête à la base de données pour obtenir les ingrédients du cocktail à partir de son id
         $requete_preparee = $conn->prepare("CALL GetListeIngredientsCocktail(?)");

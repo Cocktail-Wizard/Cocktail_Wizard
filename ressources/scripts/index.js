@@ -125,10 +125,12 @@ async function chargerInformationsModale(cocktail) {
             ).then((response) => {
                 if (response.ok) {
                     const comptJaime = document.querySelector('article[data-id-cocktail="' + cocktail.id_cocktail + '"] .compteur-jaime');
+                    const iconeJaimeCarte = document.querySelector('article[data-id-cocktail="' + cocktail.id_cocktail + '"] .icone-jaime');
                     cocktail.nb_like = cocktail.liked ? cocktail.nb_like - 1 : cocktail.nb_like + 1;
                     comptJaime.textContent = cocktail.nb_like;
                     cocktail.liked = !cocktail.liked;
                     iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
+                    iconeJaimeCarte.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
                     actualiserTextElementParId('compteur-jaime', cocktail.nb_like);
                 }
             })
@@ -192,7 +194,8 @@ async function chargerCommentairesModale(idCocktail) {
 async function chercherCocktail() {
     const recherche = barreRecherche.value.replace(/[^a-zA-Z0-9]/g, '_');
     const endpoint = recherche ? `/recherche/${recherche}` : '';
-    const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}${endpoint}`);
+    const user = utilisateur ? '?user=' + utilisateur : '';
+    const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}${endpoint}${user}`);
 
     if (data) {
         galerie.innerHTML = '';
