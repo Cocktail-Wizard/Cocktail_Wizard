@@ -34,7 +34,9 @@ if (!isset($_SESSION['username'])) {
 
         <h1>Cocktail <img src="../icone.ico" id="w-icon">izard</h1>
         <div class="button-container">
-            <a class="button" id="bouton-galerie" href="/galerie">Galerie</a>
+            <a class="button" id="bouton-galerie" href="/galerie">
+                <img src="../ressources/images/icone-galerie.svg" alt="Galerie de cocktails">
+            </a>
         </div>
     </header>
 
