@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Fonction connexionBD
