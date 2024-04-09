@@ -28,8 +28,16 @@
 
 /* Corps des informations utilisateur */
 .userinfo-body {
+    position: relative;
     text-align: center;
     padding: 20px;
+}
+
+/* Bouton déconnexion */
+#deconnexion {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 /* Image de profil */

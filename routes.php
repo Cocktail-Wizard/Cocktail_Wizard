@@ -110,6 +110,9 @@ delete('/api/cocktails/commentaires/like', 'ressources/api/dislikeCommentaire.ph
 // L'API retourne le nouveau nombre de like
 delete('/api/cocktails/like', 'ressources/api/dislikeCocktail.php');
 
+// /authentification ->Déconnexion d'un utilisateur
+delete('/authentification', 'ressources/scripts/connexionWeb.php');
+
 /*
 // Dynamic GET. Example with 1 variable
 // The $id will be available in user.php
