@@ -129,9 +129,11 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
     const ingredientElements = document.querySelectorAll('.ingredient-rajoute');
     ingredientElements.forEach(element => {
         // Récupérer les informations de chaque ingrédient restant
-        const nomIng = element.textContent.split(' ')[3];
         const quantite = element.textContent.split(' ')[1];
         const unite = element.textContent.split(' ')[2];
+        const partiIng = element.textContent.split(' ');
+        partiIng.splice(0, 2);
+        const nomIng = partiIng.join(' ');
 
 
         // Ajouter ces informations au tableau des ingrédients restants
@@ -167,7 +169,7 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
         })
         .then(data => {
             console.log(data); // Afficher la réponse du serveur
-            window.location.href = '/monbar';
+            window.location.reload();
         })
         .catch(error => {
             console.error('Erreur:', error);
