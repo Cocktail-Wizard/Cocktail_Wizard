@@ -756,9 +756,57 @@ DROP PROCEDURE IF EXISTS SupprimerCompte;
 CREATE PROCEDURE SupprimerCompte(IN var_id_utilisateur INT)
 BEGIN
 
+    CREATE TEMPORARY TABLE temp_cocktails AS
+    SELECT id_cocktail
+    FROM Cocktail
+    WHERE id_utilisateur = var_id_utilisateur;
 
+    CREATE TEMPORARY TABLE temp_commentaire AS
+    SELECT id_commentaire
+    FROM commentaire
+    WHERE id_utilisateur = var_id_utilisateur;
+
+    DELETE FROM Ingredient_Utilisateur
+    WHERE id_utilisateur = var_id_utilisateur;
+    DELETE FROM Alcool_Utilisateur
+    WHERE id_utilisateur = var_id_utilisateur;
+    DELETE FROM cocktail_liked
+    WHERE id_utilisateur = var_id_utilisateur
+    OR id_cocktail IN (SELECT id_cocktail FROM temp_cocktails);
+    DELETE FROM commentaire_liked
+    WHERE id_utilisateur = var_id_utilisateur
+    OR id_commentaire IN (SELECT id_commentaire temp_commentaire)
+    OR id_commentaire IN (SELECT id_commentaire
+        FROM Commentaire
+        WHERE id_cocktail IN (SELECT id_cocktail FROM temp_cocktails));
+    DELETE FROM commentaire
+    WHERE id_utilisateur = var_id_utilisateur
+    OR id_cocktail IN (SELECT id_cocktail FROM temp_cocktails);
+    DELETE FROM ingredient_cocktail
+    WHERE id_cocktail IN (
+        SELECT id_cocktail
+        FROM Cocktail
+        WHERE id_utilisateur = var_id_utilisateur
+    );
+    DELETE FROM cocktail
+    WHERE id_utilisateur = var_id_utilisateur;
+
+
+    DROP TABLE temp_cocktails;
+    DROP TABLE temp_commentaire;
+
+    DELETE FROM utilisateur
+    WHERE id_utilisateur = var_id_utilisateur;
+
+    IF ROW_COUNT() > 0 THEN
+        SELECT 1 AS success;
+    ELSE
+        SELECT 0 AS success;
+    END IF;
 END
 //
+
+CALL supprimerCompte(1);
 
 -- Création de la procédure supprimerCocktail
 -- Permet de supprimer un cocktail
@@ -781,6 +829,7 @@ BEGIN
     END IF;
 END
 //
+
 
 -- Création de la procédure supprimerCommentaire
 -- Permet de supprimer un commentaire
