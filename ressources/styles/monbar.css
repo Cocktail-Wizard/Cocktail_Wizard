@@ -326,10 +326,11 @@ hr {
     white-space: nowrap;
     width: 95%;
     height: 500px;
+    gap: 1.5em;
 }
 
 .scroll-item {
     flex: 0 0 auto;
     margin-right: 1em;
-    /* Add more styling as needed */
+
 }

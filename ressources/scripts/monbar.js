@@ -1,6 +1,7 @@
 const cocktailsClassiques = document.getElementById('conteneur-classique');
 const cocktailsPersonnels = document.getElementById('conteneur-favoris');
 const cocktailsCommunautaires = document.getElementById('conteneur-communautaires');
+const ordreCommentaires = 'date';
 
 
 const nombreCocktailsAffiches = 10;
@@ -320,8 +321,144 @@ function nettoyerNomCocktail(nom) {
     return nom.replace(/[^a-zA-Z0-9]/g, '');
 }
 
-function chargerInformationsModale(idCocktail) {
-    // Envoyer une requête à l'API pour ce cocktail, exemple: 'https://cocktailwizard.com/cocktail/{id}'
+async function chargerCommentairesModale(idCocktail) {
+    const modeleHTML = await chargerModeleHTML('ressources/modeles/modale_commentaire.html');
+
+    if (modeleHTML) {
+        try {
+            const data = await faireRequete(`/api/cocktails/${idCocktail}/commentaires`);
+            if (!data) return;
+
+            const listeCommentaires = document.getElementById('commentaires');
+            listeCommentaires.innerHTML = '';
+
+            data.forEach((commentaire) => {
+                const nouveauCommentaireTemp = document.createElement('li');
+
+                nouveauCommentaireTemp.innerHTML = modeleHTML;
+
+                const nouveauCommentaire = nouveauCommentaireTemp.firstElementChild.cloneNode(true);
+
+                const auteurCommentaire = nouveauCommentaire.querySelector('.auteur');
+                auteurCommentaire.innerText = `@${commentaire.auteur}`;
+
+                const dateCommentaire = nouveauCommentaire.querySelector('.date');
+                dateCommentaire.innerText = commentaire.date;
+
+                const messageCommentaire = nouveauCommentaire.querySelector('.contenu');
+                messageCommentaire.innerText = commentaire.contenu;
+
+                listeCommentaires.appendChild(nouveauCommentaire);
+            });
+
+        } catch (error) {
+            console.error('Erreur : ', error);
+        }
+    }
+}
+
+async function chargerInformationsModale(cocktail) {
+    actualiserTextElementParId('auteur', `@${cocktail.auteur}`);
+    actualiserTextElementParId('compteur-jaime', cocktail.nb_like);
+    actualiserTextElementParId('titre-cocktail', cocktail.nom);
+    actualiserTextElementParId('description', cocktail.desc);
+    actualiserTextElementParId('preparation', cocktail.preparation);
+    actualiserTextElementParId('date-publication', cocktail.date);
+
+
+    const imageCocktail = document.getElementById('illustration');
+    imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
+
+    if (utilisateur) {
+        actualiserTextElementParId('auteur-commentaire', utilisateur);
+    } else {
+        actualiserTextElementParId('text-auteur', 'Vous devez être connecté(e) pour commenter.');
+    }
+
+    const ingredients = document.getElementById('ingredients');
+    ingredients.innerHTML = '';
+
+    const iconeJAime = document.getElementById('icone-jaime');
+    iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
+
+    const spanJAime = document.getElementById('affichage-jaime');
+
+    if (utilisateur && utilisateur !== cocktail.auteur) {
+        spanJAime.addEventListener('click', async () => {
+            fetch('/api/cocktails/like', {
+                method: cocktail.liked ? 'DELETE' : 'POST',
+                body: JSON.stringify({
+                    id_cocktail: cocktail.id_cocktail,
+                    username: utilisateur
+                }),
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+            }
+            ).then((response) => {
+                if (response.ok) {
+                    const comptJaime = document.querySelector('article[data-id-cocktail="' + cocktail.id_cocktail + '"] .compteur-jaime');
+                    const iconeJaimeCarte = document.querySelector('article[data-id-cocktail="' + cocktail.id_cocktail + '"] .icone-jaime');
+                    cocktail.nb_like = cocktail.liked ? cocktail.nb_like - 1 : cocktail.nb_like + 1;
+                    comptJaime.textContent = cocktail.nb_like;
+                    cocktail.liked = !cocktail.liked;
+                    iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
+                    iconeJaimeCarte.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
+                    actualiserTextElementParId('compteur-jaime', cocktail.nb_like);
+                }
+            })
+        });
+    }
+
+    cocktail.ingredients_cocktail.forEach((ingredient) => {
+        const ligneIngredient = document.createElement('li');
+        const quantiteIngredient = document.createElement('span');
+        const uniteIngredient = document.createElement('span');
+        const nomIngredient = document.createElement('span');
+
+        quantiteIngredient.innerText = ingredient.quantite;
+        uniteIngredient.innerText = ingredient.unite;
+        nomIngredient.innerText = ingredient.ingredient;
+
+        ligneIngredient.appendChild(quantiteIngredient);
+        ligneIngredient.appendChild(uniteIngredient);
+        ligneIngredient.appendChild(nomIngredient);
+
+        ingredients.appendChild(ligneIngredient);
+    });
+}
+
+function chargerCommenter(id_cocktail) {
+    const formulaire = document.getElementById('formulaire-commentaire');
+
+    formulaire.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!utilisateur) {
+            window.location.href = '/connexion';
+            return;
+        }
+
+        // Nettoyer les caractères spéciaux
+        const contenu = document.getElementById('commentaire').value.toString().replace(/[^\x00-\xFF]/g, '').trim();
+
+        if (!contenu) return;
+
+        const data = {
+            username: utilisateur,
+            id_cocktail: id_cocktail,
+            commentaire: contenu
+        };
+
+        fetch('/api/cocktails/commentaires', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then((reponse) => {
+            if (reponse.ok) {
+                chargerCommentairesModale(id_cocktail);
+                document.getElementById('commentaire').value = '';
+            }
+        });
+    });
 }
 
 function ajouterIngredientBD(nomIngredient) {

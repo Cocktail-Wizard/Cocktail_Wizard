@@ -18,6 +18,7 @@ if (!isset($_SESSION['username'])) {
     <link rel="stylesheet" href="../ressources/styles/carte_cocktail.css">
     <link rel="stylesheet" href="../ressources/styles/userprofile.css">
     <link rel="stylesheet" href="../ressources/styles/publication.css">
+    <link rel="stylesheet" href="../ressources/styles/modale.css">
 
 </head>
 
@@ -96,6 +97,8 @@ if (!isset($_SESSION['username'])) {
 
     </aside>
 
+    <aside id="contenant-modale"></aside>
+
     <?php require_once(__DIR__ . "/../ressources/modeles/modale_publication.php") ?>
     <?php require_once(__DIR__ . "/../ressources/modeles/modale_profilUtilisateur.php") ?>
 
@@ -103,6 +106,7 @@ if (!isset($_SESSION['username'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../ressources/scripts/outils.js"></script>
+    <script src="../ressources/scripts/modale.js"></script>
     <script type="module" src="../ressources/scripts/publication.js"></script>
     <script src="../ressources/scripts/userprofile.js"></script>
     <script src="../ressources/scripts/monbar.js"></script>
