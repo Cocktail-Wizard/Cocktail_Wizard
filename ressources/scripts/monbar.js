@@ -227,9 +227,9 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 async function chargerCocktails() {
 
-    const dataClassique = await faireRequete(`/api/users/${utilisateur}/recommandations/type/classiques`);
-    const dataFavoris = await faireRequete(`/api/users/${utilisateur}/recommandations/type/favoris`);
-    const dataCommunaute = await faireRequete(`/api/users/${utilisateur}/recommandations/type/communaute`);
+    const dataClassique = await faireRequete(`/api/users/${utilisateur}/recommandations/type/classiques?user=${utilisateur}`);
+    const dataFavoris = await faireRequete(`/api/users/${utilisateur}/recommandations/type/favoris?user=${utilisateur}`);
+    const dataCommunaute = await faireRequete(`/api/users/${utilisateur}/recommandations/type/communaute?user=${utilisateur}`);
 
     if(dataClassique) {
         cocktailsClassiques.innerHTML = '';
