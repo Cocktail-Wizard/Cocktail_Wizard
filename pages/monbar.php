@@ -60,21 +60,27 @@ if (!isset($_SESSION['username'])) {
                 <span class="section-name">Les classiques</span>
                 <hr class="line right" />
             </div>
-            <div class="conteneur-carte-cocktail" id="conteneur-classique"></div>
+            <div class="conteneur-carte-cocktail" id="conteneur-classique">
+
+            </div>
             <section id="cocktails-classiques" class="galerie"></section>
 
             <div class="separator">
                 <span class="section-name">Mes favoris</span>
                 <hr class="line right" />
             </div>
+            <div class="conteneur-carte-cocktail" id="conteneur-favoris">
 
+            </div>
             <section id="cocktails-personnels" class="galerie"></section>
 
             <div class="separator">
                 <span class="section-name">Communautaires</span>
                 <hr class="line right" />
             </div>
+            <div class="conteneur-carte-cocktail" id="conteneur-communautaires">
 
+            </div>
             <section id="cocktails-communautaires" class="galerie"></section>
 
         </div>

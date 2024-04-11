@@ -562,6 +562,16 @@ BEGIN
     FROM Cocktail C
     JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
     WHERE CL.id_utilisateur = id_utilisateur
+    AND NOT EXISTS (SELECT IC.id_cocktail
+        FROM Ingredient_Cocktail IC
+        LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
+        LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
+        WHERE IC.id_cocktail = C.id_cocktail
+        AND (
+            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != id_utilisateur OR IU.id_utilisateur IS NULL))
+            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != id_utilisateur OR AU.id_utilisateur IS NULL))
+        )
+    )
     ORDER BY CL.date_like DESC;
 END
 //
