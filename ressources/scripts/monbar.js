@@ -383,7 +383,7 @@ async function chargerInformationsModale(cocktail) {
 
     const spanJAime = document.getElementById('affichage-jaime');
 
-    if (utilisateur && utilisateur !== cocktail.auteur) {
+    if (utilisateur) {
         spanJAime.addEventListener('click', async () => {
             fetch('/api/cocktails/like', {
                 method: cocktail.liked ? 'DELETE' : 'POST',
