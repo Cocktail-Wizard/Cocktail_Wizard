@@ -706,15 +706,13 @@ BEGIN
     JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
     LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
     LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-    LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
-    LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
     WHERE (LOCATE(C.nom, param_recherche) > 0
     OR LOCATE(I.nom, param_recherche) > 0
     OR LOCATE(A.nom, param_recherche) > 0
     OR LOCATE(C.profil_saveur, param_recherche) > 0)
     AND (
-        (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
-        OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
+        (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE AU.id_alcool = IC.id_alcool AND AU.id_utilisateur = id_utilisateur))
+            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE IU.id_ingredient = IC.id_ingredient AND IU.id_utilisateur = id_utilisateur))
     )
     ORDER BY
         CASE
