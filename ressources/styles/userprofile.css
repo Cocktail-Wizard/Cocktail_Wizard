@@ -140,12 +140,6 @@
     box-shadow: 0 0 10px rgba(0 0 0 / 10%);
 }
 
-/* Conteneur de défilement horizontal pour les cocktails */
-.cocktail-container {
-    overflow-x: auto;
-    white-space: nowrap;
-}
-
 /* Style pour les boutons de choix de sections */
 #info-btn,
 #cocktail-btn,
@@ -168,4 +162,14 @@
 #fuck-bootstrap {
     top: 5px;
     left: 5px;
+}
+
+/* Conteneur des cocktails dans le profile */
+.conteneur-carte-cocktail-profile {
+    display: flex;
+    overflow-x: auto;
+    padding: 1em;
+    white-space: nowrap;
+    width: 95%;
+    gap: 1.5em;
 }

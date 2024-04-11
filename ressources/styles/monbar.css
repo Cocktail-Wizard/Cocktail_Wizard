@@ -164,6 +164,7 @@ header h1 {
     padding: 5px 0;
     border-bottom: 1px solid var(--palette-border-color);
     color: var(--palette-secondary-text-color);
+    cursor : pointer;
 }
 
 .ingredient-item:hover {
@@ -189,7 +190,7 @@ header h1 {
     margin-bottom: 10px;
 }
 
-.selected-ingredient {
+/* .selected-ingredient {
     display: inline-block;
     padding: 10px;
     border: 2px solid var(--palette-border-color);
@@ -198,7 +199,8 @@ header h1 {
     margin: 5px;
     white-space: nowrap;
     box-shadow: 2px 2px 4px rgb(0 0 0 / 30%);
-}
+    cursor: pointer;
+} */
 
 /* Body Styles */
 .body {
@@ -313,6 +315,7 @@ hr {
     color: black;
     border: 3px solid var(--palette-border-color);
     border-radius: 25px;
+    cursor: pointer;
 }
 
 .ingredients-selectionne:hover {
@@ -331,5 +334,4 @@ hr {
 .scroll-item {
     flex: 0 0 auto;
     margin-right: 1em;
-
 }
