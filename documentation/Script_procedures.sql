@@ -412,20 +412,18 @@ DROP PROCEDURE IF EXISTS GetCocktailGalerieFiltrer;
 
 CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50))
 BEGIN
-    SELECT C.id_cocktail
-    FROM Cocktail C
-    WHERE NOT EXISTS (
-        SELECT IC.id_cocktail
+    SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
         FROM Ingredient_Cocktail IC
-        LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
-        LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
+        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
         WHERE IC.id_cocktail = C.id_cocktail
-        AND (
-            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
-            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
+        AND(
+            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = utilisateur))
+            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = utilisateur))
         )
-    )
-    ORDER BY
+    ) AS ing_manquant
+    FROM Cocktail C
+    ORDER BY ing_manquant ASC,
         CASE
             WHEN param_orderby = 'date' THEN C.date_publication
             WHEN param_orderby = 'like' THEN C.nb_like

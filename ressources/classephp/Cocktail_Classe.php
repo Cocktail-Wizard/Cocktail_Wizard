@@ -28,8 +28,8 @@ class Cocktail implements JsonSerializable
     // Permet de savoir si l'utilisateur a liké le cocktail quand connecté
     // Valeur: null si l'utilisateur n'est pas connecté, true si l'utilisateur a liké, false sinon
     private $liked;
-
     private $ingredients_cocktail = [];
+    private $ingManquant;
 
     public function __construct(
         $id_cocktail,
@@ -59,8 +59,13 @@ class Cocktail implements JsonSerializable
         $this->profil_saveur = $profil_saveur;
         $this->type_verre = $type_verre;
         $this->liked = null;
+        $this->ingManquant = null;
     }
 
+    public function getIdCocktail()
+    {
+        return $this->id_cocktail;
+    }
 
     // Ajoute un ingrédient à la liste des ingrédients du cocktail
     public function ajouterIngredient($ingredient)
@@ -71,6 +76,11 @@ class Cocktail implements JsonSerializable
     public function setLiked($liked)
     {
         $this->liked = $liked;
+    }
+
+    public function setIngManquant($nbIngManquant)
+    {
+        $this->ingManquant = $nbIngManquant;
     }
 
     public function jsonSerialize()
