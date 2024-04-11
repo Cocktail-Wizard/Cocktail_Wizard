@@ -233,16 +233,16 @@ async function chargerCocktails() {
 
     cocktailsClassiques.innerHTML = '';
     if(dataClassique) {
-        afficherCocktails(dataClassique, modeleCarteCocktail, cocktailsClassiques);
+        afficherCocktailsPerso(dataClassique, modeleCarteCocktail, cocktailsClassiques);
     }
     cocktailsPersonnels.innerHTML = '';
     if(dataFavoris) {
-        afficherCocktails(dataFavoris, modeleCarteCocktail, cocktailsPersonnels);
+        afficherCocktailsPerso(dataFavoris, modeleCarteCocktail, cocktailsPersonnels);
     }
 
     cocktailsCommunautaires.innerHTML = '';
     if(dataCommunaute) {
-        afficherCocktails(dataCommunaute, modeleCarteCocktail, cocktailsCommunautaires);
+        afficherCocktailsPerso(dataCommunaute, modeleCarteCocktail, cocktailsCommunautaires);
     }
 }
 
@@ -257,7 +257,9 @@ async function chargerCocktails() {
  * @param {HTMLElement} modeleHTML - Le modèle HTML pour la carte de cocktail.
  * @returns {void}
  */
-function afficherCocktails(data, modeleHTML, divParent) {
+
+function afficherCocktailsPerso(data, modeleHTML, divParent) {
+
     const fragment = document.createDocumentFragment();
     const modeleTemp = document.createElement('div');
     modeleTemp.innerHTML = modeleHTML;

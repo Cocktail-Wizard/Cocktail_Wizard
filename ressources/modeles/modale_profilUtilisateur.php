@@ -31,9 +31,7 @@
                 </div>
 
                 <div class="mycocktail-body" id="mycocktailPage">
-                    <div class="cocktail-container">
-                        <!-- Les cartes de cocktail seront ajoutées ici -->
-                    </div>
+                    <div class="conteneur-carte-cocktail-profile" id="conteneur-mes-cocktails"></div>
                 </div>
 
                 <div class="support-body" id="supportPage">

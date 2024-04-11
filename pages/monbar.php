@@ -70,18 +70,14 @@ if (!isset($_SESSION['username'])) {
                 <span class="section-name">Mes favoris</span>
                 <hr class="line right" />
             </div>
-            <div class="conteneur-carte-cocktail" id="conteneur-favoris">
-
-            </div>
+            <div class="conteneur-carte-cocktail" id="conteneur-favoris"></div>
             <section id="cocktails-personnels" class="galerie"></section>
 
             <div class="separator">
                 <span class="section-name">Communautaires</span>
                 <hr class="line right" />
             </div>
-            <div class="conteneur-carte-cocktail" id="conteneur-communautaires">
-
-            </div>
+            <div class="conteneur-carte-cocktail" id="conteneur-communautaires"></div>
             <section id="cocktails-communautaires" class="galerie"></section>
 
         </div>
@@ -108,8 +104,9 @@ if (!isset($_SESSION['username'])) {
     <script src="../ressources/scripts/outils.js"></script>
     <script src="../ressources/scripts/modale.js"></script>
     <script type="module" src="../ressources/scripts/publication.js"></script>
-    <script src="../ressources/scripts/userprofile.js"></script>
     <script src="../ressources/scripts/monbar.js"></script>
+    <script src="../ressources/scripts/userprofile.js"></script>
+
 
 </body>
 
