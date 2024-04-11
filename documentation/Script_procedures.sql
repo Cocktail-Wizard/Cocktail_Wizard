@@ -866,4 +866,48 @@ BEGIN
 END
 //
 
+-- Création de la procédure ajoutIngredientBD
+-- Permet d'ajouter un ingrédient dans la base de donnée afin que celui ci puisse être utilisé
+-- lors de la création de cocktail
+DROP PROCEDURE IF EXISTS ajoutIngredientBD
+
+CREATE PROCEDURE ajoutIngredientBD(IN var_ingredient VARCHAR(255))
+BEGIN
+    IF EXISTS (
+        SELECT nom
+        FROM Ingredient
+        WHERE nom = var_ingredient
+    )
+    THEN
+        SELECT 0 AS success;
+    ELSE
+        INSERT INTO Ingredient (nom)
+        VALUES (var_ingredient);
+        SELECT 1 AS success;
+    END IF;
+END
+//
+
+-- Création de la procédure ajoutAlcoolBD
+-- Permet d'ajouter un alcool dans la base de donnée afin que celui ci puisse être utilisé
+-- lors de la création de cocktail
+DROP PROCEDURE IF EXISTS ajoutAlcoolBD
+
+CREATE PROCEDURE ajoutAlcoolBD(IN var_alcool VARCHAR(255))
+BEGIN
+    IF EXISTS (
+        SELECT nom
+        FROM Alcool
+        WHERE nom = var_alcool
+    )
+    THEN
+        SELECT 0 AS success;
+    ELSE
+        INSERT INTO Alcool (nom)
+        VALUES (var_alcool);
+        SELECT 1 AS success;
+    END IF;
+END
+//
+
 DELIMITER ;
