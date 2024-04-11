@@ -1,3 +1,6 @@
+// Zone d'affichage des cartes cocktails
+const mesCocktails = document.getElementById('conteneur-mes-cocktails');
+
 // Récupérer le modal
 var modal = document.getElementById("my-modal");
 
@@ -42,6 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("supportPage").style.display = "block";
     });
 
+    chargerCocktailsProfile();
+
     // Fonction pour se déconnecter
     document.getElementById("deconnexion").addEventListener("click", function () {
         fetch('/authentification', {
@@ -69,3 +74,13 @@ fetch(`/api/users/${utilisateur}`)
         document.getElementById('commentCount').textContent = user.nb_commentaire;
     })
     .catch(error => console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error));
+
+async function chargerCocktailsProfile() {
+    const data = await faireRequete(`/api/users/${utilisateur}/cocktails`);
+    console.log(data);
+
+    if(data) {
+        mesCocktails.innerHTML = '';
+        afficherCocktailsPerso(data, modeleCarteCocktail, mesCocktails);
+    }
+}

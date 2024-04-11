@@ -105,11 +105,6 @@ aside#contenant-boutons-fixes a img {
     height: 100%;
 }
 
-.cocktail:hover {
-    cursor: pointer;
-    transform: scale(1.05);
-}
-
 #barre-recherche {
     background-image: url("../images/icone-loupe.svg");
     background-repeat: no-repeat;

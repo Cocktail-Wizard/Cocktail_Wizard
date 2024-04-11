@@ -18,6 +18,7 @@ if (!isset($_SESSION['username'])) {
     <link rel="stylesheet" href="../ressources/styles/carte_cocktail.css">
     <link rel="stylesheet" href="../ressources/styles/userprofile.css">
     <link rel="stylesheet" href="../ressources/styles/publication.css">
+    <link rel="stylesheet" href="../ressources/styles/modale.css">
 
 </head>
 
@@ -60,6 +61,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="section-name">Les classiques</span>
                 <hr class="line right" />
             </div>
+
             <div class="conteneur-carte-cocktail" id="conteneur-classique"></div>
             <section id="cocktails-classiques" class="galerie"></section>
 
@@ -67,14 +69,14 @@ if (!isset($_SESSION['username'])) {
                 <span class="section-name">Mes favoris</span>
                 <hr class="line right" />
             </div>
-
+            <div class="conteneur-carte-cocktail" id="conteneur-favoris"></div>
             <section id="cocktails-personnels" class="galerie"></section>
 
             <div class="separator">
                 <span class="section-name">Communautaires</span>
                 <hr class="line right" />
             </div>
-
+            <div class="conteneur-carte-cocktail" id="conteneur-communautaires"></div>
             <section id="cocktails-communautaires" class="galerie"></section>
 
         </div>
@@ -90,6 +92,8 @@ if (!isset($_SESSION['username'])) {
 
     </aside>
 
+    <aside id="contenant-modale"></aside>
+
     <?php require_once(__DIR__ . "/../ressources/modeles/modale_publication.php") ?>
     <?php require_once(__DIR__ . "/../ressources/modeles/modale_profilUtilisateur.php") ?>
 
@@ -97,9 +101,11 @@ if (!isset($_SESSION['username'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../ressources/scripts/outils.js"></script>
+    <script src="../ressources/scripts/modale.js"></script>
     <script type="module" src="../ressources/scripts/publication.js"></script>
-    <script src="../ressources/scripts/userprofile.js"></script>
     <script src="../ressources/scripts/monbar.js"></script>
+    <script src="../ressources/scripts/userprofile.js"></script>
+
 
 </body>
 

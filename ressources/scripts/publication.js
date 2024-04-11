@@ -132,7 +132,8 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
         const quantite = element.textContent.split(' ')[1];
         const unite = element.textContent.split(' ')[2];
         const partiIng = element.textContent.split(' ');
-        partiIng.splice(0, 2);
+      
+        partiIng.splice(0, 3);
         const nomIng = partiIng.join(' ');
 
 

@@ -86,6 +86,60 @@ function afficherCocktails(data) {
     galerie.appendChild(fragment);
 }
 
+// Fonction utilisé pour afficher les cocktails dans le profil. Possible de combiner avec afficherCocktails pour éviter la duplication de code
+function afficherCocktailsPerso(data, modeleHTML, divParent) {
+    const fragment = document.createDocumentFragment();
+    const modeleTemp = document.createElement('div');
+    modeleTemp.innerHTML = modeleHTML;
+    const modeleClone = modeleTemp.firstElementChild.cloneNode(true);
+
+    data.forEach((cocktail) => {
+        if (!cocktail) return;
+
+        const nouveauCocktail = modeleClone.cloneNode(true);
+
+        const nomCocktail = nouveauCocktail.querySelector('.nom-cocktail');
+        nomCocktail.textContent = cocktail.nom;
+
+        const iconeJAime = nouveauCocktail.querySelector('.icone-jaime');
+        iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
+
+        const iconeAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
+        iconeAlcool.src = 'ressources/images/pastille-alcool.svg';
+
+        const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
+        umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur] ?? iconesUmami['default']}.svg`;
+
+        const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
+        imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
+        imageCocktail.loading = 'lazy';
+
+        const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
+        pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+
+        const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
+        compteurJaime.textContent = cocktail.nb_like;
+
+        const infobulleCocktail = nouveauCocktail.querySelector('.text-infobulle');
+        infobulleCocktail.textContent = cocktail.alcool_principale;
+
+        nouveauCocktail.addEventListener('click', (event) => {
+            const idCocktail = event.currentTarget.dataset.idCocktail;
+            sectionModale.style.display = 'block';
+            chargerInformationsModale(cocktail);
+            chargerCommentairesModale(idCocktail, ordreCommentaires);
+            chargerCommenter(cocktail.id_cocktail);
+        });
+
+        nouveauCocktail.dataset.idCocktail = cocktail.id_cocktail;
+
+        fragment.appendChild(nouveauCocktail);
+    });
+
+    divParent.appendChild(fragment);
+
+}
+
 async function chargerInformationsModale(cocktail) {
     actualiserTextElementParId('auteur', `@${cocktail.auteur}`);
     actualiserTextElementParId('compteur-jaime', cocktail.nb_like);
@@ -112,7 +166,7 @@ async function chargerInformationsModale(cocktail) {
 
     const spanJAime = document.getElementById('affichage-jaime');
 
-    if (utilisateur && utilisateur !== cocktail.auteur) {
+    if (utilisateur) {
         spanJAime.addEventListener('click', async () => {
             fetch('/api/cocktails/like', {
                 method: cocktail.liked ? 'DELETE' : 'POST',

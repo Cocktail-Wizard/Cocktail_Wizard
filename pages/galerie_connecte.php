@@ -64,8 +64,8 @@
     <script src="ressources/scripts/outils.js"></script>
     <script src="ressources/scripts/index.js"></script>
     <script src="ressources/scripts/modale.js"></script>
-    <script src="../ressources/scripts/userprofile.js"></script>
     <script type="module" src="ressources/scripts/publication.js"></script>
+    <script src="../ressources/scripts/userprofile.js"></script>
 </body>
 
 </html>
