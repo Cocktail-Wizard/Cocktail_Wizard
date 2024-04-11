@@ -81,6 +81,6 @@ async function chargerCocktailsProfile() {
 
     if(data) {
         mesCocktails.innerHTML = '';
-        afficherCocktails(data, modeleCarteCocktail, mesCocktails);
+        afficherCocktailsPerso(data, modeleCarteCocktail, mesCocktails);
     }
 }
