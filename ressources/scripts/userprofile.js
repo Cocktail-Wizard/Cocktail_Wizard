@@ -76,7 +76,7 @@ fetch(`/api/users/${utilisateur}`)
     .catch(error => console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error));
 
 async function chargerCocktailsProfile() {
-    const data = await faireRequete(`/api/users/${utilisateur}/cocktails`);
+    const data = await faireRequete(`/api/users/${utilisateur}/cocktails?user=${utilisateur}`);
     console.log(data);
 
     if(data) {
