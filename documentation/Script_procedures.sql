@@ -562,6 +562,16 @@ BEGIN
     FROM Cocktail C
     JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
     WHERE CL.id_utilisateur = id_utilisateur
+    AND NOT EXISTS (SELECT IC.id_cocktail
+        FROM Ingredient_Cocktail IC
+        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+        WHERE IC.id_cocktail = C.id_cocktail
+        AND(
+            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE AU.id_alcool = IC.id_alcool AND AU.id_utilisateur = id_utilisateur))
+            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE IU.id_ingredient = IC.id_ingredient AND IU.id_utilisateur = id_utilisateur))
+        )
+    )
     ORDER BY CL.date_like DESC;
 END
 //
@@ -578,12 +588,12 @@ BEGIN
     WHERE NOT EXISTS (
         SELECT IC.id_cocktail
         FROM Ingredient_Cocktail IC
-        LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
-        LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
+        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
         WHERE IC.id_cocktail = C.id_cocktail
-        AND (
-            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
-            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
+        AND(
+            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = utilisateur))
+            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = utilisateur))
         )
     )
     AND C.classique = 1
@@ -603,12 +613,12 @@ BEGIN
     WHERE NOT EXISTS (
         SELECT IC.id_cocktail
         FROM Ingredient_Cocktail IC
-        LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
-        LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
+        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
         WHERE IC.id_cocktail = C.id_cocktail
-        AND (
-            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
-            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
+        AND(
+            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = utilisateur))
+            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = utilisateur))
         )
     )
     AND C.classique = 0
@@ -696,15 +706,13 @@ BEGIN
     JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
     LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
     LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-    LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
-    LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
     WHERE (LOCATE(C.nom, param_recherche) > 0
     OR LOCATE(I.nom, param_recherche) > 0
     OR LOCATE(A.nom, param_recherche) > 0
     OR LOCATE(C.profil_saveur, param_recherche) > 0)
     AND (
-        (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
-        OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
+        (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE AU.id_alcool = IC.id_alcool AND AU.id_utilisateur = id_utilisateur))
+            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE IU.id_ingredient = IC.id_ingredient AND IU.id_utilisateur = id_utilisateur))
     )
     ORDER BY
         CASE
@@ -863,6 +871,50 @@ BEGIN
     );
     DELETE FROM commentaire
     WHERE id_cocktail = var_id_cocktail;
+END
+//
+
+-- Création de la procédure ajoutIngredientBD
+-- Permet d'ajouter un ingrédient dans la base de donnée afin que celui ci puisse être utilisé
+-- lors de la création de cocktail
+DROP PROCEDURE IF EXISTS ajoutIngredientBD
+
+CREATE PROCEDURE ajoutIngredientBD(IN var_ingredient VARCHAR(255))
+BEGIN
+    IF EXISTS (
+        SELECT nom
+        FROM Ingredient
+        WHERE nom = var_ingredient
+    )
+    THEN
+        SELECT 0 AS success;
+    ELSE
+        INSERT INTO Ingredient (nom)
+        VALUES (var_ingredient);
+        SELECT 1 AS success;
+    END IF;
+END
+//
+
+-- Création de la procédure ajoutAlcoolBD
+-- Permet d'ajouter un alcool dans la base de donnée afin que celui ci puisse être utilisé
+-- lors de la création de cocktail
+DROP PROCEDURE IF EXISTS ajoutAlcoolBD
+
+CREATE PROCEDURE ajoutAlcoolBD(IN var_alcool VARCHAR(255))
+BEGIN
+    IF EXISTS (
+        SELECT nom
+        FROM Alcool
+        WHERE nom = var_alcool
+    )
+    THEN
+        SELECT 0 AS success;
+    ELSE
+        INSERT INTO Alcool (nom)
+        VALUES (var_alcool);
+        SELECT 1 AS success;
+    END IF;
 END
 //
 

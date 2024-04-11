@@ -8,6 +8,11 @@
     flex: 0 0 auto;
 }
 
+.cocktail:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
 .icone-cocktail {
     position: absolute;
     height: 1em;
