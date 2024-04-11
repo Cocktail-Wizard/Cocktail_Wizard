@@ -231,17 +231,17 @@ async function chargerCocktails() {
     const dataFavoris = await faireRequete(`/api/users/${utilisateur}/recommandations/type/favoris?user=${utilisateur}`);
     const dataCommunaute = await faireRequete(`/api/users/${utilisateur}/recommandations/type/communaute?user=${utilisateur}`);
 
+    cocktailsClassiques.innerHTML = '';
     if(dataClassique) {
-        cocktailsClassiques.innerHTML = '';
         afficherCocktails(dataClassique, modeleCarteCocktail, cocktailsClassiques);
     }
+    cocktailsPersonnels.innerHTML = '';
     if(dataFavoris) {
-        cocktailsPersonnels.innerHTML = '';
         afficherCocktails(dataFavoris, modeleCarteCocktail, cocktailsPersonnels);
     }
 
+    cocktailsCommunautaires.innerHTML = '';
     if(dataCommunaute) {
-        cocktailsCommunautaires.innerHTML = '';
         afficherCocktails(dataCommunaute, modeleCarteCocktail, cocktailsCommunautaires);
     }
 }
@@ -403,6 +403,7 @@ async function chargerInformationsModale(cocktail) {
                     iconeJAime.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
                     iconeJaimeCarte.src = 'ressources/images/icone-coeur-' + (cocktail.liked ? 'plein' : 'vide') + '.svg';
                     actualiserTextElementParId('compteur-jaime', cocktail.nb_like);
+                    chargerCocktails();
                 }
             })
         });
