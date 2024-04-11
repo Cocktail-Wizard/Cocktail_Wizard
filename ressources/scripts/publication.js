@@ -133,8 +133,7 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
         const unite = element.textContent.split(' ')[2];
         const partiIng = element.textContent.split(' ');
         partiIng.splice(0, 3);
-        const nomIng = trim(partiIng.join(' '));
-
+        const nomIng = partiIng.join(' ');
 
         // Ajouter ces informations au tableau des ingrédients restants
         ingredients.push({ "nomIng": nomIng, "quantite": quantite, "unite": unite });
