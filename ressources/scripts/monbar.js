@@ -283,6 +283,9 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
         imageCocktail.loading = 'lazy';
+        if(cocktail.ingManquant !== null && cocktail.ingManquant > 0) {
+            imageCocktail.style.filter = 'grayscale(100%)';
+        }
 
         const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
         pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
