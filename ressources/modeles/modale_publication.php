@@ -6,7 +6,7 @@
         <!-- Contenu du modal -->
         <div id="publication-content" class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Créer un cocktail</h4>
+                <h4 id="titre" class="modal-title">CRÉER UN COCKTAIL</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 <!-- symbole x pour fermer -->
             </div>
