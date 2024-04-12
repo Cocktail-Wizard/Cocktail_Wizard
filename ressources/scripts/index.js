@@ -6,7 +6,7 @@ const boutonOrdreIcone = document.getElementById('ordre-tri-icone');
 const finAttenteEcriture = 1000; // 1 seconde
 const monBar = document.getElementById('lien-monbar');
 
-
+let estSelect = false;
 let ordreCocktails = 'like';
 
 let chronoEcriture;
@@ -113,6 +113,12 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
         imageCocktail.loading = 'lazy';
+        if(cocktail.ingManquant !== null && cocktail.ingManquant > 0) {
+            imageCocktail.style.filter = 'grayscale(100%)';
+            const ingManquant = nouveauCocktail.querySelector('.ingredient-manquant');
+            ingManquant.style.display = 'block';
+            ingManquant.textContent = 'Il vous manque ' + cocktail.ingManquant + ' ingrédient' + (cocktail.ingManquant > 1 ? 's' : '');
+        }
 
         const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
         pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
@@ -247,14 +253,30 @@ async function chargerCommentairesModale(idCocktail) {
 
 async function chercherCocktail() {
     const recherche = barreRecherche.value.replace(/[^a-zA-Z0-9]/g, '_');
-    const endpoint = recherche ? `/recherche/${recherche}` : '';
-    const user = utilisateur ? '?user=' + utilisateur : '';
-    const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}${endpoint}${user}`);
-
-    if (data) {
-        galerie.innerHTML = '';
-        afficherCocktails(data);
+    if(estSelect === false) {
+        const endpoint = recherche ? `/recherche/${recherche}` : '';
+        const user = utilisateur ? '?user=' + utilisateur : '';
+        const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}${endpoint}${user}`);
+        if (data) {
+            galerie.innerHTML = '';
+            afficherCocktails(data);
+        }
     }
+    else if(estSelect === true && recherche) {
+        const data = await faireRequete(`/api/users/${utilisateur}/cocktails/tri/${ordreCocktails}/recherche/${recherche}`);
+        if (data) {
+            galerie.innerHTML = '';
+            afficherCocktailsPerso(data, modeleCarteCocktail, galerie);
+        }
+    }
+    else {
+        const data = await faireRequete(`/api/users/${utilisateur}/recommandations/tri/${ordreCocktails}`);
+        if (data) {
+            galerie.innerHTML = '';
+            afficherCocktailsPerso(data, modeleCarteCocktail, galerie);
+        }
+    }
+
 }
 
 async function ordonnerCocktails() {
@@ -305,3 +327,23 @@ function chargerCommenter(id_cocktail) {
         });
     });
 }
+
+document.querySelectorAll('input[type=radio]').forEach(radio => {
+
+        radio.addEventListener('mousedown', function(event) {
+            estSelect = this.checked;
+        });
+
+        radio.addEventListener('click', function(event) {
+            if (estSelect) {
+                this.checked = false;
+                estSelect = false;
+                chercherCocktail();
+            }
+            else {
+                this.checked = true;
+                estSelect = true;
+                chercherCocktail();
+            }
+        });
+});

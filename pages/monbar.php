@@ -45,7 +45,7 @@ if (!isset($_SESSION['username'])) {
 
     <main>
         <div class="separator">
-            <span class="section-name">Mes ingredients</span>
+            <span class="section-name">Mes ingrédients</span>
             <hr class="line right" />
 
             <section class="ingredients">
