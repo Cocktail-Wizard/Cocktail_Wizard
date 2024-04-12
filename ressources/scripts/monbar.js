@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     modeleCarteCocktail = await chargerModeleHTML('../ressources/modeles/cocktail_carte.html');
 
-    if(!modeleCarteCocktail) {
+    if (!modeleCarteCocktail) {
         console.error('Impossible de charger le modèle de carte de cocktail.');
         return;
     }
@@ -232,16 +232,16 @@ async function chargerCocktails() {
     const dataCommunaute = await faireRequete(`/api/users/${utilisateur}/recommandations/type/communaute?user=${utilisateur}`);
 
     cocktailsClassiques.innerHTML = '';
-    if(dataClassique) {
+    if (dataClassique) {
         afficherCocktailsPerso(dataClassique, modeleCarteCocktail, cocktailsClassiques);
     }
     cocktailsPersonnels.innerHTML = '';
-    if(dataFavoris) {
+    if (dataFavoris) {
         afficherCocktailsPerso(dataFavoris, modeleCarteCocktail, cocktailsPersonnels);
     }
 
     cocktailsCommunautaires.innerHTML = '';
-    if(dataCommunaute) {
+    if (dataCommunaute) {
         afficherCocktailsPerso(dataCommunaute, modeleCarteCocktail, cocktailsCommunautaires);
     }
 }
@@ -283,7 +283,7 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
         imageCocktail.loading = 'lazy';
-        if(cocktail.ingManquant !== null && cocktail.ingManquant > 0) {
+        if (cocktail.ingManquant !== null && cocktail.ingManquant > 0) {
             imageCocktail.style.filter = 'grayscale(100%)';
             const ingManquant = nouveauCocktail.querySelector('.ingredient-manquant');
             ingManquant.style.display = 'block';

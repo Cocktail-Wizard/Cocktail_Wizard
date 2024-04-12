@@ -34,6 +34,18 @@
     --palette-button-hover-color: #ff7931;
 
     --palette-border-color: #17dfea;
+
+    --orange-neon-box:
+        0 0 2px #ff5c05,
+        0 0 3px #ff5c05,
+        0 0 5px #ff5c05,
+        0 0 8px #ff5c05,
+        0 0 13px #e85505,
+        0 0 15px #e85505,
+        0 0 18px #c54b0a,
+        0 0 25px #c54b0a;
+
+
 }
 
 * {

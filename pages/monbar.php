@@ -35,8 +35,8 @@ if (!isset($_SESSION['username'])) {
 
         <h1 class="neonText-pink">COCKTAIL WIZARD</h1>
         <div class="button-container">
-            <a class="neon-orange-low button " id="bouton-galerie" href="/galerie">
-                <img src="../ressources/images/icone-galerie.svg" alt="Galerie de cocktails">
+            <a id="bouton-galerie" href="/galerie">
+                <img class="galerie-pic" src="../ressources/images/icone-galerie.svg" alt="Galerie de cocktails">
             </a>
         </div>
     </header>
@@ -85,10 +85,10 @@ if (!isset($_SESSION['username'])) {
     </main>
 
     <aside id="deux-boutons">
-        <button class="neon-orange-low">
+        <button>
             <img id=" btnAbout" src="../ressources/images/info.svg" alt="Info sur la page">
         </button>
-        <button class="neon-orange-low" type="button" id="publish" data-bs-toggle="modal" data-bs-target="#mon-modal">
+        <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#mon-modal">
             <img id="btnPublish" src="../ressources/images/feather.svg" alt="Modale de publication">
         </button>
 

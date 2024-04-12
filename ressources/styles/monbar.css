@@ -6,6 +6,7 @@
 root {
     --publication-width: 250px;
     --publication-height: calc(var(--publication-width * 4 / 3));
+
 }
 
 /* General Styles */
@@ -55,7 +56,7 @@ main {
     align-items: center;
     position: absolute;
     top: 1vh;
-    left: 3vh;
+    left: 1vh;
 }
 
 
@@ -63,11 +64,14 @@ main {
     width: 8vh;
     height: 8vh;
     border-radius: 50%;
-    border: 2px solid var(--palette-border-color);
     overflow: hidden;
     margin-left: 0.5vh;
     display: flex;
     justify-content: center;
+}
+
+#profil-utilisateur:hover {
+    box-shadow: var(--orange-neon-box);
 }
 
 .profile-pic {
@@ -134,13 +138,25 @@ header h1 {
 }
 
 #boite-recherche {
-    font-size: 15px;
+    font-size: 20px;
     height: 50px;
     width: 300px;
     border-radius: 15px;
     padding-left: 5px;
     background-color: var(--palette-background-secondary-color);
     color: var(--palette-lighttext-color);
+}
+
+#boite-recherche:focus {
+    box-shadow:
+        0 0 2px #17dfea,
+        0 0 3px #17dfea,
+        0 0 5px #17dfea,
+        0 0 8px #17dfea,
+        0 0 13px #1acbd5,
+        0 0 15px #1acbd5,
+        0 0 18px #25adb4,
+        0 0 25px #25adb4;
 }
 
 #liste-ingredients {
@@ -159,18 +175,27 @@ header h1 {
     z-index: 2;
     max-height: 200px;
     overflow-y: auto;
-    width: 310px;
+    width: 300px;
 }
 
 .ingredient-item {
     padding: 5px 0;
-    border-bottom: 1px solid var(--palette-border-color);
+    font-size: 20px;
+    border-bottom: 1px solid var(--palette-button-border-color);
     color: var(--palette-lighttext-color);
     cursor: pointer;
 }
 
 .ingredient-item:hover {
+    color: var(--palette-lighttext-color);
     background-color: var(--palette-button-color-hover);
+    box-shadow: var(--orange-neon-box);
+
+    text-shadow: 0 0 1px #ea00d9,
+        0 0 2px #ea00d9,
+        0 0 3px #d60bc8,
+        0 0 5px #ad12a2;
+
 }
 
 .ingredient-item:last-child {
@@ -191,17 +216,17 @@ header h1 {
     border-radius: 8px;
 }
 
-/* .selected-ingredient {
-    display: inline-block;
-    padding: 10px;
-    border: 2px solid var(--palette-border-color);
-    border-radius: 20px;
-    background-color: var(--palette-button-color);
-    margin: 5px;
-    white-space: nowrap;
-    box-shadow: 2px 2px 4px rgb(0 0 0 / 30%);
-    cursor: pointer;
-} */
+.boite-ingredients-selectionnes:hover {
+    box-shadow:
+        0 0 2px #17dfea,
+        0 0 3px #17dfea,
+        0 0 5px #17dfea,
+        0 0 8px #17dfea,
+        0 0 13px #1acbd5,
+        0 0 15px #1acbd5,
+        0 0 18px #25adb4,
+        0 0 25px #25adb4;
+}
 
 /* Body Styles */
 .body {
@@ -217,6 +242,7 @@ header h1 {
     width: 100%;
     padding: 20px 0;
     box-sizing: border-box;
+    border: none;
     text-align: center;
 }
 
@@ -265,7 +291,7 @@ header h1 {
 }
 
 #deux-boutons button:hover {
-    opacity: 1;
+    box-shadow: var(--orange-neon-box);
 }
 
 #deux-boutons button img {
@@ -288,7 +314,6 @@ header h1 {
     gap: var(--default-gap);
     justify-content: flex-start;
     margin: auto;
-    border: 3px solid var(--palette-border-color);
     background-color: var(--palette-background-color);
     border-radius: var(--default-border-radius);
 }
@@ -302,26 +327,47 @@ header h1 {
     font-size: 1.5vw;
     padding: 0.5vh 1vw;
     border: var(--palette-button-border-color);
+    top: 1vh;
+    right: 1vh;
+    width: 8vh;
+    height: 8vh;
+    border-radius: 8px;
+}
 
+.galerie-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: flex;
+    justify-content: center;
 }
 
 #bouton-galerie:hover,
 #bouton-deconnexion:hover {
     background-color: var(--palette-button-color-hover);
+    box-shadow: var(--orange-neon-box);
 }
 
 .ingredients-selectionne {
-    background-color: var(--palette-button-color);
+    background-color: var(--palette-background-color);
     padding: 10px;
     margin: 10px;
-    color: black;
-    border: 3px solid var(--palette-border-color);
+    color: var(--palette-lighttext-color);
+    border: 2px solid var(--palette-button-border-color);
     border-radius: 25px;
     cursor: pointer;
+    font-style: italic;
 }
 
 .ingredients-selectionne:hover {
+    color: var(--palette-lighttext-color);
     background-color: var(--palette-button-color-hover);
+    box-shadow: var(--orange-neon-box);
+
+    text-shadow: 0 0 1px #ea00d9,
+        0 0 2px #ea00d9,
+        0 0 3px #d60bc8,
+        0 0 5px #ad12a2;
 }
 
 .conteneur-carte-cocktail {
