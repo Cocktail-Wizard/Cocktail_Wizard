@@ -37,13 +37,11 @@
                     <br>
 
                     <label for="preparation-cocktail">Préparation:</label><br>
-                    <textarea id="preparation-texte" name="preparation-cocktail" rows="4" cols="50"
-                        placeholder="Expliquez-nous comment créer votre fabuleuse création, les étapes, la méthode et, si jamais vous avez des petites notes à rajouter, faites-nous en part!"></textarea><br>
+                    <textarea id="preparation-texte" name="preparation-cocktail" rows="4" cols="50" placeholder="Expliquez-nous comment créer votre fabuleuse création, les étapes, la méthode et, si jamais vous avez des petites notes à rajouter, faites-nous en part!"></textarea><br>
 
 
                     <label for="description-cocktail">Description:</label><br>
-                    <textarea id="description-texte" name="description-cocktail" rows="4" cols="50"
-                        placeholder="Une description n'est pas nécessaire, mais elle permet à notre communauté de voir à travers vos yeux."></textarea><br>
+                    <textarea id="description-texte" name="description-cocktail" rows="4" cols="50" placeholder="Une description n'est pas nécessaire, mais elle permet à notre communauté de voir à travers vos yeux."></textarea><br>
 
                     <div id="dropdown-choices">
                         <label for="flavor-profile">Profil de saveur:</label>

@@ -1,17 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-
-/* Modal */
+@font-face {
+    font-family: 'Elianto';
+    src: url('../styles/Elianto/Elianto/Elianto-Regular.ttf') format('truetype');
+}
 
 
 /* Contenu du Modal */
 #publication-content {
     position: relative;
-    background-color: var(--palette-secondary-background-color);
+    background-color: var(--palette-modal-background-color);
     margin: auto;
     padding-top: 10px;
     border: 1px solid var(--palette-border-color);
     width: 80%;
-
+    font-family: 'Elianto', sans-serif;
     /* template de "boxshadow" */
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
     height: auto;
@@ -27,7 +28,7 @@
 
 #mon-modal label {
     font-weight: bold;
-    color: var(--palette-button-color);
+    color: var(--palette-lighttext-color);
 }
 
 #mon-modal textarea {
@@ -123,6 +124,11 @@
     100% {
         transform: translateX(0);
     }
+}
+
+label {
+    font-style: italic;
+    color: var(--palette-lighttext-color);
 }
 
 .invalid-input {
