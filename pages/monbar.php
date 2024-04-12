@@ -48,6 +48,7 @@ if (!isset($_SESSION['username'])) {
             <span class="neonText-pink-smol section-name neon-blue-low">Mes ingredients</span>
             <hr class="line neon-blue-low" />
 
+
             <section class="ingredients">
                 <div id="contenant-boite-recherche" class="dropdown">
                     <input type="text" id="boite-recherche" placeholder="Ajouter un ingredient...">

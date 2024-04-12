@@ -412,20 +412,18 @@ DROP PROCEDURE IF EXISTS GetCocktailGalerieFiltrer;
 
 CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50))
 BEGIN
-    SELECT C.id_cocktail
-    FROM Cocktail C
-    WHERE NOT EXISTS (
-        SELECT IC.id_cocktail
+    SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
         FROM Ingredient_Cocktail IC
-        LEFT JOIN Ingredient_Utilisateur IU ON IC.id_ingredient = IU.id_ingredient
-        LEFT JOIN Alcool_Utilisateur AU ON IC.id_alcool = AU.id_alcool
+        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
         WHERE IC.id_cocktail = C.id_cocktail
-        AND (
-            (IC.id_ingredient IS NOT NULL AND (IU.id_utilisateur != utilisateur OR IU.id_utilisateur IS NULL))
-            OR (IC.id_alcool IS NOT NULL AND (AU.id_utilisateur != utilisateur OR AU.id_utilisateur IS NULL))
+        AND(
+            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = utilisateur))
+            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = utilisateur))
         )
-    )
-    ORDER BY
+    ) AS ing_manquant
+    FROM Cocktail C
+    ORDER BY ing_manquant ASC,
         CASE
             WHEN param_orderby = 'date' THEN C.date_publication
             WHEN param_orderby = 'like' THEN C.nb_like
@@ -558,11 +556,7 @@ DROP PROCEDURE IF EXISTS GetListeCocktailPossibleFavorie;
 
 CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT)
 BEGIN
-    SELECT C.id_cocktail
-    FROM Cocktail C
-    JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
-    WHERE CL.id_utilisateur = id_utilisateur
-    AND NOT EXISTS (SELECT IC.id_cocktail
+    SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
         FROM Ingredient_Cocktail IC
         LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
         LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
@@ -570,9 +564,11 @@ BEGIN
         AND(
             (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE AU.id_alcool = IC.id_alcool AND AU.id_utilisateur = id_utilisateur))
             OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE IU.id_ingredient = IC.id_ingredient AND IU.id_utilisateur = id_utilisateur))
-        )
-    )
-    ORDER BY CL.date_like DESC;
+        )) AS ing_manquant
+    FROM Cocktail C
+    JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
+    WHERE CL.id_utilisateur = id_utilisateur
+    ORDER BY ing_manquant ASC, CL.date_like DESC;
 END
 //
 
@@ -583,10 +579,7 @@ DROP PROCEDURE IF EXISTS GetCocktailsPossibleClassique;
 
 CREATE PROCEDURE GetCocktailsPossibleClassique(IN utilisateur INT)
 BEGIN
-    SELECT C.id_cocktail
-    FROM Cocktail C
-    WHERE NOT EXISTS (
-        SELECT IC.id_cocktail
+    SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
         FROM Ingredient_Cocktail IC
         LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
         LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
@@ -595,9 +588,10 @@ BEGIN
             (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = utilisateur))
             OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = utilisateur))
         )
-    )
-    AND C.classique = 1
-    ORDER BY C.nb_like DESC;
+    ) AS ing_manquant
+    FROM Cocktail C
+    WHERE C.classique = 1
+    ORDER BY ing_manquant ASC, C.nb_like DESC;
 END
 //
 
@@ -608,10 +602,7 @@ DROP PROCEDURE IF EXISTS GetCocktailsPossibleCommunautaire;
 
 CREATE PROCEDURE GetCocktailsPossibleCommunautaire(IN utilisateur INT)
 BEGIN
-    SELECT C.id_cocktail
-    FROM Cocktail C
-    WHERE NOT EXISTS (
-        SELECT IC.id_cocktail
+    SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
         FROM Ingredient_Cocktail IC
         LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
         LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
@@ -620,9 +611,10 @@ BEGIN
             (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = utilisateur))
             OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = utilisateur))
         )
-    )
-    AND C.classique = 0
-    ORDER BY C.nb_like DESC;
+    ) AS ing_manquant
+    FROM Cocktail C
+    WHERE C.classique = 0
+    ORDER BY ing_manquant ASC, C.nb_like DESC;
 END
 //
 
@@ -678,10 +670,12 @@ BEGIN
     JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
     LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
     LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+    JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
     WHERE LOCATE(param_recherche ,C.nom) > 0
     OR LOCATE(param_recherche , I.nom) > 0
     OR LOCATE( param_recherche,A.nom) > 0
     OR LOCATE(param_recherche ,C.profil_saveur) > 0
+    OR LOCATE(param_recherche, U.nom) > 0
     ORDER BY
         CASE
             WHEN param_orderby = 'date' THEN C.date_publication
@@ -701,20 +695,26 @@ CREATE PROCEDURE RechercheCocktailFiltrer(
     IN param_recherche VARCHAR(255), IN id_utilisateur INT, IN param_orderby VARCHAR(50)
 )
 BEGIN
-    SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like
+    SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like,
+    (SELECT COUNT(IC.id_ingredient_cocktail)
+        FROM Ingredient_Cocktail IC
+        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+        WHERE IC.id_cocktail = C.id_cocktail
+        AND(
+            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE id_alcool = IC.id_alcool AND AU.id_utilisateur = id_utilisateur))
+            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE id_ingredient = IC.id_ingredient AND IU.id_utilisateur = id_utilisateur))
+        )
+    ) AS ing_manquant
     FROM Cocktail C
     JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
     LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
     LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-    WHERE (LOCATE(C.nom, param_recherche) > 0
-    OR LOCATE(I.nom, param_recherche) > 0
-    OR LOCATE(A.nom, param_recherche) > 0
-    OR LOCATE(C.profil_saveur, param_recherche) > 0)
-    AND (
-        (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE AU.id_alcool = IC.id_alcool AND AU.id_utilisateur = id_utilisateur))
-            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE IU.id_ingredient = IC.id_ingredient AND IU.id_utilisateur = id_utilisateur))
-    )
-    ORDER BY
+    WHERE (LOCATE(param_recherche, C.nom) > 0
+    OR LOCATE(param_recherche, I.nom) > 0
+    OR LOCATE(param_recherche, A.nom) > 0
+    OR LOCATE(param_recherche, C.profil_saveur) > 0)
+    ORDER BY ing_manquant ASC,
         CASE
             WHEN param_orderby = 'date' THEN C.date_publication
             WHEN param_orderby = 'like' THEN C.nb_like
@@ -813,8 +813,6 @@ BEGIN
     END IF;
 END
 //
-
-CALL supprimerCompte(1);
 
 -- Création de la procédure supprimerCocktail
 -- Permet de supprimer un cocktail

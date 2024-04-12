@@ -17,6 +17,7 @@ body {
     background-color: var(--palette-background-color);
     color: var(--palette-lighttext-color);
     font-family: 'Elianto', sans-serif;
+
 }
 
 header {

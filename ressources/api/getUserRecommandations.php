@@ -33,6 +33,7 @@ require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
 $idCocktails = [];
 $cocktails = [];
+$ingManquants = [];
 
 // Connexion à la base de données
 $conn = connexionBD();
@@ -99,6 +100,7 @@ if ($resultat->num_rows > 0) {
     //Ajoute les id des cocktails à la liste
     while ($row = $resultat->fetch_assoc()) {
         $idCocktails[] = $row['id_cocktail'];
+        $ingManquants[$row['id_cocktail']] = $row['ing_manquant'];
     }
 } else {
     http_response_code(204);
@@ -107,6 +109,10 @@ if ($resultat->num_rows > 0) {
 
 foreach ($idCocktails as $id) {
     $cocktails[] = InfoAffichageCocktail($id, $conn);
+}
+
+foreach ($cocktails as $cocktail) {
+    $cocktail->setIngManquant($ingManquants[$cocktail->getIdCocktail()]);
 }
 
 echo json_encode($cocktails);

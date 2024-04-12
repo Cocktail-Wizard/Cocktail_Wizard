@@ -38,11 +38,46 @@ header h1 {
 
 nav {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     position: sticky;
     top: 0;
     width: 100%;
     z-index: 1;
+}
+
+.nav-top {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-radio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#new-radio {
+    margin-bottom: 5px;
+}
+
+#radio-cocktail {
+    background-color: white;
+    opacity: 0.8;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-top : 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color : var(--palette-button-text-color);
+}
+
+.nav-radio label {
+    font-size: 18px;
+    color: var(--palette);
 }
 
 #deux-boutons {
@@ -117,6 +152,7 @@ aside#contenant-boutons-fixes a img {
     outline: none;
     padding: 10px 0 10px 50px;
     width: clamp(200px, calc(var(--publication-width) * 1.85), 75%);
+    background-color: white;
 }
 
 #ordre-tri {
