@@ -143,3 +143,4 @@ INSERT INTO Alcool (nom) VALUES ('Kahlúa');
 INSERT INTO Alcool (nom) VALUES ('Jägermeister');
 INSERT INTO Alcool (nom) VALUES ('Campari');
 INSERT INTO Alcool (nom) VALUES ('Fernet');
+
