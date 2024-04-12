@@ -257,22 +257,22 @@ async function chercherCocktail() {
         const endpoint = recherche ? `/recherche/${recherche}` : '';
         const user = utilisateur ? '?user=' + utilisateur : '';
         const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}${endpoint}${user}`);
+        galerie.innerHTML = '';
         if (data) {
-            galerie.innerHTML = '';
             afficherCocktails(data);
         }
     }
     else if(estSelect === true && recherche) {
         const data = await faireRequete(`/api/users/${utilisateur}/cocktails/tri/${ordreCocktails}/recherche/${recherche}`);
+        galerie.innerHTML = '';
         if (data) {
-            galerie.innerHTML = '';
             afficherCocktailsPerso(data, modeleCarteCocktail, galerie);
         }
     }
     else {
         const data = await faireRequete(`/api/users/${utilisateur}/recommandations/tri/${ordreCocktails}`);
+        galerie.innerHTML = '';
         if (data) {
-            galerie.innerHTML = '';
             afficherCocktailsPerso(data, modeleCarteCocktail, galerie);
         }
     }
