@@ -79,6 +79,7 @@
     text-align: center;
     padding : 1% 2%;
     border-radius: 10px;
+    display: none;
 }
 
 .infobulle-cocktail {

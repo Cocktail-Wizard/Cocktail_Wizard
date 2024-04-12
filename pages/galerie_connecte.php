@@ -29,11 +29,19 @@
 
     <main>
         <nav>
-            <input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus>
-            <button id="ordre-tri" title="Ordonner par mentions j'aime">
-                <img id="ordre-tri-icone" src="ressources/images/icone-calendrier.svg" alt="Ordre">
-                <img src="ressources/images/tete-fleche-bas.svg" alt="Ordre décroissant">
-            </button>
+            <div class="nav-top">
+                <input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus>
+                <button id="ordre-tri" title="Ordonner par mentions j'aime">
+                    <img id="ordre-tri-icone" src="ressources/images/icone-calendrier.svg" alt="Ordre">
+                    <img src="ressources/images/tete-fleche-bas.svg" alt="Ordre décroissant">
+                </button>
+            </div>
+            <div class="nav-radio">
+                <div id="radio-cocktail">
+                    <input type="radio" id="new-radio" name="radio-group">
+                    <label for="new-radio">Cocktails réalisables</label>
+                </div>
+            </div>
         </nav>
 
         <section id="galerie"></section>

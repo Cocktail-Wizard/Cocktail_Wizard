@@ -693,20 +693,26 @@ CREATE PROCEDURE RechercheCocktailFiltrer(
     IN param_recherche VARCHAR(255), IN id_utilisateur INT, IN param_orderby VARCHAR(50)
 )
 BEGIN
-    SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like
+    SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like,
+    (SELECT COUNT(IC.id_ingredient_cocktail)
+        FROM Ingredient_Cocktail IC
+        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+        WHERE IC.id_cocktail = C.id_cocktail
+        AND(
+            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE id_alcool = IC.id_alcool AND AU.id_utilisateur = id_utilisateur))
+            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE id_ingredient = IC.id_ingredient AND IU.id_utilisateur = id_utilisateur))
+        )
+    ) AS ing_manquant
     FROM Cocktail C
     JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
     LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
     LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-    WHERE (LOCATE(C.nom, param_recherche) > 0
-    OR LOCATE(I.nom, param_recherche) > 0
-    OR LOCATE(A.nom, param_recherche) > 0
-    OR LOCATE(C.profil_saveur, param_recherche) > 0)
-    AND (
-        (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE AU.id_alcool = IC.id_alcool AND AU.id_utilisateur = id_utilisateur))
-            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE IU.id_ingredient = IC.id_ingredient AND IU.id_utilisateur = id_utilisateur))
-    )
-    ORDER BY
+    WHERE (LOCATE(param_recherche, C.nom) > 0
+    OR LOCATE(param_recherche, I.nom) > 0
+    OR LOCATE(param_recherche, A.nom) > 0
+    OR LOCATE(param_recherche, C.profil_saveur) > 0)
+    ORDER BY ing_manquant ASC,
         CASE
             WHEN param_orderby = 'date' THEN C.date_publication
             WHEN param_orderby = 'like' THEN C.nb_like

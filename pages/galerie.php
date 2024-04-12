@@ -20,11 +20,13 @@
 
     <main>
         <nav>
-            <input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus>
-            <button id="ordre-tri" title="Ordonner par mentions j'aime">
-                <img id="ordre-tri-icone" src="ressources/images/icone-calendrier.svg" alt="Ordre">
-                <img src="ressources/images/tete-fleche-bas.svg" alt="Ordre décroissant">
-            </button>
+            <div class="nav-top">
+                <input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus>
+                <button id="ordre-tri" title="Ordonner par mentions j'aime">
+                    <img id="ordre-tri-icone" src="ressources/images/icone-calendrier.svg" alt="Ordre">
+                    <img src="ressources/images/tete-fleche-bas.svg" alt="Ordre décroissant">
+                </button>
+            </div>
         </nav>
 
         <section id="galerie"></section>
