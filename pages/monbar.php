@@ -56,7 +56,7 @@ if (!isset($_SESSION['username'])) {
                 </div>
             </section>
         </div>
-        <div class="boite-ingredients-selectionnes" id=" ingredients-selectionne"></div>
+        <div class="boite-ingredients-selectionnes" id="ingredients-selectionne"></div>
         <div class="body">
             <div class="separator">
                 <span class=" neonText-pink-smol section-name neon-blue-low">Les classiques</span>
