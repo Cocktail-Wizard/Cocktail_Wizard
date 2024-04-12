@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
 
         <h1 class="neonText-pink">COCKTAIL WIZARD</h1>
         <div class="button-container">
-            <a class="button" id="bouton-galerie" href="/galerie">
+            <a class="neon-orange-low button " id="bouton-galerie" href="/galerie">
                 <img src="../ressources/images/icone-galerie.svg" alt="Galerie de cocktails">
             </a>
         </div>
@@ -45,7 +45,7 @@ if (!isset($_SESSION['username'])) {
 
     <main>
         <div class="separator">
-            <span class="section-name neon-blue-low">Mes ingredients</span>
+            <span class="neonText-pink-smol section-name neon-blue-low">Mes ingredients</span>
             <hr class="line neon-blue-low" />
 
             <section class="ingredients">
@@ -58,7 +58,7 @@ if (!isset($_SESSION['username'])) {
         <div class="boite-ingredients-selectionnes" id=" ingredients-selectionne"></div>
         <div class="body">
             <div class="separator">
-                <span class="section-name neon-blue-low neonText-pink-smol">Les classiques</span>
+                <span class=" neonText-pink-smol section-name neon-blue-low">Les classiques</span>
                 <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-classique">
@@ -67,14 +67,14 @@ if (!isset($_SESSION['username'])) {
             <section id="cocktails-classiques" class="galerie"></section>
 
             <div class="separator">
-                <span class="section-name neon-blue-low">Mes favoris</span>
+                <span class=" neonText-pink-smol section-name neon-blue-low">Mes favoris</span>
                 <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-favoris"></div>
             <section id="cocktails-personnels" class="galerie"></section>
 
             <div class="separator">
-                <span class="section-name neon-blue-low">Communautaires</span>
+                <span class="neonText-pink-smol section-name neon-blue-low">Communautaires</span>
                 <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-communautaires"></div>
@@ -84,10 +84,10 @@ if (!isset($_SESSION['username'])) {
     </main>
 
     <aside id="deux-boutons">
-        <button>
-            <img id="btnAbout" src="../ressources/images/info.svg" alt="Info sur la page">
+        <button class="neon-orange-low">
+            <img id=" btnAbout" src="../ressources/images/info.svg" alt="Info sur la page">
         </button>
-        <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#mon-modal">
+        <button class="neon-orange-low" type="button" id="publish" data-bs-toggle="modal" data-bs-target="#mon-modal">
             <img id="btnPublish" src="../ressources/images/feather.svg" alt="Modale de publication">
         </button>
 
@@ -98,7 +98,7 @@ if (!isset($_SESSION['username'])) {
     <?php require_once(__DIR__ . "/../ressources/modeles/modale_publication.php") ?>
     <?php require_once(__DIR__ . "/../ressources/modeles/modale_profilUtilisateur.php") ?>
 
-    <footer>Cocktail Wizard &copy - 2024</footer>
+    <footer class="neonText-pink">Cocktail Wizard &copy - 2024</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../ressources/scripts/outils.js"></script>

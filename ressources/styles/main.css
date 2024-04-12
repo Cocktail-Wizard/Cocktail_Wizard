@@ -29,7 +29,8 @@
     --palette-darktext-color: #711c91;
     --palette-lighttext-color: #ea00d9;
 
-    --palette-button-color: #ff5c05;
+    --palette-button-color: #ff7931;
+    --palette-button-border-color: #ff5c05;
     --palette-button-hover-color: #ff7931;
 
     --palette-border-color: #17dfea;
@@ -104,7 +105,18 @@ body>footer {
         0 0 15px #1acbd5,
         0 0 18px #25adb4,
         0 0 25px #25adb4;
+}
 
+.neon-orange-low {
+    box-shadow:
+        0 0 2px #ff5c05,
+        0 0 3px #ff5c05,
+        0 0 5px #ff5c05,
+        0 0 8px #ff5c05,
+        0 0 13px #e85505,
+        0 0 15px #e85505,
+        0 0 18px #c54b0a,
+        0 0 25px #c54b0a;
 }
 
 .neonText-pink {
@@ -120,9 +132,8 @@ body>footer {
 }
 
 .neonText-pink-smol {
-    text-shadow:
+    text-shadow: 0 0 1px #ea00d9,
         0 0 2px #ea00d9,
-        0 0 3px #ea00d9,
-        0 0 5px #d60bc8,
-        0 0 8px #ad12a2,
+        0 0 3px #d60bc8,
+        0 0 5px #ad12a2;
 }
