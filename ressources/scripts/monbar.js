@@ -285,6 +285,8 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
         imageCocktail.loading = 'lazy';
         if(cocktail.ingManquant !== null && cocktail.ingManquant > 0) {
             imageCocktail.style.filter = 'grayscale(100%)';
+            const ingManquant = nouveauCocktail.querySelector('.ingredient-manquant');
+            ingManquant.textContent = 'Il vous manque ' + cocktail.ingManquant + ' ingrédient' + (cocktail.ingManquant > 1 ? 's' : '');
         }
 
         const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
