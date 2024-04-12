@@ -33,7 +33,7 @@ if (!isset($_SESSION['username'])) {
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
         </div>
 
-        <h1>COCKTAIL WIZARD</h1>
+        <h1 class="neonText-pink">COCKTAIL WIZARD</h1>
         <div class="button-container">
             <a class="button" id="bouton-galerie" href="/galerie">
                 <img src="../ressources/images/icone-galerie.svg" alt="Galerie de cocktails">
@@ -45,8 +45,8 @@ if (!isset($_SESSION['username'])) {
 
     <main>
         <div class="separator">
-            <span class="section-name">Mes ingredients</span>
-            <hr class="line right" />
+            <span class="section-name neon-blue-low">Mes ingredients</span>
+            <hr class="line neon-blue-low" />
 
             <section class="ingredients">
                 <div id="contenant-boite-recherche" class="dropdown">
@@ -55,11 +55,11 @@ if (!isset($_SESSION['username'])) {
                 </div>
             </section>
         </div>
-        <div class="boite-ingredients-selectionnes" id="ingredients-selectionne"></div>
+        <div class="boite-ingredients-selectionnes" id=" ingredients-selectionne"></div>
         <div class="body">
             <div class="separator">
-                <span class="section-name">Les classiques</span>
-                <hr class="line right" />
+                <span class="section-name neon-blue-low neonText-pink-smol">Les classiques</span>
+                <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-classique">
 
@@ -67,15 +67,15 @@ if (!isset($_SESSION['username'])) {
             <section id="cocktails-classiques" class="galerie"></section>
 
             <div class="separator">
-                <span class="section-name">Mes favoris</span>
-                <hr class="line right" />
+                <span class="section-name neon-blue-low">Mes favoris</span>
+                <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-favoris"></div>
             <section id="cocktails-personnels" class="galerie"></section>
 
             <div class="separator">
-                <span class="section-name">Communautaires</span>
-                <hr class="line right" />
+                <span class="section-name neon-blue-low">Communautaires</span>
+                <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-communautaires"></div>
             <section id="cocktails-communautaires" class="galerie"></section>
