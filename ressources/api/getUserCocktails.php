@@ -36,8 +36,8 @@ $id_user = usernameToId($username, $conn);
 
 try {
     //Demande les cocktails fait par l'utilisateur
-    $requete_preparee = $conn->prepare("CALL GetMesCocktails(?)");
-    $requete_preparee->bind_param("i", $id_user);
+    $requete_preparee = $conn->prepare("CALL GetMesCocktails(?,?,?)");
+    $requete_preparee->bind_param("iii", $id_user, $page, $nbCocktailPage);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
 

@@ -390,8 +390,11 @@ END
 -- param_orderby: 'date' ou 'like'
 DROP PROCEDURE IF EXISTS GetCocktailGalerieNonFiltrer;
 
-CREATE PROCEDURE GetCocktailGalerieNonFiltrer(IN param_orderby VARCHAR(50))
+CREATE PROCEDURE GetCocktailGalerieNonFiltrer(IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
 BEGIN
+
+    SET @debut = (page - 1) * cocktail_par_page;
+
     SELECT C.id_cocktail
     FROM Cocktail C
     ORDER BY
@@ -399,7 +402,8 @@ BEGIN
             WHEN param_orderby = 'date' THEN C.date_publication
             WHEN param_orderby = 'like' THEN C.nb_like
             ELSE C.nb_like
-        END DESC;
+        END DESC
+    LIMIT cocktail_par_page OFFSET @debut;
 END
 //
 
@@ -410,8 +414,10 @@ END
 -- param_orderby: 'date' ou 'like'
 DROP PROCEDURE IF EXISTS GetCocktailGalerieFiltrer;
 
-CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50))
+CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
 BEGIN
+    SET @debut = (page - 1) * cocktail_par_page;
+
     SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
         FROM Ingredient_Cocktail IC
         LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
@@ -428,7 +434,8 @@ BEGIN
             WHEN param_orderby = 'date' THEN C.date_publication
             WHEN param_orderby = 'like' THEN C.nb_like
             ELSE C.nb_like
-        END DESC;
+        END DESC
+    LIMIT cocktail_par_page OFFSET @debut;
 END
 //
 
@@ -520,12 +527,15 @@ END
 -- Utiliser pour liste la liste de cocktail dans mon profil
 DROP PROCEDURE IF EXISTS GetMesCocktails;
 
-CREATE PROCEDURE GetMesCocktails(IN id_utilisateur INT)
+CREATE PROCEDURE GetMesCocktails(IN id_utilisateur INT, IN page INT, IN cocktail_par_page INT)
 BEGIN
+    SET @debut = (page - 1) * cocktail_par_page;
+
     SELECT C.id_cocktail
     FROM Cocktail C
     WHERE C.id_utilisateur = id_utilisateur
-    ORDER BY C.date_publication ASC;
+    ORDER BY C.date_publication ASC
+    LIMIT cocktail_par_page OFFSET @debut;
 END
 //
 
@@ -554,8 +564,10 @@ END
 -- Utiliser pour lister les cocktails favoris dans la section mon bar
 DROP PROCEDURE IF EXISTS GetListeCocktailPossibleFavorie;
 
-CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT)
+CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT, IN page INT, IN cocktail_par_page INT)
 BEGIN
+    SET @debut = (page - 1) * cocktail_par_page;
+
     SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
         FROM Ingredient_Cocktail IC
         LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
@@ -568,7 +580,8 @@ BEGIN
     FROM Cocktail C
     JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
     WHERE CL.id_utilisateur = id_utilisateur
-    ORDER BY ing_manquant ASC, CL.date_like DESC;
+    ORDER BY ing_manquant ASC, CL.date_like DESC
+    LIMIT cocktail_par_page OFFSET @debut;
 END
 //
 
@@ -577,8 +590,10 @@ END
 -- Utiliser pour lister les cocktails classiques dans la section mon bar
 DROP PROCEDURE IF EXISTS GetCocktailsPossibleClassique;
 
-CREATE PROCEDURE GetCocktailsPossibleClassique(IN utilisateur INT)
+CREATE PROCEDURE GetCocktailsPossibleClassique(IN utilisateur INT, IN page INT, IN cocktail_par_page INT)
 BEGIN
+    SET @debut = (page - 1) * cocktail_par_page;
+
     SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
         FROM Ingredient_Cocktail IC
         LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
@@ -591,7 +606,8 @@ BEGIN
     ) AS ing_manquant
     FROM Cocktail C
     WHERE C.classique = 1
-    ORDER BY ing_manquant ASC, C.nb_like DESC;
+    ORDER BY ing_manquant ASC, C.nb_like DESC
+    LIMIT cocktail_par_page OFFSET @debut;
 END
 //
 
@@ -600,8 +616,10 @@ END
 -- Utiliser pour lister les cocktails communautaires dans la section mon bar
 DROP PROCEDURE IF EXISTS GetCocktailsPossibleCommunautaire;
 
-CREATE PROCEDURE GetCocktailsPossibleCommunautaire(IN utilisateur INT)
+CREATE PROCEDURE GetCocktailsPossibleCommunautaire(IN utilisateur INT, IN page INT, IN cocktail_par_page INT)
 BEGIN
+    SET @debut = (page - 1) * cocktail_par_page;
+
     SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
         FROM Ingredient_Cocktail IC
         LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
@@ -614,7 +632,8 @@ BEGIN
     ) AS ing_manquant
     FROM Cocktail C
     WHERE C.classique = 0
-    ORDER BY ing_manquant ASC, C.nb_like DESC;
+    ORDER BY ing_manquant ASC, C.nb_like DESC
+    LIMIT cocktail_par_page OFFSET @debut;
 END
 //
 
@@ -663,8 +682,10 @@ END
 -- Renvoie tous les cocktails qui ont un des paramètres recherchés(À vérifier)
 DROP PROCEDURE IF EXISTS RechercheCocktail;
 
-CREATE PROCEDURE RechercheCocktail(IN param_recherche VARCHAR(255), IN param_orderby VARCHAR(50))
+CREATE PROCEDURE RechercheCocktail(IN param_recherche VARCHAR(255), IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
 BEGIN
+    SET @debut = (page - 1) * cocktail_par_page;
+
     SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like
     FROM Cocktail C
     JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
@@ -681,7 +702,8 @@ BEGIN
             WHEN param_orderby = 'date' THEN C.date_publication
             WHEN param_orderby = 'like' THEN C.nb_like
             ELSE C.nb_like
-        END DESC;
+        END DESC
+    LIMIT cocktail_par_page OFFSET @debut;
 END
 //
 
@@ -693,8 +715,11 @@ DROP PROCEDURE IF EXISTS RechercheCocktailFiltrer;
 
 CREATE PROCEDURE RechercheCocktailFiltrer(
     IN param_recherche VARCHAR(255), IN id_utilisateur INT, IN param_orderby VARCHAR(50)
+    , IN page INT, IN cocktail_par_page INT
 )
 BEGIN
+    SET @debut = (page - 1) * cocktail_par_page;
+
     SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like,
     (SELECT COUNT(IC.id_ingredient_cocktail)
         FROM Ingredient_Cocktail IC
@@ -710,16 +735,19 @@ BEGIN
     JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
     LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
     LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+    JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
     WHERE (LOCATE(param_recherche, C.nom) > 0
     OR LOCATE(param_recherche, I.nom) > 0
     OR LOCATE(param_recherche, A.nom) > 0
     OR LOCATE(param_recherche, C.profil_saveur) > 0)
+    OR LOCATE(param_recherche, U.nom) > 0
     ORDER BY ing_manquant ASC,
         CASE
             WHEN param_orderby = 'date' THEN C.date_publication
             WHEN param_orderby = 'like' THEN C.nb_like
             ELSE C.nb_like
-        END DESC;
+        END DESC
+    LIMIT cocktail_par_page OFFSET @debut;
 END
 //
 
