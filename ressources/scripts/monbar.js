@@ -527,7 +527,7 @@ function ajouterIngredientBD(nomIngredient) {
         username,
         nomIngredient
     };
-    console.log(JSON.stringify(data));
+
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -557,7 +557,7 @@ function enleverIngredientBD(nomIngredient) {
         username,
         nomIngredient
     };
-    console.log(JSON.stringify(data));
+
     const requestOptions = {
         method: 'DELETE',
         headers: {

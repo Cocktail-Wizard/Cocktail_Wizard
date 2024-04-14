@@ -271,7 +271,6 @@ async function chargerCocktailsScroll() {
     document.getElementById('gif-loading').style.display = 'block';
     page ++;
     const url = requetePrecedente + `&page=${page}-${cocktailParPage}`;
-    console.log(url);
     const data = await faireRequete(url);
     if(data.length < cocktailParPage) {
         window.removeEventListener('scroll', chargerCocktailScroll);
