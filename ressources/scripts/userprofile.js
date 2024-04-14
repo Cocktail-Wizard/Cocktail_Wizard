@@ -11,7 +11,7 @@ var supportBtn = document.getElementById("support-btn");
 var submitBtn = document.getElementById("submit-btn");
 
 // Récupérer l'élément <span> qui ferme le modal
-var span = document.getElementsByClassName("close")[0];
+// var span = document.getElementsByClassName("close")[0];
 
 // Récupérer les pages de contenu
 var infoPage = document.getElementById("infoPage");
@@ -77,9 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error));
 
     mesCocktails.addEventListener('scroll', function() {
-        console.log(mesCocktails.scrollLeft + mesCocktails.clientWidth, mesCocktails.scrollWidth);
+
         if((mesCocktails.scrollLeft + mesCocktails.clientWidth) >= (mesCocktails.scrollWidth-2) && dernierChargementProfile != mesCocktails.scrollWidth) {
-            console.log('scroll');
             pageProfile++;
             chargerCocktailsProfile();
             dernierChargementProfile = mesCocktails.scrollWidth;
