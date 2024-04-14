@@ -99,8 +99,9 @@ $('#my-modal').on('show.bs.modal', function () {
 });
 
 async function chargerCocktailsProfile() {
-    const data = await faireRequete(`/api/cocktails?auteur=${utilisateur}&page=${pageProfile}-${cocktailParPageProfile}`);
 
+    const data = await faireRequete(`/api/cocktails?auteur=${utilisateur}&page=${pageProfile}-${cocktailParPageProfile}`);
+  
     if(data) {
         afficherCocktailsPerso(data, modeleCarteCocktail, mesCocktails);
     }

@@ -11,6 +11,7 @@ let requetePrecedente;
 let dernierChargement = 0;
 
 let estSelect = false;
+
 let ordreCocktails = 'date';
 
 let chronoEcriture;
@@ -129,6 +130,7 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
         imageCocktail.loading = 'lazy';
+
         if (cocktail.ingManquant !== null && cocktail.ingManquant > 0) {
             imageCocktail.style.filter = 'grayscale(100%)';
             const ingManquant = nouveauCocktail.querySelector('.ingredient-manquant');
@@ -311,30 +313,6 @@ async function chercherCocktail() {
         }
     }
     document.getElementById('gif-loading').style.display = 'none';
-    // if (estSelect === false) {
-    //     const endpoint = recherche ? `/recherche/${recherche}` : '';
-    //     const user = utilisateur ? '?user=' + utilisateur : '';
-    //     const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}${endpoint}${user}`);
-    //     galerie.innerHTML = '';
-    //     if (data) {
-    //         afficherCocktails(data);
-    //     }
-    // }
-    // else if (estSelect === true && recherche) {
-    //     const data = await faireRequete(`/api/users/${utilisateur}/cocktails/tri/${ordreCocktails}/recherche/${recherche}`);
-    //     galerie.innerHTML = '';
-    //     if (data) {
-    //         afficherCocktailsPerso(data, modeleCarteCocktail, galerie);
-    //     }
-    // }
-    // else {
-    //     const data = await faireRequete(`/api/users/${utilisateur}/recommandations/tri/${ordreCocktails}`);
-    //     galerie.innerHTML = '';
-    //     if (data) {
-    //         afficherCocktailsPerso(data, modeleCarteCocktail, galerie);
-    //     }
-    // }
-
 }
 
 async function ordonnerCocktails() {
@@ -387,7 +365,6 @@ function chargerCommenter(id_cocktail) {
 }
 
 document.querySelectorAll('input[type=radio]').forEach(radio => {
-
     radio.addEventListener('mousedown', function (event) {
         estSelect = this.checked;
     });
