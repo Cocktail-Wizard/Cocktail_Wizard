@@ -1,6 +1,6 @@
 <?php
 
-i
+// Fonction qui vérifie si l'utilisateur a accès à la ressource demandée
 
 function userAccesResssource($usernameRequete) {
 

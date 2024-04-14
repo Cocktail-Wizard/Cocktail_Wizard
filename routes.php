@@ -108,7 +108,7 @@ get('/api/cocktails', 'ressources/api/routageGETcocktail.php');
 
 // /api/ingredients ->Liste des ingrédients de la base de données(Mon bar ou Création de cocktail)
 // /api/ingredients?user={username} ->Liste des ingrédients de mon bar
-get('/api/ingredients', '/ressources/api/getUserIngredients.php');
+get('/api/ingredients', '/ressources/api/getIngredients.php');
 
 // /api/users/{username}/cocktails ->Liste des cocktails de l'utilisateur
 // get('/api/users/$username/cocktails', '/ressources/api/getUserCocktails.php');
@@ -119,7 +119,7 @@ get('/api/users', '/ressources/api/getUserInfo.php');
 // // /api/ingredients ->Liste des ingrédients de la base de données(Mon bar ou Création de cocktail)
 // get('/api/ingredients', '/ressources/api/getIngredients.php');
 
-// /api/cocktails/commentaires?c={id_coocktail} ->Liste des commentaires d'un cocktail
+// /api/cocktails/commentaires?cocktail={id_coocktail} ->Liste des commentaires d'un cocktail
 get('/api/cocktails/commentaires', '/ressources/api/getCocktailCommentaires.php');
 
 /**********DELETE ************/
