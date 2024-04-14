@@ -11,7 +11,7 @@ let requetePrecedente;
 let dernierChargement = 0;
 
 let estSelect = false;
-let ordreCocktails = 'like';
+let ordreCocktails = 'date';
 
 let chronoEcriture;
 let modeleCarteCocktail;
