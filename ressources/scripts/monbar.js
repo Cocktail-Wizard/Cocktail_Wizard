@@ -63,7 +63,6 @@ function filterIngredients() {
                     selectIngredient(ingredient);
                     const ingredientClique = event.target.textContent;
                     ajouterIngredientBD(ingredientClique);
-                    chargerCocktails();
                 });
                 listeIngredients.appendChild(ingredientItem);
             });
@@ -129,7 +128,6 @@ function updateSelectedIngredients() {
             unselectIngredient(ingredient);
             const ingredientClique = event.target.textContent;
             enleverIngredientBD(ingredientClique);
-            chargerCocktails();
         });
         selectedIngredientsDiv.appendChild(ingredientBox);
     });
@@ -541,6 +539,10 @@ function ajouterIngredientBD(nomIngredient) {
             if (!response.ok) {
                 throw new Error('Erreur lors de la requête.');
             }
+            chargerCocktails();
+            if(response.status === 204) {
+                return null;
+            }
             return response.json();
         })
         .then(data => {
@@ -571,7 +573,8 @@ function enleverIngredientBD(nomIngredient) {
             if (!response.ok) {
                 throw new Error('Erreur lors de la requête.');
             }
-            if (response.status === 204) {
+            chargerCocktails();
+            if(response.status === 204) {
                 return null;
             }
             return response.json();
