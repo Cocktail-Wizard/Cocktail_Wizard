@@ -6,7 +6,7 @@ const boutonOrdreIcone = document.getElementById('ordre-tri-icone');
 const finAttenteEcriture = 1000; // 1 seconde
 const monBar = document.getElementById('lien-monbar');
 let page = 1;
-const cocktailParPage = 6;
+const cocktailParPage = 8;
 let requetePrecedente;
 let dernierChargement = 0;
 
