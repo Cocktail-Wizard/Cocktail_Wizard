@@ -11,12 +11,16 @@ var supportBtn = document.getElementById("support-btn");
 var submitBtn = document.getElementById("submit-btn");
 
 // Récupérer l'élément <span> qui ferme le modal
-var span = document.getElementsByClassName("close")[0];
+// var span = document.getElementsByClassName("close")[0];
 
 // Récupérer les pages de contenu
 var infoPage = document.getElementById("infoPage");
 var mycocktailPage = document.getElementById("mycocktailPage");
 var supportPage = document.getElementById("supportPage");
+
+let pageProfile = 1;
+const cocktailParPageProfile = 6;
+let dernierChargementProfile = 0;
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -45,8 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("supportPage").style.display = "block";
     });
 
-    chargerCocktailsProfile();
-
     // Fonction pour se déconnecter
     document.getElementById("deconnexion").addEventListener("click", function () {
         fetch('/authentification', {
@@ -62,9 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error('Erreur lors de la déconnexion:', error));
     });
-});
 
-fetch(`/api/users/${utilisateur}`)
+    fetch(`/api/users?user=${utilisateur}`)
     .then(response => response.json())
     .then(user => {
         document.getElementById('username').textContent = user.nom;
@@ -75,12 +76,32 @@ fetch(`/api/users/${utilisateur}`)
     })
     .catch(error => console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error));
 
-async function chargerCocktailsProfile() {
+    mesCocktails.addEventListener('scroll', function() {
 
-    const data = await faireRequete(`/api/users/${utilisateur}/cocktails?user=${utilisateur}`);
+        if((mesCocktails.scrollLeft + mesCocktails.clientWidth) >= (mesCocktails.scrollWidth-2) && dernierChargementProfile != mesCocktails.scrollWidth) {
+            pageProfile++;
+            chargerCocktailsProfile();
+            dernierChargementProfile = mesCocktails.scrollWidth;
+        }
+    });
+});
+
+$('#my-modal').on('hidden.bs.modal', function () {
+    document.getElementById("infoPage").style.display = "block";
+    document.getElementById("mycocktailPage").style.display = "none";
+    document.getElementById("supportPage").style.display = "none";
+    mesCocktails.innerHTML = '';
+    pageProfile = 1;
+});
+
+$('#my-modal').on('show.bs.modal', function () {
+    chargerCocktailsProfile();
+});
+
+async function chargerCocktailsProfile() {
+    const data = await faireRequete(`/api/cocktails?auteur=${utilisateur}&page=${pageProfile}-${cocktailParPageProfile}`);
 
     if(data) {
-        mesCocktails.innerHTML = '';
         afficherCocktailsPerso(data, modeleCarteCocktail, mesCocktails);
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Script getIngredients
  *
@@ -16,36 +15,41 @@
  *
  * @author Yani Amellal
  */
+if(isset($_GET['user'])) {
+    $username = trim($_GET['user']);
+    require_once(__DIR__ . '/getUserIngredients.php');
 
-header('Content-Type: application/json');
-require_once __DIR__ . '/config.php';
+} else {
+    header('Content-Type: application/json');
+    require_once __DIR__ . '/config.php';
 
-// Connexion à la base de données
-$conn = connexionBD();
+    // Connexion à la base de données
+    $conn = connexionBD();
 
-//Liste des noms d'ingrédients(Alcool et Ingredient)
-$ingredients = [];
+    //Liste des noms d'ingrédients(Alcool et Ingredient)
+    $ingredients = [];
 
-//Demande les noms d'ingrédients
-try {
-    $requete_preparee = $conn->prepare("CALL GetListeIngredients()");
-    $requete_preparee->execute();
-    $resultat = $requete_preparee->get_result();
-    $requete_preparee->close();
+    //Demande les noms d'ingrédients
+    try {
+        $requete_preparee = $conn->prepare("CALL GetListeIngredients()");
+        $requete_preparee->execute();
+        $resultat = $requete_preparee->get_result();
+        $requete_preparee->close();
 
-    if ($resultat->num_rows > 0) {
-        while ($row = $resultat->fetch_assoc()) {
-            $ingredients[] = $row['nom'];
+        if ($resultat->num_rows > 0) {
+            while ($row = $resultat->fetch_assoc()) {
+                $ingredients[] = $row['nom'];
+            }
+        } else {
+            http_response_code(204);
+            exit();
         }
-    } else {
-        http_response_code(204);
+        echo json_encode($ingredients);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode("Erreur : " . $e->getMessage());
         exit();
     }
-    echo json_encode($ingredients);
-} catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode("Erreur : " . $e->getMessage());
-    exit();
-}
 
-$conn->close();
+    $conn->close();
+}

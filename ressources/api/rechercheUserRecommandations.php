@@ -32,13 +32,12 @@ $conn = connexionBD();
 $cocktails = [];
 $idCocktails = [];
 $ingManquants = [];
-$mots = str_replace( "_", " ", $mots);
 
 $userId = usernameToId($username, $conn);
 
 try {
-    $requete_preparee = $conn->prepare("CALL RechercheCocktailFiltrer(?,?,?)");
-    $requete_preparee->bind_param('sis', $mots, $userId ,$tri);
+    $requete_preparee = $conn->prepare("CALL RechercheCocktailFiltrer(?,?,?,?,?)");
+    $requete_preparee->bind_param('sisii', $recherche, $userId ,$tri, $page, $nbCocktailPage);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
 
