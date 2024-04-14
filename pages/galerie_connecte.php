@@ -1,10 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: /connexion");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,6 +45,9 @@ if (!isset($_SESSION['username'])) {
         </nav>
 
         <section id="galerie"></section>
+        <div id="gif-loading" style="display: none;margin: auto;">
+            <img src="ressources/images/1490.gif" alt="Chargement">
+        </div>
     </main>
 
     <aside id="contenant-modale"></aside>
@@ -76,6 +72,7 @@ if (!isset($_SESSION['username'])) {
 
     <footer>Cocktail Wizard &copy - 2024</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="ressources/scripts/outils.js"></script>
     <script src="ressources/scripts/index.js"></script>
     <script src="ressources/scripts/modale.js"></script>

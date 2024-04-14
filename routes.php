@@ -113,7 +113,7 @@ get('/api/ingredients', '/ressources/api/getIngredients.php');
 // /api/users/{username}/cocktails ->Liste des cocktails de l'utilisateur
 // get('/api/users/$username/cocktails', '/ressources/api/getUserCocktails.php');
 
-// /api/user?user={username} ->Profil utilisateur
+// /api/users?user={username} ->Profil utilisateur
 get('/api/users', '/ressources/api/getUserInfo.php');
 
 // // /api/ingredients ->Liste des ingrédients de la base de données(Mon bar ou Création de cocktail)

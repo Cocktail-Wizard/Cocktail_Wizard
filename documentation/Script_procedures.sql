@@ -542,6 +542,7 @@ BEGIN
 END
 //
 
+
 --Création de la procédure GetMesCocktails
 -- Permet de voir les cocktails que chaque utilisateur a créé
 -- Utiliser pour liste la liste de cocktail dans mon profil
@@ -550,12 +551,18 @@ DROP PROCEDURE IF EXISTS GetMesCocktails;
 CREATE PROCEDURE GetMesCocktails(IN id_utilisateur INT, IN page INT, IN cocktail_par_page INT)
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
+    SET @cocktail_par_page = cocktail_par_page;
+    SET @id_utilisateur = id_utilisateur;
 
-    SELECT C.id_cocktail
+    SET @sql = CONCAT('SELECT C.id_cocktail
     FROM Cocktail C
-    WHERE C.id_utilisateur = id_utilisateur
-    ORDER BY C.date_publication ASC
-    LIMIT cocktail_par_page OFFSET @debut;
+    WHERE C.id_utilisateur = ', @id_utilisateur,
+    ' ORDER BY C.date_publication DESC
+    LIMIT ', @cocktail_par_page, ' OFFSET ', @debut);
+
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END
 //
 
