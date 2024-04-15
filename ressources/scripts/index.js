@@ -19,7 +19,6 @@ let modeleCarteCocktail;
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-
     modeleCarteCocktail = await chargerModeleHTML('ressources/modeles/cocktail_carte.html');
 
     if (!modeleCarteCocktail) return;
@@ -373,6 +372,7 @@ document.querySelectorAll('input[type=radio]').forEach(radio => {
         if (estSelect) {
             this.checked = false;
             estSelect = false;
+
             window.removeEventListener('scroll', chargerCocktailScroll);
             chercherCocktail();
         }
