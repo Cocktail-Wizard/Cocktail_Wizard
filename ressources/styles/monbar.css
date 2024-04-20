@@ -301,9 +301,6 @@ header h1 {
     height: 30px;
 }
 
-#deux-boutons button:focus {
-    outline: none;
-}
 
 /* Specific Styles */
 .galerie {
