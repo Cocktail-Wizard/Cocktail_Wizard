@@ -1,25 +1,33 @@
+@font-face {
+    font-family: 'Elianto';
+    src: url('../styles/Elianto/Elianto/Elianto-Regular.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Elianto', sans-serif;
+}
+
 /* Contenu du Modal */
 #userprofile-content {
     position: relative;
-    background-color: var(--palette-secondary-background-color);
+    background-color: var(--palette-background-secondary-color);
+    font-family: 'Elianto', sans-serif;
     margin: auto;
     border: 1px solid var(--palette-border-color);
     width: 80%;
-
-    /* template de "boxshadow" */
-    box-shadow: 0 4px 8px 0 rgba(0 0 0 / 20%), 0 6px 20px 0 rgba(0 0 0 / 19%);
     height: auto;
     max-height: 80%;
     overflow-y: auto;
     box-sizing: border-box;
     margin-top: 5%;
+    box-shadow: var(--blue-neon-box-high);
 }
 
 /* En-tête de la section profil utilisateur */
 #userprofile-header {
     padding: 5px 16px;
     background-color: var(--palette-secondary-background-color);
-    color: var(--palette-secondary-text-color);
+    color: var(--palette-lighttext-color);
     gap: 40px;
     display: flex;
     justify-content: center;
@@ -82,53 +90,44 @@
     padding: 20px;
     background-color: var(--palette-paragraph-color);
     border-radius: 8px;
-    box-shadow: 0 0 10px #010101;
+    color: var(--palette-lighttext-color);
 }
 
 /* Titre de la section */
 #my-modal h2 {
-    color: #7f5af0;
+    color: var(--palette-lighttext-color);
     margin-bottom: 20px;
+    font-size: xx-large;
 }
 
 /* Formulaire */
 #my-modal form {
     margin-top: 20px;
     margin-right: 10px;
+    color: var(--palette-lighttext-color);
 }
 
 /* Étiquette du formulaire */
 #my-modal label {
     font-weight: bold;
-    color: #7f5af0;
+    color: var(--palette-lighttext-color);
+    margin-bottom: 10px;
 }
 
 /* Zone de texte */
 #my-modal textarea {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: var(--palette-secondary-background-color);
     color: var(--palette-paragraph-color);
 }
 
-/* Bouton de soumission */
-#my-modal input[type="submit"] {
-    background-color: var(--palette-button-color);
-    color: var(--palette-button-text-color);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+#my-modal textarea:focus {
+    box-shadow: var(--blue-neon-box-light);
 }
 
-/* Effet au survol du bouton de soumission */
-#my-modal input[type="submit"]:hover {
-    background-color: var(--palette-button-color-hover);
-}
 
 /* Corps de la section Mes cocktails */
 .mycocktail-body {
@@ -144,10 +143,10 @@
 #info-btn,
 #cocktail-btn,
 #support-btn {
-    background-color: var(--palette-button-color);
-    color: var(--palette-button-text-color);
+    background-color: var(--palette-background-color);
+    color: var(--palette-lighttext-color);
     padding: 10px 20px;
-    border: 2px solid var(--palette-border-color);
+    border: 2px solid var(--palette-button-border-color);
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -156,7 +155,8 @@
 #info-btn:hover,
 #cocktail-btn:hover,
 #support-btn:hover {
-    background-color: var(--palette-button-color-hover);
+    box-shadow: var(--orange-neon-box);
+    text-shadow: var(--neon-text-pink);
 }
 
 #fuck-bootstrap {
@@ -172,4 +172,25 @@
     white-space: nowrap;
     width: 95%;
     gap: 1.5em;
+}
+
+#edit-btn,
+#delete-btn,
+#deconnexion,
+#submit-btn {
+    background-color: var(--palette-button-color);
+    color: var(--palette-darktext-color);
+    border-radius: 3px;
+    padding: 5px;
+}
+
+#edit-btn:hover,
+#delete-btn:hover,
+#deconnexion:hover,
+#submit-btn:hover {
+    background-color: var(--palette-background-color);
+    color: var(--palette-lighttext-color);
+    box-shadow: var(--orange-neon-box);
+    border: var(--palette-button-border-color);
+    cursor: pointer
 }
