@@ -33,6 +33,7 @@ header #w-icon {
 footer {
     padding-top: 20px;
     padding-bottom: 20px;
+    text-shadow: var(--neon-text-pink);
 }
 
 main {

@@ -99,7 +99,7 @@ if (!isset($_SESSION['username'])) {
     <?php require_once(__DIR__ . "/../ressources/modeles/modale_publication.php") ?>
     <?php require_once(__DIR__ . "/../ressources/modeles/modale_profilUtilisateur.php") ?>
 
-    <footer class="neonText-pink">Cocktail Wizard &copy - 2024</footer>
+    <footer>Cocktail Wizard &copy - 2024</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
