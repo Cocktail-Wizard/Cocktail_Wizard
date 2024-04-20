@@ -45,6 +45,26 @@
         0 0 18px #c54b0a,
         0 0 25px #c54b0a;
 
+    --blue-neon-box-light:
+        0 0 2px #17dfea,
+        0 0 3px #17dfea,
+        0 0 5px #17dfea,
+        0 0 8px #17dfea,
+        0 0 13px #1acbd5,
+        0 0 15px #1acbd5,
+        0 0 18px #25adb4,
+        0 0 25px #25adb4;
+
+    --blue-neon-box-high:
+        0 0 3px #17dfea,
+        0 0 5px #17dfea,
+        0 0 10px #17dfea,
+        0 0 15px #17dfea,
+        0 0 25px #1acbd5,
+        0 0 30px #1acbd5,
+        0 0 35px #25adb4,
+        0 0 50px #25adb4;
+
 
 }
 

@@ -19,6 +19,7 @@
     max-height: 80%;
     overflow-y: auto;
     box-sizing: border-box;
+    box-shadow: var(--blue-neon-box-high);
 }
 
 #mon-modal h2 {
@@ -154,6 +155,12 @@ label {
     overflow: hidden;
 }
 
+#ajouter-ingredient:hover,
+#enlever-ingredient:hover {
+    box-shadow: var(--orange-neon-box);
+}
+
+
 #ajouter-ingredient>.btn-icon,
 #enlever-ingredient>.btn-icon {
     width: 100%;
@@ -188,4 +195,13 @@ label {
 #ingredient-rajoute {
     font-size: larger;
     font-style: bold;
+}
+
+#ingredient-nom:focus,
+#ingredient-quantite:focus,
+#ingredient-unit:focus,
+#name-texte:focus,
+#preparation-texte:focus,
+#description-texte:focus {
+    box-shadow: var(--blue-neon-box-light);
 }
