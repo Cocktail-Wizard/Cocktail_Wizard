@@ -43,6 +43,8 @@ $image = paramJSONvalide($donnee, 'image');
 
 $userId = usernameToId($username, $conn);
 
+$conn->begin_transaction();
+
 try {
     $curl = curl_init();
 
@@ -73,6 +75,7 @@ try {
     } else {
         http_response_code(404);
         echo json_encode("Erreur lors de l'ajout du nom de l'image à la base de donnée.");
+        $conn->rollback();
         exit();
     }
 
@@ -99,6 +102,7 @@ try {
     } else {
         http_response_code(404);
         echo json_encode("Erreur de création du cocktail.");
+        $conn->rollback();
         exit();
     }
 
@@ -113,6 +117,7 @@ try {
             } else {
                 http_response_code(400);
                 echo json_encode("Les paramètres nomIng, quantite et unite sont requis pour chaque ingrédient.");
+                $conn->rollback();
                 exit();
             }
             $requete_preparee = $conn->prepare("CALL AjouterIngredientCocktail(?, ?, ?, ?)");
@@ -121,14 +126,17 @@ try {
             $requete_preparee->close();
         }
 
+        $conn->commit();
         echo json_encode("Cocktail ajouté avec succès.");
     } else {
         http_response_code(400);
         echo json_encode("Le cocktail doit contenir au moins un ingrédient.");
+        $conn->rollback();
         exit();
     }
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode("Erreur : " . $e->getMessage());
+    $conn->rollback();
     exit();
 }

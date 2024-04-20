@@ -102,6 +102,7 @@ if (!isset($_SESSION['username'])) {
     <footer class="neonText-pink">Cocktail Wizard &copy - 2024</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../ressources/scripts/outils.js"></script>
     <script src="../ressources/scripts/modale.js"></script>
     <script type="module" src="../ressources/scripts/publication.js"></script>

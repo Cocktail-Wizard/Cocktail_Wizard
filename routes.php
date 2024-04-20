@@ -65,40 +65,62 @@ post('/authentification', 'ressources/scripts/connexionWeb.php');
 
 /******GET*********/
 
-// /api/cocktails/tri/${like/date}  ->Cocktails galerie
-get('/api/cocktails/tri/$tri', 'ressources/api/getCocktails.php');
+// Pour le paramètre URL page, il faut que la valeur soit sous la forme p-nb
+// p : page
+// nb : nombre de cocktails par page
+// Exemple : page=3-15
+
+// /api/cocktails?tri={like/date}&page=p-nb
+// ->Cocktails galerie
+
+// /api/cocktails?tri={like/date}&recherche={mot-clé}&page=3-15 -
+// ->Recherche de cocktails sans filtre
+
+// /api/cocktails?tri={like/date}&recherche={mot-clé}&user={username}&page=3-15 -
+// ->Recherche de cocktails recommandés
+
+// /api/cocktails?tri={like/date}&user={username}&page=3-15 -
+// ->Liste des cocktails que l'utilisateur peut faire avec ses ingrédients. Pour galerie connectée
+
+// /api/cocktails?user={username}&type={classiques/favoris/communaute}&page=3-15 -
+// ->Liste des cocktails que l'utilisateur peut faire avec ses ingrédients. Pour mon bar
+
+// /api/cocktails?auteur={username}&page=3-15 -
+// ->Liste des cocktails qu'un utilisateur a créé
+get('/api/cocktails', 'ressources/api/routageGETcocktail.php');
 
 
-// /api/cocktails/tri/{like/date}/recherche/{mot-clé, mot-clé, mot-clé}
+// /api/cocktails/tri/{like/date}/recherche/{mot-clé, mot-clé, mot-clé} vieux
 //->Recherche de cocktails sans filtre
-get('/api/cocktails/tri/$tri/recherche/$mots', 'ressources/api/rechercheCocktail.php');
+// get('/api/cocktails/tri/$tri/recherche/$mots', 'ressources/api/rechercheCocktail.php');
 
 // /api/users/{username}/recommandations/recherche/{mot-clé, mot-clé, mot-clé}
 //  ->Recherche de cocktails recommandés
-get('/api/users/$username/cocktails/tri/$tri/recherche/$mots', '/ressources/api/rechercheUserRecommandations.php');
+//get('/api/users/$username/cocktails/tri/$tri/recherche/$mots', '/ressources/api/rechercheUserRecommandations.php');
 
 // /api/users/{username}/recommandations/tri/{like/date}
 // ->Liste des cocktails que l'utilisateur peut faire avec ses ingrédients. Pour galerie connectée
-get('/api/users/$username/recommandations/tri/$tri', '/ressources/api/getUserRecommandations.php');
+// get('/api/users/$username/recommandations/tri/$tri', '/ressources/api/getUserRecommandations.php');
 
 // /api/users/{username}/recommandations/type/{classiques/favoris/communaute}
 // ->Liste des cocktails que l'utilisateur peut faire avec ses ingrédients. Pour mon bar
-get('/api/users/$username/recommandations/type/$type', '/ressources/api/getUserRecommandations.php');
-
-// /api/users/{username}/ingredients ->Liste des ingrédients de mon bar
-get('/api/users/$username/ingredients', '/ressources/api/getUserIngredients.php');
-
-// /api/users/{username}/cocktails ->Liste des cocktails de l'utilisateur
-get('/api/users/$username/cocktails', '/ressources/api/getUserCocktails.php');
-
-// /api/user/{username} ->Profil utilisateur
-get('/api/users/$username', '/ressources/api/getUserInfo.php');
+// /get('/api/users/$username/recommandations/type/$type', '/ressources/api/getUserRecommandations.php');
 
 // /api/ingredients ->Liste des ingrédients de la base de données(Mon bar ou Création de cocktail)
+// /api/ingredients?user={username} ->Liste des ingrédients de mon bar
 get('/api/ingredients', '/ressources/api/getIngredients.php');
 
-// /api/cocktails/{id_cocktail}/commentaires ->Liste des commentaires d'un cocktail
-get('/api/cocktails/$id_cocktail/commentaires', '/ressources/api/getCocktailCommentaires.php');
+// /api/users/{username}/cocktails ->Liste des cocktails de l'utilisateur
+// get('/api/users/$username/cocktails', '/ressources/api/getUserCocktails.php');
+
+// /api/users?user={username} ->Profil utilisateur
+get('/api/users', '/ressources/api/getUserInfo.php');
+
+// // /api/ingredients ->Liste des ingrédients de la base de données(Mon bar ou Création de cocktail)
+// get('/api/ingredients', '/ressources/api/getIngredients.php');
+
+// /api/cocktails/commentaires?cocktail={id_coocktail} ->Liste des commentaires d'un cocktail
+get('/api/cocktails/commentaires', '/ressources/api/getCocktailCommentaires.php');
 
 /**********DELETE ************/
 

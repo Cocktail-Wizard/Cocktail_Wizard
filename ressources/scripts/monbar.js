@@ -3,8 +3,14 @@ const cocktailsPersonnels = document.getElementById('conteneur-favoris');
 const cocktailsCommunautaires = document.getElementById('conteneur-communautaires');
 const ordreCommentaires = 'date';
 
+let pageClassique = 1;
+let pageFavoris = 1;
+let pageCommunaute = 1;
+const nbCocktailCharger = 6;
 
-const nombreCocktailsAffiches = 10;
+let dernierChargementClassique = 0;
+let dernierChargementFavoris = 0;
+let dernierChargementCommunaute = 0;
 
 let modeleCarteCocktail;
 
@@ -57,7 +63,6 @@ function filterIngredients() {
                     selectIngredient(ingredient);
                     const ingredientClique = event.target.textContent;
                     ajouterIngredientBD(ingredientClique);
-                    chargerCocktails();
                 });
                 listeIngredients.appendChild(ingredientItem);
             });
@@ -123,7 +128,6 @@ function updateSelectedIngredients() {
             unselectIngredient(ingredient);
             const ingredientClique = event.target.textContent;
             enleverIngredientBD(ingredientClique);
-            chargerCocktails();
         });
         selectedIngredientsDiv.appendChild(ingredientBox);
     });
@@ -165,7 +169,7 @@ document.addEventListener('click', function (event) {
 async function initialSetup() {
 
     getTousIngredients();
-    const listIng = await faireRequete(`/api/users/${utilisateur}/ingredients`);
+    const listIng = await faireRequete(`/api/ingredients?user=${utilisateur}`);
     if (listIng) {
         selectedIngredients = listIng;
     }
@@ -202,6 +206,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     chargerCocktails();
 
+    cocktailsClassiques.addEventListener('scroll', function() {
+        if (cocktailsClassiques.scrollLeft + cocktailsClassiques.clientWidth >= cocktailsClassiques.scrollWidth - 2 && dernierChargementClassique !== cocktailsClassiques.scrollWidth) {
+            pageClassique++;
+            chargerCocktailsScroll(1);
+            dernierChargementClassique = cocktailsClassiques.scrollWidth;
+        }
+    });
+
+    cocktailsPersonnels.addEventListener('scroll', function() {
+        if (cocktailsPersonnels.scrollLeft + cocktailsPersonnels.clientWidth >= cocktailsPersonnels.scrollWidth - 2 && dernierChargementFavoris !== cocktailsPersonnels.scrollWidth) {
+            pageFavoris++;
+            chargerCocktailsScroll(2);
+            dernierChargementFavoris = cocktailsPersonnels.scrollWidth;
+        }
+    });
+
+    cocktailsCommunautaires.addEventListener('scroll', function() {
+        if (cocktailsCommunautaires.scrollLeft + cocktailsCommunautaires.clientWidth >= cocktailsCommunautaires.scrollWidth - 2 && dernierChargementCommunaute !== cocktailsCommunautaires.scrollWidth) {
+            pageCommunaute++;
+            chargerCocktailsScroll(3);
+            dernierChargementCommunaute = cocktailsCommunautaires.scrollWidth;
+        }
+    });
 
 
     // Appels initiaux
@@ -220,16 +247,39 @@ document.addEventListener('DOMContentLoaded', async () => {
     //     }
     // }
 });
+async function chargerCocktailsScroll(type) {
+    if (type == 1) {
+        const data = await faireRequete(`/api/cocktails?user=${utilisateur}&type=classiques&page=${pageClassique}-${nbCocktailCharger}`);
+        if (data) {
+            afficherCocktailsPerso(data, modeleCarteCocktail, cocktailsClassiques);
+        }
+    } else if(type == 2) {
+        const data = await faireRequete(`/api/cocktails?user=${utilisateur}&type=favoris&page=${pageFavoris}-${nbCocktailCharger}`);
+        if (data) {
+            afficherCocktailsPerso(data, modeleCarteCocktail, cocktailsPersonnels);
+        }
+    } else {
+        const data = await faireRequete(`/api/cocktails?user=${utilisateur}&type=communaute&page=${pageCommunaute}-${nbCocktailCharger}`);
+        if (data) {
+            afficherCocktailsPerso(data, modeleCarteCocktail, cocktailsCommunautaires);
+        }
+    }
+}
+
 
 /**
  * Charge les données des cocktails depuis une API
  * /api/users/{username}/recommandations/type/{classiques/favoris/communaute}
  */
 async function chargerCocktails() {
-
-    const dataClassique = await faireRequete(`/api/users/${utilisateur}/recommandations/type/classiques?user=${utilisateur}`);
-    const dataFavoris = await faireRequete(`/api/users/${utilisateur}/recommandations/type/favoris?user=${utilisateur}`);
-    const dataCommunaute = await faireRequete(`/api/users/${utilisateur}/recommandations/type/communaute?user=${utilisateur}`);
+    pageClassique = 1;
+    pageFavoris = 1;
+    pageCommunaute = 1;
+    const [dataClassique, dataFavoris, dataCommunaute] = await Promise.all([
+        faireRequete(`/api/cocktails?user=${utilisateur}&type=classiques&page=${pageClassique}-${nbCocktailCharger}`),
+        faireRequete(`/api/cocktails?user=${utilisateur}&type=favoris&page=${pageFavoris}-${nbCocktailCharger}`),
+        faireRequete(`/api/cocktails?user=${utilisateur}&type=communaute&page=${pageCommunaute}-${nbCocktailCharger}`)
+    ]);
 
     cocktailsClassiques.innerHTML = '';
     if (dataClassique) {
@@ -243,6 +293,7 @@ async function chargerCocktails() {
     cocktailsCommunautaires.innerHTML = '';
     if (dataCommunaute) {
         afficherCocktailsPerso(dataCommunaute, modeleCarteCocktail, cocktailsCommunautaires);
+        cocktailsCommunautaires.scrollTo(0, 0);
     }
 }
 
@@ -332,7 +383,7 @@ async function chargerCommentairesModale(idCocktail) {
 
     if (modeleHTML) {
         try {
-            const data = await faireRequete(`/api/cocktails/${idCocktail}/commentaires`);
+            const data = await faireRequete(`/api/cocktails/commentaires?cocktail=${idCocktail}`);
             if (!data) return;
 
             const listeCommentaires = document.getElementById('commentaires');
@@ -474,7 +525,7 @@ function ajouterIngredientBD(nomIngredient) {
         username,
         nomIngredient
     };
-    console.log(JSON.stringify(data));
+
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -487,6 +538,10 @@ function ajouterIngredientBD(nomIngredient) {
         .then(response => {
             if (!response.ok) {
                 throw new Error('Erreur lors de la requête.');
+            }
+            chargerCocktails();
+            if(response.status === 204) {
+                return null;
             }
             return response.json();
         })
@@ -504,7 +559,7 @@ function enleverIngredientBD(nomIngredient) {
         username,
         nomIngredient
     };
-    console.log(JSON.stringify(data));
+
     const requestOptions = {
         method: 'DELETE',
         headers: {
@@ -518,7 +573,8 @@ function enleverIngredientBD(nomIngredient) {
             if (!response.ok) {
                 throw new Error('Erreur lors de la requête.');
             }
-            if (response.status === 204) {
+            chargerCocktails();
+            if(response.status === 204) {
                 return null;
             }
             return response.json();

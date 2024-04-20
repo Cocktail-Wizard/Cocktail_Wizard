@@ -60,8 +60,13 @@ function InfoAffichageCocktail($id_cocktail, $conn)
         echo json_encode("Erreur : " . $e->getMessage());
         exit();
     }
-    if(isset($_GET['user'])) {
-        $userId = usernameToId($_GET['user'], $conn);
+
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if(isset($_SESSION['username'])){
+        $userId = usernameToId($_SESSION['username'], $conn);
         try {
             $requete_preparee = $conn->prepare("CALL cocktailLiked(?, ?)");
             $requete_preparee->bind_param("ii", $id_cocktail, $userId);

@@ -26,6 +26,14 @@ require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
 $conn = connexionBD();
 
+if(isset($_GET['user'])) {
+    $username = trim($_GET['user']);
+} else {
+    http_response_code(400);
+    echo json_encode("Erreur : Le paramètre d'URL user est manquant.");
+    exit();
+}
+
 $userId = usernameToId($username, $conn);
 
 try {

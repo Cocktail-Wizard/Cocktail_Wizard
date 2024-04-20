@@ -1,4 +1,3 @@
-<!-- DOCTYPE pas nécessaire pas include avec php. Fuck linter -->
 <!-- Modale pour la publication de cocktail -->
 <!-- Le modal -->
 <div id="mon-modal" class="modal fade">
