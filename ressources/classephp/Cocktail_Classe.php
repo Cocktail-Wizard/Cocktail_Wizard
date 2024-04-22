@@ -87,7 +87,7 @@ class Cocktail implements JsonSerializable
     {
         $vars = get_object_vars($this);
 
-        foreach($vars as $key => $value) {
+        foreach ($vars as $key => $value) {
             if ($value === null) {
                 unset($vars[$key]);
             }

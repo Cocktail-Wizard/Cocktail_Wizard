@@ -6,7 +6,7 @@
  * Cette fonction permet de retourner l'id d'un utilisateur en fonction de son nom d'utilisateur.
  *
  *
- * @param String $username Le nom d'utilisateur de l'utilisateur
+ * @param string $username Le nom d'utilisateur de l'utilisateur
  * @param mysqli $conn La connexion à la base de données
  *
  *

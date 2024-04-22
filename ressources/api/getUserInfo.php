@@ -26,7 +26,7 @@ require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
 $conn = connexionBD();
 
-if(isset($_GET['user'])) {
+if (isset($_GET['user'])) {
     $username = trim($_GET['user']);
 } else {
     http_response_code(400);
@@ -37,6 +37,7 @@ if(isset($_GET['user'])) {
 $userId = usernameToId($username, $conn);
 
 try {
+    // Envoie une requête à la base de données pour obtenir les informations de l'utilisateur
     $requete_preparee = $conn->prepare("CALL GetInfoUtilisateur(?)");
     $requete_preparee->bind_param('i', $userId);
     $requete_preparee->execute();
