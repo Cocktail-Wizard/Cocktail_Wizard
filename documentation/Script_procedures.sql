@@ -290,6 +290,68 @@ BEGIN
 END
 //
 
+-- Création de la procédure AjouterImageUtilisateur
+-- Permet d'ajouter une image d'utilisateur à la base de donnée
+-- Fonction utilisée en interne seulement
+DROP PROCEDURE IF EXISTS AjouterImageUtilisateur;
+
+CREATE PROCEDURE AjouterImageUtilisateur(IN var_nom_image VARCHAR(255))
+BEGIN
+    INSERT INTO Banque_Image (img, img_cocktail)
+    VALUES (var_nom_image, 0);
+    SELECT LAST_INSERT_ID() AS id_image;
+END
+//
+CALL AjouterImageUtilisateur('66269976d0550.jpeg');
+-- Création de la procédure changerImageUtilisateur
+-- Permet de changer l'image d'un utilisateur
+-- Utiliser pour changer l'image d'un utilisateur dans son profil
+-- Passe à la prochaine image d'utilisateur
+DROP PROCEDURE IF EXISTS changerImageUtilisateur;
+
+CREATE PROCEDURE changerImageUtilisateur(IN var_id_utilisateur INT)
+BEGIN
+    SET @id_image = (
+        SELECT id_image
+        FROM Utilisateur
+        WHERE id_utilisateur = var_id_utilisateur
+    );
+
+    IF EXISTS(
+        SELECT id_image
+        FROM Banque_Image
+        WHERE id_image > @id_image
+        AND img_cocktail = 0
+    ) THEN
+        UPDATE Utilisateur
+        SET id_image = (
+            SELECT id_image
+            FROM Banque_Image
+            WHERE id_image > @id_image
+            AND img_cocktail = 0
+            ORDER BY id_image
+            LIMIT 1
+        )
+        WHERE id_utilisateur = var_id_utilisateur;
+    ELSE
+        UPDATE Utilisateur
+        SET id_image = (
+            SELECT id_image
+            FROM Banque_Image
+            WHERE img_cocktail = 0
+            ORDER BY id_image
+            LIMIT 1
+        )
+        WHERE id_utilisateur = var_id_utilisateur;
+    END IF;
+
+    SELECT img
+    FROM Utilisateur
+    JOIN Banque_Image ON Utilisateur.id_image = Banque_Image.id_image
+    WHERE id_utilisateur = var_id_utilisateur;
+END
+//
+
 -- Création de la procédure AjouterIngredientCocktail
 -- Permet d'ajouter un ingrédient à un cocktail
 -- Utiliser pour la création de cocktail
@@ -489,7 +551,6 @@ END
 -- Renvoie les informations d'un cocktail pour l'affichage simple
 -- Utiliser pour afficher les cocktails sous format simple(image, nom, profil saveur
 -- alcool principale et nb de like)
--- *Vérfier si mieux de renoyer tous les infos d'un cocktail d'un coup et storer dans objet php
 DROP PROCEDURE IF EXISTS GetInfoCocktailSimple;
 
 CREATE PROCEDURE GetInfoCocktailSimple(IN cocktail INT)
