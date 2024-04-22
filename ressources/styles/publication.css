@@ -32,6 +32,11 @@
     color: var(--palette-lighttext-color);
 }
 
+#titre {
+    color: var(--palette-lighttext-color);
+    text-shadow: var(--neon-text-pink);
+}
+
 #mon-modal textarea {
     width: 100%;
     padding: 10px;
@@ -193,9 +198,11 @@ label {
     background-color: var(--palette-button-color-hover);
 }
 
-#ingredient-rajoute {
+.ingredient-rajoute {
     font-size: larger;
     font-style: bold;
+    color: var(--palette-lighttext-color);
+    text-shadow: var(--neon-text-pink);
 }
 
 #ingredient-nom:focus,
