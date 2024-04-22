@@ -14,8 +14,13 @@
 <body>
     <noscript class="erreur">Vous devez activer JavaScript pour charger ce site web.</noscript>
 
-    <header>
-        <h1>Cocktail Wizard</h1>
+    <header id="top">
+    <h1 class="neonText-pink">COCKTAIL WIZARD</h1>
+        <div class="button-container">
+            <a id="bouton-connexion" class="connexion-pic" href="/connexion" title="Connexion">
+                <img src="ressources/images/icone-profile.svg" alt="Icone profile">
+            </a>
+        </div>
     </header>
 
     <main>
@@ -36,12 +41,6 @@
     </main>
 
     <aside id="contenant-modale"></aside>
-
-    <aside id="contenant-boutons-fixes">
-        <a href="/connexion" title="Connexion">
-            <img src="ressources/images/icone-profile.svg" alt="Icone profile">
-        </a>
-    </aside>
 
     <aside id="deux-boutons">
         <button>
