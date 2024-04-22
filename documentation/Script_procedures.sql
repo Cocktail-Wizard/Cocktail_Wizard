@@ -527,8 +527,6 @@ BEGIN
 END
 //
 
-CALL GetInfoCocktailComplet(48);
-
 -- Création de la procédure cocktailLiked
 -- Permet de voir si un utilisateur a liké un cocktail
 DROP PROCEDURE IF EXISTS cocktailLiked;
