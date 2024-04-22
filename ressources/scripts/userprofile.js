@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 }
             })
-      });
+    });
 
     document.getElementById('delete-btn').addEventListener('click', function () {
         let confirmer = confirm('Êtes-vous sûr de vouloir supprimer votre compte?');
@@ -123,13 +123,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body: JSON.stringify({ username: utilisateur })
             }).then(response => {
-                    if (response.ok) {
-                        document.getElementById("deconnexion").click();
-                    }
-                    else {
-                        console.error('Erreur lors de la suppression du compte:', response.status);
-                    }
-                })
+                if (response.ok) {
+                    document.getElementById("deconnexion").click();
+                }
+                else {
+                    console.error('Erreur lors de la suppression du compte:', response.status);
+                }
+            })
 
         }
     });
