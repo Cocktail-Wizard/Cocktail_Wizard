@@ -15,6 +15,16 @@
     margin-top: 5%;
 }
 
+#img-profile {
+    pointer-events: auto;
+    cursor: pointer;
+
+}
+
+#img-profile:hover {
+    filter: brightness(0.4);
+}
+
 /* En-tête de la section profil utilisateur */
 #userprofile-header {
     padding: 5px 16px;
@@ -46,6 +56,7 @@
     height: 150px;
     border-radius: 50%;
     margin-bottom: 20px;
+    border: 2px solid var(--palette-border-color);
 }
 
 /* nom de l'utilisateur */
