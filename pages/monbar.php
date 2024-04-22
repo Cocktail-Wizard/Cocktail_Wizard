@@ -28,7 +28,7 @@ if (!isset($_SESSION['username'])) {
     <header id="top">
         <div class="user">
             <button type="button" id="profil-utilisateur" title="Profile" data-bs-toggle="modal" data-bs-target="#my-modal">
-                <img class="profile-pic" src="../ressources/images/lionWizard.jpg" alt="Profile Picture">
+                <img class="profile-pic" alt="Profile Picture">
             </button>
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
         </div>
