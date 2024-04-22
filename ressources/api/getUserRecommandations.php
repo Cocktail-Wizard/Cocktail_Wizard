@@ -65,7 +65,7 @@ if ($isTriInvalid || $isTypeInvalid) {
 } elseif (isset($type)) {
     try {
         switch ($type) {
-            // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Classiques
+                // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Classiques
             case 'classiques':
                 $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleClassique(?,?,?)");
                 $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
@@ -73,7 +73,7 @@ if ($isTriInvalid || $isTypeInvalid) {
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
                 break;
-            // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Favoris
+                // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Favoris
             case 'favoris':
                 $requete_preparee = $conn->prepare("CALL GetListeCocktailPossibleFavorie(?,?,?)");
                 $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
@@ -81,7 +81,7 @@ if ($isTriInvalid || $isTypeInvalid) {
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
                 break;
-            // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Communauté
+                // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Communauté
             case 'communaute':
                 $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleCommunautaire(?,?,?)");
                 $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);

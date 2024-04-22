@@ -29,7 +29,7 @@ $conn = connexionBD();
 $donnee = json_decode(file_get_contents('php://input'), true);
 
 // Vérifie si les paramètres sont présents
-$nomIngredient = paramJSONvalide($donnee,'nomIngredient');
+$nomIngredient = paramJSONvalide($donnee, 'nomIngredient');
 $username = paramJSONvalide($donnee, 'username');
 
 $userId = usernameToId($username, $conn);

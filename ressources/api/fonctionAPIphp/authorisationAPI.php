@@ -10,7 +10,8 @@
  *
  *
  */
-function userAccesResssource($usernameRequete) {
+function userAccesResssource($usernameRequete)
+{
 
     if (session_status() == PHP_SESSION_NONE) {
         session_start();

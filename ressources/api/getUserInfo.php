@@ -26,7 +26,7 @@ require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 
 $conn = connexionBD();
 
-if(isset($_GET['user'])) {
+if (isset($_GET['user'])) {
     $username = trim($_GET['user']);
 } else {
     http_response_code(400);

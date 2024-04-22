@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routage pour les requêtes GET concernant les cocktails.
  *
@@ -20,11 +21,11 @@
  *
  */
 
-if(isset($_GET['auteur'])) {
+if (isset($_GET['auteur'])) {
 
     // Vérifie si les paramètres de pagination sont valides et les récupère
     // Si les paramètres ne sont pas valides, ils prendront des valeurs par défaut
-    if(isset($_GET['page']) && preg_match('/^[0-9]+-[0-9]+$/', $_GET['page'])) {
+    if (isset($_GET['page']) && preg_match('/^[0-9]+-[0-9]+$/', $_GET['page'])) {
         $pagination = explode('-', $_GET['page']);
         $page = (int) $pagination[0];
         $nbCocktailPage = (int) $pagination[1];
@@ -36,7 +37,6 @@ if(isset($_GET['auteur'])) {
     $username = trim($_GET['auteur']);
 
     require_once __DIR__ . '/getUserCocktails.php';
-
 } else if (isset($_GET['type']) && isset($_GET['user'])) {
 
     $type = trim($_GET['type']);
@@ -52,8 +52,7 @@ if(isset($_GET['auteur'])) {
     }
 
     require_once __DIR__ . '/getUserRecommandations.php';
-
-} else if(isset($_GET['user']) && isset($_GET['recherche'])) {
+} else if (isset($_GET['user']) && isset($_GET['recherche'])) {
 
     $username = trim($_GET['user']);
     $recherche = trim($_GET['recherche']);
@@ -69,15 +68,14 @@ if(isset($_GET['auteur'])) {
 
     // Vérifie si le paramètre de tri est valide et le récupère.
     // Si le paramètres n'est pas valide, il prend une valeur par défaut
-    if(isset($_GET['tri']) && ($_GET['tri'] == 'like' || $_GET['tri'] == 'date')) {
+    if (isset($_GET['tri']) && ($_GET['tri'] == 'like' || $_GET['tri'] == 'date')) {
         $tri = trim($_GET['tri']);
     } else {
         $tri = 'like';
     }
 
     require_once __DIR__ . '/rechercheUserRecommandations.php';
-
-} else if(isset($_GET['user'])) {
+} else if (isset($_GET['user'])) {
 
     $username = trim($_GET['user']);
 
@@ -90,15 +88,14 @@ if(isset($_GET['auteur'])) {
         $nbCocktailPage = 10;
     }
 
-    if(isset($_GET['tri']) && ($_GET['tri'] == 'like' || $_GET['tri'] == 'date')) {
+    if (isset($_GET['tri']) && ($_GET['tri'] == 'like' || $_GET['tri'] == 'date')) {
         $tri = trim($_GET['tri']);
     } else {
         $tri = 'like';
     }
 
     require_once __DIR__ . '/getUserRecommandations.php';
-
-}  else if(isset($_GET['recherche'])) {
+} else if (isset($_GET['recherche'])) {
 
     $recherche = trim($_GET['recherche']);
 
@@ -111,7 +108,7 @@ if(isset($_GET['auteur'])) {
         $nbCocktailPage = 10;
     }
 
-    if(isset($_GET['tri']) && ($_GET['tri'] == 'like' || $_GET['tri'] == 'date')) {
+    if (isset($_GET['tri']) && ($_GET['tri'] == 'like' || $_GET['tri'] == 'date')) {
         $tri = trim($_GET['tri']);
     } else {
         $tri = 'like';
@@ -129,7 +126,7 @@ if(isset($_GET['auteur'])) {
         $nbCocktailPage = 10;
     }
 
-    if(isset($_GET['tri']) && ($_GET['tri'] == 'like' || $_GET['tri'] == 'date')) {
+    if (isset($_GET['tri']) && ($_GET['tri'] == 'like' || $_GET['tri'] == 'date')) {
         $tri = trim($_GET['tri']);
     } else {
         $tri = 'like';

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script ajoutIng
  *
@@ -28,37 +29,33 @@ $typeIng = paramJSONvalide($donnee, "typeIng");
 
 try {
     // Ajoute un ingrédient ou un alcool à la base de données
-    if($typeIng == "alcool"){
+    if ($typeIng == "alcool") {
         $requete_preparee = $conn->prepare("CALL ajoutAlcoolBD(?)");
         $requete_preparee->bind_param("s", $nomIng);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
         $requete_preparee->close();
-        if($resultat->num_rows > 0){
+        if ($resultat->num_rows > 0) {
             $row = $resultat->fetch_assoc();
-            echo json_encode($row['success']==1 ? "Alcool ajouté" : "Alcool déjà existant");
-        }
-        else{
+            echo json_encode($row['success'] == 1 ? "Alcool ajouté" : "Alcool déjà existant");
+        } else {
             http_response_code(404);
             echo json_encode("Erreur lors de l'ajout de l'alcool");
         }
-    }
-    elseif($typeIng == "ingredient"){
+    } elseif ($typeIng == "ingredient") {
         $requete_preparee = $conn->prepare("CALL ajoutIngredientBD(?)");
         $requete_preparee->bind_param("s", $nomIng);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
         $requete_preparee->close();
-        if($resultat->num_rows > 0){
+        if ($resultat->num_rows > 0) {
             $row = $resultat->fetch_assoc();
-            echo json_encode($row['success']==1 ? "Ingrédient ajouté" : "Ingrédient déjà existant");
-        }
-        else{
+            echo json_encode($row['success'] == 1 ? "Ingrédient ajouté" : "Ingrédient déjà existant");
+        } else {
             http_response_code(404);
             echo json_encode("Erreur lors de l'ajout de l'ingrédient");
         }
-    }
-    else{
+    } else {
         http_response_code(400);
         echo json_encode("Erreur : Type d'ingrédient invalide");
         exit();

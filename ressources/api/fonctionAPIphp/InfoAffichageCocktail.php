@@ -67,7 +67,7 @@ function InfoAffichageCocktail($id_cocktail, $conn)
         session_start();
     }
 
-    if(isset($_SESSION['username'])){
+    if (isset($_SESSION['username'])) {
         $userId = usernameToId($_SESSION['username'], $conn);
         try {
             $requete_preparee = $conn->prepare("CALL cocktailLiked(?, ?)");
@@ -78,8 +78,7 @@ function InfoAffichageCocktail($id_cocktail, $conn)
             if ($resultat->num_rows > 0) {
                 $row = $resultat->fetch_assoc();
                 $cocktail->setLiked($row['liked']);
-            }
-            else {
+            } else {
                 http_response_code(404);
                 echo json_encode("Aucun cocktail n'a été trouvé avec cet id.");
                 exit();

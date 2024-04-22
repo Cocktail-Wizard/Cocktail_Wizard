@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script rechercheCocktail
  *
@@ -37,7 +38,7 @@ $userId = usernameToId($username, $conn);
 
 try {
     $requete_preparee = $conn->prepare("CALL RechercheCocktailFiltrer(?,?,?,?,?)");
-    $requete_preparee->bind_param('sisii', $recherche, $userId ,$tri, $page, $nbCocktailPage);
+    $requete_preparee->bind_param('sisii', $recherche, $userId, $tri, $page, $nbCocktailPage);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
 
