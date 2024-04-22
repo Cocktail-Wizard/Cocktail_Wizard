@@ -64,3 +64,17 @@ function getCookie(nom) {
 function deleteCookie(nom) {
     document.cookie = `${nom}=; expires=Thu, 01 Jan 2001 00:00:00 UTC; path=/;`;
 }
+
+function genererDegreDepuisString(string) {
+    let hash = 0;
+
+    for (let i = 0; i < string.length; i++) {
+        hash += string.charCodeAt(i);
+    }
+
+    hash = Math.abs(hash);
+
+    const scaledNumber = hash % 361;
+
+    return scaledNumber;
+}
