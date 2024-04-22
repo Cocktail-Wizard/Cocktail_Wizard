@@ -3,10 +3,9 @@
     src: url('../styles/Elianto/Elianto/Elianto-Regular.ttf') format('truetype');
 }
 
-root {
+:root {
     --publication-width: 250px;
     --publication-height: calc(var(--publication-width * 4 / 3));
-
 }
 
 /* General Styles */
@@ -18,7 +17,6 @@ body {
     background-color: var(--palette-background-color);
     color: var(--palette-lighttext-color);
     font-family: 'Elianto', sans-serif;
-
 }
 
 header #w-icon {
