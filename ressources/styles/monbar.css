@@ -43,7 +43,6 @@ main {
     padding: 0 20px;
     position: relative;
     font-size: 4vw;
-    ;
 }
 
 .user {
@@ -177,7 +176,6 @@ header h1 {
     color: var(--palette-lighttext-color);
     background-color: var(--palette-button-color-hover);
     box-shadow: var(--orange-neon-box);
-
     text-shadow: var(--neon-text-pink)
 }
 
@@ -334,7 +332,6 @@ header h1 {
     color: var(--palette-lighttext-color);
     background-color: var(--palette-button-color-hover);
     box-shadow: var(--orange-neon-box);
-
     text-shadow: var(--neon-text-pink);
 }
 
