@@ -22,7 +22,7 @@ header("Content-Type: application/json");
 require_once(__DIR__ . '/config.php');
 require_once(__DIR__ . '/../classephp/Commentaire_Classe.php');
 
-if(isset($_GET['cocktail']) && is_numeric($_GET['cocktail'])) {
+if (isset($_GET['cocktail']) && is_numeric($_GET['cocktail'])) {
     $id_cocktail = trim($_GET['cocktail']);
 } else {
     http_response_code(400);

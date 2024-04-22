@@ -30,11 +30,12 @@ require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
 
 $conn = connexionBD();
 
-$cocktails = [];
-$id_cocktail = [];
+$cocktails = []; //Liste d'objets Cocktail
+$id_cocktail = []; //Liste d'id de cocktails
 
 
 try {
+    // Récupère les cocktails recherchés
     $requete_preparee = $conn->prepare("CALL RechercheCocktail(?,?,?,?)");
     $requete_preparee->bind_param('ssii', $recherche, $tri, $page, $nbCocktailPage);
     $requete_preparee->execute();
