@@ -17,8 +17,7 @@ main {
 }
 
 body>header {
-    /* background: radial-gradient(transparent, black), url("../images/sparkles.png") no-repeat center 25% / cover; */
-    background: radial-gradient(transparent, black), url("../images/cyberpunkWizard.png") no-repeat center 25% / cover;
+    background: radial-gradient(transparent, black), url("../images/sparkles.png") no-repeat center 25% / cover;
     font-size: 4vw;
     height: 50vh;
     text-shadow: 0 0 15px var(--palette-headline-color);
@@ -157,6 +156,7 @@ aside#contenant-boutons-fixes a img {
     border: 0;
     border-radius: var(--default-border-radius) 0 0 var(--default-border-radius);
     font-size: x-large;
+    opacity: 0.8;
     outline: none;
     padding: 10px 0 10px 50px;
     width: clamp(200px, calc(var(--publication-width) * 1.85), 75%);
@@ -167,7 +167,6 @@ aside#contenant-boutons-fixes a img {
 
 #barre-recherche:focus {
     box-shadow: var(--blue-neon-box-light);
-
     opacity: 1;
 }
 
@@ -289,6 +288,12 @@ header h1 {
 #bouton-connexion:hover {
     background-color: var(--palette-button-color-hover);
     box-shadow: var(--orange-neon-box);
+}
+
+@media (prefers-color-scheme: dark) {
+    body>header {
+        background: radial-gradient(transparent, black), url("../images/cyberpunkWizard.png") no-repeat center 25% / cover;
+    }
 }
 
 @media screen and (width<=850px) {
