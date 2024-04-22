@@ -66,25 +66,48 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     fetch(`/api/users?user=${utilisateur}`)
-    .then(response => response.json())
-    .then(user => {
-        document.getElementById('username').textContent = user.nom;
-        document.getElementById('email').textContent = user.courriel;
-        document.getElementById('cocktailCount').textContent = user.nb_cocktail_cree;
-        document.getElementById('likeCount').textContent = user.nb_cocktail_favoris;
-        document.getElementById('commentCount').textContent = user.nb_commentaire;
-    })
-    .catch(error => console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error));
+        .then(response => response.json())
+        .then(user => {
+            document.getElementById('username').textContent = user.nom;
+            document.getElementById('email').textContent = user.courriel;
+            document.getElementById('cocktailCount').textContent = user.nb_cocktail_cree;
+            document.getElementById('likeCount').textContent = user.nb_cocktail_favoris;
+            document.getElementById('commentCount').textContent = user.nb_commentaire;
+        })
+        .catch(error => console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error));
 
-    mesCocktails.addEventListener('scroll', function() {
+    mesCocktails.addEventListener('scroll', function () {
 
-        if((mesCocktails.scrollLeft + mesCocktails.clientWidth) >= (mesCocktails.scrollWidth-2) && dernierChargementProfile != mesCocktails.scrollWidth) {
+        if ((mesCocktails.scrollLeft + mesCocktails.clientWidth) >= (mesCocktails.scrollWidth - 2) && dernierChargementProfile != mesCocktails.scrollWidth) {
             pageProfile++;
             chargerCocktailsProfile();
             dernierChargementProfile = mesCocktails.scrollWidth;
         }
     });
+
+    document.getElementById('delete-btn').addEventListener('click', function () {
+        let confirmer = confirm('Êtes-vous sûr de vouloir supprimer votre compte?');
+        if (confirmer) {
+            fetch(`/api/users`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: utilisateur })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById("deconnexion").click();
+                    }
+                    else {
+                        console.error('Erreur lors de la suppression du compte:', response.status);
+                    }
+                })
+
+        }
+    });
 });
+
 
 $('#my-modal').on('hidden.bs.modal', function () {
     document.getElementById("infoPage").style.display = "block";
@@ -101,8 +124,8 @@ $('#my-modal').on('show.bs.modal', function () {
 async function chargerCocktailsProfile() {
 
     const data = await faireRequete(`/api/cocktails?auteur=${utilisateur}&page=${pageProfile}-${cocktailParPageProfile}`);
-  
-    if(data) {
+
+    if (data) {
         afficherCocktailsPerso(data, modeleCarteCocktail, mesCocktails);
     }
 }
