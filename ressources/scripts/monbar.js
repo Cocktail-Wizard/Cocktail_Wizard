@@ -206,7 +206,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     chargerCocktails();
 
-    cocktailsClassiques.addEventListener('scroll', function() {
+    cocktailsClassiques.addEventListener('scroll', function () {
+
         if (cocktailsClassiques.scrollLeft + cocktailsClassiques.clientWidth >= cocktailsClassiques.scrollWidth - 2 && dernierChargementClassique !== cocktailsClassiques.scrollWidth) {
             pageClassique++;
             chargerCocktailsScroll(1);
@@ -214,7 +215,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    cocktailsPersonnels.addEventListener('scroll', function() {
+    cocktailsPersonnels.addEventListener('scroll', function () {
         if (cocktailsPersonnels.scrollLeft + cocktailsPersonnels.clientWidth >= cocktailsPersonnels.scrollWidth - 2 && dernierChargementFavoris !== cocktailsPersonnels.scrollWidth) {
             pageFavoris++;
             chargerCocktailsScroll(2);
@@ -222,7 +223,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    cocktailsCommunautaires.addEventListener('scroll', function() {
+    cocktailsCommunautaires.addEventListener('scroll', function () {
         if (cocktailsCommunautaires.scrollLeft + cocktailsCommunautaires.clientWidth >= cocktailsCommunautaires.scrollWidth - 2 && dernierChargementCommunaute !== cocktailsCommunautaires.scrollWidth) {
             pageCommunaute++;
             chargerCocktailsScroll(3);
@@ -253,7 +254,7 @@ async function chargerCocktailsScroll(type) {
         if (data) {
             afficherCocktailsPerso(data, modeleCarteCocktail, cocktailsClassiques);
         }
-    } else if(type == 2) {
+    } else if (type == 2) {
         const data = await faireRequete(`/api/cocktails?user=${utilisateur}&type=favoris&page=${pageFavoris}-${nbCocktailCharger}`);
         if (data) {
             afficherCocktailsPerso(data, modeleCarteCocktail, cocktailsPersonnels);
@@ -342,7 +343,7 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
         }
 
         const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
-        pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+        pastilleAlcool.style.filter = `hue-rotate(${genererDegreDepuisString(cocktail.alcool_principale)}deg)`;
 
         const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
         compteurJaime.textContent = cocktail.nb_like;
@@ -540,7 +541,9 @@ function ajouterIngredientBD(nomIngredient) {
                 throw new Error('Erreur lors de la requête.');
             }
             chargerCocktails();
-            if(response.status === 204) {
+
+            if (response.status === 204) {
+
                 return null;
             }
             return response.json();
@@ -574,7 +577,9 @@ function enleverIngredientBD(nomIngredient) {
                 throw new Error('Erreur lors de la requête.');
             }
             chargerCocktails();
-            if(response.status === 204) {
+
+            if (response.status === 204) {
+
                 return null;
             }
             return response.json();

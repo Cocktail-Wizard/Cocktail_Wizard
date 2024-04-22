@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function chargerCocktailScroll() {
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight-1) && document.body.offsetHeight != dernierChargement) {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1) && document.body.offsetHeight != dernierChargement) {
         chargerCocktailsScroll();
         dernierChargement = document.body.offsetHeight;
     }
@@ -78,7 +78,7 @@ function afficherCocktails(data) {
         imageCocktail.loading = 'lazy';
 
         const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
-        pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+        pastilleAlcool.style.filter = `hue-rotate(${genererDegreDepuisString(cocktail.alcool_principale)}deg)`;
 
         const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
         compteurJaime.textContent = cocktail.nb_like;
@@ -138,7 +138,7 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
         }
 
         const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
-        pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+        pastilleAlcool.style.filter = `hue-rotate(${genererDegreDepuisString(cocktail.alcool_principale)}deg)`;
 
         const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
         compteurJaime.textContent = cocktail.nb_like;
@@ -270,14 +270,14 @@ async function chargerCommentairesModale(idCocktail) {
 
 async function chargerCocktailsScroll() {
     document.getElementById('gif-loading').style.display = 'block';
-    page ++;
+    page++;
     const url = requetePrecedente + `&page=${page}-${cocktailParPage}`;
     const data = await faireRequete(url);
-    if(data.length < cocktailParPage) {
+    if (data.length < cocktailParPage) {
         window.removeEventListener('scroll', chargerCocktailScroll);
     }
     if (data) {
-        if(estSelect === false) {
+        if (estSelect === false) {
             afficherCocktails(data);
         } else {
             afficherCocktailsPerso(data, modeleCarteCocktail, galerie);
@@ -301,7 +301,8 @@ async function chercherCocktail() {
     url += paramPage;
     const data = await faireRequete(url);
     if (data) {
-        if(data.length == cocktailParPage) {
+        if (data.length == cocktailParPage) {
+
             window.addEventListener('scroll', chargerCocktailScroll);
         }
         if (estSelect === false) {
