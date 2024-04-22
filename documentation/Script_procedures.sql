@@ -34,6 +34,11 @@ SHOW PROCEDURE STATUS;
 
 DELIMITER //
 
+-- Création d'index pour la table coktail afin d'optimiser les recherches
+CREATE INDEX idx_nb_like ON Cocktail(nb_like);
+CREATE INDEX idx_date_publication ON Cocktail(date_publication);
+
+
 --Création de la procédure InscriptionUtilisateur
 -- Permet d'inscrire un utilisateur
 -- Utiliser pour l'inscription
@@ -390,18 +395,28 @@ END
 -- param_orderby: 'date' ou 'like'
 DROP PROCEDURE IF EXISTS GetCocktailGalerieNonFiltrer;
 
-CREATE PROCEDURE GetCocktailGalerieNonFiltrer(IN param_orderby VARCHAR(50))
+CREATE PROCEDURE GetCocktailGalerieNonFiltrer(IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
 BEGIN
-    SELECT C.id_cocktail
-    FROM Cocktail C
-    ORDER BY
-        CASE
-            WHEN param_orderby = 'date' THEN C.date_publication
-            WHEN param_orderby = 'like' THEN C.nb_like
-            ELSE C.nb_like
-        END DESC;
+
+    SET @debut = (page - 1) * cocktail_par_page;
+    SET @nb_cocktail = cocktail_par_page;
+    SET @ordre = CASE
+        WHEN param_orderby = 'date' THEN 'C.date_publication'
+        WHEN param_orderby = 'like' THEN 'C.nb_like'
+        ELSE 'C.nb_like'
+    END;
+
+    SET @sql = CONCAT('SELECT C.id_cocktail
+                       FROM Cocktail C
+                       ORDER BY ', @ordre, ' DESC
+                       LIMIT ', @nb_cocktail, ' OFFSET ', @debut);
+
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END
 //
+
 
 -- Création de la procédure GetCocktailGalerieFiltrer
 -- Permet de voir tous les cocktails que chaque utilisateur peut faire
@@ -410,25 +425,37 @@ END
 -- param_orderby: 'date' ou 'like'
 DROP PROCEDURE IF EXISTS GetCocktailGalerieFiltrer;
 
-CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50))
+CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
 BEGIN
-    SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
-        FROM Ingredient_Cocktail IC
-        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
-        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-        WHERE IC.id_cocktail = C.id_cocktail
-        AND(
-            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = utilisateur))
-            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = utilisateur))
-        )
-    ) AS ing_manquant
-    FROM Cocktail C
-    ORDER BY ing_manquant ASC,
-        CASE
-            WHEN param_orderby = 'date' THEN C.date_publication
-            WHEN param_orderby = 'like' THEN C.nb_like
-            ELSE C.nb_like
-        END DESC;
+    SET @debut = (page - 1) * cocktail_par_page;
+    SET @utilisateur = utilisateur;
+    SET @cocktail_par_page = cocktail_par_page;
+    SET @ordre = CASE
+        WHEN param_orderby = 'date' THEN 'C.date_publication'
+        WHEN param_orderby = 'like' THEN 'C.nb_like'
+        ELSE 'C.nb_like'
+    END;
+
+    SET @sql = CONCAT('
+        SELECT C.id_cocktail, (
+            SELECT COUNT(IC.id_ingredient_cocktail)
+            FROM Ingredient_Cocktail IC
+            LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+            LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+            WHERE IC.id_cocktail = C.id_cocktail
+            AND (
+                (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = ', @utilisateur, '))
+                OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = ', @utilisateur, '))
+            )
+        ) AS ing_manquant
+        FROM Cocktail C
+        ORDER BY ing_manquant ASC,', @ordre,' DESC
+        LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
+    );
+
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END
 //
 
@@ -515,17 +542,27 @@ BEGIN
 END
 //
 
+
 --Création de la procédure GetMesCocktails
 -- Permet de voir les cocktails que chaque utilisateur a créé
 -- Utiliser pour liste la liste de cocktail dans mon profil
 DROP PROCEDURE IF EXISTS GetMesCocktails;
 
-CREATE PROCEDURE GetMesCocktails(IN id_utilisateur INT)
+CREATE PROCEDURE GetMesCocktails(IN id_utilisateur INT, IN page INT, IN cocktail_par_page INT)
 BEGIN
-    SELECT C.id_cocktail
+    SET @debut = (page - 1) * cocktail_par_page;
+    SET @cocktail_par_page = cocktail_par_page;
+    SET @id_utilisateur = id_utilisateur;
+
+    SET @sql = CONCAT('SELECT C.id_cocktail
     FROM Cocktail C
-    WHERE C.id_utilisateur = id_utilisateur
-    ORDER BY C.date_publication ASC;
+    WHERE C.id_utilisateur = ', @id_utilisateur,
+    ' ORDER BY C.date_publication DESC
+    LIMIT ', @cocktail_par_page, ' OFFSET ', @debut);
+
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END
 //
 
@@ -554,44 +591,70 @@ END
 -- Utiliser pour lister les cocktails favoris dans la section mon bar
 DROP PROCEDURE IF EXISTS GetListeCocktailPossibleFavorie;
 
-CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT)
+CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT, IN page INT, IN cocktail_par_page INT)
 BEGIN
-    SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
-        FROM Ingredient_Cocktail IC
-        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
-        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-        WHERE IC.id_cocktail = C.id_cocktail
-        AND(
-            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE AU.id_alcool = IC.id_alcool AND AU.id_utilisateur = id_utilisateur))
-            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE IU.id_ingredient = IC.id_ingredient AND IU.id_utilisateur = id_utilisateur))
-        )) AS ing_manquant
-    FROM Cocktail C
-    JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
-    WHERE CL.id_utilisateur = id_utilisateur
-    ORDER BY ing_manquant ASC, CL.date_like DESC;
+    SET @debut = (page - 1) * cocktail_par_page;
+    SET @id_utilisateur = id_utilisateur;
+    SET @cocktail_par_page = cocktail_par_page;
+
+    SET @sql = CONCAT('
+        SELECT C.id_cocktail, (
+            SELECT COUNT(IC.id_ingredient_cocktail)
+            FROM Ingredient_Cocktail IC
+            LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+            LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+            WHERE IC.id_cocktail = C.id_cocktail
+            AND (
+                (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE AU.id_alcool = IC.id_alcool AND AU.id_utilisateur = ', @id_utilisateur, '))
+                OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE IU.id_ingredient = IC.id_ingredient AND IU.id_utilisateur = ', @id_utilisateur, '))
+            )
+        ) AS ing_manquant
+        FROM Cocktail C
+        JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
+        WHERE CL.id_utilisateur = ', @id_utilisateur, '
+        ORDER BY ing_manquant ASC, CL.date_like DESC
+        LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
+    );
+
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END
 //
+
 
 --Création de la procédure GetCocktailsPossibleClassique
 -- Permet de voir les cocktails classiques que chaque utilisateur peut faire
 -- Utiliser pour lister les cocktails classiques dans la section mon bar
 DROP PROCEDURE IF EXISTS GetCocktailsPossibleClassique;
 
-CREATE PROCEDURE GetCocktailsPossibleClassique(IN utilisateur INT)
+CREATE PROCEDURE GetCocktailsPossibleClassique(IN utilisateur INT, IN page INT, IN cocktail_par_page INT)
 BEGIN
-    SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
-        FROM Ingredient_Cocktail IC
-        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
-        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-        WHERE IC.id_cocktail = C.id_cocktail
-        AND(
-            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = utilisateur))
-            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = utilisateur))
-        )
-    ) AS ing_manquant
-    FROM Cocktail C
-    WHERE C.classique = 1
-    ORDER BY ing_manquant ASC, C.nb_like DESC;
+    SET @debut = (page - 1) * cocktail_par_page;
+    SET @utilisateur = utilisateur;
+    SET @cocktail_par_page = cocktail_par_page;
+
+    SET @sql = CONCAT('
+        SELECT C.id_cocktail, (
+            SELECT COUNT(IC.id_ingredient_cocktail)
+            FROM Ingredient_Cocktail IC
+            LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+            LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+            WHERE IC.id_cocktail = C.id_cocktail
+            AND (
+                (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = ', @utilisateur, '))
+                OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = ', @utilisateur, '))
+            )
+        ) AS ing_manquant
+        FROM Cocktail C
+        WHERE C.classique = 1
+        ORDER BY ing_manquant ASC, C.nb_like DESC
+        LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
+    );
+
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END
 //
 
@@ -600,21 +663,33 @@ END
 -- Utiliser pour lister les cocktails communautaires dans la section mon bar
 DROP PROCEDURE IF EXISTS GetCocktailsPossibleCommunautaire;
 
-CREATE PROCEDURE GetCocktailsPossibleCommunautaire(IN utilisateur INT)
+CREATE PROCEDURE GetCocktailsPossibleCommunautaire(IN utilisateur INT, IN page INT, IN cocktail_par_page INT)
 BEGIN
-    SELECT C.id_cocktail, (SELECT COUNT(IC.id_ingredient_cocktail)
-        FROM Ingredient_Cocktail IC
-        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
-        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-        WHERE IC.id_cocktail = C.id_cocktail
-        AND(
-            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur WHERE id_alcool = IC.id_alcool AND id_utilisateur = utilisateur))
-            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = utilisateur))
-        )
-    ) AS ing_manquant
-    FROM Cocktail C
-    WHERE C.classique = 0
-    ORDER BY ing_manquant ASC, C.nb_like DESC;
+    SET @debut = (page - 1) * cocktail_par_page;
+    SET @utilisateur = utilisateur;
+    SET @cocktail_par_page = cocktail_par_page;
+
+    SET @sql = CONCAT('
+        SELECT C.id_cocktail, (
+            SELECT COUNT(IC.id_ingredient_cocktail)
+            FROM Ingredient_Cocktail IC
+            LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+            LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+            WHERE IC.id_cocktail = C.id_cocktail
+            AND (
+                (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE AU.id_alcool = IC.id_alcool AND AU.id_utilisateur = ', @utilisateur, '))
+                OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE IU.id_ingredient = IC.id_ingredient AND IU.id_utilisateur = ', @utilisateur, '))
+            )
+        ) AS ing_manquant
+        FROM Cocktail C
+        WHERE C.classique = 0
+        ORDER BY ing_manquant ASC, C.nb_like DESC
+        LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
+    );
+
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END
 //
 
@@ -663,25 +738,36 @@ END
 -- Renvoie tous les cocktails qui ont un des paramètres recherchés(À vérifier)
 DROP PROCEDURE IF EXISTS RechercheCocktail;
 
-CREATE PROCEDURE RechercheCocktail(IN param_recherche VARCHAR(255), IN param_orderby VARCHAR(50))
+CREATE PROCEDURE RechercheCocktail(IN param_recherche VARCHAR(255), IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
 BEGIN
-    SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like
-    FROM Cocktail C
-    JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
-    LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
-    LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-    JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
-    WHERE LOCATE(param_recherche ,C.nom) > 0
-    OR LOCATE(param_recherche , I.nom) > 0
-    OR LOCATE( param_recherche,A.nom) > 0
-    OR LOCATE(param_recherche ,C.profil_saveur) > 0
-    OR LOCATE(param_recherche, U.nom) > 0
-    ORDER BY
-        CASE
-            WHEN param_orderby = 'date' THEN C.date_publication
-            WHEN param_orderby = 'like' THEN C.nb_like
-            ELSE C.nb_like
-        END DESC;
+    SET @debut = (page - 1) * cocktail_par_page;
+    SET @param_recherche = param_recherche;
+    SET @ordre = CASE
+        WHEN param_orderby = 'date' THEN 'C.date_publication'
+        WHEN param_orderby = 'like' THEN 'C.nb_like'
+        ELSE 'C.nb_like'
+    END;
+    SET @cocktail_par_page = cocktail_par_page;
+
+    SET @sql = CONCAT('
+        SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like
+        FROM Cocktail C
+        JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
+        LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+        LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+        JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
+        WHERE LOCATE("', @param_recherche ,'", C.nom) > 0
+        OR LOCATE("', @param_recherche ,'", I.nom) > 0
+        OR LOCATE("', @param_recherche ,'", A.nom) > 0
+        OR LOCATE("', @param_recherche ,'", C.profil_saveur) > 0
+        OR LOCATE("', @param_recherche ,'", U.nom) > 0
+        ORDER BY ', @ordre,' DESC
+        LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
+    );
+
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END
 //
 
@@ -693,33 +779,48 @@ DROP PROCEDURE IF EXISTS RechercheCocktailFiltrer;
 
 CREATE PROCEDURE RechercheCocktailFiltrer(
     IN param_recherche VARCHAR(255), IN id_utilisateur INT, IN param_orderby VARCHAR(50)
+    , IN page INT, IN cocktail_par_page INT
 )
 BEGIN
-    SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like,
-    (SELECT COUNT(IC.id_ingredient_cocktail)
-        FROM Ingredient_Cocktail IC
+    SET @debut = (page - 1) * cocktail_par_page;
+    SET @param_recherche = param_recherche;
+    SET @ordre = CASE
+        WHEN param_orderby = 'date' THEN 'C.date_publication'
+        WHEN param_orderby = 'like' THEN 'C.nb_like'
+        ELSE 'C.nb_like'
+    END;
+    SET @utilisateur = id_utilisateur;
+    SET @cocktail_par_page = cocktail_par_page;
+
+    SET @sql = CONCAT('
+        SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like, (
+            SELECT COUNT(IC.id_ingredient_cocktail)
+            FROM Ingredient_Cocktail IC
+            LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
+            LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
+            WHERE IC.id_cocktail = C.id_cocktail
+            AND (
+                (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE AU.id_alcool = IC.id_alcool AND AU.id_utilisateur = ', @utilisateur, '))
+                OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE IU.id_ingredient = IC.id_ingredient AND IU.id_utilisateur = ', @utilisateur, '))
+            )
+        ) AS ing_manquant
+        FROM Cocktail C
+        JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
         LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
         LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-        WHERE IC.id_cocktail = C.id_cocktail
-        AND(
-            (IC.id_alcool IS NOT NULL AND NOT EXISTS (SELECT id_alcool FROM Alcool_Utilisateur AU WHERE id_alcool = IC.id_alcool AND AU.id_utilisateur = id_utilisateur))
-            OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur IU WHERE id_ingredient = IC.id_ingredient AND IU.id_utilisateur = id_utilisateur))
-        )
-    ) AS ing_manquant
-    FROM Cocktail C
-    JOIN Ingredient_Cocktail IC ON C.id_cocktail = IC.id_cocktail
-    LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
-    LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
-    WHERE (LOCATE(param_recherche, C.nom) > 0
-    OR LOCATE(param_recherche, I.nom) > 0
-    OR LOCATE(param_recherche, A.nom) > 0
-    OR LOCATE(param_recherche, C.profil_saveur) > 0)
-    ORDER BY ing_manquant ASC,
-        CASE
-            WHEN param_orderby = 'date' THEN C.date_publication
-            WHEN param_orderby = 'like' THEN C.nb_like
-            ELSE C.nb_like
-        END DESC;
+        JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
+        WHERE LOCATE("', @param_recherche ,'", C.nom) > 0
+        OR LOCATE("', @param_recherche ,'", I.nom) > 0
+        OR LOCATE("', @param_recherche ,'", A.nom) > 0
+        OR LOCATE("', @param_recherche ,'", C.profil_saveur) > 0
+        OR LOCATE("', @param_recherche ,'", U.nom) > 0
+        ORDER BY ing_manquant ASC, ', @ordre,' DESC
+        LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
+    );
+
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
 END
 //
 

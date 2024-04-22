@@ -30,7 +30,7 @@
     <main>
         <nav>
             <div class="nav-top">
-                <input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus>
+                <input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off">
                 <button id="ordre-tri" title="Ordonner par mentions j'aime">
                     <img id="ordre-tri-icone" src="ressources/images/icone-calendrier.svg" alt="Ordre">
                     <img src="ressources/images/tete-fleche-bas.svg" alt="Ordre décroissant">
@@ -45,6 +45,9 @@
         </nav>
 
         <section id="galerie"></section>
+        <div id="gif-loading" style="display: none;margin: auto;">
+            <img src="ressources/images/1490.gif" alt="Chargement">
+        </div>
     </main>
 
     <aside id="contenant-modale"></aside>
@@ -69,6 +72,7 @@
 
     <footer>Cocktail Wizard &copy - 2024</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="ressources/scripts/outils.js"></script>
     <script src="ressources/scripts/index.js"></script>
     <script src="ressources/scripts/modale.js"></script>

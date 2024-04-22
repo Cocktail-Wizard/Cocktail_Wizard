@@ -50,8 +50,8 @@ if ($isTriInvalid || $isTypeInvalid) {
     exit();
 } elseif (isset($tri)) {
     try {
-        $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?)");
-        $requete_preparee->bind_param("is", $userID, $tri);
+        $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?,?,?)");
+        $requete_preparee->bind_param("isii", $userID, $tri, $page, $nbCocktailPage);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
         $requete_preparee->close();
@@ -64,22 +64,22 @@ if ($isTriInvalid || $isTypeInvalid) {
     try {
         switch ($type) {
             case 'classiques':
-                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleClassique(?)");
-                $requete_preparee->bind_param("i", $userID);
+                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleClassique(?,?,?)");
+                $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
                 break;
             case 'favoris':
-                $requete_preparee = $conn->prepare("CALL GetListeCocktailPossibleFavorie(?)");
-                $requete_preparee->bind_param("i", $userID);
+                $requete_preparee = $conn->prepare("CALL GetListeCocktailPossibleFavorie(?,?,?)");
+                $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
                 break;
             case 'communaute':
-                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleCommunautaire(?)");
-                $requete_preparee->bind_param("i", $userID);
+                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleCommunautaire(?,?,?)");
+                $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();

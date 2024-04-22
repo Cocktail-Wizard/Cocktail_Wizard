@@ -1,4 +1,3 @@
-<!-- DOCTYPE pas nécessaire pas include avec php. Fuck linter -->
 <!-- Modale pour le profil utilisateur -->
 <!-- la page modale -->
 <div id="my-modal" class="modal">

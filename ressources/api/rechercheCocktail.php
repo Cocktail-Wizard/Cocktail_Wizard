@@ -32,12 +32,11 @@ $conn = connexionBD();
 
 $cocktails = [];
 $id_cocktail = [];
-$mots = str_replace( "_", " ", trim($mots));
-$tri = trim($tri);
+
 
 try {
-    $requete_preparee = $conn->prepare("CALL RechercheCocktail(?,?)");
-    $requete_preparee->bind_param('ss', $mots, $tri);
+    $requete_preparee = $conn->prepare("CALL RechercheCocktail(?,?,?,?)");
+    $requete_preparee->bind_param('ssii', $recherche, $tri, $page, $nbCocktailPage);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
 

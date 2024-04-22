@@ -5,9 +5,14 @@ const boutonOrdre = document.getElementById('ordre-tri');
 const boutonOrdreIcone = document.getElementById('ordre-tri-icone');
 const finAttenteEcriture = 1000; // 1 seconde
 const monBar = document.getElementById('lien-monbar');
+let page = 1;
+const cocktailParPage = 8;
+let requetePrecedente;
+let dernierChargement = 0;
 
 let estSelect = false;
-let ordreCocktails = 'like';
+
+let ordreCocktails = 'date';
 
 let chronoEcriture;
 let modeleCarteCocktail;
@@ -25,13 +30,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     barreRecherche.addEventListener('input', () => {
         clearTimeout(chronoEcriture);
-        chronoEcriture = setTimeout(chercherCocktail, finAttenteEcriture);
+        chronoEcriture = setTimeout(() => {
+            window.removeEventListener('scroll', chargerCocktailScroll);
+            chercherCocktail();
+        }, finAttenteEcriture);
     });
 
     boutonOrdre.addEventListener('click', () => {
+        window.removeEventListener('scroll', chargerCocktailScroll);
         ordonnerCocktails();
     });
 });
+
+function chargerCocktailScroll() {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight-1) && document.body.offsetHeight != dernierChargement) {
+        chargerCocktailsScroll();
+        dernierChargement = document.body.offsetHeight;
+    }
+}
+
 
 function afficherCocktails(data) {
     const fragment = document.createDocumentFragment();
@@ -220,7 +237,7 @@ async function chargerCommentairesModale(idCocktail) {
 
     if (modeleHTML) {
         try {
-            const data = await faireRequete(`/api/cocktails/${idCocktail}/commentaires`);
+            const data = await faireRequete(`/api/cocktails/commentaires?cocktail=${idCocktail}`);
             if (!data) return;
 
             const listeCommentaires = document.getElementById('commentaires');
@@ -251,32 +268,50 @@ async function chargerCommentairesModale(idCocktail) {
     }
 }
 
+async function chargerCocktailsScroll() {
+    document.getElementById('gif-loading').style.display = 'block';
+    page ++;
+    const url = requetePrecedente + `&page=${page}-${cocktailParPage}`;
+    const data = await faireRequete(url);
+    if(data.length < cocktailParPage) {
+        window.removeEventListener('scroll', chargerCocktailScroll);
+    }
+    if (data) {
+        if(estSelect === false) {
+            afficherCocktails(data);
+        } else {
+            afficherCocktailsPerso(data, modeleCarteCocktail, galerie);
+        }
+    }
+    document.getElementById('gif-loading').style.display = 'none';
+}
+
 async function chercherCocktail() {
+    dernierChargement = 0;
+    galerie.innerHTML = '';
+    document.getElementById('gif-loading').style.display = 'block';
+    page = 1;
     const recherche = barreRecherche.value.replace(/[^a-zA-Z0-9]/g, '_');
-    if (estSelect === false) {
-        const endpoint = recherche ? `/recherche/${recherche}` : '';
-        const user = utilisateur ? '?user=' + utilisateur : '';
-        const data = await faireRequete(`/api/cocktails/tri/${ordreCocktails}${endpoint}${user}`);
-        if (data) {
-            galerie.innerHTML = '';
+    const paramRecherche = recherche ? `&recherche=${recherche}` : '';
+    const paramOrdre = `?tri=${ordreCocktails}`;
+    const paramPage = `&page=${page}-${cocktailParPage}`;
+    const recommandations = estSelect ? `&user=${utilisateur}` : '';
+    let url = `/api/cocktails${paramOrdre}${paramRecherche}${recommandations}`;
+    requetePrecedente = url;
+    url += paramPage;
+    const data = await faireRequete(url);
+    if (data) {
+        if(data.length == cocktailParPage) {
+            window.addEventListener('scroll', chargerCocktailScroll);
+        }
+        if (estSelect === false) {
             afficherCocktails(data);
         }
-    }
-    else if (estSelect === true && recherche) {
-        const data = await faireRequete(`/api/users/${utilisateur}/cocktails/tri/${ordreCocktails}/recherche/${recherche}`);
-        if (data) {
-            galerie.innerHTML = '';
+        else {
             afficherCocktailsPerso(data, modeleCarteCocktail, galerie);
         }
     }
-    else {
-        const data = await faireRequete(`/api/users/${utilisateur}/recommandations/tri/${ordreCocktails}`);
-        if (data) {
-            galerie.innerHTML = '';
-            afficherCocktailsPerso(data, modeleCarteCocktail, galerie);
-        }
-    }
-
+    document.getElementById('gif-loading').style.display = 'none';
 }
 
 async function ordonnerCocktails() {
@@ -329,7 +364,6 @@ function chargerCommenter(id_cocktail) {
 }
 
 document.querySelectorAll('input[type=radio]').forEach(radio => {
-
     radio.addEventListener('mousedown', function (event) {
         estSelect = this.checked;
     });
@@ -338,11 +372,14 @@ document.querySelectorAll('input[type=radio]').forEach(radio => {
         if (estSelect) {
             this.checked = false;
             estSelect = false;
+
+            window.removeEventListener('scroll', chargerCocktailScroll);
             chercherCocktail();
         }
         else {
             this.checked = true;
             estSelect = true;
+            window.removeEventListener('scroll', chargerCocktailScroll);
             chercherCocktail();
         }
     });

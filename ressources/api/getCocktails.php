@@ -36,8 +36,8 @@ $id_cocktail = [];
 
 try {
     //Demande les id_cocktail de tous les cocktails
-    $requete_preparee = $conn->prepare("CALL GetCocktailGalerieNonFiltrer(?)");
-    $requete_preparee->bind_param('s', $tri);
+    $requete_preparee = $conn->prepare("CALL GetCocktailGalerieNonFiltrer(?,?,?)");
+    $requete_preparee->bind_param('sii', $tri, $page, $nbCocktailPage);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();

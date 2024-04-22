@@ -30,6 +30,9 @@
         </nav>
 
         <section id="galerie"></section>
+        <div id="gif-loading" style="display: none;margin: auto;">
+            <img src="ressources/images/1490.gif" alt="Chargement">
+        </div>
     </main>
 
     <aside id="contenant-modale"></aside>
