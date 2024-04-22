@@ -55,7 +55,7 @@ class Cocktail implements JsonSerializable
         $dateTemps = new DateTime($date);
         $this->date = $dateTemps->format('d-m-Y');
         $this->nb_like = $nb_like;
-        $this->alcool_principale = $alcool_principale;
+        $this->alcool_principale = $alcool_principale === null ? "Aucun" : $alcool_principale;;
         $this->profil_saveur = $profil_saveur;
         $this->type_verre = $type_verre;
         $this->liked = null;
@@ -87,6 +87,7 @@ class Cocktail implements JsonSerializable
     {
         $vars = get_object_vars($this);
 
+        // Supprime les variables qui sont null
         foreach ($vars as $key => $value) {
             if ($value === null) {
                 unset($vars[$key]);
