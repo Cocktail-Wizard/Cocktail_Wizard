@@ -51,7 +51,7 @@ CREATE PROCEDURE InscriptionUtilisateur(
     IN var_mdp_hashed VARCHAR(255),
     IN var_date_naissance DATE)
 BEGIN
-    SET @imgProfile = (SELECT img FROM Banque_Image WHERE img_cocktail = 0 ORDER BY RAND() LIMIT 1);
+    SET @imgProfile = (SELECT id_image FROM Banque_Image WHERE img_cocktail = 0 ORDER BY RAND() LIMIT 1);
 
 	INSERT INTO Utilisateur (nom, courriel, mdp_hashed, date_naiss, id_image)
 	VALUES (var_nom, var_courriel, var_mdp_hashed, var_date_naissance, @imgProfile);
