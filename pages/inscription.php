@@ -34,7 +34,7 @@
             <label for="naissance">Date de naissance</label>
             <input type="date" name="naissance" required>
 
-            <button type="submit">S'inscrire</button>
+            <button id="soumettre" type="submit">S'inscrire</button>
         </form>
 
     </main>
