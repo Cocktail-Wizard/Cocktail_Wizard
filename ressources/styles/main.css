@@ -27,8 +27,6 @@
 
 
     @media (prefers-color-scheme: dark) {
-        /* PALETTE DE COULEUR RETRO (POSIBLEMENT SECONDAIRE)*/
-        /* DE ICI */
         --palette-background-color: #02060c;
         --palette-background-secondary-color: #091426;
         --palette-modal-background-color: #091426;
@@ -78,7 +76,61 @@
             0 0 2px #ea00d9,
             0 0 3px #d60bc8,
             0 0 5px #ad12a2;
-        /* JUSQUA ICI */
+
+        .neon-blue-high {
+            box-shadow:
+                0 0 3px #17dfea,
+                0 0 5px #17dfea,
+                0 0 10px #17dfea,
+                0 0 15px #17dfea,
+                0 0 25px #1acbd5,
+                0 0 30px #1acbd5,
+                0 0 35px #25adb4,
+                0 0 50px #25adb4;
+        }
+
+        .neon-blue-low {
+            box-shadow:
+                0 0 2px #17dfea,
+                0 0 3px #17dfea,
+                0 0 5px #17dfea,
+                0 0 8px #17dfea,
+                0 0 13px #1acbd5,
+                0 0 15px #1acbd5,
+                0 0 18px #25adb4,
+                0 0 25px #25adb4;
+        }
+
+        .neon-orange-low {
+            box-shadow:
+                0 0 2px #ff5c05,
+                0 0 3px #ff5c05,
+                0 0 5px #ff5c05,
+                0 0 8px #ff5c05,
+                0 0 13px #e85505,
+                0 0 15px #e85505,
+                0 0 18px #c54b0a,
+                0 0 25px #c54b0a;
+        }
+
+        .neonText-pink {
+            text-shadow:
+                0 0 7px #ea00d9,
+                0 0 10px #ea00d9,
+                0 0 21px #ea00d9,
+                0 0 42px #ea00d9,
+                0 0 82px #d60bc8,
+                0 0 92px #d60bc8,
+                0 0 102px #ad12a2,
+                0 0 151px #ad12a2;
+        }
+
+        .neonText-pink-smol {
+            text-shadow: 0 0 1px #ea00d9,
+                0 0 2px #ea00d9,
+                0 0 3px #d60bc8,
+                0 0 5px #ad12a2;
+        }
     }
 
 
@@ -86,7 +138,6 @@
 
 * {
     margin: 0;
-    font-family: 'Elianto', sans-serif;
     user-select: none;
     transition-duration: 1s;
     color: var(--palette-paragraph-color);
@@ -129,59 +180,4 @@ body>footer {
 
 *:disabled {
     cursor: not-allowed;
-}
-
-.neon-blue-high {
-    box-shadow:
-        0 0 3px #17dfea,
-        0 0 5px #17dfea,
-        0 0 10px #17dfea,
-        0 0 15px #17dfea,
-        0 0 25px #1acbd5,
-        0 0 30px #1acbd5,
-        0 0 35px #25adb4,
-        0 0 50px #25adb4;
-}
-
-.neon-blue-low {
-    box-shadow:
-        0 0 2px #17dfea,
-        0 0 3px #17dfea,
-        0 0 5px #17dfea,
-        0 0 8px #17dfea,
-        0 0 13px #1acbd5,
-        0 0 15px #1acbd5,
-        0 0 18px #25adb4,
-        0 0 25px #25adb4;
-}
-
-.neon-orange-low {
-    box-shadow:
-        0 0 2px #ff5c05,
-        0 0 3px #ff5c05,
-        0 0 5px #ff5c05,
-        0 0 8px #ff5c05,
-        0 0 13px #e85505,
-        0 0 15px #e85505,
-        0 0 18px #c54b0a,
-        0 0 25px #c54b0a;
-}
-
-.neonText-pink {
-    text-shadow:
-        0 0 7px #ea00d9,
-        0 0 10px #ea00d9,
-        0 0 21px #ea00d9,
-        0 0 42px #ea00d9,
-        0 0 82px #d60bc8,
-        0 0 92px #d60bc8,
-        0 0 102px #ad12a2,
-        0 0 151px #ad12a2;
-}
-
-.neonText-pink-smol {
-    text-shadow: 0 0 1px #ea00d9,
-        0 0 2px #ea00d9,
-        0 0 3px #d60bc8,
-        0 0 5px #ad12a2;
 }

@@ -33,7 +33,7 @@ if (!isset($_SESSION['username'])) {
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
         </div>
 
-        <h1 class="neonText-pink">COCKTAIL WIZARD</h1>
+        <h1>COCKTAIL WIZARD</h1>
         <div class="button-container">
             <a id="bouton-galerie" href="/galerie">
                 <img class="galerie-pic" src="../ressources/images/icone-galerie.svg" alt="Galerie de cocktails">

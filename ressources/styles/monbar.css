@@ -21,9 +21,6 @@ body {
 
 }
 
-header {
-    font-size: 4vw;
-}
 
 header #w-icon {
     height: 4vw;
@@ -88,6 +85,7 @@ header h1 {
     text-align: center;
     font-size: 8vh;
     font-style: italic;
+    text-shadow: var(--neon-text-pink);
 }
 
 .button-container {
@@ -149,15 +147,7 @@ header h1 {
 }
 
 #boite-recherche:focus {
-    box-shadow:
-        0 0 2px #17dfea,
-        0 0 3px #17dfea,
-        0 0 5px #17dfea,
-        0 0 8px #17dfea,
-        0 0 13px #1acbd5,
-        0 0 15px #1acbd5,
-        0 0 18px #25adb4,
-        0 0 25px #25adb4;
+    box-shadow: var(--blue-neon-box-light)
 }
 
 #liste-ingredients {
@@ -192,11 +182,7 @@ header h1 {
     background-color: var(--palette-button-color-hover);
     box-shadow: var(--orange-neon-box);
 
-    text-shadow: 0 0 1px #ea00d9,
-        0 0 2px #ea00d9,
-        0 0 3px #d60bc8,
-        0 0 5px #ad12a2;
-
+    text-shadow: var(--neon-text-pink)
 }
 
 .ingredient-item:last-child {
@@ -218,15 +204,7 @@ header h1 {
 }
 
 .boite-ingredients-selectionnes:hover {
-    box-shadow:
-        0 0 2px #17dfea,
-        0 0 3px #17dfea,
-        0 0 5px #17dfea,
-        0 0 8px #17dfea,
-        0 0 13px #1acbd5,
-        0 0 15px #1acbd5,
-        0 0 18px #25adb4,
-        0 0 25px #25adb4;
+    box-shadow: var(--blue-neon-box-light);
 }
 
 /* Body Styles */
@@ -362,10 +340,7 @@ header h1 {
     background-color: var(--palette-button-color-hover);
     box-shadow: var(--orange-neon-box);
 
-    text-shadow: 0 0 1px #ea00d9,
-        0 0 2px #ea00d9,
-        0 0 3px #d60bc8,
-        0 0 5px #ad12a2;
+    text-shadow: var(--neon-text-pink);
 }
 
 .conteneur-carte-cocktail {
