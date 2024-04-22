@@ -32,10 +32,7 @@ $mdp = paramJSONvalide($donnee, 'mdp');
 $nouveauMdp = paramJSONvalide($donnee, 'nouveauMdp');
 $confNouveauMdp = paramJSONvalide($donnee, "confNouveauMdp");
 $nom = paramJSONvalide($donnee, 'nom');
-// Valider le mot de passe
-// if (empty($_POST['mdp'])) {
-//     $erreurs[] = "Le mot de passe est requis!";
-// }
+
 
 // Valider le nouveau mot de passe
 if (strlen($nouveauMdp) < 8) {

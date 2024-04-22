@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script rechercheCocktail
  *
@@ -29,15 +30,15 @@ require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
 
 $conn = connexionBD();
 
-$cocktails = [];
-$idCocktails = [];
-$ingManquants = [];
+$cocktails = []; //Liste d'objets Cocktail
+$idCocktails = []; //Liste d'id de cocktails
+$ingManquants = []; //Liste d'ingrédients manquants
 
 $userId = usernameToId($username, $conn);
 
 try {
     $requete_preparee = $conn->prepare("CALL RechercheCocktailFiltrer(?,?,?,?,?)");
-    $requete_preparee->bind_param('sisii', $recherche, $userId ,$tri, $page, $nbCocktailPage);
+    $requete_preparee->bind_param('sisii', $recherche, $userId, $tri, $page, $nbCocktailPage);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
 

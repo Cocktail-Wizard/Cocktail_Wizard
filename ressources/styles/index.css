@@ -69,10 +69,10 @@ nav {
     opacity: 0.8;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    padding-top : 5px;
+    padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
-    color : var(--palette-button-text-color);
+    color: var(--palette-button-text-color);
 }
 
 .nav-radio label {

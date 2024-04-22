@@ -36,6 +36,7 @@ $contenuCommentaire = paramJSONvalide($donnees, 'commentaire');
 $userId = usernameToId($username, $conn);
 
 try {
+    // Envoie une requête à la base de données pour ajouter le commentaire
     $requete_preparee = $conn->prepare("CALL AjouterCommentaireCocktail(?, ?, ?)");
     $requete_preparee->bind_param('iis', $idCocktail, $userId, $contenuCommentaire);
     $requete_preparee->execute();
@@ -44,7 +45,7 @@ try {
 
     // Liste d'objets commentaires du cocktail
     $commentaires = [];
-
+    // Retourne la liste des commentaires du cocktail
     if ($resultat->num_rows > 0) {
 
         while ($row = $resultat->fetch_assoc()) {

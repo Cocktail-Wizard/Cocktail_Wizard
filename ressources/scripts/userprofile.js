@@ -73,11 +73,13 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('cocktailCount').textContent = user.nb_cocktail_cree;
             document.getElementById('likeCount').textContent = user.nb_cocktail_favoris;
             document.getElementById('commentCount').textContent = user.nb_commentaire;
+
             let imgProfile = document.getElementsByClassName('profile-pic');
             for (let i = 0; i < imgProfile.length; i++) {
                 imgProfile[i].src = 'https://equipe105.tch099.ovh/images?image=' + user.img_profil;
             }
             document.getElementById('img-profile').src = 'https://equipe105.tch099.ovh/images?image=' + user.img_profil;
+
         })
         .catch(error => console.error('Erreur lors de la récupération des informations de l\'utilisateur:', error));
 

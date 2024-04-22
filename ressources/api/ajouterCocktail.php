@@ -40,12 +40,13 @@ $nomAlcoolPrincipale = paramJSONvalide($donnee, 'nomAlcoolPrincipale');
 $username = paramJSONvalide($donnee, 'username');
 $image = paramJSONvalide($donnee, 'image');
 
-
 $userId = usernameToId($username, $conn);
 
+// Démarre une transaction pour ajouter le cocktail afin d'éviter les incohérences dans la base de données
 $conn->begin_transaction();
 
 try {
+    // Envoie une requête à l'API de gestion d'image pour ajouter l'image à la base de données
     $curl = curl_init();
 
     curl_setopt($curl, CURLOPT_URL, 'https://equipe105.tch099.ovh/images');
@@ -55,6 +56,7 @@ try {
 
     $nomImageJSON = curl_exec($curl);
     curl_close($curl);
+    // Récupère le nom de l'image
     $nomImage = json_decode($nomImageJSON, true)['NomFichier'];
 
     if ($nomImage == false) {
@@ -62,13 +64,13 @@ try {
         echo json_encode("Erreur lors de l'ajout de l'image.");
         exit();
     }
-
+    // Envoie une requête à la base de données pour ajouter le nom de l'image à la base de données
     $requete_preparee = $conn->prepare("CALL AjouterImageCocktail(?)");
     $requete_preparee->bind_param('s', $nomImage);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
-
+    // Récupère l'id de l'image
     if ($resultat->num_rows == 1) {
         $row = $resultat->fetch_assoc();
         $idImage = $row['id_image'];
@@ -78,7 +80,7 @@ try {
         $conn->rollback();
         exit();
     }
-
+    // Envoie une requête à la base de données pour ajouter le cocktail à la base de données
     $requete_preparee = $conn->prepare("CALL CreerCocktail(?, ?, ?, ?, ?, ?, ?,?)");
     $requete_preparee->bind_param(
         'sssssisi',
@@ -95,7 +97,7 @@ try {
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
-
+    // Récupère l'id du nouveau cocktail
     if ($resultat->num_rows == 1) {
         $row = $resultat->fetch_assoc();
         $idCocktailNouveau = $row['id_cocktail'];
@@ -105,7 +107,8 @@ try {
         $conn->rollback();
         exit();
     }
-
+    // Envoie une requête à la base de données pour ajouter les ingrédients du cocktail à la base de données
+    // Vérifie si les ingrédients sont présents
     if (!empty($donnee['ingredients'])) {
 
         foreach ($donnee['ingredients'] as $ingredient) {

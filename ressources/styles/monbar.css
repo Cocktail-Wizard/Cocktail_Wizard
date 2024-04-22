@@ -165,7 +165,7 @@ header h1 {
     padding: 5px 0;
     border-bottom: 1px solid var(--palette-border-color);
     color: var(--palette-secondary-text-color);
-    cursor : pointer;
+    cursor: pointer;
 }
 
 .ingredient-item:hover {
