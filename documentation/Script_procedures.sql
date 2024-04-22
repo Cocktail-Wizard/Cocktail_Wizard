@@ -417,6 +417,10 @@ BEGIN
 END
 //
 
+SELECT DISTINCT c.id_cocktail
+FROM cocktail c
+LEFT JOIN ingredient_cocktail ON c.id_cocktail = ingredient_cocktail.id_cocktail
+WHERE ingredient_cocktail.id_alcool IS NULL;
 
 -- Création de la procédure GetCocktailGalerieFiltrer
 -- Permet de voir tous les cocktails que chaque utilisateur peut faire
@@ -516,12 +520,14 @@ BEGIN
     JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
     -- Enlever LEFT quand les images seront gérées
     LEFT JOIN Banque_Image BI ON C.id_image = BI.id_image
-    JOIN Alcool A ON C.id_alcool = A.id_alcool
+    LEFT JOIN Alcool A ON C.id_alcool = A.id_alcool
     -- Enlever LEFT quand les images seront gérées
     LEFT JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
     WHERE C.id_cocktail = cocktail;
 END
 //
+
+CALL GetInfoCocktailComplet(48);
 
 -- Création de la procédure cocktailLiked
 -- Permet de voir si un utilisateur a liké un cocktail
