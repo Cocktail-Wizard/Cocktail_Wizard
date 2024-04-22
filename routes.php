@@ -36,6 +36,9 @@ get('/profile', 'pages/profile.php');
 // /api/users -> Modification d'un mot de passe
 patch('/api/users', 'ressources/api/modifierMotDePasse.php');
 
+// /api/users/image -> Modification d'une image de profil
+patch('/api/users/image', 'ressources/api/modifierImageProfil.php');
+
 /******POST*******/
 
 // /api/users/authentification ->Connexion d'un utilisateur

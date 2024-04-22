@@ -46,7 +46,6 @@
     bottom: 0;
     left: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
@@ -77,7 +76,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    padding : 1% 2%;
+    padding: 1% 2%;
     border-radius: 10px;
     display: none;
 }
