@@ -74,7 +74,6 @@ input:focus {
     background-color: var(--palette-background-color);
 }
 
-
 @media screen and (width<=850px) {
     #logo-cocktail-wizard {
         width: 100%;

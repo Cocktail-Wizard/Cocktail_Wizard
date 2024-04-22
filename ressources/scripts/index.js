@@ -302,7 +302,6 @@ async function chercherCocktail() {
     const data = await faireRequete(url);
     if (data) {
         if (data.length == cocktailParPage) {
-
             window.addEventListener('scroll', chargerCocktailScroll);
         }
         if (estSelect === false) {

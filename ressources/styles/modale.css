@@ -155,7 +155,6 @@
     padding-left: var(--default-gap);
 }
 
-
 #commentaires header {
     display: flex;
     gap: calc(var(--default-gap) / 2);

@@ -80,8 +80,6 @@ h1 {
     color: black;
 }
 
-
-
 #soumettre:hover {
     box-shadow: var(--orange-neon-box);
     text-shadow: var(--neon-text-pink);

@@ -25,7 +25,6 @@
 
     --palette-border-color: #E1AFD1;
 
-
     @media (prefers-color-scheme: dark) {
         --palette-background-color: #02060c;
         --palette-background-secondary-color: #091426;
@@ -132,8 +131,6 @@
                 0 0 5px #ad12a2;
         }
     }
-
-
 }
 
 * {

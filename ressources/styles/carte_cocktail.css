@@ -22,7 +22,6 @@
 .compteur-jaime {
     font-size: 26px;
     text-shadow: 0 0 2px var(--palette-background-color);
-    color: white;
 }
 
 .illustration-cocktail {
@@ -69,7 +68,6 @@
     position: absolute;
     text-align: center;
     width: 100%;
-    color: white;
 }
 
 .ingredient-manquant {

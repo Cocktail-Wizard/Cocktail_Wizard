@@ -3,7 +3,6 @@
     src: url('../styles/Elianto/Elianto/Elianto-Regular.ttf') format('truetype');
 }
 
-
 /* Contenu du Modal */
 #publication-content {
     position: relative;
@@ -165,7 +164,6 @@ label {
 #enlever-ingredient:hover {
     box-shadow: var(--orange-neon-box);
 }
-
 
 #ajouter-ingredient>.btn-icon,
 #enlever-ingredient>.btn-icon {

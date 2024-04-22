@@ -207,7 +207,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     chargerCocktails();
 
     cocktailsClassiques.addEventListener('scroll', function () {
-
         if (cocktailsClassiques.scrollLeft + cocktailsClassiques.clientWidth >= cocktailsClassiques.scrollWidth - 2 && dernierChargementClassique !== cocktailsClassiques.scrollWidth) {
             pageClassique++;
             chargerCocktailsScroll(1);
@@ -230,23 +229,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             dernierChargementCommunaute = cocktailsCommunautaires.scrollWidth;
         }
     });
-
-
-    // Appels initiaux
-
-
-    // if (modeleHTML) {
-    //     try {
-    //         const response = await fetch(`../ressources/api/galerie.php?nombre=${nombreCocktailsAffiches}`);
-    //         if (!response.ok) {
-    //             throw new Error('La requête a échoué');
-    //         }
-    //         const data = await response.json();
-    //         afficherCocktails(data, modeleHTML);
-    //     } catch (error) {
-    //         console.error('Erreur : ', error);
-    //     }
-    // }
 });
 async function chargerCocktailsScroll(type) {
     if (type == 1) {
@@ -541,9 +523,7 @@ function ajouterIngredientBD(nomIngredient) {
                 throw new Error('Erreur lors de la requête.');
             }
             chargerCocktails();
-
             if (response.status === 204) {
-
                 return null;
             }
             return response.json();
@@ -577,9 +557,7 @@ function enleverIngredientBD(nomIngredient) {
                 throw new Error('Erreur lors de la requête.');
             }
             chargerCocktails();
-
             if (response.status === 204) {
-
                 return null;
             }
             return response.json();

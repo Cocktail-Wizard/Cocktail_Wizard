@@ -88,7 +88,6 @@ nav {
     color: var(--palette-lighttext-color);
 }
 
-
 #radio-cocktail:checked {
     box-shadow: var(--orange-neon-box);
     text-shadow: var(--neon-text-pink);
@@ -163,7 +162,6 @@ aside#contenant-boutons-fixes a img {
     background-color: var(--palette-background-secondary-color);
     color: var(--palette-lighttext-color);
 }
-
 
 #barre-recherche:focus {
     box-shadow: var(--blue-neon-box-light);
