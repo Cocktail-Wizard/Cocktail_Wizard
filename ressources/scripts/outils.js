@@ -72,8 +72,6 @@ function genererDegreDepuisString(string) {
         hash += string.charCodeAt(i);
     }
 
-    hash = Math.abs(hash);
-
     const scaledNumber = hash % 361;
 
     return scaledNumber;
