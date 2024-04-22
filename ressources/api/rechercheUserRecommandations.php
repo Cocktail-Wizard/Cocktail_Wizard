@@ -29,9 +29,9 @@ require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
 
 $conn = connexionBD();
 
-$cocktails = [];
-$idCocktails = [];
-$ingManquants = [];
+$cocktails = []; //Liste d'objets Cocktail
+$idCocktails = []; //Liste d'id de cocktails
+$ingManquants = []; //Liste d'ingrédients manquants
 
 $userId = usernameToId($username, $conn);
 

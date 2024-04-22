@@ -61,6 +61,8 @@ function InfoAffichageCocktail($id_cocktail, $conn)
         exit();
     }
 
+
+    // Envoie une requête à la base de données pour vérifier si l'utilisateur a liké le cocktail
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }

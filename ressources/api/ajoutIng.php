@@ -1,4 +1,20 @@
 <?php
+/**
+ * Script ajoutIng
+ *
+ * Script de l'API qui permet d'ajouter un ingrédient à la base de données.
+ *
+ * Type de requête : POST
+ *
+ * URL : /api/ingredients
+ *
+ * @param JSON : nomIng, typeIng
+ *
+ * @return JSON Un json contenant le message de succès ou d'erreur
+ *
+ * @version 1.0
+ */
+
 header("content-type: application/json");
 require_once(__DIR__ . "/config.php");
 require_once(__DIR__ . "/fonctionAPIphp/paramJSONvalide.php");
@@ -11,6 +27,7 @@ $nomIng = paramJSONvalide($donnee, "nomIng");
 $typeIng = paramJSONvalide($donnee, "typeIng");
 
 try {
+    // Ajoute un ingrédient ou un alcool à la base de données
     if($typeIng == "alcool"){
         $requete_preparee = $conn->prepare("CALL ajoutAlcoolBD(?)");
         $requete_preparee->bind_param("s", $nomIng);
