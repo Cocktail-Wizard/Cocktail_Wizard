@@ -11,56 +11,75 @@
     --media-screen-max-width: 850px;
     --space-from-corner: .5em;
 
-    /* PALETTE DE COULEUR RETRO (POSIBLEMENT SECONDAIRE)*/
-    --palette-background-color: #02060c;
-    --palette-background-secondary-color: #091426;
-    --palette-modal-background-color: #091426;
-    --palette-modal-background-secondary-color: #0d1c35;
+    --palette-background-color: #FFF2E1;
+    --palette-background-secondary-color: #f3e3cf;
+    --palette-modal-background-color: #EAD8C0;
+    --palette-modal-background-secondary-color: #dac7ae;
 
-    --palette-darktext-color: #711c91;
-    --palette-lighttext-color: #ea00d9;
+    --palette-darktext-color: #9BB0C1;
+    --palette-lighttext-color: #51829B;
 
-    --palette-button-color: #ff7931;
-    --palette-button-border-color: #ff5c05;
-    --palette-button-hover-color: #ff7931;
+    --palette-button-color: #AD88C6;
+    --palette-button-border-color: #E1AFD1;
+    --palette-button-hover-color: #9f7ab8;
 
-    --palette-border-color: #17dfea;
+    --palette-border-color: #E1AFD1;
 
-    --orange-neon-box:
-        0 0 2px #ff5c05,
-        0 0 3px #ff5c05,
-        0 0 5px #ff5c05,
-        0 0 8px #ff5c05,
-        0 0 13px #e85505,
-        0 0 15px #e85505,
-        0 0 18px #c54b0a,
-        0 0 25px #c54b0a;
 
-    --blue-neon-box-light:
-        0 0 2px #17dfea,
-        0 0 3px #17dfea,
-        0 0 5px #17dfea,
-        0 0 8px #17dfea,
-        0 0 13px #1acbd5,
-        0 0 15px #1acbd5,
-        0 0 18px #25adb4,
-        0 0 25px #25adb4;
+    @media (prefers-color-scheme: dark) {
+        /* PALETTE DE COULEUR RETRO (POSIBLEMENT SECONDAIRE)*/
+        /* DE ICI */
+        --palette-background-color: #02060c;
+        --palette-background-secondary-color: #091426;
+        --palette-modal-background-color: #091426;
+        --palette-modal-background-secondary-color: #0d1c35;
 
-    --blue-neon-box-high:
-        0 0 3px #17dfea,
-        0 0 5px #17dfea,
-        0 0 10px #17dfea,
-        0 0 15px #17dfea,
-        0 0 25px #1acbd5,
-        0 0 30px #1acbd5,
-        0 0 35px #25adb4,
-        0 0 50px #25adb4;
+        --palette-darktext-color: #711c91;
+        --palette-lighttext-color: #ea00d9;
 
-    --neon-text-pink:
-        0 0 1px #ea00d9,
-        0 0 2px #ea00d9,
-        0 0 3px #d60bc8,
-        0 0 5px #ad12a2;
+        --palette-button-color: #ff7931;
+        --palette-button-border-color: #ff5c05;
+        --palette-button-hover-color: #ff7931;
+
+        --palette-border-color: #17dfea;
+
+        --orange-neon-box:
+            0 0 2px #ff5c05,
+            0 0 3px #ff5c05,
+            0 0 5px #ff5c05,
+            0 0 8px #ff5c05,
+            0 0 13px #e85505,
+            0 0 15px #e85505,
+            0 0 18px #c54b0a,
+            0 0 25px #c54b0a;
+
+        --blue-neon-box-light:
+            0 0 2px #17dfea,
+            0 0 3px #17dfea,
+            0 0 5px #17dfea,
+            0 0 8px #17dfea,
+            0 0 13px #1acbd5,
+            0 0 15px #1acbd5,
+            0 0 18px #25adb4,
+            0 0 25px #25adb4;
+
+        --blue-neon-box-high:
+            0 0 3px #17dfea,
+            0 0 5px #17dfea,
+            0 0 10px #17dfea,
+            0 0 15px #17dfea,
+            0 0 25px #1acbd5,
+            0 0 30px #1acbd5,
+            0 0 35px #25adb4,
+            0 0 50px #25adb4;
+
+        --neon-text-pink:
+            0 0 1px #ea00d9,
+            0 0 2px #ea00d9,
+            0 0 3px #d60bc8,
+            0 0 5px #ad12a2;
+        /* JUSQUA ICI */
+    }
 
 
 }
