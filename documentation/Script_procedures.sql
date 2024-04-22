@@ -304,7 +304,7 @@ BEGIN
     SELECT LAST_INSERT_ID() AS id_image;
 END
 //
-CALL AjouterImageUtilisateur('66269976d0550.jpeg');
+
 -- Création de la procédure changerImageUtilisateur
 -- Permet de changer l'image d'un utilisateur
 -- Utiliser pour changer l'image d'un utilisateur dans son profil
