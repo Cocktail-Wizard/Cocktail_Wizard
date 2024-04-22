@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     modeleCarteCocktail = await chargerModeleHTML('../ressources/modeles/cocktail_carte.html');
 
-    if(!modeleCarteCocktail) {
+    if (!modeleCarteCocktail) {
         console.error('Impossible de charger le modèle de carte de cocktail.');
         return;
     }
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     chargerCocktails();
 
-    cocktailsClassiques.addEventListener('scroll', function() {
+    cocktailsClassiques.addEventListener('scroll', function () {
         if (cocktailsClassiques.scrollLeft + cocktailsClassiques.clientWidth >= cocktailsClassiques.scrollWidth - 2 && dernierChargementClassique !== cocktailsClassiques.scrollWidth) {
             pageClassique++;
             chargerCocktailsScroll(1);
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    cocktailsPersonnels.addEventListener('scroll', function() {
+    cocktailsPersonnels.addEventListener('scroll', function () {
         if (cocktailsPersonnels.scrollLeft + cocktailsPersonnels.clientWidth >= cocktailsPersonnels.scrollWidth - 2 && dernierChargementFavoris !== cocktailsPersonnels.scrollWidth) {
             pageFavoris++;
             chargerCocktailsScroll(2);
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    cocktailsCommunautaires.addEventListener('scroll', function() {
+    cocktailsCommunautaires.addEventListener('scroll', function () {
         if (cocktailsCommunautaires.scrollLeft + cocktailsCommunautaires.clientWidth >= cocktailsCommunautaires.scrollWidth - 2 && dernierChargementCommunaute !== cocktailsCommunautaires.scrollWidth) {
             pageCommunaute++;
             chargerCocktailsScroll(3);
@@ -253,7 +253,7 @@ async function chargerCocktailsScroll(type) {
         if (data) {
             afficherCocktailsPerso(data, modeleCarteCocktail, cocktailsClassiques);
         }
-    } else if(type == 2) {
+    } else if (type == 2) {
         const data = await faireRequete(`/api/cocktails?user=${utilisateur}&type=favoris&page=${pageFavoris}-${nbCocktailCharger}`);
         if (data) {
             afficherCocktailsPerso(data, modeleCarteCocktail, cocktailsPersonnels);
@@ -282,16 +282,16 @@ async function chargerCocktails() {
     ]);
 
     cocktailsClassiques.innerHTML = '';
-    if(dataClassique) {
+    if (dataClassique) {
         afficherCocktailsPerso(dataClassique, modeleCarteCocktail, cocktailsClassiques);
     }
     cocktailsPersonnels.innerHTML = '';
-    if(dataFavoris) {
+    if (dataFavoris) {
         afficherCocktailsPerso(dataFavoris, modeleCarteCocktail, cocktailsPersonnels);
     }
 
     cocktailsCommunautaires.innerHTML = '';
-    if(dataCommunaute) {
+    if (dataCommunaute) {
         afficherCocktailsPerso(dataCommunaute, modeleCarteCocktail, cocktailsCommunautaires);
         cocktailsCommunautaires.scrollTo(0, 0);
     }
@@ -334,7 +334,7 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
         imageCocktail.loading = 'lazy';
-        if(cocktail.ingManquant !== null && cocktail.ingManquant > 0) {
+        if (cocktail.ingManquant !== null && cocktail.ingManquant > 0) {
             imageCocktail.style.filter = 'grayscale(100%)';
             const ingManquant = nouveauCocktail.querySelector('.ingredient-manquant');
             ingManquant.style.display = 'block';
@@ -342,7 +342,7 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
         }
 
         const pastilleAlcool = nouveauCocktail.querySelector('.icone-pastille-alcool');
-        pastilleAlcool.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+        pastilleAlcool.style.filter = `hue-rotate(${genererDegreDepuisString(cocktail.alcool_principale)}deg)`;
 
         const compteurJaime = nouveauCocktail.querySelector('.compteur-jaime');
         compteurJaime.textContent = cocktail.nb_like;
@@ -540,7 +540,7 @@ function ajouterIngredientBD(nomIngredient) {
                 throw new Error('Erreur lors de la requête.');
             }
             chargerCocktails();
-            if(response.status === 204) {
+            if (response.status === 204) {
                 return null;
             }
             return response.json();
@@ -574,7 +574,7 @@ function enleverIngredientBD(nomIngredient) {
                 throw new Error('Erreur lors de la requête.');
             }
             chargerCocktails();
-            if(response.status === 204) {
+            if (response.status === 204) {
                 return null;
             }
             return response.json();
