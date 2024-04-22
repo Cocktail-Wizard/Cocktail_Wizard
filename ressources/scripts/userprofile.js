@@ -84,7 +84,30 @@ document.addEventListener("DOMContentLoaded", function () {
             dernierChargementProfile = mesCocktails.scrollWidth;
         }
     });
+
+    document.getElementById('delete-btn').addEventListener('click', function () {
+        let confirmer = confirm('Êtes-vous sûr de vouloir supprimer votre compte?');
+        if (confirmer) {
+            fetch(`/api/users`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: utilisateur })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById("deconnexion").click();
+                    }
+                    else {
+                        console.error('Erreur lors de la suppression du compte:', response.status);
+                    }
+                })
+
+        }
+    });
 });
+
 
 $('#my-modal').on('hidden.bs.modal', function () {
     document.getElementById("infoPage").style.display = "block";
