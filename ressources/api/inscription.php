@@ -50,7 +50,7 @@ if (count($erreurs) == 0) {
         } else if (strpos($messErreur, 'courriel') !== false) {
             $erreurs[] = "Le courriel est déjà utilisé!";
         } else {
-            $erreurs[] = "Erreur inconnue!";
+            $erreurs[] = "Erreur inconnue!" . $messErreur;
         }
     } finally {
         $requete_preparee->close();

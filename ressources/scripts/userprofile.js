@@ -101,8 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ username: utilisateur })
-            })
-            .then(response => response.json())
+            }).then(response => response.json())
             .then(data => {
                 if (data) {
                     document.getElementById('img-profile').src = 'https://equipe105.tch099.ovh/images?image=' + data.image;
@@ -112,8 +111,30 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 }
             })
+      });
+
+    document.getElementById('delete-btn').addEventListener('click', function () {
+        let confirmer = confirm('Êtes-vous sûr de vouloir supprimer votre compte?');
+        if (confirmer) {
+            fetch(`/api/users`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: utilisateur })
+            }).then(response => {
+                    if (response.ok) {
+                        document.getElementById("deconnexion").click();
+                    }
+                    else {
+                        console.error('Erreur lors de la suppression du compte:', response.status);
+                    }
+                })
+
+        }
     });
 });
+
 
 $('#my-modal').on('hidden.bs.modal', function () {
     document.getElementById("infoPage").style.display = "block";
