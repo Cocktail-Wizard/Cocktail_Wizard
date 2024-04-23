@@ -43,7 +43,7 @@
                 </span>
                 <span>
                     <input type="radio" id="radio-mocktail" name="mocktail">
-                    <label for="radio-mocktail" title="Cocktail sans alcool">Mocktails</label>
+                    <label for="radio-mocktail" title="Cocktail sans alcool">Mocktails uniquement</label>
                 </span>
             </div>
         </nav>

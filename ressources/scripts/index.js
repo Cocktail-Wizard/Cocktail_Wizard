@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function chargerCocktailScroll() {
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1) && document.body.offsetHeight != dernierChargement) {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 6) && document.body.offsetHeight != dernierChargement) {
         chargerCocktailsScroll();
         dernierChargement = document.body.offsetHeight;
     }
@@ -370,11 +370,11 @@ function chargerCommenter(id_cocktail) {
 }
 
 function initButtonRadio() {
-    afficherMocktail.addEventListener('mousedown', () => {
+    afficherMocktail.addEventListener('mousedown', function (event) {
         mocktailEstSelect = this.checked;
     });
 
-    afficherMocktail.addEventListener('click', () => {
+    afficherMocktail.addEventListener('click', function (event) {
         if (mocktailEstSelect) {
             this.checked = false;
             mocktailEstSelect = false;
@@ -390,11 +390,11 @@ function initButtonRadio() {
     });
 
     if (cocktailRealisable) {
-        cocktailRealisable.addEventListener('mousedown', () => {
+        cocktailRealisable.addEventListener('mousedown', function (event) {
             estSelect = this.checked;
         });
 
-        cocktailRealisable.addEventListener('click', () => {
+        cocktailRealisable.addEventListener('click', function (event) {
             if (estSelect) {
                 this.checked = false;
                 estSelect = false;
