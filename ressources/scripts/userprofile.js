@@ -93,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.getElementById('img-profile').addEventListener('click', function () {
-        console.log('click');
         fetch(`/api/users/image`,
             {
                 method: 'PATCH',

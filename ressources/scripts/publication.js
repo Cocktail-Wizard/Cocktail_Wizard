@@ -167,7 +167,6 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
             return response.json();
         })
         .then(data => {
-            console.log(data); // Afficher la réponse du serveur
             window.location.reload();
         })
         .catch(error => {
