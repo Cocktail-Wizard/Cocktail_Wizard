@@ -34,12 +34,14 @@ $userId = usernameToId($username, $conn);
 
 
 try {
+    // Envoie une requête à la base de données pour enlever un like au commentaire
     $requete_preparee = $conn->prepare("CALL DislikeCocktail(?,?)");
     $requete_preparee->bind_param('ii', $userId, $id_commentaire);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
 
+    // Récupère le nombre de like du commentaire
     if ($resultat->num_rows == 1) {
         $row = $resultat->fetch_assoc();
         $nbLike['nb_like'] = $row['nb_like'];

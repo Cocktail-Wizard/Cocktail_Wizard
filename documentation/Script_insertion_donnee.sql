@@ -11,32 +11,18 @@
 --
 -- ============================================================
 
-
-
-
 -- Suppression des données
 SET FOREIGN_KEY_CHECKS = 0;
-
 TRUNCATE TABLE Ingredient;
-
 TRUNCATE TABLE Alcool;
-
 TRUNCATE TABLE Banque_Image;
-
 TRUNCATE TABLE Utilisateur;
-
 TRUNCATE TABLE Ingredient_Utilisateur;
-
 TRUNCATE TABLE Alcool_utilisateur;
-
 TRUNCATE TABLE Cocktail;
-
 TRUNCATE TABLE Ingredient_Cocktail;
-
 TRUNCATE TABLE Commentaire;
-
 TRUNCATE TABLE Commentaire_Liked;
-
 TRUNCATE TABLE Cocktail_Liked;
 
 SET FOREIGN_KEY_CHECKS = 1;
@@ -143,4 +129,3 @@ INSERT INTO Alcool (nom) VALUES ('Kahlúa');
 INSERT INTO Alcool (nom) VALUES ('Jägermeister');
 INSERT INTO Alcool (nom) VALUES ('Campari');
 INSERT INTO Alcool (nom) VALUES ('Fernet');
-

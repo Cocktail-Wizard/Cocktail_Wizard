@@ -54,13 +54,15 @@
                         </select>
                         <label for="main-alcool">Alcool principal:</label>
                         <select name="main-alcool" id="alcool">
-                            <option value="apéritif">apéritif</option>
-                            <option value="gin">gin</option>
-                            <option value="liqueur">liqueur</option>
-                            <option value="rhum">rhum</option>
-                            <option value="tequila">tequila</option>
-                            <option value="vodka" selected>vodka</option>
-                            <option value="whiskey">whiskey</option>
+                            <option value="Autre">Autre</option>
+                            <option value="Vermouth">Vermouth</option>
+                            <option value="Gin">Gin</option>
+                            <option value="Liqueur">Liqueur</option>
+                            <option value="Rhum">Rhum</option>
+                            <option value="Tequila">Tequila</option>
+                            <option value="Vodka">Vodka</option>
+                            <option value="Whiskey">Whiskey</option>
+                            <option value="Aucun" selected>Aucun</option>
                         </select>
                         <label for="type-glass">Verre de service:</label>
                         <select name="type-glass" id="glass">

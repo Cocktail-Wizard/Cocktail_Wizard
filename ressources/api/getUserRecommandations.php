@@ -44,14 +44,16 @@ $userID = usernameToId($username, $conn);
 $isTriInvalid = (isset($tri) && !in_array($tri, ['like', 'date']));
 $isTypeInvalid = (isset($type) && !in_array($type, ['classiques', 'favoris', 'communaute']));
 
+// Retourne une erreur si les paramètres sont invalides
 if ($isTriInvalid || $isTypeInvalid) {
     http_response_code(400);
     echo json_encode("Paramètre invalide.");
     exit();
 } elseif (isset($tri)) {
+    // Récupère les cocktails possibles pour l'utilisateur à afficher dans la galerie
     try {
-        $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?,?,?)");
-        $requete_preparee->bind_param("isii", $userID, $tri, $page, $nbCocktailPage);
+        $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?,?,?,?)");
+        $requete_preparee->bind_param("isiii", $userID, $tri, $page, $nbCocktailPage, $mocktail);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
         $requete_preparee->close();
@@ -63,23 +65,26 @@ if ($isTriInvalid || $isTypeInvalid) {
 } elseif (isset($type)) {
     try {
         switch ($type) {
+                // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Classiques
             case 'classiques':
-                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleClassique(?,?,?)");
-                $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
+                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleClassique(?,?,?,?)");
+                $requete_preparee->bind_param("iiii", $userID, $page, $nbCocktailPage, $mocktail);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
                 break;
+                // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Favoris
             case 'favoris':
-                $requete_preparee = $conn->prepare("CALL GetListeCocktailPossibleFavorie(?,?,?)");
-                $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
+                $requete_preparee = $conn->prepare("CALL GetListeCocktailPossibleFavorie(?,?,?,?)");
+                $requete_preparee->bind_param("iiii", $userID, $page, $nbCocktailPage, $mocktail);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
                 break;
+                // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Communauté
             case 'communaute':
-                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleCommunautaire(?,?,?)");
-                $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
+                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleCommunautaire(?,?,?,?)");
+                $requete_preparee->bind_param("iiii", $userID, $page, $nbCocktailPage, $mocktail);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
@@ -111,6 +116,7 @@ foreach ($idCocktails as $id) {
     $cocktails[] = InfoAffichageCocktail($id, $conn);
 }
 
+// Ajoute le nombre d'ingrédients manquants à chaque cocktail
 foreach ($cocktails as $cocktail) {
     $cocktail->setIngManquant($ingManquants[$cocktail->getIdCocktail()]);
 }

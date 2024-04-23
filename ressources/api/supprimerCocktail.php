@@ -1,8 +1,22 @@
 <?php
 
+/**
+ * Script supprimerCocktail
+ *
+ * Script de l'API qui permet de supprimer un cocktail de la base de données.
+ *
+ * Type de requête : DELETE
+ *
+ * URL : /api/cocktails
+ *
+ * @param JSON : id_cocktail
+ *
+ * @return JSON 1 si le cocktail a été supprimé, 0 sinon
+ */
+
 header("content-type: application/json");
-require_once (__DIR__."/config.php");
-require_once (__DIR__."/fonctionAPIphp/paramJSONvalide.php");
+require_once(__DIR__ . "/config.php");
+require_once(__DIR__ . "/fonctionAPIphp/paramJSONvalide.php");
 
 $conn = connexionBD();
 
@@ -16,7 +30,7 @@ try {
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
 
-    if($resultat->num_rows > 0) {
+    if ($resultat->num_rows > 0) {
         $row = $resultat->fetch_assoc();
         echo json_encode($row["success"]);
     } else {

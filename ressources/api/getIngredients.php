@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Script getIngredients
  *
@@ -15,10 +16,9 @@
  *
  * @author Yani Amellal
  */
-if(isset($_GET['user'])) {
+if (isset($_GET['user'])) {
     $username = trim($_GET['user']);
     require_once(__DIR__ . '/getUserIngredients.php');
-
 } else {
     header('Content-Type: application/json');
     require_once __DIR__ . '/config.php';
