@@ -370,11 +370,11 @@ function chargerCommenter(id_cocktail) {
 }
 
 function initButtonRadio() {
-    afficherMocktail.addEventListener('mousedown', function (event) {
+    afficherMocktail.addEventListener('mousedown', () => {
         mocktailEstSelect = this.checked;
     });
 
-    afficherMocktail.addEventListener('click', function (event) {
+    afficherMocktail.addEventListener('click', () => {
         if (mocktailEstSelect) {
             this.checked = false;
             mocktailEstSelect = false;
@@ -388,12 +388,13 @@ function initButtonRadio() {
             chercherCocktail();
         }
     });
+
     if (cocktailRealisable) {
-        cocktailRealisable.addEventListener('mousedown', function (event) {
+        cocktailRealisable.addEventListener('mousedown', () => {
             estSelect = this.checked;
         });
 
-        cocktailRealisable.addEventListener('click', function (event) {
+        cocktailRealisable.addEventListener('click', () => {
             if (estSelect) {
                 this.checked = false;
                 estSelect = false;
