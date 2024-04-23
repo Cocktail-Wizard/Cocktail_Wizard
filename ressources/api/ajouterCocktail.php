@@ -25,6 +25,7 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
+require_once __DIR__ . '/fonctionAPIphp/authorisationAPI.php';
 
 $conn = connexionBD();
 
@@ -40,6 +41,7 @@ $nomAlcoolPrincipale = paramJSONvalide($donnee, 'nomAlcoolPrincipale');
 $username = paramJSONvalide($donnee, 'username');
 $image = paramJSONvalide($donnee, 'image');
 
+userAccesResssource($username);
 $userId = usernameToId($username, $conn);
 
 // Démarre une transaction pour ajouter le cocktail afin d'éviter les incohérences dans la base de données

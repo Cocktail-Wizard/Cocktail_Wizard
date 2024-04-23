@@ -27,6 +27,7 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
+require_once __DIR__ . '/fonctionAPIphp/authorisationAPI.php';
 
 $conn = connexionBD();
 
@@ -34,6 +35,7 @@ $cocktails = []; //Liste d'objets Cocktail
 $idCocktails = []; //Liste d'id de cocktails
 $ingManquants = []; //Liste d'ingrédients manquants
 
+userAccesResssource($username);
 $userId = usernameToId($username, $conn);
 
 try {

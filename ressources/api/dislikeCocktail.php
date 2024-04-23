@@ -22,6 +22,7 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
+require_once __DIR__ . '/fonctionAPIphp/authorisationAPI.php';
 
 $conn = connexionBD();
 
@@ -30,6 +31,8 @@ $donnees = json_decode(file_get_contents('php://input'), true);
 // Vérifie si les paramètres sont présents
 $username = paramJSONvalide($donnees, 'username');
 $id_cocktail = paramJSONvalide($donnees, 'id_cocktail');
+
+userAccesResssource($username);
 $userId = usernameToId($username, $conn);
 
 try {

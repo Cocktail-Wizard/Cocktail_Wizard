@@ -23,6 +23,7 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 require_once __DIR__ . '/../classephp/Commentaire_Classe.php';
 require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
+require_once __DIR__ . '/fonctionAPIphp/authorisationAPI.php';
 
 $conn = connexionBD();
 
@@ -33,6 +34,7 @@ $username = paramJSONvalide($donnees, 'username');
 $idCocktail = paramJSONvalide($donnees, 'id_cocktail');
 $contenuCommentaire = paramJSONvalide($donnees, 'commentaire');
 
+userAccesResssource($username);
 $userId = usernameToId($username, $conn);
 
 try {
