@@ -45,7 +45,7 @@ if (!isset($_SESSION['username'])) {
 
     <main>
         <div class="separator">
-            <span class="neonText-pink-smol section-name neon-blue-low">Mes ingredients</span>
+            <span class="neonText-pink-smol section-name neon-blue-low">Mes ingrédients</span>
             <hr class="line neon-blue-low" />
 
 

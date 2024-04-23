@@ -9,7 +9,6 @@ body {
     flex-direction: column;
     height: 100vh;
     padding: 0;
-    background-color: var(--palette-background-color);
     color: var(--palette-lighttext-color);
 }
 
@@ -75,7 +74,7 @@ header h1 {
     font-size: 8vh;
     font-style: italic;
     text-shadow: var(--neon-text-pink);
-    color: var(--palette-background-color);
+    color: var(--palette-header-color-monbar);
 }
 
 .button-container {
@@ -133,7 +132,7 @@ header h1 {
     border-radius: 15px;
     padding-left: 5px;
     background-color: var(--palette-background-secondary-color);
-    color: var(--palette-lighttext-color);
+    color: var(--palette-color-cocktail-card);
 }
 
 #boite-recherche:focus {
@@ -316,7 +315,7 @@ header h1 {
     background-color: var(--palette-background-color);
     padding: 10px;
     margin: 10px;
-    color: var(--palette-lighttext-color);
+    color: var(--palette-color-cocktail-card);
     border: 2px solid var(--palette-button-border-color);
     border-radius: 25px;
     cursor: pointer;

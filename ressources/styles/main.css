@@ -23,9 +23,11 @@
     --palette-button-hover-color: #9f7ab8;
     --palette-border-color: #E1AFD1;
     --palette-color-cocktail-card: #51829B;
+    --palette-header-color-monbar: #51829B;
 
     @media (prefers-color-scheme: dark) {
         --palette-background-color: #02060c;
+        --palette-header-color-monbar: #02060c;
         --palette-background-secondary-color: #091426;
         --palette-modal-background-color: #091426;
         --palette-modal-background-secondary-color: #0d1c35;
