@@ -1,17 +1,7 @@
-@font-face {
-    font-family: 'Elianto';
-    src: url('../styles/Elianto/Elianto/Elianto-Regular.ttf') format('truetype');
-}
-
-body {
-    font-family: 'Elianto', sans-serif;
-}
-
 /* Contenu du Modal */
 #userprofile-content {
     position: relative;
     background-color: var(--palette-background-secondary-color);
-    font-family: 'Elianto', sans-serif;
     margin: auto;
     border: 1px solid var(--palette-border-color);
     width: 80%;
@@ -21,6 +11,11 @@ body {
     box-sizing: border-box;
     margin-top: 5%;
     box-shadow: var(--blue-neon-box-high);
+}
+
+p,
+h3 {
+    color: var(--palette-lighttext-color)
 }
 
 #img-profile {
@@ -82,7 +77,7 @@ body {
 /* Texte du l'infromation personelle */
 .userinfo-body span {
     font-weight: bold;
-    color: var(--palette-button-color);
+    color: var(--palette-color-cocktail-card);
 }
 
 /* Pied de page de la page modale */

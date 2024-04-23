@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'Elianto';
+    font-family: Elianto;
     src: url('../styles/Elianto/Elianto/Elianto-Regular.ttf') format('truetype');
 }
 
@@ -10,21 +10,17 @@
     --authentification-area-height: 60%;
     --media-screen-max-width: 850px;
     --space-from-corner: .5em;
-
+    /* Palette de couleur */
     --palette-background-color: #FFF2E1;
     --palette-background-secondary-color: #f3e3cf;
     --palette-modal-background-color: #EAD8C0;
     --palette-modal-background-secondary-color: #dac7ae;
-
     --palette-darktext-color: #9BB0C1;
     --palette-lighttext-color: #51829B;
-
     --palette-button-color: #AD88C6;
     --palette-button-border-color: #E1AFD1;
     --palette-button-hover-color: #9f7ab8;
-
     --palette-border-color: #E1AFD1;
-
     --palette-color-cocktail-card: #51829B;
 
     @media (prefers-color-scheme: dark) {
@@ -32,18 +28,13 @@
         --palette-background-secondary-color: #091426;
         --palette-modal-background-color: #091426;
         --palette-modal-background-secondary-color: #0d1c35;
-
         --palette-darktext-color: #711c91;
         --palette-lighttext-color: #ea00d9;
-
         --palette-button-color: #ff7931;
         --palette-button-border-color: #ff5c05;
         --palette-button-hover-color: #ff7931;
-
         --palette-border-color: #17dfea;
-
         --palette-color-cocktail-card: white;
-
         --orange-neon-box:
             0 0 2px #ff5c05,
             0 0 3px #ff5c05,
@@ -53,7 +44,6 @@
             0 0 15px #e85505,
             0 0 18px #c54b0a,
             0 0 25px #c54b0a;
-
         --blue-neon-box-light:
             0 0 2px #17dfea,
             0 0 3px #17dfea,
@@ -63,7 +53,6 @@
             0 0 15px #1acbd5,
             0 0 18px #25adb4,
             0 0 25px #25adb4;
-
         --blue-neon-box-high:
             0 0 3px #17dfea,
             0 0 5px #17dfea,
@@ -73,7 +62,6 @@
             0 0 30px #1acbd5,
             0 0 35px #25adb4,
             0 0 50px #25adb4;
-
         --neon-text-pink:
             0 0 1px #ea00d9,
             0 0 2px #ea00d9,
@@ -116,7 +104,7 @@
                 0 0 25px #c54b0a;
         }
 
-        .neonText-pink {
+        .neon-text-pink {
             text-shadow:
                 0 0 7px #ea00d9,
                 0 0 10px #ea00d9,
@@ -128,7 +116,7 @@
                 0 0 151px #ad12a2;
         }
 
-        .neonText-pink-smol {
+        .neon-text-pink-smol {
             text-shadow: 0 0 1px #ea00d9,
                 0 0 2px #ea00d9,
                 0 0 3px #d60bc8,
@@ -142,7 +130,7 @@
     user-select: none;
     transition-duration: 1s;
     color: var(--palette-paragraph-color);
-    font-family: "Elianto", sans-serif;
+    font-family: Elianto, sans-serif;
 }
 
 button {

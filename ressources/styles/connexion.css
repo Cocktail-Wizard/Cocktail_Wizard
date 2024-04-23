@@ -19,14 +19,14 @@ main {
     color: var(--palette-lighttext-color);
 }
 
-main h1 {
-    text-align: center;
-    font-size: clamp(2em, 3vw, 3vw);
-}
-
 h1 {
     text-shadow: var(--neon-text-pink);
     color: black;
+}
+
+main h1 {
+    text-align: center;
+    font-size: clamp(2em, 3vw, 3vw);
 }
 
 input:focus {

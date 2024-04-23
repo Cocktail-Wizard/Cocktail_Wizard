@@ -29,6 +29,11 @@ input:focus {
     box-shadow: var(--blue-neon-box-light);
 }
 
+h1 {
+    text-shadow: var(--neon-text-pink);
+    color: black;
+}
+
 #form-inscription {
     display: flex;
     flex-direction: column;
@@ -73,11 +78,6 @@ input:focus {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-h1 {
-    text-shadow: var(--neon-text-pink);
-    color: black;
 }
 
 #soumettre:hover {

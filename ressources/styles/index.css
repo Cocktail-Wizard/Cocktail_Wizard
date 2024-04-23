@@ -35,7 +35,12 @@ header h1 {
     font-size: 2em;
     font-weight: bold;
     color: var(--palette-background-color);
+    width: 100%;
+    font-style: italic;
+    text-shadow: var(--neon-text-pink);
 }
+
+
 
 footer {
     padding-top: 20px;
@@ -222,13 +227,6 @@ aside#contenant-boutons-fixes a img {
     margin-left: 0;
 }
 
-header h1 {
-    width: 100%;
-    padding: 1em;
-    text-align: center;
-    font-size: 8vh;
-    font-style: italic;
-}
 
 .button-container {
     display: flex;

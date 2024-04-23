@@ -81,6 +81,7 @@ header h1 {
     font-size: 8vh;
     font-style: italic;
     text-shadow: var(--neon-text-pink);
+    color: var(--palette-background-color);
 }
 
 .button-container {
