@@ -78,6 +78,12 @@ $response = array(
 );
 
 if ($success) {
+    if (!isset($src) || $src != 'web') {
+        require(__DIR__ . '/../../../configDonne.php');
+
+        $token = hash_hmac('sha256', $nom, $cle);
+        $response['token'] = $token;
+    }
     $response["username"] = $nom;
 }
 

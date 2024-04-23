@@ -14,9 +14,11 @@
  * @author Maxim Dmitriev, Vianney Veremme, Yani Amellal
  */
 
+
 function connexionBD(): ?mysqli
 {
     require_once(__DIR__ . '/../../../configDonne.php');
+
     try {
         // Créer la connexion à la base de données directement
         $conn = new mysqli($DB_HOST, $DB_USER, $DB_PASSWORD, $DB_NAME);
