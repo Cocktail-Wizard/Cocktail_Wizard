@@ -54,8 +54,8 @@ main {
 }
 
 #profil-utilisateur {
-    width: 8vh;
-    height: 8vh;
+    width: 12vh;
+    height: 12vh;
     border-radius: 50%;
     overflow: hidden;
     margin-left: 0.5vh;
