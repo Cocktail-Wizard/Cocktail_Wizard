@@ -25,6 +25,8 @@
 
     --palette-border-color: #E1AFD1;
 
+    --palette-color-cocktail-card: #51829B;
+
     @media (prefers-color-scheme: dark) {
         --palette-background-color: #02060c;
         --palette-background-secondary-color: #091426;
@@ -39,6 +41,8 @@
         --palette-button-hover-color: #ff7931;
 
         --palette-border-color: #17dfea;
+
+        --palette-color-cocktail-card: white;
 
         --orange-neon-box:
             0 0 2px #ff5c05,
@@ -138,6 +142,7 @@
     user-select: none;
     transition-duration: 1s;
     color: var(--palette-paragraph-color);
+    font-family: "Elianto", sans-serif;
 }
 
 button {

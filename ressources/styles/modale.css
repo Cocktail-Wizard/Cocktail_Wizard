@@ -118,7 +118,12 @@
 #commenter>form>textarea {
     resize: none;
     height: 100px;
-    color: var(--palette-secondary-text-color);
+    color: var(--palette-color-cocktail-card);
+    background-color: var(--palette-background-secondary-color);
+}
+
+#commenter>form>textarea:focus {
+    box-shadow: var(--blue-neon-box-high);
 }
 
 #commenter>form button {
@@ -169,6 +174,7 @@ ul#ingredients {
     list-style-type: none;
     text-align: left;
     padding: 0;
+    color: var(--palette-color-cocktail-card);
 }
 
 ul#ingredients li {
@@ -188,11 +194,16 @@ ul#ingredients li {
     border: 2px solid var(--palette-border-color);
     border-radius: 5px;
     padding: 5px;
+    color: var(--palette-color-cocktail-card);
 }
 
 #description:hover,
 #preparation:hover {
     box-shadow: var(--blue-neon-box-high);
+}
+
+#titre-cocktail {
+    font-size: 4vh;
 }
 
 .commentaire {
