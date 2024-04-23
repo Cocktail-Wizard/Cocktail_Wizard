@@ -5,6 +5,7 @@ const boutonOrdre = document.getElementById('ordre-tri');
 const boutonOrdreIcone = document.getElementById('ordre-tri-icone');
 const finAttenteEcriture = 1000; // 1 seconde
 const monBar = document.getElementById('lien-monbar');
+const afficherMocktail = document.getElementById('new-radio2');
 let page = 1;
 const cocktailParPage = 8;
 let requetePrecedente;
@@ -296,6 +297,7 @@ async function chercherCocktail() {
     const paramOrdre = `?tri=${ordreCocktails}`;
     const paramPage = `&page=${page}-${cocktailParPage}`;
     const recommandations = estSelect ? `&user=${utilisateur}` : '';
+    const mocktails = afficherMocktail.checked ? '&mocktail=true' : '';
     let url = `/api/cocktails${paramOrdre}${paramRecherche}${recommandations}`;
     requetePrecedente = url;
     url += paramPage;
@@ -363,9 +365,10 @@ function chargerCommenter(id_cocktail) {
     });
 }
 
-document.querySelectorAll('input[type=radio]').forEach(radio => {
+document.getElementById('new-radio').addEventListener(radio => {
     radio.addEventListener('mousedown', function (event) {
         estSelect = this.checked;
+        console.log(estSelect);
     });
 
     radio.addEventListener('click', function (event) {

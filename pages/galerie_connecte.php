@@ -37,10 +37,14 @@
                 </button>
             </div>
             <div class="nav-radio">
-                <div id="radio-cocktail">
-                    <input type="radio" id="new-radio" name="radio-group">
+                <span>
+                    <input type="radio" id="new-radio" name="cocktail">
                     <label for="new-radio">Cocktails réalisables</label>
-                </div>
+                </span>
+                <span>
+                    <input type="radio" id="new-radio2" name="mocktail" checked>
+                    <label for="new-radio2" title="Cocktail sans alcool">Mocktails</label>
+                </span>
             </div>
         </nav>
 
