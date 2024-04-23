@@ -6,7 +6,6 @@
     padding-top: 10px;
     border: 1px solid var(--palette-border-color);
     width: 80%;
-    /* template de "boxshadow" */
     height: auto;
     max-height: 80%;
     overflow-y: auto;
