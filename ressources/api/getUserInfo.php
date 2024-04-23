@@ -23,6 +23,7 @@ header("Content-Type: application/json");
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/../classephp/Utilisateur_Classe.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
+require_once __DIR__ . '/fonctionAPIphp/authorisationAPI.php';
 
 $conn = connexionBD();
 
@@ -34,6 +35,7 @@ if (isset($_GET['user'])) {
     exit();
 }
 
+userAccesResssource($username);
 $userId = usernameToId($username, $conn);
 
 try {
