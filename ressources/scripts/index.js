@@ -302,7 +302,7 @@ async function chercherCocktail() {
     const paramPage = `&page=${page}-${cocktailParPage}`;
     const recommandations = estSelect ? `&user=${utilisateur}` : '';
     const mocktails = mocktailEstSelect ? '&mocktail=true' : '';
-    let url = `/api/cocktails${paramOrdre}${paramRecherche}${recommandations}`;
+    let url = `/api/cocktails${paramOrdre}${paramRecherche}${recommandations}${mocktails}`;
     requetePrecedente = url;
     url += paramPage;
     const data = await faireRequete(url);
@@ -378,10 +378,14 @@ function initButtonRadio() {
         if (mocktailEstSelect) {
             this.checked = false;
             mocktailEstSelect = false;
+            window.removeEventListener('scroll', chargerCocktailScroll);
+            chercherCocktail();
         }
         else {
             this.checked = true;
             mocktailEstSelect = true;
+            window.removeEventListener('scroll', chargerCocktailScroll);
+            chercherCocktail();
         }
     });
     if (cocktailRealisable) {
