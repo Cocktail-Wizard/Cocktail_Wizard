@@ -38,12 +38,12 @@
             </div>
             <div class="nav-radio">
                 <span>
-                    <input type="radio" id="new-radio" name="cocktail">
-                    <label for="new-radio">Cocktails réalisables</label>
+                    <input type="radio" id="radio-perso" name="cocktail">
+                    <label for="radio-perso">Cocktails réalisables</label>
                 </span>
                 <span>
-                    <input type="radio" id="new-radio2" name="mocktail">
-                    <label for="new-radio2" title="Cocktail sans alcool">Mocktails</label>
+                    <input type="radio" id="radio-mocktail" name="mocktail">
+                    <label for="radio-mocktail" title="Cocktail sans alcool">Mocktails</label>
                 </span>
             </div>
         </nav>

@@ -5,8 +5,8 @@ const boutonOrdre = document.getElementById('ordre-tri');
 const boutonOrdreIcone = document.getElementById('ordre-tri-icone');
 const finAttenteEcriture = 1000; // 1 seconde
 const monBar = document.getElementById('lien-monbar');
-const afficherMocktail = document.getElementById('new-radio2');
-const cocktailRealisable = document.getElementById('new-radio');
+const afficherMocktail = document.getElementById('radio-mocktail');
+const cocktailRealisable = document.getElementById('radio-perso');
 let page = 1;
 const cocktailParPage = 8;
 let requetePrecedente;
