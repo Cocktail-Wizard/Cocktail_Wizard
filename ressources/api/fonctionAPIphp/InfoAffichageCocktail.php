@@ -48,7 +48,6 @@ function InfoAffichageCocktail($id_cocktail, $conn)
                 $row['alcool_principale'],
                 $row['profil_saveur'],
                 $row['type_verre'],
-
             );
         } else {
             http_response_code(404);

@@ -36,8 +36,8 @@ $id_cocktail = []; //Liste d'id de cocktails
 
 try {
     // Récupère les cocktails recherchés
-    $requete_preparee = $conn->prepare("CALL RechercheCocktail(?,?,?,?)");
-    $requete_preparee->bind_param('ssii', $recherche, $tri, $page, $nbCocktailPage);
+    $requete_preparee = $conn->prepare("CALL RechercheCocktail(?,?,?,?,?)");
+    $requete_preparee->bind_param('ssiii', $recherche, $tri, $page, $nbCocktailPage, $mocktail);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
 

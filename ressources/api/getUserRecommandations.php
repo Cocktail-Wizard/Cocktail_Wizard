@@ -52,8 +52,8 @@ if ($isTriInvalid || $isTypeInvalid) {
 } elseif (isset($tri)) {
     // Récupère les cocktails possibles pour l'utilisateur à afficher dans la galerie
     try {
-        $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?,?,?)");
-        $requete_preparee->bind_param("isii", $userID, $tri, $page, $nbCocktailPage);
+        $requete_preparee = $conn->prepare("CALL GetCocktailGalerieFiltrer(?,?,?,?,?)");
+        $requete_preparee->bind_param("isiii", $userID, $tri, $page, $nbCocktailPage, $mocktail);
         $requete_preparee->execute();
         $resultat = $requete_preparee->get_result();
         $requete_preparee->close();
@@ -67,24 +67,24 @@ if ($isTriInvalid || $isTypeInvalid) {
         switch ($type) {
                 // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Classiques
             case 'classiques':
-                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleClassique(?,?,?)");
-                $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
+                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleClassique(?,?,?,?)");
+                $requete_preparee->bind_param("iiii", $userID, $page, $nbCocktailPage, $mocktail);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
                 break;
                 // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Favoris
             case 'favoris':
-                $requete_preparee = $conn->prepare("CALL GetListeCocktailPossibleFavorie(?,?,?)");
-                $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
+                $requete_preparee = $conn->prepare("CALL GetListeCocktailPossibleFavorie(?,?,?,?)");
+                $requete_preparee->bind_param("iiii", $userID, $page, $nbCocktailPage, $mocktail);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();
                 break;
                 // Récupère les cocktails possibles pour l'utilisateur à afficher dans la section Communauté
             case 'communaute':
-                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleCommunautaire(?,?,?)");
-                $requete_preparee->bind_param("iii", $userID, $page, $nbCocktailPage);
+                $requete_preparee = $conn->prepare("CALL GetCocktailsPossibleCommunautaire(?,?,?,?)");
+                $requete_preparee->bind_param("iiii", $userID, $page, $nbCocktailPage, $mocktail);
                 $requete_preparee->execute();
                 $resultat = $requete_preparee->get_result();
                 $requete_preparee->close();

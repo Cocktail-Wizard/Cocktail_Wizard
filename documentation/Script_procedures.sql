@@ -459,7 +459,7 @@ END
 -- param_orderby: 'date' ou 'like'
 DROP PROCEDURE IF EXISTS GetCocktailGalerieNonFiltrer;
 
-CREATE PROCEDURE GetCocktailGalerieNonFiltrer(IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE GetCocktailGalerieNonFiltrer(IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
 
     SET @debut = (page - 1) * cocktail_par_page;
@@ -470,9 +470,15 @@ BEGIN
         ELSE 'C.nb_like'
     END;
 
+    IF mocktail = 1 THEN
+        SET @mocktail = ' WHERE C.id_alcool IS NULL ';
+    ELSE
+        SET @mocktail = ' ';
+    END IF;
+
     SET @sql = CONCAT('SELECT C.id_cocktail
-                       FROM Cocktail C
-                       ORDER BY ', @ordre, ' DESC
+                       FROM Cocktail C', @mocktail,
+                       'ORDER BY ', @ordre, ' DESC
                        LIMIT ', @nb_cocktail, ' OFFSET ', @debut);
 
     PREPARE stmt FROM @sql;
@@ -481,7 +487,6 @@ BEGIN
 END
 //
 
-
 -- Création de la procédure GetCocktailGalerieFiltrer
 -- Permet de voir tous les cocktails que chaque utilisateur peut faire
 -- Utiliser pour afficher les cocktails dans la galerie connecté lorsque
@@ -489,7 +494,7 @@ END
 -- param_orderby: 'date' ou 'like'
 DROP PROCEDURE IF EXISTS GetCocktailGalerieFiltrer;
 
-CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
     SET @utilisateur = utilisateur;
@@ -499,6 +504,12 @@ BEGIN
         WHEN param_orderby = 'like' THEN 'C.nb_like'
         ELSE 'C.nb_like'
     END;
+
+    IF mocktail = 1 THEN
+        SET @mocktail = ' WHERE C.id_alcool IS NULL ';
+    ELSE
+        SET @mocktail = ' ';
+    END IF;
 
     SET @sql = CONCAT('
         SELECT C.id_cocktail, (
@@ -512,8 +523,8 @@ BEGIN
                 OR (IC.id_ingredient IS NOT NULL AND NOT EXISTS (SELECT id_ingredient FROM Ingredient_Utilisateur WHERE id_ingredient = IC.id_ingredient AND id_utilisateur = ', @utilisateur, '))
             )
         ) AS ing_manquant
-        FROM Cocktail C
-        ORDER BY ing_manquant ASC,', @ordre,' DESC
+        FROM Cocktail C', @mocktail,
+        'ORDER BY ing_manquant ASC,', @ordre,' DESC
         LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
     );
 
@@ -579,7 +590,7 @@ BEGIN
     JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
     -- Enlever LEFT quand les images seront gérées
     LEFT JOIN Banque_Image BI ON C.id_image = BI.id_image
-    JOIN Alcool A ON C.id_alcool = A.id_alcool
+    LEFT JOIN Alcool A ON C.id_alcool = A.id_alcool
     -- Enlever LEFT quand les images seront gérées
     LEFT JOIN Banque_Image BI2 ON U.id_image = BI2.id_image
     WHERE C.id_cocktail = cocktail;
@@ -654,11 +665,17 @@ END
 -- Utiliser pour lister les cocktails favoris dans la section mon bar
 DROP PROCEDURE IF EXISTS GetListeCocktailPossibleFavorie;
 
-CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT, IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT, IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
     SET @id_utilisateur = id_utilisateur;
     SET @cocktail_par_page = cocktail_par_page;
+
+    IF mocktail = 1 THEN
+        SET @mocktail = ' AND C.id_alcool IS NULL ';
+    ELSE
+        SET @mocktail = ' ';
+    END IF;
 
     SET @sql = CONCAT('
         SELECT C.id_cocktail, (
@@ -674,7 +691,7 @@ BEGIN
         ) AS ing_manquant
         FROM Cocktail C
         JOIN cocktail_liked CL ON C.id_cocktail = CL.id_cocktail
-        WHERE CL.id_utilisateur = ', @id_utilisateur, '
+        WHERE CL.id_utilisateur = ', @id_utilisateur, ' ', @mocktail, '
         ORDER BY ing_manquant ASC, CL.date_like DESC
         LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
     );
@@ -691,11 +708,17 @@ END
 -- Utiliser pour lister les cocktails classiques dans la section mon bar
 DROP PROCEDURE IF EXISTS GetCocktailsPossibleClassique;
 
-CREATE PROCEDURE GetCocktailsPossibleClassique(IN utilisateur INT, IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE GetCocktailsPossibleClassique(IN utilisateur INT, IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
     SET @utilisateur = utilisateur;
     SET @cocktail_par_page = cocktail_par_page;
+
+    IF mocktail = 1 THEN
+        SET @mocktail = ' AND C.id_alcool IS NULL ';
+    ELSE
+        SET @mocktail = ' ';
+    END IF;
 
     SET @sql = CONCAT('
         SELECT C.id_cocktail, (
@@ -710,7 +733,7 @@ BEGIN
             )
         ) AS ing_manquant
         FROM Cocktail C
-        WHERE C.classique = 1
+        WHERE C.classique = 1', @mocktail, '
         ORDER BY ing_manquant ASC, C.nb_like DESC
         LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
     );
@@ -726,11 +749,17 @@ END
 -- Utiliser pour lister les cocktails communautaires dans la section mon bar
 DROP PROCEDURE IF EXISTS GetCocktailsPossibleCommunautaire;
 
-CREATE PROCEDURE GetCocktailsPossibleCommunautaire(IN utilisateur INT, IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE GetCocktailsPossibleCommunautaire(IN utilisateur INT, IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
     SET @utilisateur = utilisateur;
     SET @cocktail_par_page = cocktail_par_page;
+
+    IF mocktail = 1 THEN
+        SET @mocktail = ' AND C.id_alcool IS NULL ';
+    ELSE
+        SET @mocktail = ' ';
+    END IF;
 
     SET @sql = CONCAT('
         SELECT C.id_cocktail, (
@@ -745,7 +774,7 @@ BEGIN
             )
         ) AS ing_manquant
         FROM Cocktail C
-        WHERE C.classique = 0
+        WHERE C.classique = 0', @mocktail, '
         ORDER BY ing_manquant ASC, C.nb_like DESC
         LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
     );
@@ -801,7 +830,7 @@ END
 -- Renvoie tous les cocktails qui ont un des paramètres recherchés(À vérifier)
 DROP PROCEDURE IF EXISTS RechercheCocktail;
 
-CREATE PROCEDURE RechercheCocktail(IN param_recherche VARCHAR(255), IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE RechercheCocktail(IN param_recherche VARCHAR(255), IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
     SET @param_recherche = param_recherche;
@@ -812,6 +841,12 @@ BEGIN
     END;
     SET @cocktail_par_page = cocktail_par_page;
 
+    IF mocktail = 1 THEN
+        SET @mocktail = ' AND C.id_alcool IS NULL ';
+    ELSE
+        SET @mocktail = ' ';
+    END IF;
+
     SET @sql = CONCAT('
         SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like
         FROM Cocktail C
@@ -819,11 +854,11 @@ BEGIN
         LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
         LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
         JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
-        WHERE LOCATE("', @param_recherche ,'", C.nom) > 0
+        WHERE (LOCATE("', @param_recherche ,'", C.nom) > 0
         OR LOCATE("', @param_recherche ,'", I.nom) > 0
         OR LOCATE("', @param_recherche ,'", A.nom) > 0
         OR LOCATE("', @param_recherche ,'", C.profil_saveur) > 0
-        OR LOCATE("', @param_recherche ,'", U.nom) > 0
+        OR LOCATE("', @param_recherche ,'", U.nom) > 0)', @mocktail, '
         ORDER BY ', @ordre,' DESC
         LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
     );
@@ -842,7 +877,7 @@ DROP PROCEDURE IF EXISTS RechercheCocktailFiltrer;
 
 CREATE PROCEDURE RechercheCocktailFiltrer(
     IN param_recherche VARCHAR(255), IN id_utilisateur INT, IN param_orderby VARCHAR(50)
-    , IN page INT, IN cocktail_par_page INT
+    , IN page INT, IN cocktail_par_page INT, IN mocktail INT
 )
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
@@ -854,6 +889,12 @@ BEGIN
     END;
     SET @utilisateur = id_utilisateur;
     SET @cocktail_par_page = cocktail_par_page;
+
+    IF mocktail = 1 THEN
+        SET @mocktail = ' AND C.id_alcool IS NULL ';
+    ELSE
+        SET @mocktail = ' ';
+    END IF;
 
     SET @sql = CONCAT('
         SELECT DISTINCT C.id_cocktail, C.date_publication, C.nb_like, (
@@ -872,11 +913,11 @@ BEGIN
         LEFT JOIN Ingredient I ON IC.id_ingredient = I.id_ingredient
         LEFT JOIN Alcool A ON IC.id_alcool = A.id_alcool
         JOIN Utilisateur U ON C.id_utilisateur = U.id_utilisateur
-        WHERE LOCATE("', @param_recherche ,'", C.nom) > 0
+        WHERE (LOCATE("', @param_recherche ,'", C.nom) > 0
         OR LOCATE("', @param_recherche ,'", I.nom) > 0
         OR LOCATE("', @param_recherche ,'", A.nom) > 0
         OR LOCATE("', @param_recherche ,'", C.profil_saveur) > 0
-        OR LOCATE("', @param_recherche ,'", U.nom) > 0
+        OR LOCATE("', @param_recherche ,'", U.nom) > 0)', @mocktail, '
         ORDER BY ing_manquant ASC, ', @ordre,' DESC
         LIMIT ', @cocktail_par_page, ' OFFSET ', @debut
     );

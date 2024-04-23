@@ -11,7 +11,7 @@
  * Si l'URL contient un paramètre 'recherche', la route renvoie les cocktails recherchés.
  * Sinon, la route renvoie les cocktails de la galerie.
  *
- * Autre paramètre possible : 'tri' pour trier les cocktails par date ou par nombre de likes.
+ * Autre paramètre possible : 'tri' pour trier les cocktails par date ou par nombre de likes. 'mocktail' pour afficher les mocktails.
  * 'page' pour la pagination. page=p-nb. p est le numéro de la page et nb le nombre de cocktails par page.
  * Ces paramètres sont optionnels et ont des valeurs par défaut. Si les valeurs sont incorrectes, elles seront ignorées.
  *
@@ -42,6 +42,13 @@ if (isset($_GET['auteur'])) {
     $type = trim($_GET['type']);
     $username = trim($_GET['user']);
 
+    if (isset($_GET['mocktail']) && $_GET['mocktail'] == 'true') {
+        $mocktail = 1;
+    } else {
+        $mocktail = 0;
+    }
+
+
     if (isset($_GET['page']) && preg_match('/^[0-9]+-[0-9]+$/', $_GET['page'])) {
         $pagination = explode('-', $_GET['page']);
         $page = (int) $pagination[0];
@@ -56,6 +63,12 @@ if (isset($_GET['auteur'])) {
 
     $username = trim($_GET['user']);
     $recherche = trim($_GET['recherche']);
+
+    if (isset($_GET['mocktail']) && $_GET['mocktail'] == 'true') {
+        $mocktail = 1;
+    } else {
+        $mocktail = 0;
+    }
 
     if (isset($_GET['page']) && preg_match('/^[0-9]+-[0-9]+$/', $_GET['page'])) {
         $pagination = explode('-', $_GET['page']);
@@ -79,6 +92,12 @@ if (isset($_GET['auteur'])) {
 
     $username = trim($_GET['user']);
 
+    if (isset($_GET['mocktail']) && $_GET['mocktail'] == 'true') {
+        $mocktail = 1;
+    } else {
+        $mocktail = 0;
+    }
+
     if (isset($_GET['page']) && preg_match('/^[0-9]+-[0-9]+$/', $_GET['page'])) {
         $pagination = explode('-', $_GET['page']);
         $page = (int) $pagination[0];
@@ -99,6 +118,12 @@ if (isset($_GET['auteur'])) {
 
     $recherche = trim($_GET['recherche']);
 
+    if (isset($_GET['mocktail']) && $_GET['mocktail'] == 'true') {
+        $mocktail = 1;
+    } else {
+        $mocktail = 0;
+    }
+
     if (isset($_GET['page']) && preg_match('/^[0-9]+-[0-9]+$/', $_GET['page'])) {
         $pagination = explode('-', $_GET['page']);
         $page = (int) $pagination[0];
@@ -116,6 +141,12 @@ if (isset($_GET['auteur'])) {
 
     require_once __DIR__ . '/rechercheCocktail.php';
 } else {
+
+    if (isset($_GET['mocktail']) && $_GET['mocktail'] == 'true') {
+        $mocktail = 1;
+    } else {
+        $mocktail = 0;
+    }
 
     if (isset($_GET['page']) && preg_match('/^[0-9]+-[0-9]+$/', $_GET['page'])) {
         $pagination = explode('-', $_GET['page']);
