@@ -15,7 +15,7 @@
     <noscript class="erreur">Vous devez activer JavaScript pour charger ce site web.</noscript>
 
     <header id="top">
-    <h1 class="neonText-pink">COCKTAIL WIZARD</h1>
+        <h1 class="neonText-pink">COCKTAIL WIZARD</h1>
         <div class="button-container">
             <a id="bouton-connexion" class="connexion-pic" href="/connexion" title="Connexion">
                 <img src="ressources/images/icone-profile.svg" alt="Icone profile">
@@ -26,7 +26,7 @@
     <main>
         <nav>
             <div class="nav-top">
-                <input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off" autofocus>
+                <input id="barre-recherche" type="text" placeholder="Recherchez un cocktail..." autocomplete="off">
                 <button id="ordre-tri" title="Ordonner par mentions j'aime">
                     <img id="ordre-tri-icone" src="ressources/images/icone-calendrier.svg" alt="Ordre">
                     <img src="ressources/images/tete-fleche-bas.svg" alt="Ordre décroissant">
