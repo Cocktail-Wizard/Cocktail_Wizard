@@ -459,7 +459,7 @@ END
 -- param_orderby: 'date' ou 'like'
 DROP PROCEDURE IF EXISTS GetCocktailGalerieNonFiltrer;
 
-CREATE PROCEDURE GetCocktailGalerieNonFiltrer(IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE GetCocktailGalerieNonFiltrer(IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
 
     SET @debut = (page - 1) * cocktail_par_page;
@@ -481,11 +481,6 @@ BEGIN
 END
 //
 
-SELECT DISTINCT c.id_cocktail
-FROM cocktail c
-LEFT JOIN ingredient_cocktail ON c.id_cocktail = ingredient_cocktail.id_cocktail
-WHERE ingredient_cocktail.id_alcool IS NULL;
-
 -- Création de la procédure GetCocktailGalerieFiltrer
 -- Permet de voir tous les cocktails que chaque utilisateur peut faire
 -- Utiliser pour afficher les cocktails dans la galerie connecté lorsque
@@ -493,7 +488,7 @@ WHERE ingredient_cocktail.id_alcool IS NULL;
 -- param_orderby: 'date' ou 'like'
 DROP PROCEDURE IF EXISTS GetCocktailGalerieFiltrer;
 
-CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE GetCocktailGalerieFiltrer(IN utilisateur INT, IN param_orderby VARCHAR(50), IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
     SET @utilisateur = utilisateur;
@@ -658,7 +653,7 @@ END
 -- Utiliser pour lister les cocktails favoris dans la section mon bar
 DROP PROCEDURE IF EXISTS GetListeCocktailPossibleFavorie;
 
-CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT, IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE GetListeCocktailPossibleFavorie(IN id_utilisateur INT, IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
     SET @id_utilisateur = id_utilisateur;
@@ -695,7 +690,7 @@ END
 -- Utiliser pour lister les cocktails classiques dans la section mon bar
 DROP PROCEDURE IF EXISTS GetCocktailsPossibleClassique;
 
-CREATE PROCEDURE GetCocktailsPossibleClassique(IN utilisateur INT, IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE GetCocktailsPossibleClassique(IN utilisateur INT, IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
     SET @utilisateur = utilisateur;
@@ -730,7 +725,7 @@ END
 -- Utiliser pour lister les cocktails communautaires dans la section mon bar
 DROP PROCEDURE IF EXISTS GetCocktailsPossibleCommunautaire;
 
-CREATE PROCEDURE GetCocktailsPossibleCommunautaire(IN utilisateur INT, IN page INT, IN cocktail_par_page INT)
+CREATE PROCEDURE GetCocktailsPossibleCommunautaire(IN utilisateur INT, IN page INT, IN cocktail_par_page INT, IN mocktail INT)
 BEGIN
     SET @debut = (page - 1) * cocktail_par_page;
     SET @utilisateur = utilisateur;
