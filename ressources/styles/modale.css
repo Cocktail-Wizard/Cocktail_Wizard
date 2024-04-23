@@ -4,6 +4,10 @@
     --modal-content-min-width: 270px;
 }
 
+#bouton-supprimer {
+    display: none;
+}
+
 #contenant-modale {
     display: none;
     position: fixed;

@@ -57,6 +57,7 @@
 .icone-saveur {
     bottom: 0;
     right: 0;
+    pointer-events: auto;
 }
 
 .nom-cocktail {
