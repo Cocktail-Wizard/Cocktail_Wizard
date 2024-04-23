@@ -330,6 +330,7 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
 
         const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
         umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur] ?? iconesUmami['default']}.svg`;
+        umamiCocktail.title = cocktail.profil_saveur;
 
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
