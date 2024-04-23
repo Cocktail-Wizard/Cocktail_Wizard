@@ -6,12 +6,14 @@ const boutonOrdreIcone = document.getElementById('ordre-tri-icone');
 const finAttenteEcriture = 1000; // 1 seconde
 const monBar = document.getElementById('lien-monbar');
 const afficherMocktail = document.getElementById('new-radio2');
+const cocktailRealisable = document.getElementById('new-radio');
 let page = 1;
 const cocktailParPage = 8;
 let requetePrecedente;
 let dernierChargement = 0;
 
-let estSelect = false;
+let mocktailEstSelect = false;
+let estSelect = false; // Pour cocktail realisable
 
 let ordreCocktails = 'date';
 
@@ -41,6 +43,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.removeEventListener('scroll', chargerCocktailScroll);
         ordonnerCocktails();
     });
+
+    initButtonRadio();
 });
 
 function chargerCocktailScroll() {
@@ -365,25 +369,40 @@ function chargerCommenter(id_cocktail) {
     });
 }
 
-document.getElementById('new-radio').addEventListener(radio => {
-    radio.addEventListener('mousedown', function (event) {
-        estSelect = this.checked;
-        console.log(estSelect);
+function initButtonRadio() {
+    afficherMocktail.addEventListener('mousedown', function (event) {
+        mocktailEstSelect = this.checked;
     });
 
-    radio.addEventListener('click', function (event) {
-        if (estSelect) {
+    afficherMocktail.addEventListener('click', function (event) {
+        if (mocktailEstSelect) {
             this.checked = false;
-            estSelect = false;
-
-            window.removeEventListener('scroll', chargerCocktailScroll);
-            chercherCocktail();
+            mocktailEstSelect = false;
         }
         else {
             this.checked = true;
-            estSelect = true;
-            window.removeEventListener('scroll', chargerCocktailScroll);
-            chercherCocktail();
+            mocktailEstSelect = true;
         }
     });
-});
+    if (cocktailRealisable) {
+        cocktailRealisable.addEventListener('mousedown', function (event) {
+            estSelect = this.checked;
+        });
+
+        cocktailRealisable.addEventListener('click', function (event) {
+            if (estSelect) {
+                this.checked = false;
+                estSelect = false;
+
+                window.removeEventListener('scroll', chargerCocktailScroll);
+                chercherCocktail();
+            }
+            else {
+                this.checked = true;
+                estSelect = true;
+                window.removeEventListener('scroll', chargerCocktailScroll);
+                chercherCocktail();
+            }
+        });
+    }
+}

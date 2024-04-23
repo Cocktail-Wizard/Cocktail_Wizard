@@ -42,7 +42,7 @@
                     <label for="new-radio">Cocktails réalisables</label>
                 </span>
                 <span>
-                    <input type="radio" id="new-radio2" name="mocktail" checked>
+                    <input type="radio" id="new-radio2" name="mocktail">
                     <label for="new-radio2" title="Cocktail sans alcool">Mocktails</label>
                 </span>
             </div>

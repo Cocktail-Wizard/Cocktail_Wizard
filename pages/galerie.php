@@ -29,7 +29,7 @@
             </div>
             <div class="nav-radio">
                 <span>
-                    <input type="radio" id="new-radio2" name="mocktail" checked>
+                    <input type="radio" id="new-radio2" name="mocktail">
                     <label for="new-radio2" title="Cocktail sans alcool">Mocktails</label>
                 </span>
             </div>
