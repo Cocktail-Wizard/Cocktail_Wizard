@@ -15,15 +15,21 @@
 header("content-type: application/json");
 require_once(__DIR__ . "/config.php");
 require_once(__DIR__ . "/fonctionAPIphp/paramJSONvalide.php");
+require_once(__DIR__ . "/fonctionAPIphp/authorisationAPI.php");
+require_once(__DIR__ . "/fonctionAPIphp/usernameToId.php");
 
 $conn = connexionBD();
 
 $donnee = json_decode(file_get_contents("php://input"), true);
 $id_commentaire = paramJSONvalide($donnee, "id_commentaire");
+$username = paramJSONvalide($donnee, "username");
+
+userAccesResssource($username);
+$userID = usernameToId($username, $conn);
 
 try {
-    $requete_preparee = $conn->prepare("CALL SupprimerCommentaire(?)");
-    $requete_preparee->bind_param("i", $id_commentaire);
+    $requete_preparee = $conn->prepare("CALL SupprimerCommentaire(?, ?)");
+    $requete_preparee->bind_param("ii", $id_commentaire, $userID);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
