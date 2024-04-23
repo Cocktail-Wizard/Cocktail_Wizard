@@ -293,8 +293,8 @@ header h1 {
     border: var(--palette-button-border-color);
     top: 1vh;
     right: 1vh;
-    width: 8vh;
-    height: 8vh;
+    width: 12vh;
+    height: 12vh;
     border-radius: 8px;
 }
 
