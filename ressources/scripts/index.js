@@ -54,7 +54,6 @@ function chargerCocktailScroll() {
     }
 }
 
-
 function afficherCocktails(data) {
     const fragment = document.createDocumentFragment();
     const modeleTemp = document.createElement('div');
@@ -178,7 +177,6 @@ async function chargerInformationsModale(cocktail) {
     actualiserTextElementParId('preparation', cocktail.preparation);
     actualiserTextElementParId('date-publication', cocktail.date);
 
-
     const imageCocktail = document.getElementById('illustration');
     imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
 
@@ -236,6 +234,27 @@ async function chargerInformationsModale(cocktail) {
         ligneIngredient.appendChild(nomIngredient);
 
         ingredients.appendChild(ligneIngredient);
+    });
+
+    if (!utilisateur) return;
+
+    // Afficher le bouton supprimer si l'utilisateur est l'auteur du cocktail
+    const boutonSupprimer = document.getElementById('bouton-supprimer');
+    boutonSupprimer.style.display = cocktail.auteur === utilisateur ? 'block' : 'none';
+
+    boutonSupprimer.addEventListener('click', async () => {
+        fetch('/api/cocktails', {
+            method: 'DELETE',
+            body: JSON.stringify({
+                id_cocktail: cocktail.id_cocktail,
+                username: utilisateur
+            }),
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        }).then((response) => {
+            if (response.ok) {
+                window.location.href = '/';
+            }
+        });
     });
 }
 
