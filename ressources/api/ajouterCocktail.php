@@ -115,7 +115,7 @@ try {
 
         foreach ($donnee['ingredients'] as $ingredient) {
 
-            if (!empty($ingredient['nomIng']) && !empty($ingredient['quantite']) && isset($ingredient['unite'])) {
+            if (!empty($ingredient['nomIng']) && !empty($ingredient['quantite']) && !empty($ingredient['unite'])) {
                 $nomIng = $ingredient['nomIng'];
                 $quantite = $ingredient['quantite'];
                 $unite = $ingredient['unite'];
