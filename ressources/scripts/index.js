@@ -301,7 +301,7 @@ async function chercherCocktail() {
     const paramOrdre = `?tri=${ordreCocktails}`;
     const paramPage = `&page=${page}-${cocktailParPage}`;
     const recommandations = estSelect ? `&user=${utilisateur}` : '';
-    const mocktails = afficherMocktail.checked ? '&mocktail=true' : '';
+    const mocktails = mocktailEstSelect ? '&mocktail=true' : '';
     let url = `/api/cocktails${paramOrdre}${paramRecherche}${recommandations}`;
     requetePrecedente = url;
     url += paramPage;
