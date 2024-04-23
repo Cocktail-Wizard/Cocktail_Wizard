@@ -5,12 +5,15 @@ const boutonOrdre = document.getElementById('ordre-tri');
 const boutonOrdreIcone = document.getElementById('ordre-tri-icone');
 const finAttenteEcriture = 1000; // 1 seconde
 const monBar = document.getElementById('lien-monbar');
+const afficherMocktail = document.getElementById('radio-mocktail');
+const cocktailRealisable = document.getElementById('radio-perso');
 let page = 1;
 const cocktailParPage = 8;
 let requetePrecedente;
 let dernierChargement = 0;
 
-let estSelect = false;
+let mocktailEstSelect = false;
+let estSelect = false; // Pour cocktail realisable
 
 let ordreCocktails = 'date';
 
@@ -40,10 +43,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.removeEventListener('scroll', chargerCocktailScroll);
         ordonnerCocktails();
     });
+
+    initButtonRadio();
 });
 
 function chargerCocktailScroll() {
-    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 1) && document.body.offsetHeight != dernierChargement) {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 6) && document.body.offsetHeight != dernierChargement) {
         chargerCocktailsScroll();
         dernierChargement = document.body.offsetHeight;
     }
@@ -72,6 +77,7 @@ function afficherCocktails(data) {
 
         const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
         umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur] ?? iconesUmami['default']}.svg`;
+        umamiCocktail.title = cocktail.profil_saveur;
 
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
@@ -125,6 +131,7 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
 
         const umamiCocktail = nouveauCocktail.querySelector('.icone-saveur');
         umamiCocktail.src = `ressources/images/${iconesUmami[cocktail.profil_saveur] ?? iconesUmami['default']}.svg`;
+        umamiCocktail.title = cocktail.profil_saveur;
 
         const imageCocktail = nouveauCocktail.querySelector('.illustration-cocktail');
         imageCocktail.src = 'https://equipe105.tch099.ovh/images?image=' + cocktail.img_cocktail;
@@ -296,7 +303,8 @@ async function chercherCocktail() {
     const paramOrdre = `?tri=${ordreCocktails}`;
     const paramPage = `&page=${page}-${cocktailParPage}`;
     const recommandations = estSelect ? `&user=${utilisateur}` : '';
-    let url = `/api/cocktails${paramOrdre}${paramRecherche}${recommandations}`;
+    const mocktails = mocktailEstSelect ? '&mocktail=true' : '';
+    let url = `/api/cocktails${paramOrdre}${paramRecherche}${recommandations}${mocktails}`;
     requetePrecedente = url;
     url += paramPage;
     const data = await faireRequete(url);
@@ -363,24 +371,45 @@ function chargerCommenter(id_cocktail) {
     });
 }
 
-document.querySelectorAll('input[type=radio]').forEach(radio => {
-    radio.addEventListener('mousedown', function (event) {
-        estSelect = this.checked;
+function initButtonRadio() {
+    afficherMocktail.addEventListener('mousedown', function (event) {
+        mocktailEstSelect = this.checked;
     });
 
-    radio.addEventListener('click', function (event) {
-        if (estSelect) {
+    afficherMocktail.addEventListener('click', function (event) {
+        if (mocktailEstSelect) {
             this.checked = false;
-            estSelect = false;
-
+            mocktailEstSelect = false;
             window.removeEventListener('scroll', chargerCocktailScroll);
             chercherCocktail();
         }
         else {
             this.checked = true;
-            estSelect = true;
+            mocktailEstSelect = true;
             window.removeEventListener('scroll', chargerCocktailScroll);
             chercherCocktail();
         }
     });
-});
+
+    if (cocktailRealisable) {
+        cocktailRealisable.addEventListener('mousedown', function (event) {
+            estSelect = this.checked;
+        });
+
+        cocktailRealisable.addEventListener('click', function (event) {
+            if (estSelect) {
+                this.checked = false;
+                estSelect = false;
+
+                window.removeEventListener('scroll', chargerCocktailScroll);
+                chercherCocktail();
+            }
+            else {
+                this.checked = true;
+                estSelect = true;
+                window.removeEventListener('scroll', chargerCocktailScroll);
+                chercherCocktail();
+            }
+        });
+    }
+}

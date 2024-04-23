@@ -27,6 +27,12 @@
                     <img src="ressources/images/tete-fleche-bas.svg" alt="Ordre décroissant">
                 </button>
             </div>
+            <div class="nav-radio">
+                <span>
+                    <input type="radio" id="radio-mocktail" name="mocktail">
+                    <label for="radio-mocktail" title="Cocktail sans alcool">Mocktails uniquement</label>
+                </span>
+            </div>
         </nav>
 
         <section id="galerie"></section>
