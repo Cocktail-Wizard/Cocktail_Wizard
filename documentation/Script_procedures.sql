@@ -1024,8 +1024,24 @@ END
 -- Utiliser pour supprimer un cocktail dans mon profil
 DROP PROCEDURE IF EXISTS SupprimerCocktail;
 
-CREATE PROCEDURE SupprimerCocktail(IN var_id_cocktail INT)
+CREATE PROCEDURE SupprimerCocktail(IN var_id_cocktail INT, IN var_id_utilisateur INT) suppCocktail:
 BEGIN
+    -- Vérifier si l'utilisateur a le droit de supprimer le cocktail
+    IF NOT EXISTS (
+        SELECT id_cocktail
+        FROM Cocktail
+        WHERE id_cocktail = var_id_cocktail
+        AND id_utilisateur = var_id_utilisateur
+    ) AND NOT EXISTS (
+        SELECT id_utilisateur
+        FROM utilisateur
+        WHERE id_utilisateur = var_id_utilisateur
+        AND privilege = 1
+    ) THEN
+        SELECT 'Erreur: Vous n\'avez pas les droits pour supprimer ce cocktail' AS success;
+        LEAVE suppCocktail;
+    END IF;
+
     DELETE FROM cocktail_liked
     WHERE id_cocktail = var_id_cocktail;
     CALL SupprimerCommentaireDeCocktail(var_id_cocktail);
@@ -1046,8 +1062,24 @@ END
 -- Permet de supprimer un commentaire
 DROP PROCEDURE IF EXISTS SupprimerCommentaire;
 
-CREATE PROCEDURE SupprimerCommentaire(IN var_id_commentaire INT)
+CREATE PROCEDURE SupprimerCommentaire(IN var_id_commentaire INT, IN var_id_utilisateur INT) suppCommentaire:
 BEGIN
+    -- Vérifier si l'utilisateur a le droit de supprimer le commentaire
+    IF NOT EXISTS (
+        SELECT id_commentaire
+        FROM Commentaire
+        WHERE id_commentaire = var_id_commentaire
+        AND id_utilisateur = var_id_utilisateur
+    ) AND NOT EXISTS (
+        SELECT id_utilisateur
+        FROM utilisateur
+        WHERE id_utilisateur = var_id_utilisateur
+        AND privilege = 1
+    ) THEN
+        SELECT 'Erreur: Vous n\'avez pas les droits pour supprimer ce commentaire' AS success;
+        LEAVE suppCommentaire;
+    END IF;
+
     DELETE FROM commentaire_liked
     WHERE id_commentaire = var_id_commentaire;
     DELETE FROM commentaire

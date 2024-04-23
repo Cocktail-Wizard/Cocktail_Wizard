@@ -11,21 +11,29 @@
  *
  * @param JSON : id_cocktail
  *
+ * @param JSON : username
+ *
  * @return JSON 1 si le cocktail a été supprimé, 0 sinon
  */
 
 header("content-type: application/json");
 require_once(__DIR__ . "/config.php");
 require_once(__DIR__ . "/fonctionAPIphp/paramJSONvalide.php");
+require_once(__DIR__ . "/fonctionAPIphp/authorisationAPI.php");
+require_once(__DIR__ . "/fonctionAPIphp/usernameToId.php");
 
 $conn = connexionBD();
 
 $donnees = json_decode(file_get_contents('php://input'), true);
 $id_cocktail = paramJSONvalide($donnees, 'id_cocktail');
+$username = paramJSONvalide($donnees, 'username');
+
+userAccesResssource($username);
+$userId = usernameToId($username, $conn);
 
 try {
-    $requete_preparee = $conn->prepare("CALL SupprimerCocktail(?)");
-    $requete_preparee->bind_param("i", $id_cocktail);
+    $requete_preparee = $conn->prepare("CALL SupprimerCocktail(?, ?)");
+    $requete_preparee->bind_param("ii", $id_cocktail, $userId);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
