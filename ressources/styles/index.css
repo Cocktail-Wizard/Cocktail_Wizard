@@ -34,6 +34,19 @@ header h1 {
     text-align: center;
     font-size: 2em;
     font-weight: bold;
+    color: var(--palette-background-color);
+    width: 100%;
+    font-style: italic;
+    text-shadow: var(--neon-text-pink);
+}
+
+
+
+footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-shadow: var(--neon-text-pink);
+    color: var(--palette-lighttext-color);
 }
 
 nav {
@@ -55,19 +68,11 @@ nav {
 
 .nav-radio {
     display: flex;
-}
-
-#new-radio {
-    margin-bottom: 5px;
-}
-
-.nav-radio label {
-    font-size: 18px;
-    color: var(--palette);
+    flex-direction: column;
+    align-items: center;
 }
 
 .nav-radio>* {
-    background-color: white;
     opacity: 0.8;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -75,6 +80,17 @@ nav {
     padding-left: 5px;
     padding-right: 5px;
     color: var(--palette-button-text-color);
+    background-color: var(--palette-background-secondary-color);
+}
+
+.nav-radio label {
+    font-size: 18px;
+    color: var(--palette-lighttext-color);
+}
+
+#radio-cocktail:checked {
+    box-shadow: var(--orange-neon-box);
+    text-shadow: var(--neon-text-pink);
     text-wrap: nowrap;
 }
 
@@ -93,13 +109,12 @@ nav {
     border: none;
     background-color: var(--palette-button-color);
     border-radius: 50%;
-    opacity: 0.4;
     width: 50px;
     height: 50px;
 }
 
 #deux-boutons button:hover {
-    opacity: 1;
+    box-shadow: var(--orange-neon-box);
 }
 
 #deux-boutons button img {
@@ -107,10 +122,6 @@ nav {
     margin: auto;
     width: 30px;
     height: 30px;
-}
-
-#deux-boutons button:focus {
-    outline: none;
 }
 
 aside#contenant-boutons-fixes {
@@ -144,24 +155,35 @@ aside#contenant-boutons-fixes a img {
     background-size: contain;
     border: 0;
     border-radius: var(--default-border-radius) 0 0 var(--default-border-radius);
-    color: var(--palette-button-text-color);
     font-size: x-large;
     opacity: 0.8;
     outline: none;
     padding: 10px 0 10px 50px;
     width: clamp(200px, calc(var(--publication-width) * 1.85), 75%);
-    background-color: white;
+    background-color: var(--palette-background-secondary-color);
+    color: var(--palette-lighttext-color);
+}
+
+#barre-recherche:focus {
+    box-shadow: var(--blue-neon-box-light);
+    opacity: 1;
 }
 
 #ordre-tri {
     border-radius: 0 var(--default-border-radius) var(--default-border-radius) 0;
     border: 0;
     font-size: x-large;
+    background-color: var(--palette-background-secondary-color);
+    color: var(--palette-lighttext-color);
 }
 
-#barre-recherche:focus {
-    box-shadow: #000 0 0 10px;
-    opacity: 1;
+#ordre-tri:hover {
+    border-radius: 0 var(--default-border-radius) var(--default-border-radius) 0;
+    border: 0;
+    font-size: x-large;
+    background-color: var(--palette-background-secondary-color);
+    color: var(--palette-lighttext-color);
+    box-shadow: var(--orange-neon-box);
 }
 
 #galerie {
@@ -178,26 +200,92 @@ aside#contenant-boutons-fixes a img {
     align-items: center;
     position: absolute;
     top: 1vh;
-    left: 3vh;
-    z-index: 1;
+    left: 1vh;
 }
 
 #profil-utilisateur {
-    width: 10vh;
-    height: 10vh;
+    width: 12vh;
+    height: 12vh;
     border-radius: 50%;
-    border: 2px solid var(--palette-border-color);
     overflow: hidden;
-    margin-left: 1vh;
+    margin-left: 0.5vh;
     display: flex;
     justify-content: center;
 }
 
+#profil-utilisateur:hover {
+    box-shadow: var(--orange-neon-box);
+}
+
 .profile-pic {
-    width: 10vh;
-    height: 10vh;
+    width: 12vh;
+    height: 12vh;
     border-radius: 50%;
     margin-left: 0;
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 1vh;
+    right: 1vh;
+}
+
+.button {
+    background-image: linear-gradient(var(--pallette-button-color));
+    border: 2px solid var(--palette-border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 17px;
+    outline: 0;
+    padding: 11px 15px 12px;
+    text-align: center;
+    touch-action: manipulation;
+    display: inline-block;
+}
+
+.button:hover {
+    box-shadow: rgba(255 255 255 30%) 0 0 2px inset, rgb(0 0 0 / 40%) 0 1px 2px;
+    text-decoration: none;
+    color: var(--palette-button-text-color);
+    background-color: var(--palette-button-color-hover);
+}
+
+#bouton-monbar,
+#bouton-deconnexion,
+#bouton-connexion {
+    font-size: 1.5vw;
+    padding: 0.5vh 1vw;
+    border: var(--palette-button-border-color);
+    top: 1vh;
+    right: 1vh;
+    width: 12vh;
+    height: 12vh;
+    border-radius: 8px;
+}
+
+.monbar-pic,
+.connexion-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: flex;
+    justify-content: center;
+}
+
+#bouton-monbar:hover,
+#bouton-deconnexion:hover,
+#bouton-connexion:hover {
+    background-color: var(--palette-button-color-hover);
+    box-shadow: var(--orange-neon-box);
+}
+
+@media (prefers-color-scheme: dark) {
+    body>header {
+        background: radial-gradient(transparent, black), url("../images/cyberpunkWizard.png") no-repeat center 25% / cover;
+    }
 }
 
 @media screen and (width<=850px) {

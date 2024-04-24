@@ -1,29 +1,139 @@
-@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+@font-face {
+    font-family: Elianto;
+    src: url('../styles/Elianto/Elianto/Elianto-Regular.ttf') format('truetype');
+}
 
 :root {
     --default-gap: 3em;
     --default-border-radius: 8px;
     --authentification-area-width: 60%;
     --authentification-area-height: 60%;
-    --palette-background-color: #16161a;
-    --palette-headline-color: #fffffe;
-    --palette-paragraph-color: #fffffe;
-    --palette-button-color: #7f5af0;
-    --palette-button-text-color: #232946;
-    --palette-button-color-hover: #2cb67d;
-    --palette-border-color: #010101;
-    --palette-secondary-background-color: #94a1b2;
-    --palette-secondary-text-color: #010101;
     --media-screen-max-width: 850px;
     --space-from-corner: .5em;
+
+    /* Palette de couleur */
+    --palette-background-color: #FFF2E1;
+    --palette-background-secondary-color: #f3e3cf;
+    --palette-modal-background-color: #EAD8C0;
+    --palette-modal-background-secondary-color: #dac7ae;
+    --palette-darktext-color: #9BB0C1;
+    --palette-lighttext-color: #51829B;
+    --palette-button-color: #AD88C6;
+    --palette-button-border-color: #E1AFD1;
+    --palette-button-hover-color: #9f7ab8;
+    --palette-border-color: #E1AFD1;
+    --palette-color-cocktail-card: #51829B;
+    --palette-header-color-monbar: #51829B;
+
+    @media (prefers-color-scheme: dark) {
+        --palette-background-color: #02060c;
+        --palette-header-color-monbar: #02060c;
+        --palette-background-secondary-color: #091426;
+        --palette-modal-background-color: #091426;
+        --palette-modal-background-secondary-color: #0d1c35;
+        --palette-darktext-color: #711c91;
+        --palette-lighttext-color: #ea00d9;
+        --palette-button-color: #ff7931;
+        --palette-button-border-color: #ff5c05;
+        --palette-button-hover-color: #ff7931;
+        --palette-border-color: #17dfea;
+        --palette-color-cocktail-card: white;
+        --orange-neon-box:
+            0 0 2px #ff5c05,
+            0 0 3px #ff5c05,
+            0 0 5px #ff5c05,
+            0 0 8px #ff5c05,
+            0 0 13px #e85505,
+            0 0 15px #e85505,
+            0 0 18px #c54b0a,
+            0 0 25px #c54b0a;
+        --blue-neon-box-light:
+            0 0 2px #17dfea,
+            0 0 3px #17dfea,
+            0 0 5px #17dfea,
+            0 0 8px #17dfea,
+            0 0 13px #1acbd5,
+            0 0 15px #1acbd5,
+            0 0 18px #25adb4,
+            0 0 25px #25adb4;
+        --blue-neon-box-high:
+            0 0 3px #17dfea,
+            0 0 5px #17dfea,
+            0 0 10px #17dfea,
+            0 0 15px #17dfea,
+            0 0 25px #1acbd5,
+            0 0 30px #1acbd5,
+            0 0 35px #25adb4,
+            0 0 50px #25adb4;
+        --neon-text-pink:
+            0 0 1px #ea00d9,
+            0 0 2px #ea00d9,
+            0 0 3px #d60bc8,
+            0 0 5px #ad12a2;
+
+        .neon-blue-high {
+            box-shadow:
+                0 0 3px #17dfea,
+                0 0 5px #17dfea,
+                0 0 10px #17dfea,
+                0 0 15px #17dfea,
+                0 0 25px #1acbd5,
+                0 0 30px #1acbd5,
+                0 0 35px #25adb4,
+                0 0 50px #25adb4;
+        }
+
+        .neon-blue-low {
+            box-shadow:
+                0 0 2px #17dfea,
+                0 0 3px #17dfea,
+                0 0 5px #17dfea,
+                0 0 8px #17dfea,
+                0 0 13px #1acbd5,
+                0 0 15px #1acbd5,
+                0 0 18px #25adb4,
+                0 0 25px #25adb4;
+        }
+
+        .neon-orange-low {
+            box-shadow:
+                0 0 2px #ff5c05,
+                0 0 3px #ff5c05,
+                0 0 5px #ff5c05,
+                0 0 8px #ff5c05,
+                0 0 13px #e85505,
+                0 0 15px #e85505,
+                0 0 18px #c54b0a,
+                0 0 25px #c54b0a;
+        }
+
+        .neon-text-pink {
+            text-shadow:
+                0 0 7px #ea00d9,
+                0 0 10px #ea00d9,
+                0 0 21px #ea00d9,
+                0 0 42px #ea00d9,
+                0 0 82px #d60bc8,
+                0 0 92px #d60bc8,
+                0 0 102px #ad12a2,
+                0 0 151px #ad12a2;
+        }
+
+        .neon-text-pink-smol {
+            text-shadow: 0 0 1px #ea00d9,
+                0 0 2px #ea00d9,
+                0 0 3px #d60bc8,
+                0 0 5px #ad12a2;
+        }
+    }
 }
 
 * {
     margin: 0;
-    font-family: Prata, serif;
     user-select: none;
     transition-duration: 1s;
     color: var(--palette-paragraph-color);
+    font-family: Elianto, sans-serif;
 }
 
 button {
@@ -44,7 +154,7 @@ img {
 }
 
 input {
-    color: var(--palette-secondary-text-color);
+    color: var(--palette-lighttext-color);
 }
 
 .erreur * {
