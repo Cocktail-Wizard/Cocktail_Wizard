@@ -170,6 +170,7 @@ document.getElementById('bouton-publier').addEventListener('click', function (ev
             window.location.reload();
         })
         .catch(error => {
+            alert('Erreur lors de la publication du cocktail, veuillez vérifier les informations saisies.');
             console.error('Erreur:', error);
         });
 });
