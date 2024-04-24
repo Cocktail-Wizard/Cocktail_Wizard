@@ -22,6 +22,7 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
+require_once __DIR__ . '/fonctionAPIphp/authorisationAPI.php';
 
 $conn = connexionBD();
 
@@ -30,6 +31,8 @@ $donnees = json_decode(file_get_contents("php://input"), true);
 
 $nomIngredient = paramJSONvalide($donnees, 'nomIngredient');
 $username = paramJSONvalide($donnees, 'username');
+
+userAccesResssource($username);
 $userId = usernameToId($username, $conn);
 
 try {
@@ -50,7 +53,6 @@ try {
         echo json_encode($ingredients);
     } else {
         http_response_code(204);
-        echo json_encode("Aucun ingredient trouvé.");
     }
 } catch (Exception $e) {
     http_response_code(500);

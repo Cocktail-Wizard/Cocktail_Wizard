@@ -22,6 +22,7 @@ header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
+require_once __DIR__ . '/fonctionAPIphp/authorisationAPI.php';
 
 $conn = connexionBD();
 
@@ -29,9 +30,10 @@ $conn = connexionBD();
 $donnee = json_decode(file_get_contents('php://input'), true);
 
 // Vérifie si les paramètres sont présents
-$nomIngredient = paramJSONvalide($donnee,'nomIngredient');
+$nomIngredient = paramJSONvalide($donnee, 'nomIngredient');
 $username = paramJSONvalide($donnee, 'username');
 
+userAccesResssource($username);
 $userId = usernameToId($username, $conn);
 
 try {
@@ -42,6 +44,7 @@ try {
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
 
+    // Retourne la liste des ingrédients du bar de l'utilisateur
     if ($resultat->num_rows > 0) {
         $ingredients = array();
 
@@ -52,7 +55,7 @@ try {
         echo json_encode($ingredients);
     } else {
         http_response_code(204);
-        echo json_encode("Aucun ingredient trouvé.");
+        exit();
     }
 } catch (Exception $e) {
     http_response_code(500);

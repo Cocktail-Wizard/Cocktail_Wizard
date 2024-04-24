@@ -22,6 +22,15 @@ header("Content-Type: application/json");
 require_once(__DIR__ . '/config.php');
 require_once(__DIR__ . '/../classephp/Commentaire_Classe.php');
 
+if (isset($_GET['cocktail']) && is_numeric($_GET['cocktail'])) {
+    $id_cocktail = trim($_GET['cocktail']);
+} else {
+    http_response_code(400);
+    echo json_encode("Erreur : Le paramètre d'URL cocktail est manquant ou invalide.");
+    exit();
+}
+
+
 $conn = connexionBD();
 
 try {
@@ -31,9 +40,10 @@ try {
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
 
+    // Liste d'objets commentaires du cocktail
+    $commentaires = [];
+
     if ($resultat->num_rows > 0) {
-        // Liste d'objets commentaires du cocktail
-        $commentaires = [];
         while ($row = $resultat->fetch_assoc()) {
             $commentaire = new Commentaire(
                 $row['id_commentaire'],
@@ -47,7 +57,6 @@ try {
         }
     } else {
         http_response_code(204);
-        echo json_encode("Aucun commentaire trouvé.");
         exit();
     }
 

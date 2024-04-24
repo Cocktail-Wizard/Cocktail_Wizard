@@ -22,12 +22,15 @@
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
+require_once __DIR__ . '/fonctionAPIphp/authorisationAPI.php';
 
 // Connexion à la base de données
 $conn = connexionBD();
 
 //Liste des noms d'ingrédients(Alcool et Ingredient)
 $ingredients = [];
+
+userAccesResssource($username);
 
 // Transforme le nom d'utilisateur en id
 $id_user = usernameToId($username, $conn);
@@ -48,7 +51,6 @@ try {
         echo json_encode($ingredients);
     } else {
         http_response_code(204);
-        echo json_encode("Aucun ingrédient trouvé.");
         exit();
     }
 } catch (Exception $e) {

@@ -1,0 +1,201 @@
+/* Contenu du Modal */
+#userprofile-content {
+    position: relative;
+    background-color: var(--palette-background-secondary-color);
+    margin: auto;
+    border: 1px solid var(--palette-border-color);
+    width: 80%;
+    height: auto;
+    max-height: 80%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    margin-top: 5%;
+    box-shadow: var(--blue-neon-box-high);
+}
+
+p,
+h3 {
+    color: var(--palette-lighttext-color)
+}
+
+#img-profile {
+    pointer-events: auto;
+    cursor: pointer;
+
+}
+
+#img-profile:hover {
+    filter: brightness(0.4);
+}
+
+/* En-tête de la section profil utilisateur */
+#userprofile-header {
+    padding: 5px 16px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-lighttext-color);
+    gap: 40px;
+    display: flex;
+    justify-content: center;
+    margin-left: 18%;
+}
+
+/* Corps des informations utilisateur */
+.userinfo-body {
+    position: relative;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Bouton déconnexion */
+#deconnexion {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* Image de profil */
+.userinfo-body img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 2px solid var(--palette-border-color);
+}
+
+/* nom de l'utilisateur */
+.userinfo-body h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Paragraphe d'informations */
+.userinfo-body p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+/* Texte du l'infromation personelle */
+.userinfo-body span {
+    font-weight: bold;
+    color: var(--palette-color-cocktail-card);
+}
+
+/* Pied de page de la page modale */
+.userprofile-footer {
+    padding: 2px 16px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-paragraph-color);
+    text-align: center;
+    font-size: small;
+}
+
+/* Style pour la section support */
+.support-body {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--palette-paragraph-color);
+    border-radius: 8px;
+    color: var(--palette-lighttext-color);
+}
+
+/* Titre de la section */
+#my-modal h2 {
+    color: var(--palette-lighttext-color);
+    margin-bottom: 20px;
+    font-size: xx-large;
+}
+
+/* Formulaire */
+#my-modal form {
+    margin-top: 20px;
+    margin-right: 10px;
+    color: var(--palette-lighttext-color);
+}
+
+/* Étiquette du formulaire */
+#my-modal label {
+    font-weight: bold;
+    color: var(--palette-lighttext-color);
+    margin-bottom: 10px;
+}
+
+/* Zone de texte */
+#my-modal textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--palette-secondary-background-color);
+    color: var(--palette-paragraph-color);
+}
+
+#my-modal textarea:focus {
+    box-shadow: var(--blue-neon-box-light);
+}
+
+/* Corps de la section Mes cocktails */
+.mycocktail-body {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--palette-paragraph-color);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0 0 0 / 10%);
+}
+
+/* Style pour les boutons de choix de sections */
+#info-btn,
+#cocktail-btn,
+#support-btn {
+    background-color: var(--palette-background-color);
+    color: var(--palette-lighttext-color);
+    padding: 10px 20px;
+    border: 2px solid var(--palette-button-border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#info-btn:hover,
+#cocktail-btn:hover,
+#support-btn:hover {
+    box-shadow: var(--orange-neon-box);
+    text-shadow: var(--neon-text-pink);
+}
+
+#fuck-bootstrap {
+    top: 5px;
+    left: 5px;
+}
+
+/* Conteneur des cocktails dans le profile */
+.conteneur-carte-cocktail-profile {
+    display: flex;
+    overflow-x: auto;
+    padding: 1em;
+    white-space: nowrap;
+    width: 95%;
+    gap: 1.5em;
+}
+
+#edit-btn,
+#delete-btn,
+#deconnexion,
+#submit-btn {
+    background-color: var(--palette-button-color);
+    color: var(--palette-darktext-color);
+    border-radius: 3px;
+    padding: 5px;
+}
+
+#edit-btn:hover,
+#delete-btn:hover,
+#deconnexion:hover,
+#submit-btn:hover {
+    background-color: var(--palette-background-color);
+    color: var(--palette-lighttext-color);
+    box-shadow: var(--orange-neon-box);
+    border: var(--palette-button-border-color);
+    cursor: pointer
+}

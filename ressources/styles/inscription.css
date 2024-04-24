@@ -17,6 +17,21 @@ main {
     flex-direction: row-reverse;
     border-radius: calc(var(--default-border-radius) * var(--multiplicateur-styles));
     overflow: hidden;
+    color: var(--palette-lighttext-color);
+}
+
+input {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+input:focus {
+    box-shadow: var(--blue-neon-box-light);
+}
+
+h1 {
+    text-shadow: var(--neon-text-pink);
+    color: black;
 }
 
 #form-inscription {
@@ -24,7 +39,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--palette-secondary-background-color);
+    background-color: var(--palette-background-secondary-color);
     width: 100%;
     height: 100%;
 }
@@ -44,11 +59,13 @@ main {
 #form-inscription>button {
     padding: 0.9375rem;
     font-size: 1.25rem;
-    background-color: var(--palette-button-color);
-    color: var(--palette-button-text-color);
-    border: none;
+    background-color: var(--palette-background-secondary-color);
+    color: var(--palette-lighttext-color);
+    border: 2px solid var(--palette-button-border-color);
     border-radius: var(--default-border-radius);
     width: 13.75rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 #logo-cocktail-wizard {
@@ -61,6 +78,12 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+#soumettre:hover {
+    box-shadow: var(--orange-neon-box);
+    text-shadow: var(--neon-text-pink);
+    background-color: var(--palette-background-color);
 }
 
 @media screen and (width<=850px) {

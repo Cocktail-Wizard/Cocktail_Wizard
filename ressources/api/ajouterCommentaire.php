@@ -23,6 +23,7 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/fonctionAPIphp/usernameToId.php';
 require_once __DIR__ . '/../classephp/Commentaire_Classe.php';
 require_once __DIR__ . '/fonctionAPIphp/paramJSONvalide.php';
+require_once __DIR__ . '/fonctionAPIphp/authorisationAPI.php';
 
 $conn = connexionBD();
 
@@ -33,18 +34,21 @@ $username = paramJSONvalide($donnees, 'username');
 $idCocktail = paramJSONvalide($donnees, 'id_cocktail');
 $contenuCommentaire = paramJSONvalide($donnees, 'commentaire');
 
+userAccesResssource($username);
 $userId = usernameToId($username, $conn);
 
 try {
+    // Envoie une requête à la base de données pour ajouter le commentaire
     $requete_preparee = $conn->prepare("CALL AjouterCommentaireCocktail(?, ?, ?)");
     $requete_preparee->bind_param('iis', $idCocktail, $userId, $contenuCommentaire);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
 
+    // Liste d'objets commentaires du cocktail
+    $commentaires = [];
+    // Retourne la liste des commentaires du cocktail
     if ($resultat->num_rows > 0) {
-        // Liste d'objets commentaires du cocktail
-        $commentaires = [];
 
         while ($row = $resultat->fetch_assoc()) {
             $commentaire = new Commentaire(
@@ -57,10 +61,6 @@ try {
             );
             $commentaires[] = $commentaire;
         }
-    } else {
-        http_response_code(204);
-        echo json_encode("Aucun commentaire trouvé.");
-        exit();
     }
 
     echo json_encode($commentaires);

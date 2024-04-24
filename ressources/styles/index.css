@@ -32,10 +32,27 @@ header h1 {
     box-shadow: rgb(0 0 0 / 10%) 0 0 20px;
     padding: 1em;
     text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--palette-background-color);
+    width: 100%;
+    font-style: italic;
+    text-shadow: var(--neon-text-pink);
+}
+
+
+
+footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-shadow: var(--neon-text-pink);
+    color: var(--palette-lighttext-color);
 }
 
 nav {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     position: sticky;
     top: 0;
@@ -43,19 +60,87 @@ nav {
     z-index: 1;
 }
 
-aside#contenant-boutons-fixes>* {
+.nav-top {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-radio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-radio>* {
+    opacity: 0.8;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: var(--palette-button-text-color);
+    background-color: var(--palette-background-secondary-color);
+}
+
+.nav-radio label {
+    font-size: 18px;
+    color: var(--palette-lighttext-color);
+}
+
+#radio-cocktail:checked {
+    box-shadow: var(--orange-neon-box);
+    text-shadow: var(--neon-text-pink);
+    text-wrap: nowrap;
+}
+
+#deux-boutons {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#deux-boutons button {
+    border: none;
+    background-color: var(--palette-button-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+#deux-boutons button:hover {
+    box-shadow: var(--orange-neon-box);
+}
+
+#deux-boutons button img {
+    display: block;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+}
+
+aside#contenant-boutons-fixes {
     position: absolute;
-    right: var(--space-from-corner);
     top: var(--space-from-corner);
+    left: var(--space-from-corner);
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: calc(100% - 2 * var(--space-from-corner));
+    height: 4em;
 }
 
 aside#contenant-boutons-fixes a {
-    height: 4em;
-    position: absolute;
-    right: var(--space-from-corner);
-    top: var(--space-from-corner);
-    width: 4em;
     border-radius: var(--default-border-radius);
+    display: flex;
+    flex-direction: row;
+    width: 4em;
+    justify-content: space-between;
 }
 
 aside#contenant-boutons-fixes a img {
@@ -64,29 +149,41 @@ aside#contenant-boutons-fixes a img {
     height: 100%;
 }
 
-.cocktail:hover {
-    cursor: pointer;
-    transform: scale(1.05);
-}
-
 #barre-recherche {
     background-image: url("../images/icone-loupe.svg");
     background-repeat: no-repeat;
     background-size: contain;
     border: 0;
-    border-radius: var(--default-border-radius);
-    box-shadow: #666 0 0 10px;
-    color: var(--palette-button-text-color);
+    border-radius: var(--default-border-radius) 0 0 var(--default-border-radius);
     font-size: x-large;
     opacity: 0.8;
     outline: none;
     padding: 10px 0 10px 50px;
-    width: clamp(200px, calc(var(--publication-width) * 2), 75%);
+    width: clamp(200px, calc(var(--publication-width) * 1.85), 75%);
+    background-color: var(--palette-background-secondary-color);
+    color: var(--palette-lighttext-color);
 }
 
 #barre-recherche:focus {
-    box-shadow: #000 0 0 10px;
+    box-shadow: var(--blue-neon-box-light);
     opacity: 1;
+}
+
+#ordre-tri {
+    border-radius: 0 var(--default-border-radius) var(--default-border-radius) 0;
+    border: 0;
+    font-size: x-large;
+    background-color: var(--palette-background-secondary-color);
+    color: var(--palette-lighttext-color);
+}
+
+#ordre-tri:hover {
+    border-radius: 0 var(--default-border-radius) var(--default-border-radius) 0;
+    border: 0;
+    font-size: x-large;
+    background-color: var(--palette-background-secondary-color);
+    color: var(--palette-lighttext-color);
+    box-shadow: var(--orange-neon-box);
 }
 
 #galerie {
@@ -96,6 +193,99 @@ aside#contenant-boutons-fixes a img {
     justify-content: center;
     margin: auto;
     width: 80%;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 1vh;
+    left: 1vh;
+}
+
+#profil-utilisateur {
+    width: 12vh;
+    height: 12vh;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 0.5vh;
+    display: flex;
+    justify-content: center;
+}
+
+#profil-utilisateur:hover {
+    box-shadow: var(--orange-neon-box);
+}
+
+.profile-pic {
+    width: 12vh;
+    height: 12vh;
+    border-radius: 50%;
+    margin-left: 0;
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 1vh;
+    right: 1vh;
+}
+
+.button {
+    background-image: linear-gradient(var(--pallette-button-color));
+    border: 2px solid var(--palette-border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 17px;
+    outline: 0;
+    padding: 11px 15px 12px;
+    text-align: center;
+    touch-action: manipulation;
+    display: inline-block;
+}
+
+.button:hover {
+    box-shadow: rgba(255 255 255 30%) 0 0 2px inset, rgb(0 0 0 / 40%) 0 1px 2px;
+    text-decoration: none;
+    color: var(--palette-button-text-color);
+    background-color: var(--palette-button-color-hover);
+}
+
+#bouton-monbar,
+#bouton-deconnexion,
+#bouton-connexion {
+    font-size: 1.5vw;
+    padding: 0.5vh 1vw;
+    border: var(--palette-button-border-color);
+    top: 1vh;
+    right: 1vh;
+    width: 12vh;
+    height: 12vh;
+    border-radius: 8px;
+}
+
+.monbar-pic,
+.connexion-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: flex;
+    justify-content: center;
+}
+
+#bouton-monbar:hover,
+#bouton-deconnexion:hover,
+#bouton-connexion:hover {
+    background-color: var(--palette-button-color-hover);
+    box-shadow: var(--orange-neon-box);
+}
+
+@media (prefers-color-scheme: dark) {
+    body>header {
+        background: radial-gradient(transparent, black), url("../images/cyberpunkWizard.png") no-repeat center 25% / cover;
+    }
 }
 
 @media screen and (width<=850px) {

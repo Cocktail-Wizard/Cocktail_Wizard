@@ -28,8 +28,8 @@ class Cocktail implements JsonSerializable
     // Permet de savoir si l'utilisateur a liké le cocktail quand connecté
     // Valeur: null si l'utilisateur n'est pas connecté, true si l'utilisateur a liké, false sinon
     private $liked;
-
     private $ingredients_cocktail = [];
+    private $ingManquant;
 
     public function __construct(
         $id_cocktail,
@@ -55,11 +55,17 @@ class Cocktail implements JsonSerializable
         $dateTemps = new DateTime($date);
         $this->date = $dateTemps->format('d-m-Y');
         $this->nb_like = $nb_like;
-        $this->alcool_principale = $alcool_principale;
+        $this->alcool_principale = $alcool_principale === null ? "Aucun" : $alcool_principale;;
         $this->profil_saveur = $profil_saveur;
         $this->type_verre = $type_verre;
+        $this->liked = null;
+        $this->ingManquant = null;
     }
 
+    public function getIdCocktail()
+    {
+        return $this->id_cocktail;
+    }
 
     // Ajoute un ingrédient à la liste des ingrédients du cocktail
     public function ajouterIngredient($ingredient)
@@ -67,8 +73,27 @@ class Cocktail implements JsonSerializable
         $this->ingredients_cocktail[] = $ingredient;
     }
 
+    public function setLiked($liked)
+    {
+        $this->liked = $liked;
+    }
+
+    public function setIngManquant($nbIngManquant)
+    {
+        $this->ingManquant = $nbIngManquant;
+    }
+
     public function jsonSerialize()
     {
-        return get_object_vars($this);
+        $vars = get_object_vars($this);
+
+        // Supprime les variables qui sont null
+        foreach ($vars as $key => $value) {
+            if ($value === null) {
+                unset($vars[$key]);
+            }
+        }
+
+        return $vars;
     }
 }

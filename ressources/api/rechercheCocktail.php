@@ -30,14 +30,14 @@ require_once __DIR__ . '/fonctionAPIphp/InfoAffichageCocktail.php';
 
 $conn = connexionBD();
 
-$cocktails = [];
-$id_cocktail = [];
-$mots = str_replace( "_", " ", trim($mots));
-$tri = trim($tri);
+$cocktails = []; //Liste d'objets Cocktail
+$id_cocktail = []; //Liste d'id de cocktails
+
 
 try {
-    $requete_preparee = $conn->prepare("CALL RechercheCocktail(?,?)");
-    $requete_preparee->bind_param('ss', $mots, $tri);
+    // Récupère les cocktails recherchés
+    $requete_preparee = $conn->prepare("CALL RechercheCocktail(?,?,?,?,?)");
+    $requete_preparee->bind_param('ssiii', $recherche, $tri, $page, $nbCocktailPage, $mocktail);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
 
@@ -48,8 +48,7 @@ try {
             $id_cocktail[] = $row['id_cocktail'];
         }
     } else {
-        http_response_code(404);
-        echo json_encode("Aucun cocktail trouvé.");
+        http_response_code(204);
         exit();
     }
 

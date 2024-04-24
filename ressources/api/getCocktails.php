@@ -19,8 +19,6 @@
  *
  * @see InfoAffichageCocktail.php
  *
- * @todo Ajouter la pagination
- *
  */
 header('Content-Type: application/json');
 require_once __DIR__ . '/config.php';
@@ -36,8 +34,8 @@ $id_cocktail = [];
 
 try {
     //Demande les id_cocktail de tous les cocktails
-    $requete_preparee = $conn->prepare("CALL GetCocktailGalerieNonFiltrer(?)");
-    $requete_preparee->bind_param('s', $tri);
+    $requete_preparee = $conn->prepare("CALL GetCocktailGalerieNonFiltrer(?,?,?,?)");
+    $requete_preparee->bind_param('siii', $tri, $page, $nbCocktailPage, $mocktail);
     $requete_preparee->execute();
     $resultat = $requete_preparee->get_result();
     $requete_preparee->close();
@@ -49,7 +47,6 @@ try {
         }
     } else {
         http_response_code(204);
-        echo json_encode("Aucun cocktail trouvé.");
         exit();
     }
 
