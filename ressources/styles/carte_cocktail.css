@@ -94,6 +94,7 @@
     padding: 2px .5em;
     font-size: 20px;
     text-wrap: nowrap;
+    color: var(--palette-color-cocktail-card);
 }
 
 .pastille-alcool:hover .infobulle-cocktail {

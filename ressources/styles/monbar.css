@@ -1,6 +1,6 @@
 :root {
     --publication-width: 250px;
-    --publication-height: calc(var(--publication-width * 4 / 3));
+    --publication-height: calc(var(--publication-width) * 4 / 3);
 }
 
 /* General Styles */
