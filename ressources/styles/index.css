@@ -161,7 +161,7 @@ aside#contenant-boutons-fixes a img {
     padding: 10px 0 10px 50px;
     width: clamp(200px, calc(var(--publication-width) * 1.85), 75%);
     background-color: var(--palette-background-secondary-color);
-    color: var(--palette-border-color);
+    color: var(--palette-color-cocktail-card);
 }
 
 #barre-recherche:focus {
