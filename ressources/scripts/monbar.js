@@ -333,7 +333,6 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
 
         const infobulleCocktail = nouveauCocktail.querySelector('.text-infobulle');
         infobulleCocktail.textContent = cocktail.alcool_principale;
-        infobulleCocktail.href = cocktail.lien_saq;
 
         nouveauCocktail.addEventListener('click', (event) => {
             const idCocktail = event.currentTarget.dataset.idCocktail;
