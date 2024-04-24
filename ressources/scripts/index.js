@@ -243,6 +243,8 @@ async function chargerInformationsModale(cocktail) {
     boutonSupprimer.style.display = cocktail.auteur === utilisateur ? 'block' : 'none';
 
     boutonSupprimer.addEventListener('click', async () => {
+        if (window.confirm('Voulez-vous vraiment supprimer ce cocktail?') === false) return;
+
         fetch('/api/cocktails', {
             method: 'DELETE',
             body: JSON.stringify({
