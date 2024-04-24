@@ -71,7 +71,7 @@ nav {
     flex-direction: column;
     align-items: center;
 }
-    
+
 .nav-radio>* {
     opacity: 0.8;
     border-bottom-left-radius: 10px;
@@ -91,9 +91,7 @@ nav {
 #radio-cocktail:checked {
     box-shadow: var(--orange-neon-box);
     text-shadow: var(--neon-text-pink);
-
     text-wrap: nowrap;
-
 }
 
 #deux-boutons {
