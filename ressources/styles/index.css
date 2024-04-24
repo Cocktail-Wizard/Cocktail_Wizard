@@ -89,7 +89,7 @@ nav {
 }
 
 #radio-cocktail:checked {
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
     text-shadow: var(--neon-text-pink);
     text-wrap: nowrap;
 }
@@ -114,7 +114,7 @@ nav {
 }
 
 #deux-boutons button:hover {
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
 }
 
 #deux-boutons button img {
@@ -183,7 +183,7 @@ aside#contenant-boutons-fixes a img {
     font-size: x-large;
     background-color: var(--palette-background-secondary-color);
     color: var(--palette-lighttext-color);
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
 }
 
 #galerie {
@@ -214,7 +214,7 @@ aside#contenant-boutons-fixes a img {
 }
 
 #profil-utilisateur:hover {
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
 }
 
 .profile-pic {
@@ -279,7 +279,7 @@ aside#contenant-boutons-fixes a img {
 #bouton-deconnexion:hover,
 #bouton-connexion:hover {
     background-color: var(--palette-button-color-hover);
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
 }
 
 @media (prefers-color-scheme: dark) {

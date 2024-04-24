@@ -81,7 +81,7 @@ h1 {
 }
 
 #soumettre:hover {
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
     text-shadow: var(--neon-text-pink);
     background-color: var(--palette-background-color);
 }
