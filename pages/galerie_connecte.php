@@ -17,14 +17,20 @@
 <body>
     <noscript class="erreur">Vous devez activer JavaScript pour charger ce site web.</noscript>
 
-    <header>
+    <header id="top">
         <div class="user">
             <button type="button" title="Profile" id="profil-utilisateur" data-bs-toggle="modal" data-bs-target="#my-modal">
-                <img class="profile-pic" src="ressources/images/1490.gif" alt="Profile Picture">
+                <img class="profile-pic" src="ressources/images/1486.gif" alt="Profile Picture">
             </button>
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
         </div>
-        <h1>Cocktail Wizard</h1>
+
+        <h1 class="neonText-pink">COCKTAIL WIZARD</h1>
+        <div class="button-container">
+            <a id="bouton-monbar" href="/monbar">
+                <img class="monbar-pic" src="../ressources/images/icone-monbar.svg" alt="Mon bar">
+            </a>
+        </div>
     </header>
 
     <main>
@@ -43,24 +49,18 @@
                 </span>
                 <span>
                     <input type="radio" id="radio-mocktail" name="mocktail">
-                    <label for="radio-mocktail" title="Cocktail sans alcool">Mocktails uniquement</label>
+                    <label for="radio-mocktail" title="Cocktail sans alcool">Mocktails</label>
                 </span>
             </div>
         </nav>
 
         <section id="galerie"></section>
         <div id="gif-loading" style="display: none;margin: auto;">
-            <img src="ressources/images/1490.gif" alt="Chargement">
+            <img src="ressources/images/1486.gif" alt="Chargement">
         </div>
     </main>
 
     <aside id="contenant-modale"></aside>
-
-    <aside id="contenant-boutons-fixes">
-        <a href="/monbar" title="Mon bar" id="lien-monbar">
-            <img src="ressources/images/icone-monbar.svg" alt="Mon bar">
-        </a>
-    </aside>
 
     <aside id="deux-boutons">
         <button>

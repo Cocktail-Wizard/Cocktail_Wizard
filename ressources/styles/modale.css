@@ -25,12 +25,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: var(--palette-secondary-background-color);
+    background-color: var(--palette-background-secondary-color);
     padding: 1em;
     border-radius: var(--default-border-radius);
     display: flex;
     flex-direction: column;
     gap: var(--default-gap);
+    color: var(--palette-lighttext-color);
 }
 
 #fermer {
@@ -121,21 +122,35 @@
 #commenter>form>textarea {
     resize: none;
     height: 100px;
-    color: var(--palette-secondary-text-color);
+    color: var(--palette-color-cocktail-card);
+    background-color: var(--palette-background-secondary-color);
+}
+
+#commenter>form>textarea:focus {
+    box-shadow: var(--blue-neon-box-high);
 }
 
 #commenter>form button {
     align-self: flex-end;
-    border: none;
     padding: .5em;
-    font-size: large;
-    border-radius: var(--default-border-radius);
+    background-color: var(--palette-background-color);
+    color: var(--palette-lighttext-color);
+    border: 2px solid var(--palette-button-border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#commenter>form button:hover {
+    box-shadow: var(--orange-neon-box);
+    text-shadow: var(--neon-text-pink);
 }
 
 #commenter #soumettre {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1em;
 }
 
 #commenter #soumettre #auteur-commentaire {
@@ -149,19 +164,13 @@
     padding-left: var(--default-gap);
 }
 
-.commentaire {
-    border-radius: var(--default-border-radius);
-    background-color: rgba(255 255 255 15%);
-    padding: 1em;
-}
-
 #commentaires header {
     display: flex;
     gap: calc(var(--default-gap) / 2);
 }
 
 #commentaires .date {
-    color: rgb(0 0 0 / 25%);
+    color: var(--palette-lighttext-color);
     font-style: italic;
 }
 
@@ -169,6 +178,7 @@ ul#ingredients {
     list-style-type: none;
     text-align: left;
     padding: 0;
+    color: var(--palette-color-cocktail-card);
 }
 
 ul#ingredients li {
@@ -181,4 +191,27 @@ ul#ingredients li {
     #presentation {
         width: 100%;
     }
+}
+
+#description,
+#preparation {
+    border: 2px solid var(--palette-border-color);
+    border-radius: 5px;
+    padding: 5px;
+    color: var(--palette-color-cocktail-card);
+}
+
+#description:hover,
+#preparation:hover {
+    box-shadow: var(--blue-neon-box-high);
+}
+
+#titre-cocktail {
+    font-size: 4vh;
+}
+
+.commentaire {
+    border: 2px solid var(--palette-border-color);
+    border-radius: 5px;
+    padding: 1em;
 }

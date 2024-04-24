@@ -229,23 +229,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             dernierChargementCommunaute = cocktailsCommunautaires.scrollWidth;
         }
     });
-
-
-    // Appels initiaux
-
-
-    // if (modeleHTML) {
-    //     try {
-    //         const response = await fetch(`../ressources/api/galerie.php?nombre=${nombreCocktailsAffiches}`);
-    //         if (!response.ok) {
-    //             throw new Error('La requête a échoué');
-    //         }
-    //         const data = await response.json();
-    //         afficherCocktails(data, modeleHTML);
-    //     } catch (error) {
-    //         console.error('Erreur : ', error);
-    //     }
-    // }
 });
 async function chargerCocktailsScroll(type) {
     if (type == 1) {
