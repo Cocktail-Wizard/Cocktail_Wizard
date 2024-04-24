@@ -1,5 +1,5 @@
 :root {
-    --publication-width: 250px;
+    --publication-width: 300px;
     --publication-height: calc(var(--publication-width) * 4 / 3);
 }
 
@@ -189,6 +189,8 @@ header h1 {
     border: 3px solid var(--palette-border-color);
     background-color: var(--palette-background-secondary-color);
     border-radius: 8px;
+    margin-top: var(--default-gap);
+    margin-bottom: var(--default-gap);
 }
 
 .boite-ingredients-selectionnes:hover {
@@ -217,8 +219,6 @@ header h1 {
     display: flex;
     align-items: center;
     width: 100%;
-    margin-top: 30px;
-    margin-bottom: 30px;
 }
 
 .section-name {
@@ -335,7 +335,7 @@ header h1 {
     padding: 1em;
     white-space: nowrap;
     width: 95%;
-    gap: 1.5em;
+    gap: 2em;
 }
 
 .scroll-item {

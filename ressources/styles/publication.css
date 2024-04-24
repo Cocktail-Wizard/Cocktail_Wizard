@@ -78,7 +78,7 @@ label {
 #preview {
     max-width: 100%;
     max-height: 300px;
-    display: block;
+    display: none;
     margin: auto;
 }
 

@@ -65,21 +65,20 @@ if (!isset($_SESSION['username'])) {
             <div class="conteneur-carte-cocktail" id="conteneur-classique">
 
             </div>
-            <section id="cocktails-classiques" class="galerie"></section>
+
 
             <div class="separator">
                 <span class=" neonText-pink-smol section-name neon-blue-low">Mes favoris</span>
                 <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-favoris"></div>
-            <section id="cocktails-personnels" class="galerie"></section>
 
             <div class="separator">
                 <span class="neonText-pink-smol section-name neon-blue-low">Communautaires</span>
                 <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-communautaires"></div>
-            <section id="cocktails-communautaires" class="galerie"></section>
+
 
         </div>
     </main>
