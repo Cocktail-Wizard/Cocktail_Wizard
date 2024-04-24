@@ -1,23 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-
-/* Modal */
-
-
 /* Contenu du Modal */
 #publication-content {
     position: relative;
-    background-color: var(--palette-secondary-background-color);
+    background-color: var(--palette-modal-background-color);
     margin: auto;
     padding-top: 10px;
     border: 1px solid var(--palette-border-color);
     width: 80%;
-
-    /* template de "boxshadow" */
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
     height: auto;
     max-height: 80%;
     overflow-y: auto;
     box-sizing: border-box;
+    box-shadow: var(--blue-neon-box-high);
 }
 
 #mon-modal h2 {
@@ -25,15 +18,26 @@
     margin-bottom: 20px;
 }
 
+label {
+    font-style: italic;
+    color: var(--palette-lighttext-color);
+}
+
 #mon-modal label {
     font-weight: bold;
-    color: var(--palette-button-color);
+    color: var(--palette-lighttext-color);
+}
+
+#titre {
+    color: var(--palette-lighttext-color);
+    text-shadow: var(--neon-text-pink);
 }
 
 #mon-modal textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
+    margin-top: 10px;
     border: 1px solid var(--palette-border-color);
     border-radius: 4px;
     background-color: var(--palette-secondary-background-color);
@@ -74,7 +78,7 @@
 #preview {
     max-width: 100%;
     max-height: 300px;
-    display: block;
+    display: none;
     margin: auto;
 }
 
@@ -148,6 +152,11 @@
     overflow: hidden;
 }
 
+#ajouter-ingredient:hover,
+#enlever-ingredient:hover {
+    box-shadow: var(--orange-neon-box);
+}
+
 #ajouter-ingredient>.btn-icon,
 #enlever-ingredient>.btn-icon {
     width: 100%;
@@ -159,8 +168,8 @@
 .button-publish {
     width: 30px;
     height: 30px;
-    background-image: linear-gradient(var(--pallette-button-color), #a48df0);
-    border: 2px solid --palette-border-color;
+    background-image: linear-gradient(var(--pallette-button-color));
+    border: 2px solid var(--palette-border-color);
     border-radius: 4px;
     box-shadow: rgb(0 0 0 / 12%) 0 1px 1px;
     cursor: pointer;
@@ -179,7 +188,18 @@
     background-color: var(--palette-button-color-hover);
 }
 
-#ingredient-rajoute {
+.ingredient-rajoute {
     font-size: larger;
     font-style: bold;
+    color: var(--palette-lighttext-color);
+    text-shadow: var(--neon-text-pink);
+}
+
+#ingredient-nom:focus,
+#ingredient-quantite:focus,
+#ingredient-unit:focus,
+#name-texte:focus,
+#preparation-texte:focus,
+#description-texte:focus {
+    box-shadow: var(--blue-neon-box-light);
 }

@@ -90,6 +90,7 @@ function afficherCocktails(data) {
 
         const infobulleCocktail = nouveauCocktail.querySelector('.text-infobulle');
         infobulleCocktail.textContent = cocktail.alcool_principale;
+        infobulleCocktail.href = cocktail.lien_saq;
 
         nouveauCocktail.addEventListener('click', (event) => {
             const idCocktail = event.currentTarget.dataset.idCocktail;
@@ -151,6 +152,7 @@ function afficherCocktailsPerso(data, modeleHTML, divParent) {
 
         const infobulleCocktail = nouveauCocktail.querySelector('.text-infobulle');
         infobulleCocktail.textContent = cocktail.alcool_principale;
+        infobulleCocktail.href = cocktail.lien_saq;
 
         nouveauCocktail.addEventListener('click', (event) => {
             const idCocktail = event.currentTarget.dataset.idCocktail;
@@ -243,6 +245,8 @@ async function chargerInformationsModale(cocktail) {
     boutonSupprimer.style.display = cocktail.auteur === utilisateur ? 'block' : 'none';
 
     boutonSupprimer.addEventListener('click', async () => {
+        if (window.confirm('Voulez-vous vraiment supprimer ce cocktail?') === false) return;
+
         fetch('/api/cocktails', {
             method: 'DELETE',
             body: JSON.stringify({

@@ -28,25 +28,26 @@ if (!isset($_SESSION['username'])) {
     <header id="top">
         <div class="user">
             <button type="button" id="profil-utilisateur" title="Profile" data-bs-toggle="modal" data-bs-target="#my-modal">
-                <img class="profile-pic" src="ressources/images/1490.gif" alt="Profile Picture">
+                <img class="profile-pic" src="ressources/images/1486.gif" alt="Profile Picture">
             </button>
             <button class="button" id="bouton-deconnexion" style="display: none;">Déconnexion</button>
         </div>
 
-        <h1>Cocktail <img src="../icone.ico" id="w-icon">izard</h1>
+        <h1>COCKTAIL WIZARD</h1>
         <div class="button-container">
-            <a class="button" id="bouton-galerie" href="/galerie">
-                <img src="../ressources/images/icone-galerie.svg" alt="Galerie de cocktails">
+            <a id="bouton-galerie" href="/galerie">
+                <img class="galerie-pic" src="../ressources/images/icone-galerie.svg" alt="Galerie de cocktails">
             </a>
         </div>
     </header>
 
-    <hr>
+
 
     <main>
         <div class="separator">
-            <span class="section-name">Mes ingrédients</span>
-            <hr class="line right" />
+            <span class="neonText-pink-smol section-name neon-blue-low">Mes ingrédients</span>
+            <hr class="line neon-blue-low" />
+
 
             <section class="ingredients">
                 <div id="contenant-boite-recherche" class="dropdown">
@@ -58,34 +59,33 @@ if (!isset($_SESSION['username'])) {
         <div class="boite-ingredients-selectionnes" id="ingredients-selectionne"></div>
         <div class="body">
             <div class="separator">
-                <span class="section-name">Les classiques</span>
-                <hr class="line right" />
+                <span class=" neonText-pink-smol section-name neon-blue-low">Les classiques</span>
+                <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-classique">
 
             </div>
-            <section id="cocktails-classiques" class="galerie"></section>
+
 
             <div class="separator">
-                <span class="section-name">Mes favoris</span>
-                <hr class="line right" />
+                <span class=" neonText-pink-smol section-name neon-blue-low">Mes favoris</span>
+                <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-favoris"></div>
-            <section id="cocktails-personnels" class="galerie"></section>
 
             <div class="separator">
-                <span class="section-name">Communautaires</span>
-                <hr class="line right" />
+                <span class="neonText-pink-smol section-name neon-blue-low">Communautaires</span>
+                <hr class="line neon-blue-low" />
             </div>
             <div class="conteneur-carte-cocktail" id="conteneur-communautaires"></div>
-            <section id="cocktails-communautaires" class="galerie"></section>
+
 
         </div>
     </main>
 
     <aside id="deux-boutons">
         <button>
-            <img id="btnAbout" src="../ressources/images/info.svg" alt="Info sur la page">
+            <img id=" btnAbout" src="../ressources/images/info.svg" alt="Info sur la page">
         </button>
         <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#mon-modal">
             <img id="btnPublish" src="../ressources/images/feather.svg" alt="Modale de publication">

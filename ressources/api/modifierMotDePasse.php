@@ -24,6 +24,7 @@ require_once(__DIR__ . "/fonctionAPIphp/paramJSONvalide.php");
 require_once(__DIR__ . "/fonctionAPIphp/usernameToId.php");
 require_once(__DIR__ . "/fonctionAPIphp/authorisationAPI.php");
 
+$conn = connexionBD();
 
 $donnee = json_decode(file_get_contents('php://input'), true);
 // Accumulateur d'erreurs
@@ -48,7 +49,7 @@ if (strlen($nouveauMdp) < 8) {
 if (empty($erreurs)) {
     $nouveauMdp_hashed = password_hash($nouveauMdp, PASSWORD_DEFAULT);
 
-    $conn = connexionBD();
+
 
     // Vérifier le mot de passe actuel avec celui de la base de données
     try {

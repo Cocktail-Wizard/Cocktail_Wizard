@@ -14,8 +14,13 @@
 <body>
     <noscript class="erreur">Vous devez activer JavaScript pour charger ce site web.</noscript>
 
-    <header>
-        <h1>Cocktail Wizard</h1>
+    <header id="top">
+        <h1 class="neonText-pink">COCKTAIL WIZARD</h1>
+        <div class="button-container">
+            <a id="bouton-connexion" class="connexion-pic" href="/connexion" title="Connexion">
+                <img src="ressources/images/icone-profile.svg" alt="Icone profile">
+            </a>
+        </div>
     </header>
 
     <main>
@@ -30,24 +35,18 @@
             <div class="nav-radio">
                 <span>
                     <input type="radio" id="radio-mocktail" name="mocktail">
-                    <label for="radio-mocktail" title="Cocktail sans alcool">Mocktails uniquement</label>
+                    <label for="radio-mocktail" title="Cocktail sans alcool">Mocktails</label>
                 </span>
             </div>
         </nav>
 
         <section id="galerie"></section>
         <div id="gif-loading" style="display: none;margin: auto;">
-            <img src="ressources/images/1490.gif" alt="Chargement">
+            <img src="ressources/images/1486.gif" alt="Chargement">
         </div>
     </main>
 
     <aside id="contenant-modale"></aside>
-
-    <aside id="contenant-boutons-fixes">
-        <a href="/connexion" title="Connexion">
-            <img src="ressources/images/icone-profile.svg" alt="Icone profile">
-        </a>
-    </aside>
 
     <aside id="deux-boutons">
         <button>

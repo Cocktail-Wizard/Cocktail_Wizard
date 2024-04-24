@@ -91,6 +91,7 @@ function previewImage(event) {
         let reader = new FileReader();
         reader.onload = function (e) {
             let preview = document.getElementById('preview');
+            preview.style.display = 'block';
             preview.src = e.target.result;
             base64Image = e.target.result.split(',')[1];
         };
