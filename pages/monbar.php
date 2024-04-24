@@ -84,13 +84,9 @@ if (!isset($_SESSION['username'])) {
     </main>
 
     <aside id="deux-boutons">
-        <button>
-            <img id=" btnAbout" src="../ressources/images/info.svg" alt="Info sur la page">
-        </button>
         <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#mon-modal">
             <img id="btnPublish" src="../ressources/images/feather.svg" alt="Modale de publication">
         </button>
-
     </aside>
 
     <aside id="contenant-modale"></aside>

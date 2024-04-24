@@ -8,26 +8,38 @@
 --  au site web cocktail wizard
 -- Procédures :
 --
+--  - InscriptionUtilisateur
+--  - ConnexionUtilisateur
+--  - GetIdUser
+--  - AjoutIngredient
+--  - RetraitIngredient
+--  - LikeCocktail
+--  - DislikeCocktail
+--  - LikeCommentaire
+--  - DislikeCommentaire
+--  - CreerCocktail
+--  - AjouterImageCocktail
+--  - AjouterImageUtilisateur
+--  - changerImageUtilisateur
+--  - AjouterIngredientCocktail
+--  - AjouterIngredientAutreCocktail
+--  - AjouterCommentaireCocktail
+--  - GetCocktailGalerieNonFiltrer
+--  - GetCocktailGalerieFiltrer
+--  - GetListeIngredientsCocktail
+--  - GetInfoCocktailSimple
+--  - GetInfoCocktailComplet
+--  - cocktailLiked
+--  - GetMesCocktails
+--  - GetMesIngredients
+--  - GetCocktailPossibleFavorie
+--  - GetCocktailsPossibleClassique
+--  - GetCocktailsPossibleCommunautaire
+--  - GetlisteIngredients
+--  - GetCommentairesCocktail
+--  - RechercheCocktail
+--  - RechercheCocktailFiltrer
 -- ============================================================
-
--- indexe pas sur column qui change
-
--- Azure blobl storage pour les images
-
-
--- Ajouter procédure qui permet de like et renvoyer le nouveau
--- nombre de like
-
--- Manque logique de gestion des images
-
--- Le session_id du siteweb doit être le id_utilisateur
-
--- À faire ajout d'indexe pour les order by qui renvoit bcp de donnees
-
--- À faire, diminuer la quantité de procédures en envoyant plus d'informations en une seule fois
--- qui seront stocker dans des objets php
-
--- À faire, déterminer la quantité de cocktail renvoyer à la fois
 
 -- Affiche les procédures
 SHOW PROCEDURE STATUS;

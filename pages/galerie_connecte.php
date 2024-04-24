@@ -63,9 +63,6 @@
     <aside id="contenant-modale"></aside>
 
     <aside id="deux-boutons">
-        <button>
-            <img id="btnAbout" src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
-        </button>
         <button type="button" id="publish" data-bs-toggle="modal" data-bs-target="#mon-modal">
             <img id="btnPublish" src="../ressources/images/feather.svg" alt="Feather" width="24" height="24">
         </button>

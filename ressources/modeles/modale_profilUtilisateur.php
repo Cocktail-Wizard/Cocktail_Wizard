@@ -24,7 +24,6 @@
                     <p>Nombre de cocktails : <span id="cocktailCount">0</span></p>
                     <p>Nombre de commentaires : <span id="commentCount">0</span></p>
                     <div class="userprofile-footer" id="boutton-profile">
-                        <button id="edit-btn">Modifier</button>
                         <button id="delete-btn">Supprimer</button>
                     </div>
                 </div>
@@ -37,11 +36,11 @@
 
                     <h2>Contactez-nous</h2>
 
-                    <form action="../ressources/email.php" method="post">
-                        <label for="message">Message:</label><br>
-                        <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
-                        <input id="submit-btn" type="submit" value="Envoyer">
-                    </form>
+
+                    <label for="message">Message:</label><br>
+                    <textarea id="message" name="message" rows="4" cols="50"></textarea><br>
+                    <input id="submit-btn" type="button" value="Envoyer" onclick="location.reload();">
+
 
                 </div>
             </div>

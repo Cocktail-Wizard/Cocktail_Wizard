@@ -6,6 +6,10 @@
 
 #bouton-supprimer {
     display: none;
+    pointer-events: auto;
+    width: 2em;
+    height: 2em;
+    cursor: pointer;
 }
 
 #contenant-modale {
