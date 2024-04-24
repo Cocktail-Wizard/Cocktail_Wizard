@@ -35,14 +35,14 @@
             <div class="nav-radio">
                 <span>
                     <input type="radio" id="radio-mocktail" name="mocktail">
-                    <label for="radio-mocktail" title="Cocktail sans alcool">Mocktails uniquement</label>
+                    <label for="radio-mocktail" title="Cocktail sans alcool">Mocktails</label>
                 </span>
             </div>
         </nav>
 
         <section id="galerie"></section>
         <div id="gif-loading" style="display: none;margin: auto;">
-            <img src="ressources/images/1490.gif" alt="Chargement">
+            <img src="ressources/images/1486.gif" alt="Chargement">
         </div>
     </main>
 
