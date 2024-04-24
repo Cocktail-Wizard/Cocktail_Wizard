@@ -160,7 +160,7 @@ h3 {
 #info-btn:hover,
 #cocktail-btn:hover,
 #support-btn:hover {
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
     text-shadow: var(--neon-text-pink);
 }
 
@@ -195,7 +195,7 @@ h3 {
 #submit-btn:hover {
     background-color: var(--palette-background-color);
     color: var(--palette-lighttext-color);
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
     border: var(--palette-button-border-color);
     cursor: pointer
 }

@@ -57,7 +57,7 @@ main {
 }
 
 #profil-utilisateur:hover {
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
 }
 
 .profile-pic {
@@ -169,7 +169,7 @@ header h1 {
 .ingredient-item:hover {
     color: var(--palette-lighttext-color);
     background-color: var(--palette-button-color-hover);
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
     text-shadow: var(--neon-text-pink)
 }
 
@@ -258,7 +258,7 @@ header h1 {
 }
 
 #deux-boutons button:hover {
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
 }
 
 #deux-boutons button img {
@@ -308,7 +308,7 @@ header h1 {
 #bouton-galerie:hover,
 #bouton-deconnexion:hover {
     background-color: var(--palette-button-color-hover);
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
 }
 
 .ingredients-selectionne {
@@ -325,7 +325,7 @@ header h1 {
 .ingredients-selectionne:hover {
     color: var(--palette-lighttext-color);
     background-color: var(--palette-button-color-hover);
-    box-shadow: var(--orange-neon-box);
+    filter: drop-shadow(0 0 25px var(--palette-button-border-color));
     text-shadow: var(--neon-text-pink);
 }
 
