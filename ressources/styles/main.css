@@ -12,10 +12,10 @@
     --space-from-corner: .5em;
 
     /* Palette de couleur */
-    --palette-background-color: #FFF2E1;
-    --palette-background-secondary-color: #f3e3cf;
-    --palette-modal-background-color: #EAD8C0;
-    --palette-modal-background-secondary-color: #dac7ae;
+    --palette-background-color: #ad9371;
+    --palette-background-secondary-color: #dbc1a1;
+    --palette-modal-background-color: #ccb69a;
+    --palette-modal-background-secondary-color: #aa9982;
     --palette-darktext-color: #9BB0C1;
     --palette-lighttext-color: #51829B;
     --palette-button-color: #AD88C6;
@@ -164,7 +164,6 @@ input {
 }
 
 body>footer {
-    background-color: rgb(0 0 0 / 10%);
     height: 2em;
     align-items: center;
     display: flex;

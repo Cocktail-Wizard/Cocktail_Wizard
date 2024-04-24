@@ -467,6 +467,29 @@ async function chargerInformationsModale(cocktail) {
 
         ingredients.appendChild(ligneIngredient);
     });
+
+    if (!utilisateur) return;
+
+    // Afficher le bouton supprimer si l'utilisateur est l'auteur du cocktail
+    const boutonSupprimer = document.getElementById('bouton-supprimer');
+    boutonSupprimer.style.display = cocktail.auteur === utilisateur ? 'block' : 'none';
+
+    boutonSupprimer.addEventListener('click', async () => {
+        if (window.confirm('Voulez-vous vraiment supprimer ce cocktail?') === false) return;
+
+        fetch('/api/cocktails', {
+            method: 'DELETE',
+            body: JSON.stringify({
+                id_cocktail: cocktail.id_cocktail,
+                username: utilisateur
+            }),
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        }).then((response) => {
+            if (response.ok) {
+                window.location.href = '/';
+            }
+        });
+    });
 }
 
 function chargerCommenter(id_cocktail) {

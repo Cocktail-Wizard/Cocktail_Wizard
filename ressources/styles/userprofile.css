@@ -183,19 +183,19 @@ h3 {
 #delete-btn,
 #deconnexion,
 #submit-btn {
-    background-color: var(--palette-button-color);
-    color: var(--palette-darktext-color);
-    border-radius: 3px;
-    padding: 5px;
+    background-color: var(--palette-background-color);
+    color: var(--palette-lighttext-color);
+    padding: 10px 20px;
+    border: 2px solid var(--palette-button-border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 #edit-btn:hover,
 #delete-btn:hover,
 #deconnexion:hover,
 #submit-btn:hover {
-    background-color: var(--palette-background-color);
-    color: var(--palette-lighttext-color);
     filter: drop-shadow(0 0 25px var(--palette-button-border-color));
-    border: var(--palette-button-border-color);
-    cursor: pointer
+    text-shadow: var(--neon-text-pink);
 }

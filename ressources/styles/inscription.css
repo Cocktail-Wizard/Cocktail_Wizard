@@ -66,6 +66,7 @@ h1 {
     width: 13.75rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 1em;
 }
 
 #logo-cocktail-wizard {

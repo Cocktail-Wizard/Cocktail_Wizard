@@ -48,11 +48,6 @@
 
     <aside id="contenant-modale"></aside>
 
-    <aside id="deux-boutons">
-        <button>
-            <img id="btnAbout" src="../ressources/images/info.svg" alt="Question Mark" width="24" height="24">
-        </button>
-    </aside>
 
     <footer>Cocktail Wizard &copy - 2024</footer>
     <script src="ressources/scripts/outils.js"></script>

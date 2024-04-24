@@ -320,6 +320,7 @@ header h1 {
     border-radius: 25px;
     cursor: pointer;
     font-style: italic;
+    font-size: 1.4em;
 }
 
 .ingredients-selectionne:hover {
